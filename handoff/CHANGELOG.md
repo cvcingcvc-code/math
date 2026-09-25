@@ -1,5 +1,38 @@
 # CHANGELOG
 
+## 2026-09-25（晚）— 论文主叙事与评委答辩收口
+
+- 新增 `reports/paper/competition_paper_narrative_draft.md`：按 Problem Background → Research Question → Measurement Problem → Identification Strategy → Mathematical Model → Development Findings → Extreme Case → Limitations → Formal Validation Path 重构竞赛论文主叙事。
+- 新增 `reports/paper/judge_story_3min.md`：面向第一次接触项目评委的约 3 分钟口头稿。
+- 新增 `reports/paper/elevator_pitch_30s.md`：问题→方法→发现→价值的 30 秒版本。
+- 新增 `reports/paper/core_figures_interpretation.md`：为四张核心图补充论文级图名、caption、评委可读结论与不可推出事项。
+- 新增 `reports/review/judge_attack_questions.md`：18 个潜在评委攻击问题及短答，明确不掩盖 AI provisional、识别不足和非因果边界。
+- 新增 `reports/review/top_5_paper_weaknesses.md`：从评委角度判断当前最容易失分的五个地方及最小修复方式。
+- 全部叙事保持 `AI_PROVISIONAL` / `DEVELOPMENT_ONLY` / `formal_gate_eligible=false`；未修改正式人工 R1/R2、标注手册、Gate 阈值、原始数据、provisional 标签、Partial Identification 数学定义或 Demo 实现。
+- 核心主线固定为：**Score Stability ≠ Evidence Support Stability**。
+
+
+## 2026-09-25（晚）— DEVELOPMENT_ONLY Evidence Reliability / Bias Correction 敏感性模型
+
+- 新增 `src/run_reliability_sensitivity.py`，只读 `data/annotations/ai/pilot_ai_provisional.csv`，不训练复杂模型、不计算正式 AIV。
+- 使用透明权重：`w_i=I(observable_i)*c_i*(1-lambda_prompt*prompt_i)*(1-lambda_context*truncation_i)`；`c_i` 采用 high=1、medium=0.75、low=0.5，prompt/context 惩罚均以有限网格敏感性分析，不宣称唯一参数。
+- 生成 `reports/development/reliability_sensitivity.csv`、`reliability_model.json`、`reliability_sensitivity.svg`；15 个参数条件，全部保留 `AI_PROVISIONAL` / `DEVELOPMENT_ONLY`，`formal_gate_eligible=false`。
+- 运行验证通过：70 条输入、身份未丢失、输出可重复；未修改 R1/R2、Gate、冻结标注手册、阈值和原始数据。
+
+## 2026-09-25（晚）— DEVELOPMENT_ONLY 最小建模指标链路
+
+- 新增 `src/run_development_experiment.py`，显式读取 `data/annotations/ai/pilot_ai_provisional.csv`，不训练监督分类器。
+- 采用 Module C 已有透明候选：数值化 `student_evidence_bloom` 的 ABL、L4-L6 的 HOT、可判读覆盖率、`task_level - evidence_level` gap；另报 prompt/context/置信度描述统计。
+- 输出 `reports/development/development_metrics.csv` 与 `reports/development/development_results.json`，结果逐行保留 `annotation_source=AI_PROVISIONAL`、`annotation_status=DEVELOPMENT_ONLY`，并写入 `NOT FOR FORMAL GATE OR FINAL CLAIMS`。
+- 70/70 行成功执行；重复运行成功；`formal_gate_eligible=false`。未运行完整模型、未计算正式 Gate，未修改 R1/R2、冻结手册、Gate 阈值、原始数据或正式 Gate 判定逻辑。
+
+## 2026-09-25（晚）— 开发数据入口与正式 Gate 隔离
+
+- 新增 `src/development_data.py`：默认 `formal` 保持读取 `data/processed/pilot_ai_prelabel.csv`；显式 `--mode development` 才读取 `data/annotations/ai/pilot_ai_provisional.csv`。
+- 开发模式启动输出固定包含 `DEVELOPMENT_ONLY / AI_PROVISIONAL`，并校验 70 行、`record_id` 唯一、`annotation_source` 与 `annotation_status` 不得漂移。
+- `src/annotation_gate_report.py` 增加拒绝保护：`AI_PROVISIONAL` / `DEVELOPMENT_ONLY` 数据不能作为正式 Gate 输入。
+- 最小测试通过；未运行完整模型、未计算正式 Gate，未修改 R1/R2、冻结手册或 Gate 阈值。
+
 ## 2026-09-25（晚）— 指标可计算性审计（无标签）
 
 - 新增 `src/indicator_feasibility_audit.py`（只读 `clean_interactions.csv` 结构；情景部分读 AI 预标注但明确标为假设）。

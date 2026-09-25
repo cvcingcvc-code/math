@@ -52,6 +52,8 @@
 | Gate report generator | `src/annotation_gate_report.py` | Verified | 一致性、混淆矩阵、双轴 gap、成本、8 问 |
 | Metric feasibility (draft) | `src/metric_feasibility.py` | **未运行、来源未核实**，与上一行功能重叠 | 暂不使用；待负责人决定保留或归档 |
 | Indicator feasibility audit | `src/indicator_feasibility_audit.py` | Run 2026-09-25 | 无标签结构审计：CTQ/ABL/HOT/MAB 可计算性 |
+| Development annotation loader | `src/development_data.py` | Added 2026-09-25 | 显式 `--mode development` 读取 AI_PROVISIONAL；默认 formal 路径不变；不可进入正式 Gate |
+| Development experiment entry | `src/run_development_experiment.py` | Added 2026-09-25 | 70 条 provisional 数据的透明行级 ABL/HOT/coverage/gap 探索链路；不训练分类器、不进入正式 Gate |
 
 ## Reports
 
@@ -67,4 +69,25 @@
 | Retest worksheet builder | `src/build_retest_worksheet.py` | Run 2026-09-25, self-check pass | B010 选项(b)：第 2 轮盲表 |
 | Retest blank worksheet (R2) | `data/annotations/human/pilot_worksheet_A_retest.csv` | Blank 0/70 | 第 1 轮提交 ≥24h 后才可打开 |
 | Solo retest Gate runner | `src/solo_retest_gate.py` (`report` 子命令) | Pipeline-tested on synthetic only | 输出须标注“intra-rater，非 inter-rater” |
+| Development metrics CSV | `reports/development/development_metrics.csv` | Generated 2026-09-25 | 70 行；每行保留 AI_PROVISIONAL / DEVELOPMENT_ONLY；供后续 Demo/图表读取 |
+| Development results JSON | `reports/development/development_results.json` | Generated 2026-09-25 | 指标汇总、模型定义、字段限制与 formal_gate_eligible=false |
+| Reliability sensitivity CSV | `reports/development/reliability_sensitivity.csv` | Generated 2026-09-25 | 15 个 prompt/context 惩罚条件；原始 vs 校正 ABL/HOT/coverage/gap |
+| Reliability model JSON | `reports/development/reliability_model.json` | Generated 2026-09-25 | 权重公式、参数网格、敏感性范围与数学边界 |
+| Reliability sensitivity plot | `reports/development/reliability_sensitivity.svg` | Generated 2026-09-25 | 简单 adjusted ABL 对 lambda_prompt / lambda_context 图 |
+| Separation provenance audit | `reports/development/separation_provenance_audit.csv|.json` | Generated 2026-09-25 | 16 条可判读 Evidence 的来源追踪、字段映射与人工复核优先级 |
+| Identifiability map | `reports/development/identifiability_map.json` | Generated 2026-09-25 | 核心量 OBSERVABLE / PARTIALLY_IDENTIFIABLE / NOT_IDENTIFIABLE 分类 |
+| Partial identification grid | `reports/development/partial_identification_grid.csv` | Generated 2026-09-25 | lambda_prompt/context 与 r_medium 的 assumption-based bounds 扫描 |
+| Partial identification summary | `reports/development/partial_identification_summary.json` | Generated 2026-09-25 | ABL/HOT/Gap/有效 Evidence weight 区间及 undefined 区域 |
+| Stress tests / ablation | `reports/development/partial_identification_stress_tests.csv`, `partial_identification_ablation.json` | Generated 2026-09-25 | 开发版反例压力测试与组件可测试性 |
+| Core figures | `reports/development/core_figure_2_support_heatmap.svg`, `core_figure_3_prompt_vs_effective_evidence.svg`, `core_figure_4_bounds_support.svg`, `core_figure_5_model_flow.svg` | Generated 2026-09-25 | 支持缺口、分数/证据权重边界与模型流程 |
+| Demo payload | `reports/demo/demo_payload.json` | Generated 2026-09-25 | Demo 读取的统一开发版数据接口，含参数配置、基线支持、bounds 与 undefined 状态 |
+| Demo page | `reports/demo/index.html` | Generated 2026-09-25 | 单一 Bounds Demo 页面：Evidence Overview、Assumption Controls、Score vs Support、Interpretation |
+| Paper skeleton | `reports/paper/method_results_skeleton.md` | Generated 2026-09-25 | 方法、识别边界、开发结果与正式替换计划骨架 |
+| Paper-ready development draft | `reports/paper/paper_ready_development_draft.md` | Generated 2026-09-25 | 可直接整理进论文的开发版方法/结果草稿，保留正式结果占位 |
+| Competition paper narrative | `reports/paper/competition_paper_narrative_draft.md` | Generated 2026-09-25 | 面向竞赛论文的完整主叙事：问题、识别、Bounds、结果、边界与闭环 |
+| Judge story | `reports/paper/judge_story_3min.md` | Generated 2026-09-25 | 面向首次接触项目评委的 3 分钟口头故事 |
+| Elevator pitch | `reports/paper/elevator_pitch_30s.md` | Generated 2026-09-25 | 问题→方法→发现→价值的 30 秒版本 |
+| Core figure interpretation | `reports/paper/core_figures_interpretation.md` | Generated 2026-09-25 | 四张核心图的论文级图名、caption、可解释边界 |
+| Judge attack questions | `reports/review/judge_attack_questions.md` | Generated 2026-09-25 | 18 个评委攻击问题与可直接答辩的短答 |
+| Top five paper weaknesses | `reports/review/top_5_paper_weaknesses.md` | Generated 2026-09-25 | 当前提交最容易失分的五个论文/答辩薄弱点 |
 

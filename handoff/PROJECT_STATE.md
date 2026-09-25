@@ -139,6 +139,20 @@ S4 Pilot Annotation Gate
 按 AI 预标注情景推算，学生级独立比例指标精度不足以做个体排名 → B009（模型结构待决）。单人参赛与双人标注设计冲突 → B010。
 Gate 状态不变：仍无人工标签。
 
+## Paper / presentation narrative closeout (2026-09-25 晚)
+
+已完成论文与答辩收口材料，主线固定为：**Score Stability ≠ Evidence Support Stability**。
+
+新增：
+- `reports/paper/competition_paper_narrative_draft.md`
+- `reports/paper/judge_story_3min.md`
+- `reports/paper/elevator_pitch_30s.md`
+- `reports/paper/core_figures_interpretation.md`
+- `reports/review/judge_attack_questions.md`
+- `reports/review/top_5_paper_weaknesses.md`
+
+这些材料只整理现有 DEVELOPMENT_ONLY / AI_PROVISIONAL 结果，不改变冻结模型、正式数据、标注手册、Gate 阈值、provisional 标签或 Demo。当前论文最大风险是正式人工证据链尚未闭环，以及 16 条 Evidence 的完全分离可能混合了选择、规则、临时标签和映射效应。
+
 ## Module B evidence level
 
 当前最高：Level 1 — 描述性差异。

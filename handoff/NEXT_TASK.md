@@ -65,6 +65,11 @@ python src/run_s4_gate.py
 - PSM/DID
 - 论文强结论
 
+## 本窗口已完成的论文/答辩并行工作
+
+- 论文主叙事、3 分钟故事、30 秒 pitch、核心图 caption、评委攻击问题与五个薄弱点已整理到 `reports/paper/` 与 `reports/review/`。
+- 这些材料不改变冻结模型或正式 Gate；必须继续沿用 `AI_PROVISIONAL` / `DEVELOPMENT_ONLY` / `formal_gate_eligible=false` 口径。
+
 ## 与人工标注并行、不依赖标签的任务（负责人确认 B009、B010 后）
 
 在 `research/module_c_candidates.md` 增补"小样本收缩 AIV"：Beta-Binomial / 经验贝叶斯 HOT、最低证据量门槛、
