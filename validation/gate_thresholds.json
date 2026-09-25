@@ -1,0 +1,26 @@
+{
+  "_comment": "S4 Pilot Annotation Gate — 冻结阈值。阈值在任何真实人工标签产生前由项目负责人确认；不得在查看结果后回改。",
+  "preregistered": true,
+  "confirmed_by": "项目负责人（用户确认）",
+  "confirmed_at": "2026-09-25T19:40:00+08:00",
+  "freeze_basis": "现有 validation_plan.md、annotation_manual_v0.1.md、annotation_clarification_v0.1.1.md 与既有 Gate 分析器；冻结发生在 R1/R2 真实标签均为空时。",
+  "reliability_design": "single-annotator test-retest; not inter-rater reliability",
+  "gate_scope": "70 core records; 140-record canonical pilot retained; remaining 70 are not required for this Gate",
+  "thresholds": {
+    "completeness_valid_value_min": 1.0,
+    "six_level_alpha_min": 0.667,
+    "three_tier_alpha_min": 0.667,
+    "three_tier_should_exceed_six_level": true,
+    "undetermined_rate_max_per_axis": 0.20,
+    "second_review_rate_max": 0.40,
+    "evidence_span_locatable_min": 0.80,
+    "min_records_for_estimate": 60,
+    "median_sec_per_record_max": 120
+  },
+  "notes": [
+    "0.667 是 Krippendorff 对探索性结论的惯用下限，属于项目操作性方法设计选择，不是本任务的文献已验证标准；保留既有候选数值，不因本次冻结而调高或调低。",
+    "当前分析器报告 exact agreement（agreement_rate）、Cohen kappa、quadratic weighted kappa、六级/三阶 alpha、混淆矩阵与置信区间；相邻一致率和总 disagreement rate 目前不是独立 Gate 阈值，冻结时不自行编造数值或阈值。",
+    "UNDETERMINED 作为每轴最大比例阈值（0.20）；NO_EVIDENCE 比例只报告，不设通过阈值：它是数据事实，不是质量指标。",
+    "阈值只能事前确认；发现不达标时不得回改阈值，应报告不达标并缩小结论范围。"
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "source": "data\\processed\\clean_interactions.csv",
+  "labels_used": "none (structure only)",
+  "scenario_source": "pilot_ai_prelabel.csv (LLM_EXPLORATORY_NOT_HUMAN; assumption, not evidence)",
+  "evidence_yield_ai_prelabel": {
+    "2025秋": {
+      "n": 70,
+      "levelled": 35,
+      "yield": 0.5,
+      "wilson95": [
+        0.386,
+        0.614
+      ]
+    },
+    "2026春": {
+      "n": 70,
+      "levelled": 15,
+      "yield": 0.2143,
+      "wilson95": [
+        0.1344,
+        0.3239
+      ]
+    }
+  },
+  "by_semester": {
+    "2025秋": {
+      "students": 295,
+      "session_proxies": 824,
+      "student_turns": 2512,
+      "student_turns_per_session": {
+        "n": 824,
+        "mean": 3.049,
+        "p25": 1.0,
+        "median": 2.0,
+        "p75": 4.0,
+        "p90": 7.0,
+        "max": 18
+      },
+      "sessions_with_ge2_student_turns": 0.5765,
+      "sessions_with_ge3_student_turns": 0.415,
+      "transitions_total": 1688,
+      "student_turns_per_student": {
+        "n": 295,
+        "mean": 8.515,
+        "p25": 5.0,
+        "median": 8.0,
+        "p75": 11.0,
+        "p90": 14.0,
+        "max": 79
+      },
+      "sessions_per_student": {
+        "n": 295,
+        "mean": 2.793,
+        "p25": 2.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "p90": 5.0,
+        "max": 20
+      },
+      "students_with_ge1_ctq_session": 0.9458,
+      "students_with_ge_turns": {
+        "3": 0.9288,
+        "5": 0.7831,
+        "10": 0.3458,
+        "20": 0.0305
+      },
+      "mab_distinct_known_agents_per_student": {
+        "1": 141,
+        "2": 141,
+        "3": 12,
+        "4": 1
+      },
+      "students_with_ge2_known_agents": 0.522,
+      "agent_catalog_observed": [
+        "思政点灯人",
+        "探知侠",
+        "数模全才",
+        "数模匹配"
+      ],
+      "unknown_agent_turn_share": 0.0,
+      "merge_sensitivity": {
+        "consecutive_row_pairs": 529,
+        "share_gap_le_30min": 0.7353,
+        "share_gap_le_30min_same_agent": 0.3837
+      },
+      "scenario_expected_evidence_turns_per_student": {
+        "yield_assumed": 0.5,
+        "median": 4.0,
+        "share_students_ge5": 0.3458,
+        "share_students_ge10": 0.0305,
+        "hot_worst_case_se_at_median": 0.25
+      }
+    },
+    "2026春": {
+      "students": 106,
+      "session_proxies": 401,
+      "student_turns": 1010,
+      "student_turns_per_session": {
+        "n": 401,
+        "mean": 2.519,
+        "p25": 1.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "p90": 5.0,
+        "max": 14
+      },
+      "sessions_with_ge2_student_turns": 0.5411,
+      "sessions_with_ge3_student_turns": 0.3466,
+      "transitions_total": 609,
+      "student_turns_per_student": {
+        "n": 106,
+        "mean": 9.528,
+        "p25": 5.0,
+        "median": 9.0,
+        "p75": 12.0,
+        "p90": 18.5,
+        "max": 42
+      },
+      "sessions_per_student": {
+        "n": 106,
+        "mean": 3.783,
+        "p25": 2.0,
+        "median": 3.0,
+        "p75": 5.0,
+        "p90": 6.0,
+        "max": 14
+      },
+      "students_with_ge1_ctq_session": 0.8962,
+      "students_with_ge_turns": {
+        "3": 0.8774,
+        "5": 0.7736,
+        "10": 0.4245,
+        "20": 0.0755
+      },
+      "mab_distinct_known_agents_per_student": {
+        "0": 13,
+        "1": 31,
+        "2": 45,
+        "3": 16,
+        "4": 1
+      },
+      "students_with_ge2_known_agents": 0.5849,
+      "agent_catalog_observed": [
+        "AI助教",
+        "AI学伴",
+        "探知侠",
+        "数模匹配",
+        "逆行侠"
+      ],
+      "unknown_agent_turn_share": 0.3683,
+      "merge_sensitivity": {
+        "consecutive_row_pairs": 295,
+        "share_gap_le_30min": 0.339,
+        "share_gap_le_30min_same_agent": 0.1797
+      },
+      "scenario_expected_evidence_turns_per_student": {
+        "yield_assumed": 0.2143,
+        "median": 1.93,
+        "share_students_ge5": 0.0566,
+        "share_students_ge10": 0.0,
+        "hot_worst_case_se_at_median": 0.36
+      }
+    }
+  }
+}

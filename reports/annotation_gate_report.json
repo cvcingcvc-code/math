@@ -1,0 +1,24 @@
+{
+  "status": "PENDING",
+  "gate_report_generated": false,
+  "reason": "No real human annotations have been returned yet. No reliability coefficient is computed (D008).",
+  "awaiting": [
+    "data/annotations/human/pilot_worksheet_A.csv (labels)",
+    "data/annotations/human/pilot_worksheet_B.csv (labels)"
+  ],
+  "ready": {
+    "clarification": "docs/annotation/annotation_clarification_v0.1.1.md",
+    "worksheets": ["data/annotations/human/pilot_worksheet_A.csv", "data/annotations/human/pilot_worksheet_B.csv"],
+    "key": "data/annotations/_keys/pilot_worksheet_key.csv",
+    "thresholds": "validation/gate_thresholds.json",
+    "preregistered": false
+  },
+  "completed_checks": {
+    "integrity_invariants_passed": 21,
+    "integrity_invariants_total": 21,
+    "reliability_selftests_passed": 9,
+    "defects_open": ["S4-F01", "S4-F02"]
+  },
+  "how_to_generate": "python src/run_s4_gate.py",
+  "boundary": "Thresholds must be confirmed before viewing results; AI prelabels must never be reported as human labels (D007/D008)."
+}

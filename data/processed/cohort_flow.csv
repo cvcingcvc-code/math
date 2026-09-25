@@ -1,0 +1,9 @@
+﻿semester,stage,n,student_count,date_min,date_max,note
+2025秋,raw_nonempty_excel_rows,845,297,2025-10-09 15:50:24,2026-02-05 22:07:58,Source Q&A worksheet data rows; Excel row numbers retained.
+2025秋,cohort_and_content_included_rows,824,295,2025-10-09 15:50:24,2026-02-05 22:07:58,Included raw records; see exclusion_log.csv for each row disposition.
+2025秋,excluded_rows,21,17,,,"{""url_only_unretrieved_content"": 21}"
+2025秋,clean_turns,5019,295,2025-10-09 15:50:24,2026-02-05 22:07:58,One row per parsed utterance; unparsed records retained as unknown.
+2026春,raw_nonempty_excel_rows,1925,528,2024-11-21 13:50:09,2026-09-19 17:52:39,Source Q&A worksheet data rows; Excel row numbers retained.
+2026春,cohort_and_content_included_rows,401,106,2026-03-19 14:55:02,2026-07-27 14:25:54,Included raw records; see exclusion_log.csv for each row disposition.
+2026春,excluded_rows,1524,473,,,"{""url_only_unretrieved_content"": 68, ""empty_interaction_text"": 13, ""outside_affirmative_spring_rosters"": 1443}"
+2026春,clean_turns,2009,106,2026-03-19 14:55:02,2026-07-27 14:25:54,One row per parsed utterance; unparsed records retained as unknown.

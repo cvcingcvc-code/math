@@ -1,0 +1,24 @@
+# Local/editor/runtime artifacts
+*.log
+*.tmp
+__pycache__/
+.pytest_cache/
+.vscode/
+.idea/
+
+# Local secrets and machine-specific configuration
+.env
+.env.*
+*.pem
+*.key
+
+# Scratch outputs; canonical reports and data remain tracked
+# The entire work/ tree is generated/local audit material; do not delete it.
+work/
+
+# Generated software-test artifacts (not research results)
+work/_e2e/_SYNTHETIC_*
+work/_e2e/_retest_pipeline_test.*
+work/_e2e/_retest_order_identical_labels.csv
+work/_e2e/_SYNTHETIC_orig_order.*
+work/_e2e/_SYNTHETIC_retest_order.*
