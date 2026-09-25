@@ -47,7 +47,7 @@
 **Figure 4. 分数稳定与证据支持退化的分离**
 
 ### 论文 caption
-**图 4｜Partial Identification 视角下的 Evidence Support 退化（须结合表中 Score bounds 阅读）。** 当前 SVG 实际只绘制 effective coverage 对 prompt 惩罚假设的曲线，并未绘制 ABL、HOT、Gap 曲线或区间；这些分数近似不变的结论来自配套的 `partial_identification_summary.json`。该配套分析说明分数稳定不能替代证据支持审计；当分母为零时，评价状态应记为 `NO_EFFECTIVE_EVIDENCE`，指标为 undefined under assumption。图示是 assumption-based sensitivity behavior，不是统计置信区间。
+**图 4｜Partial Identification 视角下的 Score 与 Evidence Support 分离。** 图中红线表示归一化 Score（ABL=3.5625、HOT=0.375、Gap=1.125 的共同稳定水平），蓝线表示 effective coverage；横轴为 `lambda_prompt`，并固定 `lambda_context=0.00`、`r_medium=0.75`。红线保持稳定而蓝线下降，源于当前 16 条可判读 Evidence 具有共同的参数相关缩放结构；这不是 causal effect。图中的 coverage 定义为 `effective evidence weight / 70 development records`。当 `lambda_prompt=1` 时 support 归零，状态应记为 `NO_EFFECTIVE_EVIDENCE`，Score 指标为 undefined under assumption。图示是 assumption-based sensitivity behavior，不是统计置信区间。
 
 ### 图告诉评委什么
 - 配套 bounds 结果至少有两个维度：归一化 Score 与 support 规模。

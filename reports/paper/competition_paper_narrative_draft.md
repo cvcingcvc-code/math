@@ -83,6 +83,8 @@ Gap(theta)  = sum(w_i * (Task_i - Bloom_i)) / sum(w_i)
 - effective evidence weight = `12.0`
 - effective coverage = `0.1714`
 
+本文中 `effective coverage = effective evidence weight / 70 development records`；分母是全部 70 条开发记录，而不是 16 条可判读 Evidence。
+
 在有效参数网格中，ABL、HOT、Gap 基本保持不变：
 
 - ABL 的范围约为 `3.5625–3.5625`
