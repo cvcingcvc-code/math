@@ -122,7 +122,7 @@ sum(w_i * score_i) / sum(w_i)
 
 ### Figure 4
 
-图实际也只绘制 `effective coverage` 曲线；横轴标为 `x`，不是 `lambda_prompt`。标题写了 score stable，但 SVG 没有绘制 Score 曲线。现有 `core_figures_interpretation.md` 已经记录这一事实并修正 caption：不能说该 SVG 同时直接展示 Score 与 Support。判定为 P1 文档/展示口径问题，未改 Demo 或图文件。
+已修复并重新生成：图现在直接绘制 normalized Score 稳定红线与 Evidence Support（effective coverage）下降蓝线；横轴明确为 `lambda_prompt`，副标题注明固定 `lambda_context=0.00` 与 `r_medium=0.75`，右轴明确 coverage 分母为全部 70 条 development records。图下注明稳定来自当前 16 条可判读 Evidence 的公共缩放结构，不是因果效应；`lambda_prompt=1` 时 support 归零并进入 `NO_EFFECTIVE_EVIDENCE`。
 
 ### Figure 5
 

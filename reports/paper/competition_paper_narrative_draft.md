@@ -69,7 +69,7 @@ Gap(theta)  = sum(w_i * (Task_i - Bloom_i)) / sum(w_i)
 同时报告：
 
 - `effective evidence weight = sum(w_i)`
-- `effective coverage = sum(w_i) / total records`
+- `effective coverage = sum(w_i) / 70 development records`（分母是全部 70 条 development records，而不是 16 条可判读 Evidence）
 
 当 `sum(w_i)=0` 时，模型返回 `NO_EFFECTIVE_EVIDENCE`；ABL、HOT、Gap 在该假设下为 **undefined under assumption**，不能写成 0。
 
