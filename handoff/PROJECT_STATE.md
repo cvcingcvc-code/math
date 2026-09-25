@@ -153,6 +153,12 @@ Gate 状态不变：仍无人工标签。
 
 这些材料只整理现有 DEVELOPMENT_ONLY / AI_PROVISIONAL 结果，不改变冻结模型、正式数据、标注手册、Gate 阈值、provisional 标签或 Demo。当前论文最大风险是正式人工证据链尚未闭环，以及 16 条 Evidence 的完全分离可能混合了选择、规则、临时标签和映射效应。
 
+## Independent numerical verification (2026-09-25 深夜)
+
+已从 `data/annotations/ai/pilot_ai_provisional.csv` 独立复算全部 Bounds 数字，未调用生产 Bounds 函数。结果全部复现：70 records、16 readable Evidence、21×11×3=693 grid、660 defined、33 undefined、ABL=3.5625、HOT=0.375、Gap=1.125、effective weight 0.4–16.0、effective coverage 0.005714...–0.228571...。Coverage denominator 明确为全部 70 条 development records。
+
+所有 readable Evidence 均为 prompt=true、context=false、confidence=medium、task_actor=ai，故参数因子构成公共缩放，归一化分数稳定而 support 下降。Demo payload 逐项一致；论文数字无 P0 矛盾。发现 1 个 P1 展示问题：Figure 4 SVG 实际只画 effective coverage，标题却写 score stable；另有 1 个 P2 表达问题：coverage 首次出现时应明确 denominator=70。详细结果见 `reports/verification/reproduction_review.md`。
+
 ## Module B evidence level
 
 当前最高：Level 1 — 描述性差异。

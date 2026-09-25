@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 2026-09-25（深夜）— Partial Identification 独立数值复算
+
+- 新增 `src/verification/recompute_bounds.py`：不导入生产 Bounds 函数，直接读取 `data/annotations/ai/pilot_ai_provisional.csv`，独立重建 21×11×3 参数网格并计算 ABL/HOT/Gap、effective weight、coverage 与 undefined。
+- 独立复现：70 条记录、16 条可判读 Evidence、693 个参数条件、660 defined、33 undefined；ABL=3.5625、HOT=0.375、Gap=1.125；weight=0.4–16.0；coverage=0.005714...–0.228571...。
+- 确认 coverage 分母为全部 70 条 development records，不是 16 条 Evidence；基线 coverage=12/70=0.171428...。
+- 确认所有可判读 Evidence 共享 prompt=true、context=false、confidence=medium、actor=ai，因此惩罚项形成公共缩放，归一化分数稳定但 support 下降。
+- 新增 `reports/verification/` 下 raw recount、独立复算 CSV/JSON、Demo 一致性、论文数字一致性、source of truth 与 reproduction review。
+- P0=0、P1=1、P2=1。P1 为 Figure 4 SVG 标题暗示 Score+Support 但实际仅画 coverage，横轴为 `x`；P2 为 coverage 首次出现时应显式标明 denominator=70。
+- 未修改 Partial Identification 主公式、数据、标签、R1/R2、manual、Gate threshold、Demo UI 或论文叙事主体。
+
 ## 2026-09-25（晚）— 论文主叙事与评委答辩收口
 
 - 新增 `reports/paper/competition_paper_narrative_draft.md`：按 Problem Background → Research Question → Measurement Problem → Identification Strategy → Mathematical Model → Development Findings → Extreme Case → Limitations → Formal Validation Path 重构竞赛论文主叙事。

@@ -90,4 +90,12 @@
 | Core figure interpretation | `reports/paper/core_figures_interpretation.md` | Generated 2026-09-25 | 四张核心图的论文级图名、caption、可解释边界 |
 | Judge attack questions | `reports/review/judge_attack_questions.md` | Generated 2026-09-25 | 18 个评委攻击问题与可直接答辩的短答 |
 | Top five paper weaknesses | `reports/review/top_5_paper_weaknesses.md` | Generated 2026-09-25 | 当前提交最容易失分的五个论文/答辩薄弱点 |
+| Independent bounds recompute | `src/verification/recompute_bounds.py` | Verified 2026-09-25 | 不调用生产函数的只读独立复算器 |
+| Raw input recount | `reports/verification/raw_input_recount.json|.csv` | Verified 2026-09-25 | 直接从 provisional CSV 统计原始分布 |
+| Independent reproduction grid | `reports/verification/independent_bounds_reproduction.csv` | Verified 2026-09-25 | 693 个参数条件的独立行级复算 |
+| Independent reproduction summary | `reports/verification/independent_bounds_summary.json` | Verified 2026-09-25 | 独立 bounds、support、coverage 与 undefined 汇总 |
+| Demo consistency report | `reports/verification/demo_payload_consistency.json` | Verified 2026-09-25 | Demo payload 与独立复算逐项核对 |
+| Paper numeric consistency | `reports/verification/paper_numeric_consistency.md` | Verified 2026-09-25 | 论文数字和状态口径核对 |
+| Core numbers source of truth | `reports/verification/core_numbers_source_of_truth.json` | Verified 2026-09-25 | 当前开发数字唯一验真汇总 |
+| Reproduction review | `reports/verification/reproduction_review.md` | Verified 2026-09-25 | 独立审稿式复算结论与 P0/P1/P2 分类 |
 

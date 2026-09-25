@@ -1,0 +1,170 @@
+{
+  "independent_implementation": true,
+  "input": "data/annotations/ai/pilot_ai_provisional.csv",
+  "status": {
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY",
+    "formal_gate_eligible": false
+  },
+  "raw_recount": {
+    "total_records": 70,
+    "student_evidence_bloom": {
+      "UNDETERMINED": 35,
+      "NO_EVIDENCE": 19,
+      "L2": 5,
+      "L5": 2,
+      "L3": 5,
+      "L6": 3,
+      "L4": 1
+    },
+    "interpretable_evidence_count": 16,
+    "no_evidence_count": 19,
+    "undetermined_count": 35,
+    "prompt_induced": {
+      "true": 53,
+      "false": 17
+    },
+    "context_truncated": {
+      "true": 28,
+      "false": 42
+    },
+    "confidence": {
+      "low": 51,
+      "medium": 19
+    },
+    "task_actor": {
+      "ai": 53,
+      "student": 11,
+      "unknown": 6
+    },
+    "task_source": {
+      "ai_prompt": 53,
+      "student_request": 11,
+      "unknown": 6
+    },
+    "readable_prompt_induced": {
+      "true": 16
+    },
+    "readable_context_truncated": {
+      "false": 16
+    },
+    "readable_confidence": {
+      "medium": 16
+    },
+    "readable_task_actor": {
+      "ai": 16
+    },
+    "readable_task_source": {
+      "ai_prompt": 16
+    },
+    "status": {
+      "annotation_source": [
+        "AI_PROVISIONAL"
+      ],
+      "annotation_status": [
+        "DEVELOPMENT_ONLY"
+      ],
+      "formal_gate_eligible": false
+    }
+  },
+  "parameter_space": {
+    "lambda_prompt": {
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "count": 21
+    },
+    "lambda_context": {
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.1,
+      "count": 11
+    },
+    "r_medium": [
+      0.5,
+      0.75,
+      1.0
+    ],
+    "theoretical_grid_size": 693
+  },
+  "grid_counts": {
+    "total": 693,
+    "defined": 660,
+    "undefined": 33
+  },
+  "bounds": {
+    "ABL": {
+      "min": 3.5624999999999996,
+      "max": 3.5625000000000004
+    },
+    "HOT": {
+      "min": 0.37499999999999994,
+      "max": 0.37500000000000006
+    },
+    "Gap": {
+      "min": 1.1249999999999998,
+      "max": 1.1250000000000002
+    },
+    "effective_weight": {
+      "min": 0.40000000000000036,
+      "q25": 3.1499999999999995,
+      "median": 5.8,
+      "q75": 8.850000000000001,
+      "max": 16.0
+    },
+    "effective_coverage": {
+      "min": 0.0057142857142857195,
+      "q25": 0.045,
+      "median": 0.08285714285714285,
+      "q75": 0.12642857142857145,
+      "max": 0.22857142857142856
+    }
+  },
+  "undefined_examples": [
+    {
+      "lambda_prompt": 1.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.5,
+      "effective_weight": 0.0,
+      "effective_coverage": 0.0,
+      "defined": false,
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "ABL": null,
+      "HOT": null,
+      "Gap": null
+    },
+    {
+      "lambda_prompt": 1.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 0.0,
+      "effective_coverage": 0.0,
+      "defined": false,
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "ABL": null,
+      "HOT": null,
+      "Gap": null
+    },
+    {
+      "lambda_prompt": 1.0,
+      "lambda_context": 0.0,
+      "r_medium": 1.0,
+      "effective_weight": 0.0,
+      "effective_coverage": 0.0,
+      "defined": false,
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "ABL": null,
+      "HOT": null,
+      "Gap": null
+    }
+  ],
+  "stability": {
+    "ABL_all_defined_equal": true,
+    "HOT_all_defined_equal": true,
+    "Gap_all_defined_equal": true,
+    "all_readable_prompt_induced": true,
+    "all_readable_context_not_truncated": true,
+    "all_readable_confidence_medium": true,
+    "reason": "Every readable row has the same prompt/context/confidence factors, so parameter-dependent factors are a common multiplier and cancel in normalized metrics."
+  }
+}

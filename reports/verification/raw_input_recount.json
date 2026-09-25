@@ -1,0 +1,61 @@
+{
+  "total_records": 70,
+  "student_evidence_bloom": {
+    "UNDETERMINED": 35,
+    "NO_EVIDENCE": 19,
+    "L2": 5,
+    "L5": 2,
+    "L3": 5,
+    "L6": 3,
+    "L4": 1
+  },
+  "interpretable_evidence_count": 16,
+  "no_evidence_count": 19,
+  "undetermined_count": 35,
+  "prompt_induced": {
+    "true": 53,
+    "false": 17
+  },
+  "context_truncated": {
+    "true": 28,
+    "false": 42
+  },
+  "confidence": {
+    "low": 51,
+    "medium": 19
+  },
+  "task_actor": {
+    "ai": 53,
+    "student": 11,
+    "unknown": 6
+  },
+  "task_source": {
+    "ai_prompt": 53,
+    "student_request": 11,
+    "unknown": 6
+  },
+  "readable_prompt_induced": {
+    "true": 16
+  },
+  "readable_context_truncated": {
+    "false": 16
+  },
+  "readable_confidence": {
+    "medium": 16
+  },
+  "readable_task_actor": {
+    "ai": 16
+  },
+  "readable_task_source": {
+    "ai_prompt": 16
+  },
+  "status": {
+    "annotation_source": [
+      "AI_PROVISIONAL"
+    ],
+    "annotation_status": [
+      "DEVELOPMENT_ONLY"
+    ],
+    "formal_gate_eligible": false
+  }
+}

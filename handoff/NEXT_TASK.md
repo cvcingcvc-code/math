@@ -70,6 +70,12 @@ python src/run_s4_gate.py
 - 论文主叙事、3 分钟故事、30 秒 pitch、核心图 caption、评委攻击问题与五个薄弱点已整理到 `reports/paper/` 与 `reports/review/`。
 - 这些材料不改变冻结模型或正式 Gate；必须继续沿用 `AI_PROVISIONAL` / `DEVELOPMENT_ONLY` / `formal_gate_eligible=false` 口径。
 
+## 本窗口已完成的独立数值复算
+
+- 已从 provisional CSV 独立重算 70 条、16 条 Evidence、693 个网格条件、33 个 undefined 和全部核心数字。
+- 结果、Demo payload 与论文数字已完成交叉核对；详细报告见 `reports/verification/reproduction_review.md`。
+- 未修改冻结模型、正式数据、标签、Demo UI 或论文主体。
+
 ## 与人工标注并行、不依赖标签的任务（负责人确认 B009、B010 后）
 
 在 `research/module_c_candidates.md` 增补"小样本收缩 AIV"：Beta-Binomial / 经验贝叶斯 HOT、最低证据量门槛、
