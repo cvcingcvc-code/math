@@ -17,7 +17,7 @@ w_i = Evidence indicator × confidence weight
       × prompt factor × context factor
 ```
 
-然后我们同时报告两类东西：第一类是分数，例如 ABL、HOT 和 Task/Evidence Gap；第二类是支撑这些分数的 effective evidence weight 和 effective coverage。
+然后我们同时报告两类东西：第一类是分数，例如 ABL、HOT 和 Task/Evidence Gap；第二类是支撑这些分数的 effective evidence weight 和 effective coverage，其中 coverage 的分母明确是全部 70 条 development records，而不是 16 条可判读 Evidence。
 
 开发结果非常关键。基线下，ABL 是 3.5625，HOT 是 0.375，Gap 是 1.125。在有效参数范围内，这三个分数基本不变，看起来非常稳定。但是有效 Evidence weight 可以从 16.0 降到 0.4，有效 coverage 可以从 0.2286 降到 0.0057。也就是说，分数可以稳定，但支撑分数的证据正在快速减少。
 

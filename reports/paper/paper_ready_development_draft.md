@@ -52,7 +52,7 @@ Gap(θ) = Σ w_i(Task_i - Bloom_i) / Σ w_i
 
 ## 7. Development results
 
-基线（`λ_prompt=0`、`λ_context=0`、`r_medium=0.75`）为：`ABL=3.5625`、`HOT=0.375`、`Gap=1.125`。本文中 `effective coverage = effective evidence weight / 70 development records`，分母为全部 70 条开发记录，而不是 16 条可判读 Evidence。在有效参数网格中，这三个分数几乎不变；但 effective evidence weight 从 16.0 降至 0.4，effective coverage 从 0.2286 降至 0.0057。当 `λ_prompt=1` 时，当前数据进入 `NO_EFFECTIVE_EVIDENCE`。
+基线（`λ_prompt=0`、`λ_context=0`、`r_medium=0.75`）为：`ABL=3.5625`、`HOT=0.375`、`Gap=1.125`。本文中 `effective coverage = effective evidence weight / 70 development records`，分母为全部 70 条开发记录，而不是 16 条可判读 Evidence。在有效参数网格中，这三个分数几乎不变；但 effective evidence weight 从 16.0 降至 0.4，effective coverage 从 0.2286 降至 0.0057。这里 coverage 的分母是全部 70 条 development records，而不是 16 条可判读 Evidence。当 `λ_prompt=1` 时，当前数据进入 `NO_EFFECTIVE_EVIDENCE`。
 
 因此当前开发版最重要的结果是：**Score Stability ≠ Evidence Support Stability**。主要不确定性来自 evidence availability，而不是分数本身；这不是已识别的 prompt causal effect。
 

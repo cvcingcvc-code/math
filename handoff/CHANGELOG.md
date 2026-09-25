@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 2026-09-25（深夜）— Figure 4 与 Score/Support 口径修复
+
+- 修复 `src/run_partial_identification.py` 的 Figure 4 标签并重新生成 `reports/development/core_figure_4_bounds_support.svg`：红线为 normalized Score（ABL/HOT/Gap）共同稳定水平，蓝线为 Evidence Support；横轴为 `lambda_prompt`，固定 `lambda_context=0.00`、`r_medium=0.75`。
+- 图中明确 `effective coverage = effective weight / 70 development records`，并说明当前稳定来自 16 条可判读 Evidence 的公共缩放结构，不是因果效应；零支持进入 `NO_EFFECTIVE_EVIDENCE`。
+- 论文 `competition_paper_narrative_draft.md`、`paper_ready_development_draft.md`、`judge_story_3min.md` 与 Demo 卡片统一 coverage 分母口径。
+- 阶段提交：`2359fbf`。
+
 ## 2026-09-25（深夜）— Partial Identification 独立数值复算
 
 - 新增 `src/verification/recompute_bounds.py`：不导入生产 Bounds 函数，直接读取 `data/annotations/ai/pilot_ai_provisional.csv`，独立重建 21×11×3 参数网格并计算 ABL/HOT/Gap、effective weight、coverage 与 undefined。

@@ -159,6 +159,10 @@ Gate 状态不变：仍无人工标签。
 
 所有 readable Evidence 均为 prompt=true、context=false、confidence=medium、task_actor=ai，故参数因子构成公共缩放，归一化分数稳定而 support 下降。Demo payload 逐项一致；论文数字无 P0 矛盾。发现 1 个 P1 展示问题：Figure 4 SVG 实际只画 effective coverage，标题却写 score stable；另有 1 个 P2 表达问题：coverage 首次出现时应明确 denominator=70。详细结果见 `reports/verification/reproduction_review.md`。
 
+## Figure / Demo / Paper closeout (2026-09-25 深夜)
+
+阶段一已完成并提交 `2359fbf`：Figure 4 现在直接显示 normalized Score 稳定与 Evidence Support 下降，横轴为真实 `lambda_prompt`，固定参数及 `effective coverage` 分母 70 均明确。论文和 Demo 同步说明：分数稳定来自当前 16 条可判读 Evidence 的公共缩放结构，不是因果效应；support 为零时返回 `NO_EFFECTIVE_EVIDENCE`，不填 0。阶段二检查确认现有真实开发输入只能支持明确的开发/合成结构演示：16 条可判读 Evidence 全部为 prompt=true、context=false、confidence=medium、task_actor=ai、task_source=ai_prompt、content_relation=reworked_with_addition，缺少异质交叉支持。因此未修改标注、不把曲线写成真实异质实验或正式结论。
+
 ## Module B evidence level
 
 当前最高：Level 1 — 描述性差异。

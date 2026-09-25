@@ -46,6 +46,8 @@
 ### 图名
 **Figure 4. 分数稳定与证据支持退化的分离**
 
+> 图中红线实际表示 ABL/HOT/Gap 的归一化共同稳定水平，蓝线表示 Evidence Support；横轴是 `lambda_prompt`，并固定 `lambda_context=0.00`、`r_medium=0.75`。
+
 ### 论文 caption
 **图 4｜Partial Identification 视角下的 Score 与 Evidence Support 分离。** 图中红线表示归一化 Score（ABL=3.5625、HOT=0.375、Gap=1.125 的共同稳定水平），蓝线表示 effective coverage；横轴为 `lambda_prompt`，并固定 `lambda_context=0.00`、`r_medium=0.75`。红线保持稳定而蓝线下降，源于当前 16 条可判读 Evidence 具有共同的参数相关缩放结构；这不是 causal effect。图中的 coverage 定义为 `effective evidence weight / 70 development records`。当 `lambda_prompt=1` 时 support 归零，状态应记为 `NO_EFFECTIVE_EVIDENCE`，Score 指标为 undefined under assumption。图示是 assumption-based sensitivity behavior，不是统计置信区间。
 
