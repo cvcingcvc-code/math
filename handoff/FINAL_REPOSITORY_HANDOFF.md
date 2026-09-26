@@ -8,8 +8,8 @@
 |---|---|
 | 项目根目录 | `C:\Users\lin\Documents\Codex\2026-09-25\yu` |
 | 当前 branch | `master` |
-| 最终 commit SHA | `2210041df43e11e6ddc80a26e199bd2a87e98da9` |
-| 收敛 commit | `bc6f02af0defcfc1ec172092ed698cce55502276`（主体）+ `2210041`（demo polish） |
+| 最终 commit SHA | `4fc32794d1ddab1800258eb6d5f9a61e652e6025` |
+| 收敛 commit 链 | `bc6f02a`（主体收敛）→ `2210041`（demo polish）→ `4fc3279`（final handoff 文档） |
 | remote | `https://github.com/cvcingcvc-code/math.git`（origin） |
 | push 成功 | **是**（local HEAD == remote HEAD == `2210041`） |
 | working tree | **clean**（0 改动） |
