@@ -6,6 +6,20 @@
 
 ---
 
+## 🌐 Live Demo
+
+在线演示（GitHub Pages）：**https://cvcingcvc-code.github.io/math/**
+
+## 入口 Entries
+
+- 🌐 **Live Demo**：https://cvcingcvc-code.github.io/math/（正式比赛 Demo）
+- 📄 **Paper**：`paper/development_submission_candidate.md`（canonical development paper）
+- 📊 **PPT**：`outputs/education_ai_evidence_roadshow_final.pptx`（10 页最终路演版）
+- 🔁 **Reproducibility**：`python run_all.py`（开发版复现，32/32 检查），详见 `docs/RUN_GUIDE.md`
+- 💻 **Source Code**：`src/`、`scripts/`、`run_all.py`
+
+---
+
 ## Research Question
 
 当观测到的学习表现存在**缺失、冲突或可信度差异**时，如何显式建模**证据可靠性（Evidence Reliability）**，并在证据不足时拒绝给出过度确定的结论（`ABSTAIN` / `NO_EFFECTIVE_EVIDENCE`），而不是把 Raw Signal 直接当成可信结论？
