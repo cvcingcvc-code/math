@@ -203,5 +203,10 @@
     "path": "src\\run_reliability_sensitivity.py",
     "bytes": 11112,
     "sha256": "CD787BB83747BB258D4ABBE8CC46DA59B7742FC2BD5E5122C1F11CFB0B067FCF"
+  },
+  {
+    "path": "reports/audit/COMPETITION_GRADE_GAP_FINAL.md",
+    "bytes": 5752,
+    "sha256": "60065562436C0BEF5B8E4C64037E4F21F5BB0C24FE6E5C1F2BB0780BAF3D317E"
   }
 ]
