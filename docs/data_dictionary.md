@@ -208,7 +208,7 @@ AI 辅助标注（deepseek-flash），列与 3.1 相同但以 `formal_gate_eligi
 | student_evidence_bloom / task_bloom | 同输入 |
 | evidence_level_numeric | L2–L6 → 2–6；不可判读为空 |
 | confidence / prompt_induced / context_truncated | 同输入 |
-| baseline_weight | 基线参数（λ_prompt=0, λ_context=0, r_medium=0.75）下的记录权重 |
+| baseline_weight | M1 confidence-only 权重（λ_prompt=0、λ_context=0、r_medium=0.75）；**注意这是 confidence-only 基线，不是 M0 Raw-only**（M0 无任何校正，权重恒为 1.0） |
 | enters_score | 是否进入 Score 分母（16 条 true） |
 | record_score_status | IN_SCORE_DENOMINATOR / NOT_SCORED_* |
 | AIV / ranking | 恒 `NOT_AVAILABLE_PENDING_FORMAL_GATE` |
@@ -217,7 +217,7 @@ AI 辅助标注（deepseek-flash），列与 3.1 相同但以 `formal_gate_eligi
 
 ### 4.3 `reports/submission/development_results_summary.csv`
 
-列：`quantity, scope, value, value_max, annotation_source, development_status, formal_gate_eligible, claim_boundary`。含 70/16/19/35、693/660/33、基线 Score（ABL 3.5625 / HOT 0.375 / Gap 1.125）、基线 Support（权重 12.0，覆盖率 12/70=0.1714）、AIV/ranking=NOT_AVAILABLE…。浮点 `3.5624999999999996` 为舍入，恒等于 3.5625。
+列：`quantity, scope, value, value_max, annotation_source, development_status, formal_gate_eligible, claim_boundary`。含 70/16/19/35、693/660/33、Score（ABL 3.5625 / HOT 0.375 / Gap 1.125）、以及 Support 消融序列 —— **M0 Raw-only = 16（coverage 0.228571）；M1 confidence-only = 12（0.171429）；M2/M3 当前模型 = 6（0.085714）**；AIV/ranking=NOT_AVAILABLE…。浮点 `3.5624999999999996` 为舍入，恒等于 3.5625。
 
 ### 4.4 其他开发输出
 

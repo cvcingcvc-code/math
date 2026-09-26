@@ -252,23 +252,42 @@
 
   <!-- ================= SECTION 3 ================= -->
   <section id="result">
-    <div class="sec-head"><span class="sec-num">3</span><h2>Core Development Result</h2></div>
-    <p class="lede"><b>Score Stability ≠ Evidence Support Stability.</b> 在声明的参数范围内，归一化分数保持稳定，而有效证据支持显著变化 —— 二者稳定性不同。</p>
+    <div class="sec-head"><span class="sec-num">3</span><h2>Core Finding</h2></div>
+    <p class="lede"><b>Score Stability ≠ Evidence Support Stability.</b> 归一化分数保持不变，而有效证据支持显著下降 —— 分数稳定，不等于支撑它的证据同样稳定。</p>
+
+    <div class="cards" style="margin-bottom:14px">
+      <div class="card" style="border-top:3px solid var(--green)">
+        <div class="c-title">Score（ABL / HOT / Gap）</div>
+        <div class="stat pos">3.5625 / 0.375 / 1.125</div>
+        <div class="c-row muted">M0 → M3 全程不变 —— 公共缩放退化，<b>不是提升</b>。</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange)">
+        <div class="c-title">Effective Support（Σw）</div>
+        <div class="stat warn">16 → 12 → 6 → 6</div>
+        <div class="c-row muted">M0 → M1 → M2 → M3，<b>证据支撑下降</b>。</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--orange)">
+        <div class="c-title">Coverage（Σw / N，N=70）</div>
+        <div class="stat warn" style="font-size:16px">0.228571 → 0.171429 → 0.085714 → 0.085714</div>
+        <div class="c-row muted">覆盖率随支持同步下降。</div>
+      </div>
+    </div>
 
     <div class="table-wrap">
       <table>
-        <thead><tr><th>量</th><th>Raw (M0)</th><th>Adjusted (M3)</th><th>含义</th></tr></thead>
+        <thead><tr><th>Model</th><th>Components</th><th>Score (ABL)</th><th>Effective Support</th><th>Coverage (N=70)</th></tr></thead>
         <tbody>
-          <tr><td>Score · ABL</td><td class="big">3.5625</td><td class="big">3.5625</td><td>分数不变 —— 公共缩放退化，非提升</td></tr>
-          <tr><td>Score · HOT</td><td>0.375</td><td>0.375</td><td>伴生描述分数</td></tr>
-          <tr><td>Score · Gap</td><td>1.125</td><td>1.125</td><td>伴生描述分数</td></tr>
-          <tr><td><b>Support Mass (Σw)</b></td><td class="big">16</td><td class="big">6</td><td><b>证据支撑下降</b></td></tr>
-          <tr><td><b>Coverage (Σw/70)</b></td><td>0.228571</td><td>0.085714</td><td><b>覆盖率下降</b>，分母 N=70</td></tr>
+          <tr><td>M0</td><td>无校正（Raw-only）</td><td>3.5625</td><td class="big">16</td><td>0.228571</td></tr>
+          <tr><td>M1</td><td>+ confidence</td><td>3.5625</td><td>12</td><td>0.171429</td></tr>
+          <tr><td>M2</td><td>+ confidence + prompt</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
+          <tr><td>M3</td><td>+ confidence + prompt + context</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p class="muted" style="margin-top:10px">可判读证据：16 条（L2×5、L3×5、L4×1、L5×2、L6×3）。16 条共享 prompt=true / context=false / confidence=medium，各加权方案施加同一常数因子，归一化后抵消 —— 因此 Raw 与 Adjusted 相同，<b>不得写成 improvement</b>。</p>
+    <p class="muted" style="margin-top:10px">视觉重点：<b>Score 稳定 ≠ Evidence Support 稳定。</b> 四个模型的归一化分数完全相同（3.5625），但有效支持从 16 降到 6、覆盖率从 0.228571 降到 0.085714。prompt 模块承担主要支持下降（M1→M2）；context 模块在当前可判读记录中无变异（M2=M3，不可识别独立效应）。</p>
+
+    <p class="muted" style="margin-top:8px">数据构成（N=70）：16 条可判读（L2×5、L3×5、L4×1、L5×2、L6×3）+ 19 条 NO_EVIDENCE + 35 条 UNDETERMINED = <b>54 条 NO_EFFECTIVE_EVIDENCE</b>。16 条可判读共享 prompt=true / context=false / confidence=medium，各加权方案施加同一常数因子，归一化后抵消 —— 因此 Raw 与 Adjusted 相同，<b>不得写成 improvement</b>。</p>
 
     <figure>
       <img src="../visual_evidence/final/F5_ablation_refusal.svg" alt="F5 消融与拒判边界">
@@ -279,38 +298,43 @@
   <!-- ================= SECTION 4 ================= -->
   <section id="validation">
     <div class="sec-head"><span class="sec-num">4</span><h2>Five Validation Paths</h2></div>
-    <p class="lede">每条路径只给 <b>Question / Result / Meaning</b>，不铺长文。</p>
+    <p class="lede">每条路径只给 <b>Question / Key Result / Meaning / Limit</b>，不铺长文。</p>
 
     <div class="cards">
       <div class="card">
         <div class="c-title">1 · Baseline</div>
-        <div class="c-row"><span class="lbl">Question</span>：Raw-only 是否已足够？</div>
-        <div class="c-row"><span class="lbl">Result</span>：M0 把 16 条可判读全部当满权重（w=1，support mass 16）；四模型 ABL 均 3.5625。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：Raw-only 是必要 baseline，但缺少区分证据等级与证据质量的通道。</div>
+        <div class="c-row"><span class="lbl">Question</span>：可靠性层是否必要？</div>
+        <div class="c-row"><span class="lbl">Key Result</span>：四模型 ABL 均 3.5625；Raw-only support=16，主模型=6。</div>
+        <div class="c-row"><span class="lbl">Meaning</span>：可靠性层带来 Raw-only 没有的 graded support。</div>
+        <div class="c-row"><span class="lbl">Limit</span>：不证明乘法形式必需；不证明精度/预测优越。</div>
       </div>
       <div class="card">
         <div class="c-title">2 · Ablation</div>
-        <div class="c-row"><span class="lbl">Question</span>：组件是否真的改变支持记账？</div>
-        <div class="c-row"><span class="lbl">Result</span>：16→12→6→6；分数恒 3.5625；M2/M3 相同（context 无变异）。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：confidence / prompt 组件改变 support accounting 与拒判边界，而非装饰。</div>
+        <div class="c-row"><span class="lbl">Question</span>：组件是否只是装饰？</div>
+        <div class="c-row"><span class="lbl">Key Result</span>：有效权重 16→12→6→6，分数恒 3.5625。</div>
+        <div class="c-row"><span class="lbl">Meaning</span>：confidence / prompt 组件确实改变 support accounting。</div>
+        <div class="c-row"><span class="lbl">Limit</span>：模块差异 ≠ 独立因果效应；context 无变异不可识别。</div>
       </div>
       <div class="card">
         <div class="c-title">3 · Sensitivity / Robustness</div>
         <div class="c-row"><span class="lbl">Question</span>：现象是否只是单一参数点产生？</div>
-        <div class="c-row"><span class="lbl">Result</span>：±10%/±20% 扰动 → 0 个 decision-state flips；693 网格、660 defined、33 undefined；weight 0.4–16。</div>
+        <div class="c-row"><span class="lbl">Key Result</span>：±10%/±20% → 0 个 decision-state flips；693 网格 660 defined / 33 undefined。</div>
         <div class="c-row"><span class="lbl">Meaning</span>：局部结构稳定性；学生 ranking 为 NOT_APPLICABLE。</div>
+        <div class="c-row"><span class="lbl">Limit</span>：不是统计置信区间，也不是全局稳健性。</div>
       </div>
       <div class="card">
         <div class="c-title">4 · Failure Case</div>
-        <div class="c-row"><span class="lbl">Question</span>：高 Raw 是否一定意味着高支持？</div>
-        <div class="c-row"><span class="lbl">Result</span>：P108 Raw=L6 但 R=0.375、Adj=2.25、LOW_SUPPORT；P072/P035 返回 NO_EFFECTIVE_EVIDENCE。</div>
+        <div class="c-row"><span class="lbl">Question</span>：高 Raw 是否仍被接受？</div>
+        <div class="c-row"><span class="lbl">Key Result</span>：P108 L6 → R=0.375 → LOW_SUPPORT；P072/P035 返回 NO_EFFECTIVE_EVIDENCE。</div>
         <div class="c-row"><span class="lbl">Meaning</span>：High Raw ≠ High Evidence Support；Missing Evidence ≠ Score 0。</div>
+        <div class="c-row"><span class="lbl">Limit</span>：不是准确率/真实错误率；无 true outcome。</div>
       </div>
       <div class="card">
         <div class="c-title">5 · External Transfer</div>
-        <div class="c-row"><span class="lbl">Question</span>：同一结构能否迁移到其他领域？</div>
-        <div class="c-row"><span class="lbl">Result</span>：BTC n=1698：Gate1/Gate2 SUPPORTED，Gate3 NOT SUPPORTED。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：结构可迁移（structural portability），但不证明教育泛化或交易优势。</div>
+        <div class="c-row"><span class="lbl">Question</span>：是否只为教育数据硬写？</div>
+        <div class="c-row"><span class="lbl">Key Result</span>：BTC n=1698：Gate1/Gate2 SUPPORTED，Gate3 NOT SUPPORTED。</div>
+        <div class="c-row"><span class="lbl">Meaning</span>：结构可迁移（structural portability）。</div>
+        <div class="c-row"><span class="lbl">Limit</span>：非教育泛化/交易优势；不能成为第二主线。</div>
       </div>
     </div>
 
@@ -414,7 +438,22 @@
   <!-- ================= SECTION 8 ================= -->
   <section id="limitations">
     <div class="sec-head"><span class="sec-num">8</span><h2>Limitations / Evidence Status</h2></div>
-    <p class="lede">不藏限制。</p>
+    <p class="lede">这不是「自曝缺点」，而是<b>证据边界</b> —— 明确当前证据能支持什么、不能支持什么。</p>
+
+    <div class="table-wrap" style="margin-bottom:14px">
+      <table style="min-width:0">
+        <thead><tr><th>Evidence Status</th><th>值</th></tr></thead>
+        <tbody>
+          <tr><td>Development Sample</td><td class="big">70</td></tr>
+          <tr><td>Readable Evidence</td><td class="big">16</td></tr>
+          <tr><td>NO_EFFECTIVE_EVIDENCE</td><td class="big">54</td></tr>
+          <tr><td>Human R1 / R2</td><td class="warn">0 / 70 · 0 / 70</td></tr>
+          <tr><td>Formal Gate</td><td class="warn">NOT_RUN</td></tr>
+          <tr><td>AI Increment</td><td class="neg">NOT_SUPPORTED</td></tr>
+          <tr><td>External Transfer</td><td class="warn">STRUCTURAL ONLY</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="cards">
       <div class="card"><div class="c-title">Development-only</div><div class="c-row muted">全部结果来自 AI_PROVISIONAL 开发切片，不是正式验证结果。</div></div>
