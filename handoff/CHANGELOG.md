@@ -135,3 +135,10 @@ Python 3.14.2 / pandas 3.0.1 / numpy 2.4.1 / scipy 1.18.0 / scikit-learn 1.9.0�
 - 阈值口径核对：分析器已有 exact agreement、Cohen kappa、quadratic weighted kappa、六级/三阶 alpha、混淆矩阵与 CI；相邻一致率/总 disagreement rate 没有既有独立 Gate 阈值，本轮未擅自新增或编造。
 - 当前冻结后的唯一下一步：开始第一轮人工标注 R1；不得先运行真实 Gate 或填写 R2。
 
+# 2026-09-26 — Research core closure
+
+- 新增 `src/build_core_closure.py`，沿用既有 reliability weight 公式生成 Raw/Adjusted 指标、M0–M3 消融、4 条真实记录反例与六问研究结论。
+- 生成 `reports/development/raw_adjusted_metrics.csv`、`ablation_results.csv`、`counterexamples.csv`、`research_core_closure.md|.json`。
+- `run_all.py` 纳入核心闭环步骤；6 步、32/32 checks 通过。
+- 开发版结论：Raw ABL/HOT/Gap=3.5625/0.375/1.125；调整后分数保持不变，effective weight 16→6，coverage 0.228571→0.085714；16 条可判读 Evidence 全部 prompt-induced。
+- 未修改正式 R1/R2、Gate 阈值、冻结标注手册、原始数据或 Formal AIV 边界；来源不明的未跟踪成果未纳入。

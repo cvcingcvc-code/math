@@ -23,6 +23,10 @@
     {
       "step": "src/build_development_results_csv.py",
       "exit_code": 0
+    },
+    {
+      "step": "src/build_core_closure.py",
+      "exit_code": 0
     }
   ],
   "checks": [
@@ -168,6 +172,21 @@
     },
     {
       "check": "result csv: AIV/ranking pending, labels kept",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "core closure frozen for submission",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "core closure retains provisional boundary",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "ablation/counterexample artifacts present",
       "pass": true,
       "detail": ""
     }

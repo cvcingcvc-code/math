@@ -5,6 +5,7 @@ AI_PROVISIONAL development data
   -> reliability sensitivity        (src/run_reliability_sensitivity.py)
   -> bounds grid, Figure 4, Demo payload (src/run_partial_identification.py --mode development)
   -> independent recomputation      (src/verification/recompute_bounds.py)
+  -> core closure (src/build_core_closure.py)
   -> consistency checks + core report (reports/submission/run_all_report.json)
 
 This script never reads human R1/R2 labels. `--mode formal` only delegates to the
@@ -30,6 +31,7 @@ REQUIRED_INPUTS = [
     "src/run_partial_identification.py",
     "src/verification/recompute_bounds.py",
     "src/build_development_results_csv.py",
+    "src/build_core_closure.py",
 ]
 
 STEPS = [
@@ -38,6 +40,7 @@ STEPS = [
     ["src/run_partial_identification.py", "--mode", "development"],
     ["src/verification/recompute_bounds.py"],
     ["src/build_development_results_csv.py"],
+    ["src/build_core_closure.py"],
 ]
 
 # Frozen development expectations (reports/verification/core_numbers_source_of_truth.json).
@@ -105,6 +108,21 @@ def check_outputs():
         all(r["AIV"] == r["ranking"] == "NOT_AVAILABLE_PENDING_FORMAL_GATE"
             and r["annotation_source"] == "AI_PROVISIONAL" and r["development_status"] == "DEVELOPMENT_ONLY"
             and r["formal_gate_eligible"] == "false" for r in rec))
+
+    closure = load("reports/development/research_core_closure.json")
+    add("core closure frozen for submission",
+        closure.get("status") == "RESEARCH_CORE_FROZEN_FOR_SUBMISSION"
+        and closure.get("formal_gate_eligible") is False)
+    add("core closure retains provisional boundary",
+        closure.get("readable_evidence_all_prompt_induced") is True
+        and closure.get("readable_evidence_prompt_false_count") == 0)
+    add("ablation/counterexample artifacts present",
+        all((ROOT / p).exists() for p in [
+            "reports/development/raw_adjusted_metrics.csv",
+            "reports/development/ablation_results.csv",
+            "reports/development/counterexamples.csv",
+            "reports/development/research_core_closure.md",
+        ]))
     return checks
 
 

@@ -54,6 +54,7 @@
 | Indicator feasibility audit | `src/indicator_feasibility_audit.py` | Run 2026-09-25 | 无标签结构审计：CTQ/ABL/HOT/MAB 可计算性 |
 | Development annotation loader | `src/development_data.py` | Added 2026-09-25 | 显式 `--mode development` 读取 AI_PROVISIONAL；默认 formal 路径不变；不可进入正式 Gate |
 | Development experiment entry | `src/run_development_experiment.py` | Added 2026-09-25 | 70 条 provisional 数据的透明行级 ABL/HOT/coverage/gap 探索链路；不训练分类器、不进入正式 Gate |
+| Core closure builder | `src/build_core_closure.py` | Added 2026-09-26 | Raw/Adjusted 指标、M0–M3 消融、真实反例与研究结论；仅 DEVELOPMENT_ONLY |
 
 ## Reports
 
@@ -74,6 +75,10 @@
 | Reliability sensitivity CSV | `reports/development/reliability_sensitivity.csv` | Generated 2026-09-25 | 15 个 prompt/context 惩罚条件；原始 vs 校正 ABL/HOT/coverage/gap |
 | Reliability model JSON | `reports/development/reliability_model.json` | Generated 2026-09-25 | 权重公式、参数网格、敏感性范围与数学边界 |
 | Reliability sensitivity plot | `reports/development/reliability_sensitivity.svg` | Generated 2026-09-25 | 简单 adjusted ABL 对 lambda_prompt / lambda_context 图 |
+| Raw/Adjusted metrics | `reports/development/raw_adjusted_metrics.csv` | Generated 2026-09-26 | 统一 Raw vs Adjusted 指标、变化量与支持度 |
+| Ablation results | `reports/development/ablation_results.csv` | Generated 2026-09-26 | M0 无校正、M1 置信度、M2 加 prompt、M3 加 context |
+| Counterexamples | `reports/development/counterexamples.csv` | Generated 2026-09-26 | 4 条来自 70 条 development records 的真实反例 |
+| Research core closure | `reports/development/research_core_closure.md|.json` | Generated 2026-09-26 | 六问研究结论与 `RESEARCH_CORE_FROZEN_FOR_SUBMISSION` 状态 |
 | Separation provenance audit | `reports/development/separation_provenance_audit.csv|.json` | Generated 2026-09-25 | 16 条可判读 Evidence 的来源追踪、字段映射与人工复核优先级 |
 | Identifiability map | `reports/development/identifiability_map.json` | Generated 2026-09-25 | 核心量 OBSERVABLE / PARTIALLY_IDENTIFIABLE / NOT_IDENTIFIABLE 分类 |
 | Partial identification grid | `reports/development/partial_identification_grid.csv` | Generated 2026-09-25 | lambda_prompt/context 与 r_medium 的 assumption-based bounds 扫描 |

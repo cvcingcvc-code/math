@@ -6,7 +6,7 @@ Stage: S4-Pilot Annotation Gate
 
 ## 唯一下一任务
 
-**由两名独立人工标注者执行 `data/annotations/human/pilot_worksheet_A.csv` 与 `_B.csv` 的盲标，然后运行 Gate 分析器。**
+**由同一名人工标注者执行 R1=`data/annotations/human/pilot_worksheet_A.csv`，至少间隔 24 小时后执行 R2=`data/annotations/human/pilot_worksheet_A_retest.csv`，然后运行 Gate 分析器。**
 
 执行前必读（顺序）：
 1. `data/annotations/human/README_ANNOTATOR.md`
@@ -55,7 +55,7 @@ python src/run_s4_gate.py
 
 - [ ] 确认采纳 `annotation_clarification_v0.1.1.md`（或指出需修改处）
 - [ ] 在**未查看一致性结果**的前提下确认 `validation/gate_thresholds.json`
-- [ ] 裁定 B008（"140 条" 与 "70 条双标" 的口径）
+- [x] B008 已冻结为 70 条核心样本；B010 已冻结为同一标注者 R1/R2 重测
 
 ## Gate 未通过前禁止
 

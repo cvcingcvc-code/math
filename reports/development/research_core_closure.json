@@ -1,0 +1,30 @@
+{
+  "status": "RESEARCH_CORE_FROZEN_FOR_SUBMISSION",
+  "formal_gate_eligible": false,
+  "outputs": [
+    "raw_adjusted_metrics.csv",
+    "ablation_results.csv",
+    "counterexamples.csv",
+    "research_core_closure.md"
+  ],
+  "raw": {
+    "ABL": 3.5625,
+    "HOT": 0.375,
+    "Task_Evidence_Gap": 1.125,
+    "effective_weight": 16.0,
+    "effective_coverage": 0.22857142857142856,
+    "included_evidence_count": 16,
+    "status": "DEFINED"
+  },
+  "adjusted": {
+    "ABL": 3.5625,
+    "HOT": 0.375,
+    "Task_Evidence_Gap": 1.125,
+    "effective_weight": 6.0,
+    "effective_coverage": 0.08571428571428572,
+    "included_evidence_count": 16,
+    "status": "DEFINED"
+  },
+  "readable_evidence_all_prompt_induced": true,
+  "readable_evidence_prompt_false_count": 0
+}

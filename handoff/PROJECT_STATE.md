@@ -168,3 +168,9 @@ Gate 状态不变：仍无人工标签。
 当前最高：Level 1 — 描述性差异。
 
 在处理、对照、基线、结果、共同支持等条件确认之前，不得宣称 AI 因果增量。
+
+## Research core closure (2026-09-26)
+
+开发版测量闭环已完成并标记为 `RESEARCH_CORE_FROZEN_FOR_SUBMISSION`。`src/build_core_closure.py` 生成统一 Raw/Adjusted 指标、M0–M3 消融、真实记录反例和六问结论；`run_all.py` 已纳入该步骤，当前 32/32 检查通过。
+
+本冻结不改变正式 Gate、R1/R2、原始数据、标注手册、阈值或 Formal AIV 边界。16 条可判读 Evidence 全部 `prompt_induced=true`，因此当前数据只能支持“分数稳定与证据支持不稳定并存”的开发版测量结论；Formal AIV 仍为 `NOT_AVAILABLE_PENDING_FORMAL_GATE`。
