@@ -1,7 +1,7 @@
 # PAPER EVIDENCE TRACE
 
 > 唯一 Claim → Evidence → Number → Table/Figure → Source 映射。
-> 状态：`PAPER_EVIDENCE_LOCK`。本文件把 `paper/development_submission_candidate.md` 的每一处声明绑定到 canonical artifact。
+> 状态：`PAPER_EVIDENCE_LOCK`。本文件把 `paper/development_submission_candidate.md`（V1）与 `paper/paper_v2_candidate.md`（V2，`PAPER_V2_CANONICAL_DEVELOPMENT`）的每一处声明绑定到 canonical artifact。V2 是结构重写，未新增任何经验数字，本映射 C1–C13 对 V2 同样成立（V2 正文逐条引用 C1–C13，见其 §5.2/§8/附录 A）。
 > 全部数字来自 `AI_PROVISIONAL / DEVELOPMENT_ONLY` 输入；`formal_gate_eligible=false`；`NOT_HUMAN_VALIDATED`。
 > 未在本文件登记为「有 canonical source」的声明，不得进入正式论文。
 
