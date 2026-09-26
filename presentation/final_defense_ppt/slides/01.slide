@@ -4,7 +4,8 @@
   </Box>
   <Box style={{ height: 500, padding: 54, justifyContent: 'center', gap: 24 }}>
     <Text style={{ fontSize: 42, color: '#0E3F8C', fontWeight: 'bold', lineHeight: 1.2 }}>观察到的结果，不等于可靠证据</Text>
-    <Text style={{ fontSize: 25, color: '#4A5568', lineHeight: 1.45 }}>当证据缺失、冲突或可信度不同，如何避免把 Raw Signal 直接当成可信结论？</Text>
+    <Text style={{ fontSize: 25, color: '#4A5568', lineHeight: 1.45 }}>我们不是重新给学生打分，而是在回答：这个分数，到底有多少证据值得相信？</Text>
+    <Text style={{ fontSize: 19, color: '#8B97A8', lineHeight: 1.4 }}>当证据缺失、冲突或可信度不同，如何避免把 Raw Signal 直接当成可信结论？</Text>
     <Box style={{ background: '#E8EFF8', border: '2px solid #1E4FA8', padding: 28, width: 900 }}>
       <Text style={{ fontSize: 34, color: '#1E4FA8', fontWeight: 'bold' }}>Score Stability ≠ Evidence Support Stability</Text>
       <Text style={{ fontSize: 22, color: '#1A2230', marginTop: 12 }}>分数稳定，不等于证据支撑稳定</Text>

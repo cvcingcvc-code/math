@@ -6,8 +6,8 @@
 ## 2. 为什么不能直接用 Raw Signal？
 因为 Raw Signal 只描述观察到的表现，不表达证据是否可判读、是否缺失或是否受到 prompt/context 影响。直接使用会把弱证据包装成确定结论。
 
-## 3. 你们的 Reliability 是概率吗？
-不是。R 是确定性的支持权重，用于调整贡献和计算 Support/Coverage，不是校准概率。
+## 3. 你们的 Reliability 是概率吗？是拍脑袋定的吗？
+不是概率，也不是拍脑袋。R 是确定性的支持权重，用于调整贡献和计算 Support/Coverage，不是校准概率。它的参数（`λ_prompt=0.5`、`λ_context=0.5`、`r_medium=0.75`）是**透明的、预先声明的设计假设**（preregistered design assumptions），不是从当前样本学出的真实概率。我们诚实地把它们标为 `WEAKLY_JUSTIFIED_COMPONENT`，并通过 693 格敏感性分析检验结论是否依赖某个精确取值——结果显示结构性结论不依赖单点取值。最终只能声称结构性行为，不能声称 Reliability 已校准。
 
 ## 4. 公式中的参数是怎么来的？
 当前使用冻结默认值：`lambda_prompt=0.5`、`lambda_context=0.5`、`confidence medium=0.75`。它们是 development-only 的弱合理化组件，不被升级成普适参数。
@@ -16,10 +16,10 @@
 因为当前 16 条可判读记录共享同一组因素，Reliability 形成公共缩放；归一化后平均分里的常数因子抵消。这是公共缩放退化，不是效果提升。
 
 ## 6. 既然分数没变，方法增加了什么？
-增加了对 Evidence Reliability、effective weight、coverage 和拒答状态的显式报告，使“分数稳定但支持下降”可被观察和审查。
+分数没变不是“模型没用”，恰恰相反：它说明如果只报告 Score，就**看不到 Evidence Support 已经明显变化**。加入 Reliability 后，归一化分数仍是 3.5625，但有效支持从 16 降到 6、覆盖率从 22.86% 降到 8.57%。本项目的核心贡献之一，就是把 performance magnitude 和 evidence strength 从同一个数字里拆开报告。所以它增加的是对 Evidence Reliability、effective weight、coverage 和拒答状态的显式报告，使“分数稳定但支持下降”可被观察和审查。
 
-## 7. 70 条里为什么只有 16 条可判读？
-因为 19 条是 NO_EVIDENCE，35 条是 UNDETERMINED。系统不把不可判读记录强行转成数值，因此 54 条返回 NO_EFFECTIVE_EVIDENCE。
+## 7. 70 条里为什么只有 16 条可判读？16 条是不是太少？
+因为 19 条是 NO_EVIDENCE，35 条是 UNDETERMINED，系统不把不可判读记录强行转成数值，因此 54 条返回 NO_EFFECTIVE_EVIDENCE。**16 条确实是当前研究的重要限制，我们不隐藏。** 但恰恰是 70 条里只有 16 条 readable，才暴露出 Raw-only evaluation 会产生过度确定性解释的问题。所以 16 条不是证明样本量充分，它证明的是当前 evidence availability 有严重限制；Formal Human Gate 仍需要在后续完成。
 
 ## 8. 54 条是不是 54 个零分？
 不是。它们没有有效证据，Adjusted 为 null；填 0 会把“无证据”错误解释成“表现为零”。

@@ -42,6 +42,12 @@
   .subtitle{font-size:clamp(18px,2.4vw,23px); color:#354138; margin:0 0 8px; font-weight:600}
   .rq{font-size:17px; color:var(--muted); max-width:820px; margin:0 0 6px}
   .rq b{color:var(--ink)}
+  .btn-demo{
+    display:inline-block; font:inherit; font-size:16px; font-weight:800;
+    padding:11px 22px; border-radius:9px; text-decoration:none;
+    color:#fff; background:var(--green); border:1.5px solid var(--green);
+  }
+  .btn-demo:hover{background:var(--ink); border-color:var(--ink)}
 
   /* ---- metric cards ---- */
   .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:26px 0 6px}
@@ -170,9 +176,10 @@
 
   <header>
     <div class="tag">赛道一 · 教育 AI 增量价值评价</div>
-    <h1>证据感知评价框架</h1>
-    <p class="subtitle">Evidence-Aware Evaluation Framework ｜ 把「表现水平」与「证据支持」分开</p>
-    <p class="rq"><b>观察到的结果 ≠ 可靠证据（Observed Result ≠ Reliable Evidence）。</b> 当证据缺失、冲突或低可信时，原始信号（Raw Signal）不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
+    <h1>这个分数，到底有多少证据值得相信？</h1>
+    <p class="subtitle">我们不是重新给学生打分，而是在回答：证据是否足以支撑这个分数被同样强度地解释。</p>
+    <p class="rq"><b>观察到的结果 ≠ 可靠证据（Observed Result ≠ Reliable Evidence）。</b> 一个结果有多高，和我们有多大把握解释这个结果，不是一回事。当证据缺失、冲突或低可信时，原始信号（Raw Signal）不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
+    <p style="margin-top:14px"><a class="btn-demo" href="#model">开始模型演示 ↓</a></p>
   </header>
 
   <section class="metrics">
