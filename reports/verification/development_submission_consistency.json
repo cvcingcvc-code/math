@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "checks": {
+    "artifact_identity": true,
+    "artifact_sections": true,
+    "sample_count": true,
+    "raw_adjusted": true,
+    "status_counts": true,
+    "sensitivity": true,
+    "ablation": true,
+    "transfer": true,
+    "paper": true,
+    "demo": true,
+    "figures": true,
+    "ppt_core_numbers_checked": true
+  },
+  "artifact": "outputs/final_results.json",
+  "formal_run_performed": false
+}

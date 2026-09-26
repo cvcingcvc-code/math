@@ -1,0 +1,1076 @@
+[
+  {
+    "record_id": "P072",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P071",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P005",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P017",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P097",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P028",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P008",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P002",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P036",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P131",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P105",
+    "raw_score": 2.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 0.75,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L2"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L2 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P080",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P089",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P035",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P010",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P096",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P031",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P038",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P018",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P023",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P116",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P138",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P118",
+    "raw_score": 5.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.875,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L5"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L5 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P094",
+    "raw_score": 3.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.125,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L3"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L3 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P006",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P061",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P014",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P127",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P082",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P004",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P088",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P050",
+    "raw_score": 2.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 0.75,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L2"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L2 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P053",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P047",
+    "raw_score": 3.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.125,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L3"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L3 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P062",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P083",
+    "raw_score": 2.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 0.75,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L2"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L2 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P140",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P032",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P040",
+    "raw_score": 2.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 0.75,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L2"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L2 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P065",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P108",
+    "raw_score": 6.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 2.25,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L6"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L6 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P054",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P020",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P009",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P103",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P067",
+    "raw_score": 3.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.125,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L3"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L3 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P051",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P024",
+    "raw_score": 2.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 0.75,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L2"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L2 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P077",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P076",
+    "raw_score": 3.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.125,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L3"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L3 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P068",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P069",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P137",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P033",
+    "raw_score": 6.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 2.25,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L6"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L6 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P107",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P100",
+    "raw_score": 5.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.875,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L5"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L5 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P030",
+    "raw_score": 4.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.5,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L4"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L4 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P001",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P106",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P139",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P059",
+    "raw_score": 3.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 1.125,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L3"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L3 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P007",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P039",
+    "raw_score": 6.0,
+    "evidence_reliability": 0.375,
+    "adjusted_score": 2.25,
+    "evaluation_status": "LOW_SUPPORT",
+    "positive_factors": [
+      "student_evidence_bloom=L6"
+    ],
+    "negative_factors": [
+      "prompt_induced"
+    ],
+    "explanation": "Raw Evidence L6 contributes with deterministic reliability 0.375; adjusted contribution is raw score multiplied by that reliability.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P121",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P052",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P104",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P026",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P133",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P027",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  },
+  {
+    "record_id": "P074",
+    "raw_score": null,
+    "evidence_reliability": 0.0,
+    "adjusted_score": null,
+    "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+    "positive_factors": [],
+    "negative_factors": [
+      "prompt_induced",
+      "context_truncated",
+      "confidence=low"
+    ],
+    "explanation": "No effective evidence: student evidence is not an observable L1-L6 level or its deterministic weight is zero.",
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY"
+  }
+]

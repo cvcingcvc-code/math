@@ -1,0 +1,219 @@
+<!doctype html><html><head><meta charset='utf-8'><style>@page{size:A4;margin:18mm 16mm}body{font-family:'Microsoft YaHei','SimSun',Arial,sans-serif;font-size:10.5pt;line-height:1.55;color:#111}
+h1{font-size:17pt}h2{font-size:13pt;border-bottom:1px solid #999;margin-top:18px}table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #888;padding:3px 7px;font-size:9.5pt}
+pre{background:#f4f4f4;padding:8px;font-size:9pt;white-space:pre-wrap}code{font-family:Consolas,monospace}blockquote{border-left:4px solid #c2410c;background:#fff7ed;margin:0;padding:6px 12px}
+.wm{position:fixed;top:4mm;right:0;font-size:8pt;color:#c2410c}</style></head><body><div class='wm'>DEVELOPMENT ONLY · AI_PROVISIONAL · formal_gate_eligible=false</div><h1>教育 AI 交互证据的可信评价：Score 与 Evidence Support 分离报告（Submission Candidate）</h1>
+<blockquote>
+<p><strong>Development Only.</strong> 本文所有数值来自 70 条 <code>AI_PROVISIONAL</code> 开发标注，<code>annotation_status=DEVELOPMENT_ONLY</code>，<code>formal_gate_eligible=false</code>。项目另有 70/70 条 <code>AI_ASSISTED</code> 开发标注，但它同样是 <code>DEVELOPMENT_ONLY</code>，不是 <code>HUMAN_R1</code> 或 <code>HUMAN_R2</code>，也未作为本文正式输入。当前 <code>HUMAN_R1=0/70 VALID</code>、<code>HUMAN_R2=0/70</code>、<code>FORMAL_HUMAN_GATE=NOT_RUN</code>。文中结果用于说明方法行为与识别边界，<strong>不是</strong>正式研究结论、统计置信区间、AI 因果效应、正式 AIV 或学生排名。</p>
+<p>底稿：<code>reports/paper/competition_paper_narrative_draft.md</code>；数字唯一来源：<code>reports/verification/core_numbers_source_of_truth.json</code>。</p>
+</blockquote>
+<h2>摘要</h2>
+<p>AI 进入学习过程后，学生提交的文本混合了学生自身思考、AI 提示与重组、上下文缺失和标注不确定性。本文把问题定位为测量与可识别性问题，而非预测问题：先判断哪些记录构成可判读的学生 Evidence，再在透明假设参数下同时报告 Score（ABL、HOT、Gap）与 Evidence Support（effective evidence weight、effective coverage）。当有效证据权重为零时，模型返回 <code>NO_EFFECTIVE_EVIDENCE</code>，而不是 0 分。开发数据（70 条 <code>AI_PROVISIONAL</code> 记录，16 条可判读 Evidence，693 个参数组合，其中 33 个无定义）显示：Raw 与 Adjusted 的 ABL/HOT/Gap 都保持为 <code>3.5625 / 0.375 / 1.125</code>，但 effective evidence weight 从 <code>16</code> 降到 <code>6</code>，effective coverage 从 <code>0.228571</code> 降到 <code>0.085714</code>；在更宽的敏感性范围内，coverage 最低达到 <code>0.0057</code>。核心结论是：<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong></p>
+<h2>1. Problem Background</h2>
+<p>AI 已经进入学习过程。评价者看到的是多种生成过程混合形成的结果，而不是可直接等同于学生能力的纯粹观测。<strong>看到学生提交了什么，不等于观察到了多少可信的学生证据。</strong> 只对最终文本打分，可能把 AI 的引导结构误当作学生的独立表现；只报告一个稳定分数，则可能掩盖支撑分数的有效 Evidence 已经非常稀薄。</p>
+<p>本研究的 AIV 定位是形成性教学诊断，不解释为学生长期稳定能力、无 AI 学习增益或 AI 的因果效果，也不用于高风险排名。</p>
+<h2>2. Research Question</h2>
+<p>在学生证据受到 prompt 引导、上下文缺失和标注不确定性影响时，如何构建一个<strong>不把不可识别问题伪装成精确估计</strong>的评价框架？</p>
+<ol>
+<li>哪些观察记录可以保留为可判读的 Student Evidence？</li>
+<li>在透明、可审查的偏差假设下，Score 与 Evidence Support 的可行范围如何变化？</li>
+<li>证据不足时，如何返回“无定义”，而不是填入看似完整的 0 分？</li>
+</ol>
+<h2>3. Why Traditional Evaluation Fails: Measurement Problem</h2>
+<p>这首先是 measurement / identifiability problem。预测方法假设目标与标签已明确，而本问题更早一层：学生文本中哪些成分可归因于学生，哪些可能来自 AI 引导，哪些记录因上下文不足或来源不可判而不应进入有效证据。边界未确认时，更复杂的模型只会更精确地拟合一个混合标签。</p>
+<p>开发数据的证据分层（70 条）：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th style="text-align: right;">条数</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可判读 Evidence（L1–L6）</td>
+<td style="text-align: right;">16</td>
+<td>进入 Score 计算</td>
+</tr>
+<tr>
+<td><code>NO_EVIDENCE</code></td>
+<td style="text-align: right;">19</td>
+<td>不进入，不视为低分</td>
+</tr>
+<tr>
+<td><code>UNDETERMINED</code></td>
+<td style="text-align: right;">35</td>
+<td>不进入，不推断补齐</td>
+</tr>
+</tbody>
+</table>
+<p><code>NO_EVIDENCE</code>、<code>UNDETERMINED</code> 与可判读 Evidence 不混用。</p>
+<h2>4. Data and Measurement Boundary</h2>
+<p>16 条可判读 Evidence 全部具有 <code>prompt_induced=true</code>、<code>context_truncated=false</code>、<code>confidence=medium</code>、<code>task_actor=ai</code>。数据中不存在对照变化，因此无法估计 prompt、context 或 confidence 修正系数的唯一值。</p>
+<p>本文采用 Partial Identification / Bounds：不假设修正系数已知，而是在透明参数集合 Θ 上计算结果：</p>
+<ul>
+<li><code>lambda_prompt</code> ∈ [0, 1]，步长 0.05（21 个值）</li>
+<li><code>lambda_context</code> ∈ [0, 1]，步长 0.10（11 个值）</li>
+<li><code>r_medium</code> ∈ {0.5, 0.75, 1.0}</li>
+</ul>
+<p>共 21×11×3 = 693 个参数组合。所得区间是 <strong>assumption-based identification interval</strong>，不是统计置信区间，参数也不是估计或校准值。</p>
+<h2>5. Mathematical Model</h2>
+<p>对每条记录 i 定义可靠性权重：</p>
+<pre><code class="language-text">w_i(θ) = I(student_evidence_bloom_i ∈ L1…L6)
+         · c_i(r_medium)
+         · (1 − lambda_prompt · prompt_i)
+         · (1 − lambda_context · context_i)
+</code></pre>
+<ul>
+<li><code>I(·)</code>：只有可判读 Evidence 进入；<code>NO_EVIDENCE</code>、<code>UNDETERMINED</code> 的权重为 0，但仍计入分母 N。</li>
+<li><code>c_i</code>：透明可靠性惩罚，high=1，medium=<code>r_medium</code>，low=0.5。</li>
+<li><code>prompt_i</code>、<code>context_i</code>：prompt 引导与上下文截断的指示变量。</li>
+</ul>
+<p><strong>Score（结果层）</strong>，仅在 Σw_i &gt; 0 时定义：</p>
+<pre><code class="language-text">ABL(θ) = Σ w_i · Bloom_i / Σ w_i
+HOT(θ) = Σ w_i · I(Bloom_i ≥ L4) / Σ w_i
+Gap(θ) = Σ w_i · (Task_i − Bloom_i) / Σ w_i
+</code></pre>
+<p><strong>Evidence Support（支持层）</strong>：</p>
+<pre><code class="language-text">effective evidence weight = Σ w_i
+effective coverage        = Σ w_i / N,   N = 70（全部 development records）
+</code></pre>
+<p><strong>effective coverage 的分母是全部 70 条 development records，不是 16 条可判读 Evidence。</strong> 因此 coverage 同时反映“有多少记录可判读”和“可判读记录在假设下保留多少权重”。</p>
+<p><strong>无定义规则</strong>：Σw_i = 0 时返回 <code>NO_EFFECTIVE_EVIDENCE</code>，ABL/HOT/Gap 为 undefined under assumption，不平滑、不插值、不填 0。</p>
+<p><strong>公共缩放命题</strong>：若所有可判读 Evidence 的 (confidence, prompt, context) 取值相同，则 w_i = k(θ)·I_i，k(θ) 在分子分母中约去，Score 与 θ 无关，而 Σw_i = 16·k(θ) 随 θ 变化。这是代数结构，不是经验发现，更不是因果效应。</p>
+<h2>6. Development Results and Counterexamples (Development Only)</h2>
+<p>基线 θ₀ = (lambda_prompt=0, lambda_context=0, r_medium=0.75)：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align: right;">值</th>
+<th>层</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABL</td>
+<td style="text-align: right;">3.5625</td>
+<td>Score</td>
+</tr>
+<tr>
+<td>HOT</td>
+<td style="text-align: right;">0.375</td>
+<td>Score</td>
+</tr>
+<tr>
+<td>Gap</td>
+<td style="text-align: right;">1.125</td>
+<td>Score</td>
+</tr>
+<tr>
+<td>effective evidence weight</td>
+<td style="text-align: right;">12.0（=16×0.75）</td>
+<td>Support</td>
+</tr>
+<tr>
+<td>effective coverage</td>
+<td style="text-align: right;">0.1714（=12.0/70）</td>
+<td>Support</td>
+</tr>
+</tbody>
+</table>
+<p>693 个参数组合中，660 个有定义，33 个无定义。有定义组合上的结果：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align: right;">最小</th>
+<th style="text-align: right;">最大</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ABL</td>
+<td style="text-align: right;">3.5625</td>
+<td style="text-align: right;">3.5625</td>
+</tr>
+<tr>
+<td>HOT</td>
+<td style="text-align: right;">0.375</td>
+<td style="text-align: right;">0.375</td>
+</tr>
+<tr>
+<td>Gap</td>
+<td style="text-align: right;">1.125</td>
+<td style="text-align: right;">1.125</td>
+</tr>
+<tr>
+<td>effective evidence weight</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">16.0</td>
+</tr>
+<tr>
+<td>effective coverage</td>
+<td style="text-align: right;">0.0057</td>
+<td style="text-align: right;">0.2286</td>
+</tr>
+</tbody>
+</table>
+<p>（Score 的极差仅为浮点误差量级，约 1e-16。）</p>
+<p><strong>Figure 4</strong>（<code>reports/development/core_figure_4_bounds_support.svg</code>）：横轴为 <code>lambda_prompt</code>，固定 <code>lambda_context=0.00</code>、<code>r_medium=0.75</code>。红线为归一化 Score，保持 1.00；蓝线为 effective coverage，从 0.1714 下降。在 <code>lambda_prompt=1.00</code> 处标记 <code>NO_EFFECTIVE_EVIDENCE</code>，Score 不绘制。</p>
+<p>解释：当前 16 条可判读 Evidence 的参数相关字段完全相同，满足第 5 节公共缩放条件，所以 Score 稳定是<strong>结构必然</strong>，不能解释为模型稳健性或 prompt 的因果作用。</p>
+<h2>7. Sensitivity / Ablation</h2>
+<ol>
+<li><strong>无定义边界</strong>：33 个无定义组合全部位于 <code>lambda_prompt=1.0</code>（11 个 lambda_context × 3 个 r_medium）。此时 16 条 Evidence 的 prompt 因子全部为 0，返回 <code>NO_EFFECTIVE_EVIDENCE</code>。</li>
+<li><strong>Support 的敏感性</strong>：effective weight 在有定义组合上的中位数为 5.8，四分位数为 3.15 与 8.85。Support 对假设高度敏感，Score 则不敏感。</li>
+<li><strong>独立复算</strong>：<code>src/verification/recompute_bounds.py</code> 不依赖主实现，独立复现了 70/16/693/660/33 及全部边界值。</li>
+<li><strong>异质性检查</strong>：现有真实开发数据中，可判读 Evidence 的 prompt、context 和 confidence 均无变化，<strong>不支持</strong>异质 Evidence 的经验对比。本文没有修改标注，也没有构造合成数据冒充真实结果。</li>
+<li><strong>可复现性</strong>：完整开发链路在隔离副本中重跑后，20 个产物与仓库版本逐字节一致（见 <code>reports/submission/reproduction_notes.md</code>）。</li>
+</ol>
+<h2>8. Human Validation Status and Limitations</h2><p>当前没有正式人工验证结果：HUMAN R1 为 0/70 VALID，HUMAN R2 为 0/70，Formal Human Gate 为 <code>NOT_RUN</code>。<code>AI_ASSISTED</code> 文件的 70/70 完成度只表示机器辅助开发完成度，不改变本文 <code>AI_PROVISIONAL</code> / <code>DEVELOPMENT_ONLY</code> 的数据身份，也不能产生正式 reliability、AIV 或排名。</p>
+<p>当前<strong>不能</strong>宣称：正式研究结论；学生真实或长期能力；prompt/agent 的因果效应；正式 AI 增量价值或正式 AIV；学生排名或高风险决策依据。</p>
+<ol>
+<li>正式人工 R1/R2 未完成，Gate 未产生结论。R2 为同一标注者的 test-retest，不是评分者间一致性。</li>
+<li>可判读 Evidence 缺少 <code>prompt_induced=false</code>、<code>context_truncated=true</code>、low/high confidence 和非 AI actor 的支持。</li>
+<li>完全分离结构可能混合了 selection、标注规则、临时标签和字段映射效应，不能解释为 prompt 修正效应。</li>
+<li>缺少独立的无 AI 学习 outcome、可靠原生 session_id 和可比 treatment/control。</li>
+<li>70 条开发结果不能外推到 140 条正式人工标注。</li>
+<li><code>r_medium</code> 与各 λ 只是透明假设范围，不是校准参数。</li>
+</ol>
+<h2>9. Practical Interpretation and Demo</h2>
+<p>Demo：<code>reports/demo/index.html</code>（读取 <code>reports/demo/demo_payload.json</code>，需通过本地 HTTP 服务打开）。</p>
+<ol>
+<li>顶部横幅显示 <code>DEVELOPMENT_ONLY · AI_PROVISIONAL</code>；</li>
+<li>展示 70 条记录中有 16 条进入 L1–L6；</li>
+<li>拖动 <code>lambda_prompt</code>、<code>lambda_context</code>、<code>r_medium</code>；</li>
+<li>同时显示 Score（ABL/HOT/Gap）与 Evidence Support（effective weight / 70 development records）；</li>
+<li><code>lambda_prompt=1</code> 时状态变为 <code>NO_EFFECTIVE_EVIDENCE</code>，Score 不显示为 0。</li>
+</ol>
+<p>正式切换流程见 <code>handoff/FORMAL_GATE_SWITCH.md</code>：人工 R1/R2 → test-retest → Gate → Gate PASS 后以 <code>--mode formal</code> 重跑 → 替换本文 Development Only 表格。</p>
+<h2>10. Conclusion</h2>
+<p>在 AI 辅助学习中，可信评价不能只报告分数是否稳定，还必须报告支撑分数的学生证据是否存在、可判读且足够充分。开发数据展示了这种分离：Raw 与 Adjusted 的 Score 都为 <code>3.5625 / 0.375 / 1.125</code>，但 effective evidence weight 从 <code>16</code> 降到 <code>6</code>，coverage 从 <code>0.228571</code> 降到 <code>0.085714</code>；在完整敏感性范围内，coverage 还可降到 <code>0.0057</code>，并在极端假设下变为 <code>NO_EFFECTIVE_EVIDENCE</code>。<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong> 以上结论只描述方法行为；正式效果须等人工 Gate 通过后验证。</p>
+<h2>附录 A：数字来源</h2>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>来源文件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>70 / 16 / 19 / 35</td>
+<td><code>reports/verification/raw_input_recount.json</code></td>
+</tr>
+<tr>
+<td>693 / 660 / 33、Score 与 Support 边界</td>
+<td><code>reports/verification/core_numbers_source_of_truth.json</code></td>
+</tr>
+<tr>
+<td>基线 12.0 / 0.1714</td>
+<td><code>reports/development/partial_identification_grid.csv</code></td>
+</tr>
+<tr>
+<td>Gate 状态 PENDING</td>
+<td><code>reports/annotation_gate_report.json</code></td>
+</tr>
+</tbody>
+</table></body></html>
+

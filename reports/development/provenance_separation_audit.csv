@@ -1,0 +1,106 @@
+﻿record_id,priority_for_human_review,original_task_bloom,provisional_task_bloom,original_student_evidence_bloom,provisional_student_evidence_bloom,original_confidence,provisional_confidence,task_source,task_actor,prompt_induced,context_truncated,content_relation,evidence_confidence,scaffold_share,path_case,original_content_source_attribution,changed_vs_original_prelabel,audit_flags,raw_visible_student_text
+P105,MEDIUM,L2,L5,L2,L2,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,task_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,"我目前对支持向量机（SVM）的理解是：它是一种机器学习中的分类算法，主要用来解决“把不同类别的数据区分开”的问题。比如有两类数据点，SVM会尝试找到一条合适的分界线，把这两类数据尽量准确地区分开。
+
+我理解它的特点不是随便找一条线，而是希望找到一条“最稳妥”的分界线，让两类数据离这条线都尽可能远一些。这样即使以后出现新的数据，它也更有可能被正确分类。
+
+所以我觉得，SVM主要是用来做分类判断的，比如图像识别、文本分类、疾病判断等。它的核心思想可能就是：在不同类别之间找到一个最合适的边界，让分类结果更加可靠。"
+P118,MEDIUM,L5,L5,L3,L5,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,other_or_unknown,AI_REWORKED_WITH_ADDITION,student_evidence_bloom,actor_source_pair,"我会把它当成一个“你到底在问什么问题”的选择题。
+
+**优先选直方图：当我要搞清楚数据的“分布机制/形状细节”。**
+也就是：我不是只想要几个统计量，而是想知道数据到底长什么样、为什么会长这样。
+
+具体例子：
+你在做**电商物流的配送时长**分析（单位：分钟）。老板问：“为啥最近投诉多？”
+这时我会先画直方图，因为我想看：
+
+* 是不是出现了**长尾**（少数订单特别慢）
+* 有没有**双峰**（比如同城 vs 跨城两类订单混在一起）
+* 有没有明显的**阈值效应**（比如 60 分钟附近突然堆了一坨，可能是系统/规则导致）
+  直方图能把这些“形状线索”直接暴露出来，帮助你追根溯源。
+
+**优先选箱线图：当我要“快速比较”组与组差异，或者做监控/汇报。**
+也就是：我关心的是中心、波动、异常点，尤其是多组并排对比。
+
+具体例子：
+你要比较**A/B 两个版本的页面加载时间**，或者比较**不同城市的房价**、**不同工厂的良品率**。
+这时箱线图一摆：
+
+* 中位数谁更好（典型水平）
+* 波动谁更大（稳定性）
+* 异常点谁更多（风险/极端情况）
+  特别适合开会时“一眼讲清楚”。
+
+一句话收束：
+
+* **要“看形状、找原因、发现分群/偏态/多峰” → 直方图**
+* **要“做对比、给结论、看稳定性和异常” → 箱线图**
+
+现实里最强搭配经常是：先用箱线图把差异定位出来，再用直方图追查差异从哪里来——先抓嫌疑人，再查作案手法。"
+P094,HIGH,L2,L3,NO_EVIDENCE,L3,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,scaffold_path,AI_COPIED,task_bloom;student_evidence_bloom;task_confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;actor_source_pair,"所以，在整个过程中，我们完全不需要计算高维空间中的具体坐标。核函数 K(x_i, x_j) 充当了一个‘黑箱’，它让我们在原始低维空间进行简单的计算，就能直接得到在高维空间进行内积运算的结果。
+
+这带来的好处是革命性的：
+
+计算可行：我们避免了在超高维空间中工作的巨大计算开销。
+
+维度无限：我们可以使用映射到无限维空间的核函数（如高斯RBF核），这在显式计算下是绝对不可能的。
+
+正是核技巧的这种‘隐式计算’能力，使得SVM能够轻松处理复杂的非线性问题，从而成为一代经典的机器学习算法"
+P050,HIGH,NOT_APPLICABLE,L5,NO_EVIDENCE,L2,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,scaffold_path,AI_COPIED,task_bloom;student_evidence_bloom;task_confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;actor_source_pair,"从头开始系统学习自适应控制的核心概念？
+深入理解某个具体的自适应控制方法（比如模型参考自适应控制、自校正控制等）？
+还是想了解自适应控制在实际工程中的应用？"
+P047,MEDIUM,L3,L4,L3,L3,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,other_or_unknown,STUDENT_VISIBLE_NOT_VERIFIED,task_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,我有一定的数学模型结合受力分析的经历，通过带入经典的力学理论，使用matlab进行混凝土构件受力过程的响应预测
+P083,MEDIUM,L4,L4,L4,L2,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,other_or_unknown,STUDENT_VISIBLE_NOT_VERIFIED,student_evidence_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,FFT频谱里最关键看五点：峰的位置、峰的高度、峰的形状、有没有新峰、以及和历史对比——峰的位置对应固有频率，若整体向低频偏移通常意味着刚度下降（如松动或损伤）；峰的高度反映振动能量，异常增大往往接近共振或激励增强；峰变宽或底噪抬高通常说明阻尼增加或出现摩擦/裂纹；新出现的峰、谐波或侧频带往往是故障特征；而真正可靠的判断必须基于和历史数据对比，只要看到“频率漂移 + 幅值变化 + 频谱形态改变”同时出现，就基本可以判定结构状态已经发生异常变化。
+P040,HIGH,L5,L5,UNDETERMINED,L2,low,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,scaffold_path,UNKNOWN,student_evidence_bloom;evidence_confidence;confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;provisional_confidence_raised;actor_source_pair,这种方法不是适用于我定义的所有“异常”的检测，只有在一个非常特别的水声环境中可能才有作用
+P108,MEDIUM,L6,L6,L6,L6,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,,actor_source_pair,"场景1：多约束背包
+可以将DP状态从一维容量扩展为多维：dp[i][j][k][l]表示考虑前i个物品，预算、人力、时间分别用了j,k,l时的最大价值。转移时每个维度都要减去对应的资源消耗。但复杂度会爆炸（
+O
+(
+n
+⋅
+W
+1
+⋅
+W
+2
+⋅
+W
+3
+O(n⋅W 
+1
+​
+ ⋅W 
+2
+​
+ ⋅W 
+3
+​
+ )。实际中常改用回溯、分支限界，或近似/启发式算法如遗传算法。
+
+场景2：依赖关系背包
+一种方法是先把物品按依赖关系分组——如有先修关系，可转为树形DP：dp[u][j]表示以u为根的子树中，选u（且可递归选其后代） 且总容量为j的最大价值。如果u不选，则其所有依赖它的子节点都不能选。转移时类似分组背包，合并子树的分配容量。
+
+场景3：课程选择系统
+可以把每门课看成一个0-1物品，先修关系用拓扑排序构建DAG，再用回溯+动态规划：
+
+先枚举所有满足先修条件的课程子集（可用DFS生成合法组合）。
+
+对每个合法子集计算总学分成本与总收益，转为经典0-1背包。
+
+若课程较多，改用A*搜索或约束规划，并加入启发式：按“收益/学分”排序剪枝。
+实际推荐时，可融合协同过滤：先找出类似学生选课模式，再对候选课程做背包优化，兼顾兴趣与约束。"
+P067,MEDIUM,L6,L4,L4,L3,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,task_bloom;student_evidence_bloom,actor_source_pair,首先要设计多层次动态系统模型，同时要注意自适应与可解释的融合，不把人简化为静止的统计样本，而是视其为一部正在书写自身历史的、动态的、开放的生命系统。模型的目标不是预测一个确切的未来数值，而是刻画生理状态演变的轨迹与不确定性，从而为个性化健康干预提供一个可计算、可解释的决策基础。
+P024,MEDIUM,L4,L4,L4,L2,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,student_evidence_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,n-1 条边是刚好能让 n 个顶点 连通且无环的唯一边数，少了连不通，多了有冗余。
+P076,HIGH,L2,L6,NO_EVIDENCE,L3,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,reverse_path,AI_COPIED,task_bloom;student_evidence_bloom;task_confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;actor_source_pair,部分了解，熟悉模型预测控制（MPC）：预测未来轨迹，优化人机协同权重，强化学习（RL）：通过仿真/真实数据学习最优协同策略，意图识别模型：HMM/贝叶斯网络/深度学习预测驾驶员意图
+P033,MEDIUM,L2,L4,L2,L6,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,task_bloom;student_evidence_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,"参数估计和参数假设检验的本质区别在于核心目标与推理逻辑不同：
+参数估计的核心是 “基于样本推断总体参数的具体可能值 / 范围”，是 “从无到有” 的推断 —— 比如通过 100 位顾客 80% 的满意率，估算所有顾客真实满意率的区间（如 72%-88%），重点是 “找到总体参数的合理估计结果”；
+参数假设检验的核心是 “先对总体参数提出一个明确假设（如满意率≥85%），再用样本数据验证这个假设是否成立”，是 “先有假设再验证” 的推断 —— 不直接估算参数值，而是判断样本证据是否支持预设的假设，最终给出 “接受假设” 或 “拒绝假设” 的结论。"
+P100,HIGH,L4,L5,NO_EVIDENCE,L5,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,other_or_unknown,ACK_OR_REQUEST_ONLY,task_bloom;student_evidence_bloom;task_confidence,provisional_upgraded_non_numeric_original;actor_source_pair,你应该知道，多普勒因子、时间偏移、CFO（甚至还有信道多径系数，我们暂时先不考虑它）都是耦合在一起的，你可以介绍一下有哪些联合估计或分别独立估计的方法。水声通信中研究比较多的是多普勒扩展因子的估计，往往用LFM信号来做，请你再详细介绍一下
+P030,HIGH,UNDETERMINED,L4,UNDETERMINED,L4,low,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,scaffold_path,AI_COPIED,task_bloom;student_evidence_bloom;task_confidence;evidence_confidence;confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;provisional_confidence_raised;actor_source_pair,这正是Monte Carlo方法最精妙、也最深刻的一点：它用概率的“不确定性”去逼近数学的“确定性”。用“撒豆子”这种看似笨拙又随机的方法之所以能成功，其核心在于当我们进行海量随机尝试时，偶然的偏差会相互抵消，而整体的统计规律便会清晰地浮现出来。就像你不可能通过扔一次硬币就断定正反面概率各半，但重复成千上万次后，结果就会稳定趋近于二分之一。本质上，这是将一个难以直接计算的确定性问题（如池塘面积），转化为一个可以通过随机抽样进行统计估计的概率问题，用“数量”的力量战胜了“随机”的干扰，最终让随机性本身成为揭示确定真相的工具。
+P059,HIGH,L4,L6,NO_EVIDENCE,L3,medium,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,high,other_or_unknown,AI_COPIED,task_bloom;student_evidence_bloom;task_confidence,original_prelabel_copy_or_unknown;provisional_upgraded_non_numeric_original;actor_source_pair,Q7: 掌握非线性微分方程的求解方法对于数学建模实践有什么重要价值？它如何帮助我们理解复杂的动态系统？
+P039,MEDIUM,L3,L5,L3,L6,high,medium,ai_prompt,ai,true,false,reworked_with_addition,medium,medium,scaffold_path,STUDENT_VISIBLE_NOT_VERIFIED,task_bloom;student_evidence_bloom;task_confidence;evidence_confidence;confidence,provisional_confidence_lowered;actor_source_pair,"既然方差代表了“不确定性”和“风险”，我会采取截然不同的策略：
+对于商品B（低方差，稳定）：实行“精益库存”策略
+它的销量非常稳定（标准差仅1.5，基本在9-12件之间），预测准确度高。
+策略：我可以大大降低库存水平，按均值稍多一点进货即可。这样能减少资金占用和库存积压，追求高周转率。
+对于商品A（高方差，波动大）：实行“高安全库存”策略
+它的销量忽高忽低（标准差3.5，范围跨度大），很容易出现断货或严重积压。
+策略：为了防止在销量高峰期断货（损失客户），我必须准备比B商品更多的**“安全库存”**作为缓冲。同时，我可能需要更频繁地监控它的库存，或者寻找补货速度更快的供应商来应对波动。"

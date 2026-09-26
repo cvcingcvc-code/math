@@ -1,0 +1,115 @@
+{
+  "manifest_version": "1.0",
+  "status": "DEVELOPMENT_ONLY",
+  "generated_at_utc": "2026-09-26T09:29:36.812437+00:00",
+  "git_head": "667ecf7e25226366014687aa0ff77cbd80d8df34",
+  "input_sha256": "1f09059c56e8ba55a9467db93d526d146d505d8159498dd7e7dc3171d3d33b25",
+  "canonical_numbers": {
+    "records": 70,
+    "readable_evidence": 16,
+    "no_effective_evidence": 54,
+    "raw_effective_weight": 16.0,
+    "adjusted_effective_weight": 6.0,
+    "raw_coverage": 0.22857142857142856,
+    "adjusted_coverage": 0.08571428571428572
+  },
+  "artifacts": [
+    {
+      "path": "data/annotations/ai/pilot_ai_provisional.csv",
+      "exists": true,
+      "sha256": "1f09059c56e8ba55a9467db93d526d146d505d8159498dd7e7dc3171d3d33b25",
+      "bytes": 194476
+    },
+    {
+      "path": "outputs/final_results.json",
+      "exists": true,
+      "sha256": "47ca1c7228ad9bd6a1777434dd693776f27345f04c2c543237d781e1bcb1723e",
+      "bytes": 58225
+    },
+    {
+      "path": "reports/demo/demo_payload.json",
+      "exists": true,
+      "sha256": "fd9dd49f7a6813225cbe292335b86f1aa9511cf3c662c8c6fb00c2c2237922e2",
+      "bytes": 12258
+    },
+    {
+      "path": "reports/demo/index.html",
+      "exists": true,
+      "sha256": "80122141705b48d5a228ebf430017aee21b766718f8d2e20eccff86c4328ff77",
+      "bytes": 8808
+    },
+    {
+      "path": "outputs/submission_package_development_only/demo/demo_payload.json",
+      "exists": true,
+      "sha256": "fd9dd49f7a6813225cbe292335b86f1aa9511cf3c662c8c6fb00c2c2237922e2",
+      "bytes": 12258
+    },
+    {
+      "path": "outputs/submission_package_development_only/demo/index.html",
+      "exists": true,
+      "sha256": "c4fe40b82acce96444f76661461c8fdba2d92b15e5f7332e27c4c88061ff9a9e",
+      "bytes": 11120
+    },
+    {
+      "path": "reports/failure_cases/development_candidates.json",
+      "exists": true,
+      "sha256": "2d3a9a6cabad8f04fccdcda2850ff40d0125b7d4423e2253493ef921bd4c58ce",
+      "bytes": 2518
+    },
+    {
+      "path": "reports/visual_evidence/final/F2_raw_vs_adjusted.svg",
+      "exists": true,
+      "sha256": "1fb6735564d7d752dc5ccd5cb53ede42d0a565ebd53dcd7f1b0a0c6ea80c3980",
+      "bytes": 7212
+    },
+    {
+      "path": "reports/visual_evidence/final/F5_ablation_refusal.svg",
+      "exists": true,
+      "sha256": "fc765dd7b32a9a593744cff968266b8830f79bc725e9de34d70027917be53962",
+      "bytes": 5765
+    },
+    {
+      "path": "paper/submission_candidate.md",
+      "exists": true,
+      "sha256": "86dce259991e903a9c3fa800c114f4c3e05b5a75704588f06294d935053458c0",
+      "bytes": 12203
+    },
+    {
+      "path": "paper/development_submission_candidate.md",
+      "exists": true,
+      "sha256": "882bdb54ff4b0ae77727fe150c47e52dc55c0066bf0579858650b6b8917f4801",
+      "bytes": 11637
+    },
+    {
+      "path": "docs/metric_dictionary.md",
+      "exists": true,
+      "sha256": "1d85312fb9e2032dad47bb490a1e1e552763a957569e4db24b04b883bb5489a5",
+      "bytes": 3816
+    },
+    {
+      "path": "docs/claim_boundary.md",
+      "exists": true,
+      "sha256": "bfba8dd8d3f37a211a290d89dfaa7bc3792ddaa968bc7ecf4ef677d1d78c6d01",
+      "bytes": 1907
+    },
+    {
+      "path": "outputs/submission_package_development_only/MANIFEST.sha256.json",
+      "exists": true,
+      "sha256": "d08f604717c0fa6633c1bedcc1a29d7371146864c18e04dd7af575ad04eb0ad3",
+      "bytes": 6030
+    }
+  ],
+  "post_processing": {
+    "core_artifact": "outputs/final_results.json is the canonical M0/M3 numerical source; no experiment rerun in this repair.",
+    "figures": "reports/visual_evidence/final/ figures are existing development-only renderings linked by the artifact.",
+    "demo": "reports/demo/demo_payload.json and submission-package demo payload are aligned to M0 Raw and M3 default; HTML is presentation-only.",
+    "paper": "paper/submission_candidate.md and paper/development_submission_candidate.md consume the same frozen development numbers and retain NOT_HUMAN_VALIDATED.",
+    "failure_cases": "reports/failure_cases/development_candidates.json is aligned from existing counterexamples; undefined evidence is not zero-filled."
+  },
+  "formal_boundary": {
+    "human_r1": "0/70 VALID",
+    "human_r2": "0/70",
+    "formal_gate": "NOT_RUN",
+    "formal_gate_eligible": false
+  }
+}

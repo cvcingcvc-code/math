@@ -1,0 +1,7 @@
+﻿case_id,variant,changed_variable,raw_signal,reliability,adjusted_signal,decision,source,status
+P108,Original,none,6.0,0.375,2.25,LOW_SUPPORT,AI_PROVISIONAL,DEVELOPMENT_ONLY
+P108,Prompt removed,prompt_induced true→false,6.0,0.75,4.5,DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT,AI_PROVISIONAL,DEVELOPMENT_ONLY
+P108,Confidence low,confidence medium→low,6.0,0.25,1.5,LOW_SUPPORT,AI_PROVISIONAL,DEVELOPMENT_ONLY
+P072,Original,none,,0.0,,NO_EFFECTIVE_EVIDENCE,AI_PROVISIONAL,DEVELOPMENT_ONLY
+P072,Context restored,context_truncated true→false,,0.0,,NO_EFFECTIVE_EVIDENCE,AI_PROVISIONAL,DEVELOPMENT_ONLY
+P072,Evidence remains undetermined,context only; evidence unchanged,,0.0,,NO_EFFECTIVE_EVIDENCE,AI_PROVISIONAL,DEVELOPMENT_ONLY

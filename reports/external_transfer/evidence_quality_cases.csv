@@ -1,0 +1,4 @@
+﻿label,timestamp,raw_signal,reliability,adjusted_signal,decision,future_outcome,components,status
+Case 1 · full high reliability,2021-02-08,0.999999445759206,0.7217948717948717,0.7217944717467087,ACCEPT,0.006161523959955284,"{'data_quality': 0.5, 'information_completeness': 1.0, 'evidence_freshness': 0.358974358974359, 'signal_agreement': 1.0}",EXTERNAL_TRANSFER
+Case 2 · missing evidence,2021-02-08,0.999999445759206,0.5267948717948718,0.5267945798236638,ABSTAIN,0.006161523959955284,"{'data_quality': 0.5, 'information_completeness': 0.35, 'evidence_freshness': 0.358974358974359, 'signal_agreement': 1.0}",EXTERNAL_TRANSFER
+Case 3 · conflicting evidence,2021-02-08,0.999999445759206,0.5217948717948717,0.5217945825948677,ABSTAIN,0.006161523959955284,"{'data_quality': 0.5, 'information_completeness': 1.0, 'evidence_freshness': 0.358974358974359, 'signal_agreement': 0.0}",EXTERNAL_TRANSFER

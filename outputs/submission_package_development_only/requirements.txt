@@ -1,0 +1,5 @@
+# Verified with Python 3.13 on 2026-09-26 (DEVELOPMENT_ONLY reproduction chain).
+# Install binary wheels only; a pandas source build failed on this machine.
+#   python -m pip install --only-binary=:all: -r requirements.txt
+pandas==3.0.6
+numpy==2.5.3

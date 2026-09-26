@@ -47,6 +47,45 @@ def read_rows():
         return list(csv.DictReader(f))
 
 
+def raw_metric(rows):
+    """Return the descriptive M0 raw layer (no confidence or risk correction).
+
+    The bounds grid uses ``metric`` for M1--M3 sensitivity.  Keeping M0 in a
+    separate helper prevents the confidence-only theta0/M1 row from being
+    labelled as the raw baseline in downstream Demo payloads.
+    """
+    vals = []
+    for r in rows:
+        if r["student_evidence_bloom"] not in LEVELS:
+            continue
+        level = int(r["student_evidence_bloom"][1])
+        task = int(r["task_bloom"][1]) if r["task_bloom"] in LEVELS else None
+        vals.append((level, task))
+    total = len(vals)
+    base = {
+        "model_layer": "M0_No_correction",
+        "confidence_weighting": False,
+        "lambda_prompt": 0.0,
+        "lambda_context": 0.0,
+        "r_medium": None,
+        "effective_weight": float(total),
+        "effective_coverage": total / len(rows),
+        "valid_or_undefined": total > 0,
+    }
+    if not total:
+        base.update({"ABL": None, "HOT": None, "Task_Evidence_Gap": None,
+                     "undefined_reason": "NO_EFFECTIVE_EVIDENCE"})
+        return base
+    with_task = [(level, task) for level, task in vals if task is not None]
+    base.update({
+        "ABL": sum(level for level, _ in vals) / total,
+        "HOT": sum(level >= 4 for level, _ in vals) / total,
+        "Task_Evidence_Gap": sum(task - level for level, task in with_task) / len(with_task),
+        "undefined_reason": "",
+    })
+    return base
+
+
 def metric(rows, lp, lc, rm, subset=None):
     selected = [r for r in rows if subset is None or subset(r)]
     vals = []
@@ -169,9 +208,10 @@ def main():
     summary={**BANNER, "input":"data/annotations/ai/pilot_ai_provisional.csv", "model":"assumption_based_identification_interval", "interval_name":"assumption-based identification interval (not a statistical confidence interval)", "parameter_space":{"lambda_prompt":"0.00..1.00 step 0.05","lambda_context":"0.00..1.00 step 0.10","r_medium":[0.5,0.75,1.0]}, "n_grid":len(grid), "undefined_cells":sum(not r["valid_or_undefined"] for r in grid), "bounds":{}, "findings":{}, "limitations":["All 16 readable Evidence rows have prompt_induced=true and context_truncated=false; prompt/context penalties are not empirically identified.","r_medium is an assumption range, not calibrated reliability.","Undefined cells are recorded when effective evidence weight is zero; no smoothing is used.","No formal AIV, Gate, Kappa, Alpha, causal effect, or student ranking is produced."]}
     for k in ("adjusted_ABL","adjusted_HOT","adjusted_gap","effective_weight","effective_coverage"):
         vals=[r[k] for r in valid if r[k] is not None]; summary["bounds"][k] = {"min":min(vals),"max":max(vals)}
-    base=metric(rows,0,0,0.75)
-    near=[r for r in valid if abs(r["adjusted_ABL"]-base["adjusted_ABL"])<=0.01]
-    summary["findings"]={"raw_baseline":base,"baseline_ABL":base["adjusted_ABL"],"baseline_HOT":base["adjusted_HOT"],"baseline_gap":base["adjusted_gap"],"ABL_within_0.01_fraction_of_valid_grid":len(near)/len(valid),"score_stability_vs_support":"ABL/HOT/gap remain constant across valid penalty assumptions because every readable row shares the same prompt/context flags; effective evidence weight collapses as lambda_prompt approaches 1.","primary_uncertainty":"evidence availability uncertainty, not score uncertainty"}
+    raw_base=raw_metric(rows)
+    theta0=metric(rows,0,0,0.75)
+    near=[r for r in valid if abs(r["adjusted_ABL"]-raw_base["ABL"])<=0.01]
+    summary["findings"]={"raw_baseline":raw_base,"confidence_only_m1":theta0,"baseline_ABL":raw_base["ABL"],"baseline_HOT":raw_base["HOT"],"baseline_gap":raw_base["Task_Evidence_Gap"],"ABL_within_0.01_fraction_of_valid_grid":len(near)/len(valid),"score_stability_vs_support":"ABL/HOT/gap remain constant across valid penalty assumptions because every readable row shares the same prompt/context flags; effective evidence weight collapses as lambda_prompt approaches 1.","primary_uncertainty":"evidence availability uncertainty, not score uncertainty"}
     (OUT/"partial_identification_summary.json").write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding="utf-8")
     prompt_curve=[metric(rows,i/20,0,0.75) for i in range(21)]
     svg_line(OUT/"core_figure_3_prompt_vs_effective_evidence.svg", prompt_curve, "lambda_prompt", "effective_coverage", "Prompt assumption vs effective evidence", "effective coverage")
@@ -184,9 +224,8 @@ def main():
     with (OUT/"partial_identification_stress_tests.csv").open("w",encoding="utf-8-sig",newline="") as f:
         w=csv.DictWriter(f,fieldnames=list(stress[0])); w.writeheader(); w.writerows(stress)
     raw_vals=[(int(r["student_evidence_bloom"][1]), int(r["task_bloom"][1]) if r["task_bloom"] in LEVELS else None) for r in rows if r["student_evidence_bloom"] in LEVELS]
-    raw_total=len(raw_vals)
-    raw_metric={"effective_weight":raw_total,"effective_coverage":raw_total/len(rows),"valid_or_undefined":True,"adjusted_ABL":sum(x for x,_ in raw_vals)/raw_total,"adjusted_HOT":sum(x>=4 for x,_ in raw_vals)/raw_total,"adjusted_gap":sum(t-x for x,t in raw_vals if t is not None)/sum(t is not None for _,t in raw_vals),"undefined_reason":""}
-    ablation=[{"model":"M0 Raw Evidence","status":"OBSERVED_BASELINE","metric":raw_metric},{"model":"M1 confidence weighting","status":"NOT_TESTABLE_WITH_CURRENT_SUPPORT","metric":metric(rows,0,0,0.75)},{"model":"M2 prompt uncertainty","status":"SENSITIVITY_ONLY","metric":metric(rows,0.5,0,0.75)},{"model":"M3 context uncertainty","status":"NOT_TESTABLE_WITH_CURRENT_SUPPORT","metric":metric(rows,0,0.5,0.75)},{"model":"M4 full bounds framework","status":"PARTIALLY_SUPPORTED_BOUNDS_ONLY","metric":metric(rows,0.5,0.5,0.75)}]
+    raw_metric_value=raw_metric(rows)
+    ablation=[{"model":"M0 Raw Evidence","status":"OBSERVED_BASELINE","metric":raw_metric_value},{"model":"M1 confidence weighting","status":"NOT_TESTABLE_WITH_CURRENT_SUPPORT","metric":metric(rows,0,0,0.75)},{"model":"M2 prompt uncertainty","status":"SENSITIVITY_ONLY","metric":metric(rows,0.5,0,0.75)},{"model":"M3 context uncertainty","status":"NOT_TESTABLE_WITH_CURRENT_SUPPORT","metric":metric(rows,0,0.5,0.75)},{"model":"M4 full bounds framework","status":"PARTIALLY_SUPPORTED_BOUNDS_ONLY","metric":metric(rows,0.5,0.5,0.75)}]
     (OUT/"partial_identification_ablation.json").write_text(json.dumps({**BANNER,"models":ablation,"note":"No accuracy comparison is meaningful without human labels."},ensure_ascii=False,indent=2),encoding="utf-8")
     ident_map={**BANNER,"quantities":[
       {"quantity":"Evidence coverage","status":"OBSERVABLE","reason":"Direct descriptive proportion of student_evidence_bloom in L1-L6 within provisional data."},
@@ -203,7 +242,8 @@ def main():
       {"quantity":"formal AIV/student ranking","status":"NOT_IDENTIFIABLE","reason":"Human R1/R2, outcome and identification support are absent."}]}
     (OUT/"identifiability_map.json").write_text(json.dumps(ident_map,ensure_ascii=False,indent=2),encoding="utf-8")
     readable_rows = [r for r in rows if r["student_evidence_bloom"] in LEVELS]
-    demo={**BANNER,"model_status":"PARTIAL_IDENTIFICATION_BOUNDS","project_status":"S4 blocked by human annotation; development bounds prepared","source_type":"AI_PROVISIONAL","data_source":"data/annotations/ai/pilot_ai_provisional.csv","development_only":True,"parameter_configuration":{"lambda_prompt":{"min":0.0,"max":1.0,"step":0.05,"role":"assumption/sensitivity"},"lambda_context":{"min":0.0,"max":1.0,"step":0.10,"role":"assumption/sensitivity"},"r_medium":{"values":[0.5,0.75,1.0],"role":"assumption/sensitivity"}},"measurement_problem":{"records":len(rows),"readable_evidence":len(readable_rows),"prompt_true_in_readable":sum(r["prompt_induced"]=="true" for r in readable_rows),"context_truncated_true_in_readable":sum(r["context_truncated"]=="true" for r in readable_rows)},"identifiability":ident_map["quantities"],"raw_metrics":summary["findings"]["raw_baseline"],"baseline_support":{"effective_weight":summary["findings"]["raw_baseline"]["effective_weight"],"effective_coverage":summary["findings"]["raw_baseline"]["effective_coverage"]},"bounds":summary["bounds"],"stress_tests":stress,"example_records":[r["record_id"] for r in readable_rows][:8],"demo_records":[{k:r[k] for k in ["record_id","student_evidence_bloom","task_bloom","confidence","prompt_induced","context_truncated"]} for r in readable_rows],"limitations":summary["limitations"]}
+    adjusted_default=metric(rows,0.5,0.5,0.75)
+    demo={**BANNER,"model_status":"PARTIAL_IDENTIFICATION_BOUNDS","project_status":"S4 blocked by human annotation; development bounds prepared","source_type":"AI_PROVISIONAL","data_source":"data/annotations/ai/pilot_ai_provisional.csv","development_only":True,"model_layers":{"raw":"M0_No_correction","adjusted":"M3_Confidence_Prompt_Context"},"default_parameters":{"model_layer":"M3_Confidence_Prompt_Context","lambda_prompt":0.5,"lambda_context":0.5,"r_medium":0.75,"role":"canonical adjusted development display"},"parameter_configuration":{"lambda_prompt":{"min":0.0,"max":1.0,"step":0.05,"default":0.5,"role":"assumption/sensitivity"},"lambda_context":{"min":0.0,"max":1.0,"step":0.10,"default":0.5,"role":"assumption/sensitivity"},"r_medium":{"values":[0.5,0.75,1.0],"default":0.75,"role":"assumption/sensitivity"}},"measurement_problem":{"records":len(rows),"readable_evidence":len(readable_rows),"prompt_true_in_readable":sum(r["prompt_induced"]=="true" for r in readable_rows),"context_truncated_true_in_readable":sum(r["context_truncated"]=="true" for r in readable_rows)},"identifiability":ident_map["quantities"],"raw_metrics":summary["findings"]["raw_baseline"],"baseline_support":{"model_layer":"M0_No_correction","effective_weight":summary["findings"]["raw_baseline"]["effective_weight"],"effective_coverage":summary["findings"]["raw_baseline"]["effective_coverage"]},"adjusted_metrics":{"model_layer":"M3_Confidence_Prompt_Context","lambda_prompt":0.5,"lambda_context":0.5,"r_medium":0.75,"effective_weight":adjusted_default["effective_weight"],"effective_coverage":adjusted_default["effective_coverage"],"ABL":adjusted_default["adjusted_ABL"],"HOT":adjusted_default["adjusted_HOT"],"Task_Evidence_Gap":adjusted_default["adjusted_gap"],"valid_or_undefined":adjusted_default["valid_or_undefined"],"undefined_reason":adjusted_default["undefined_reason"]},"bounds":summary["bounds"],"stress_tests":stress,"example_records":[r["record_id"] for r in readable_rows][:8],"demo_records":[{k:r[k] for k in ["record_id","student_evidence_bloom","task_bloom","confidence","prompt_induced","context_truncated"]} for r in readable_rows],"limitations":summary["limitations"]}
     (DEMO/"demo_payload.json").write_text(json.dumps(demo,ensure_ascii=False,indent=2),encoding="utf-8")
     paper='''# 教育 AI 交互证据评价：方法与结果骨架（开发版）\n\n> 本文骨架只承载 DEVELOPMENT_ONLY / AI_PROVISIONAL 结果，不替代正式人工标注、Gate 或 AIV。\n\n## 1 Introduction\nAI 介入后，观察到的学生文本不自动等于学生能力。\n\n## 2 Problem Definition\n定义 observed evidence、student evidence、prompt-induced evidence、measurement uncertainty、support 与 identifiability。\n\n## 3 Data and Measurement\n说明 70 条开发样本、L1-L6 可判读 Evidence、NO_EVIDENCE/UNDETERMINED 拒判状态，以及 AI provisional 与 human R1/R2 的边界。\n\n## 4 Identifiability Diagnosis\n报告 16 条可判读 Evidence 的完全分离：prompt=true、actor=ai、confidence=medium、context_truncated=false，并区分数据生成、规则、provisional 标签和字段映射来源。\n\n## 5 Model\n使用 assumption-based identification interval，而不是唯一惩罚系数：\n\n`w_i(theta)=I(E_i=L1..L6) * c_i * (1-lambda_prompt*p_i) * (1-lambda_context*t_i)`\n\n对参数集合 Θ 计算 ABL/HOT/Gap/有效证据权重的可行范围；分母为零时记为 undefined。该区间不是统计置信区间。\n\n## 6 Experiments\n开发版包括参数网格、压力测试和组件状态审计；不比较 accuracy，不拟合复杂模型。\n\n## 7 Results\n当前最重要结果是：有效区间内 ABL/HOT/Gap 基本稳定，但有效 Evidence weight 随 prompt penalty 下降并可退化为零；不确定性主要来自 evidence availability。\n\n## 8 Limitations\n缺少真实 R1/R2、独立无 AI outcome、可靠 session_id、可比 prompt 对照和充分 actor/confidence 支持；不能宣称因果增量、正式 AIV 或学生排名。\n\n## 9 Discussion\n“先证明 Evidence 可解释”是教育 AI 增量价值评价的必要前置条件之一；这里是方法论命题，不是已验证因果结论。\n\n## 10 Formal replacement plan\n人工标签返回后，以统一输入接口替换 source_type/mode，重跑 Gate、可靠性、support audit、bounds、stress tests 和最终图表；不得把开发结果覆盖为正式结果。\n'''
     (PAPER/"method_results_skeleton.md").write_text(paper,encoding="utf-8")

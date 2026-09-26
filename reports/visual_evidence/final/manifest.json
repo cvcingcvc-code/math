@@ -1,0 +1,43 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "formal_gate": "NOT_RUN",
+  "figures": {
+    "F1": "reports/visual_evidence/final/F1_model_flow.svg",
+    "F2": "reports/visual_evidence/final/F2_raw_vs_adjusted.svg",
+    "F3": "reports/visual_evidence/final/F3_evidence_degradation.svg",
+    "F4": "reports/visual_evidence/final/F4_parameter_perturbation.svg",
+    "F5": "reports/visual_evidence/final/F5_ablation_refusal.svg",
+    "F6": "reports/visual_evidence/final/F6_external_structural_transfer.svg"
+  },
+  "paper_main": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5"
+  ],
+  "paper_external_or_appendix": [
+    "F6"
+  ],
+  "demo_home": [
+    "F1",
+    "F2",
+    "F3"
+  ],
+  "source_artifacts": [
+    "reports/development/ablation_results.csv",
+    "reports/development/counterexamples.csv",
+    "reports/perturbation/evidence_perturbation_cases.csv",
+    "reports/robustness/parameter_perturbation.csv",
+    "reports/external_transfer/three_raw_signals_unified.csv"
+  ],
+  "old_figures_not_mainline": [
+    "reports/development/reliability_sensitivity.svg",
+    "reports/development/evidence_reliability_distribution.svg",
+    "reports/development/counterexamples.svg",
+    "reports/development/core_figure_2_support_heatmap.svg",
+    "reports/development/core_figure_3_prompt_vs_effective_evidence.svg",
+    "experiments/transfer_finance/figure1-4.svg",
+    "reports/external_transfer/three_raw_signals_quality.svg"
+  ]
+}

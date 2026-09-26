@@ -1,0 +1,25 @@
+{
+  "contract_version": "1.0",
+  "status": "DEVELOPMENT_ONLY",
+  "ai_increment_identification": "NOT_SUPPORTED",
+  "source_of_truth": "outputs/final_results.json",
+  "record_fields": {
+    "raw_score": "number|null; observed Student Evidence Bloom L1-L6, never an AI increment",
+    "reliability": "number in [0,1]; deterministic support weight, not a probability",
+    "reliability_components": ["observable", "confidence_weight", "prompt_factor", "context_factor"],
+    "adjusted_score": "number|null; raw_score multiplied by reliability for a record",
+    "threshold": "0.75 record reliability threshold used for DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT vs LOW_SUPPORT",
+    "decision": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT | LOW_SUPPORT | NO_EFFECTIVE_EVIDENCE",
+    "coverage": "effective_weight / N; N must be shown and is 70 for current development slice",
+    "explanation": "plain-language deterministic explanation"
+  },
+  "aggregate_fields": {
+    "raw_score": "mean observable evidence score",
+    "reliability": "sum weights / N",
+    "adjusted_score": "sum(weight*raw_score) / sum(weight), null if zero support",
+    "coverage": "effective coverage with denominator N",
+    "decision": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT only when aggregate support is defined; otherwise NO_EFFECTIVE_EVIDENCE"
+  },
+  "prohibited_labels": ["Observed AI Increment", "Reliable AI Increment", "causal effect", "formal AIV"],
+  "required_banner": "AI_PROVISIONAL / DEVELOPMENT_ONLY / FORMAL_GATE_NOT_RUN"
+}

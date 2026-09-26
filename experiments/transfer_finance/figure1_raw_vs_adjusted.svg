@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360"><rect width="100%" height="100%" fill="white"/><text x="20" y="30" font-size="20">Raw Signal vs Evidence-Adjusted Signal</text><text x="20" y="80">See record_level.csv columns raw_signal and adjusted_signal; adjusted = raw × R_market.</text></svg>

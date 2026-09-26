@@ -162,3 +162,102 @@ Python 3.14.2 / pandas 3.0.1 / numpy 2.4.1 / scipy 1.18.0 / scikit-learn 1.9.0�
 - 未修改：论文主体、冻结阈值、标注手册/澄清件、provisional 标签、正式 Gate 判定逻辑。
 
 
+
+- 2026-09-26: replaced AI-dashboard visual language with editorial green/cream/orange deck style based on supplied reference images; validation passed; no R1/Gate content changed.
+
+
+- 2026-09-26: user paused PPT styling; updated paper Markdown/HTML emphasis for Raw vs Adjusted and support collapse; no annotation files or formal states changed.
+
+# 2026-09-26 — Formal human input status corrected
+
+- Cleared the single malformed entry in `data/annotations/human/pilot_worksheet_A.csv`; the pre-clear checkpoint remains in `work/backups/pilot_worksheet_A_2026-09-26_1117_checkpoint.csv`; formal HUMAN_R1 is now 0/70 VALID and HUMAN_R2 remains 0/70.
+- Recorded that AI_ASSISTED is 70/70 but `DEVELOPMENT_ONLY`; it is not written back to HUMAN_R1 and cannot substitute for human validation.
+- Fixed case normalization in `src/annotation_gate_report.py` for in-memory validation/reliability handling; thresholds, labels, and manual remain unchanged.
+- Formal Human Gate remains `NOT_RUN` and the PENDING placeholder report remains non-result state.
+
+# 2026-09-26 — Submission readiness and Gate-path hardening
+
+- Confirmed the separate `AI_ASSISTED` artifact is 70/70 and remains `DEVELOPMENT_ONLY`; no machine labels were written into HUMAN_R1/R2.
+- Fixed a real Gate-path crash for legal semicolon-separated `ambiguity_type` values and made malformed ambiguity codes reduce `valid_row_rate`.
+- Added in-memory case normalization and preregistered Gate decision fields (`gate_status`, `formal_gate_eligible`, threshold checks) to future generated Gate reports; current Formal Gate report remains untouched and `PENDING`.
+- Tightened `paper/submission_candidate.md/.html` to state AI_ASSISTED vs AI_PROVISIONAL separation, explicit R1/R2 status, and the competition-facing section path. No model, threshold, manual, or development result was changed.
+- Re-rendered `paper/submission_candidate.pdf` from the updated HTML, visually checked representative pages, and synchronized all three paper files plus manifest hashes in `outputs/submission_package_development_only/`.
+
+## 2026-09-25 — External design absorption
+- Added deterministic single-record Explain output, What-if sensitivity interface, unified `outputs/final_results.json`, and five core SVG figures.
+- Verified 70 records, 15 What-if rows, deterministic SHA-256 repeat, and no human worksheet reads.
+- Formal Gate status unchanged: HUMAN_R1/R2 unavailable; `formal_gate_eligible=false`.
+
+## Current round — Development Submission Candidate
+- Synchronized existing external transfer result and independent Binance public-data shadow status into `outputs/final_results.json`; no retuning, orders, or main-model changes.
+- Added development paper candidate, artifact-backed Demo, fail-closed formal adapter contract, and 12-check consistency report.
+- Formal Gate was not run; human validation remains intentionally paused.
+
+## Current round — Competition alignment audit
+- Audited the full Problem → Model → Results → Demo → Paper → PPT chain against the competition question.
+- Confirmed PASS with the evidence-support framing; documented True Ability / causal-effect boundaries, overlapping causes of 54 `NO_EFFECTIVE_EVIDENCE` records, three judge-facing cases, factor decomposition, sensitivity and ablation conclusions, and transfer placement.
+- No model, metric, threshold, Human Gate, or data pipeline changed.
+
+## 2026-09-26 — Binance external transfer shadow
+- Added isolated public-market-data forward validation for BTCUSDT.
+- Used official `data-api.binance.vision` Kline GET only; no private credentials or trading endpoints.
+- Preserved historical transfer validation and frozen parameters. Added per-record timestamp feature calculation to prevent batch look-ahead.
+- First run produced 10 cumulative 1m records, all abstained and awaiting 24h future returns; current status is `INSUFFICIENT_DATA`.
+
+
+## 2026-09-26 — External Information-Missing Validation + Interactive Demo
+
+- 新增 xperiments/transfer_finance/run_information_missing_validation.py 与 information_missing_validation.json。固定 7-day Momentum、阈值 0.65、四组件权重不变；M0/M1/M2/M3 均可运行。M1 明确为 synthetic/controlled evidence。
+- Gate 1 SUPPORTED、Gate 2 SUPPORTED、Gate 3 NOT SUPPORTED；未补造错误率结论。
+-
+eports/demo/index.html 升级为 Interactive Model Validation Demo：completeness slider、Normal/Delayed/Conflicting/Low Trust、Raw vs Adjusted、Reliability decomposition、counterfactual、历史案例和失败区域。
+- outputs/final_results.json 增加迁移验证路径与 Gate 结果。
+
+
+## 2026-09-26 — research-line repair
+- Declared AI_INCREMENT_IDENTIFICATION = NOT_SUPPORTED and froze narrower Evidence-Aware Evaluation wording.
+- Added metric dictionary, claim boundary, reliability audit, Accuracy-Coverage/F1-F3 contracts, and fail-closed formal preflight.
+- No human annotation files, thresholds, labels, or Demo UI were modified.
+
+- 2026-09-26：收到并归档 data/annotations/workbuddy/pilot_worksheet_B_submitted.csv（70 行，SHA-256 089331175F37EB66B4BAEC311E2E40E7294421050B6240AF6B6A98FC44551FC6）。完成结构审计：必填/条件字段完整、受控值无非法项；未把该文件用于冻结 B010 R1/R2 或 Formal Gate。
+
+- 2026-09-26：基于 B 交回件生成 `reports/workbuddy_annotation_summary.md|.json`，仅做单标注者分布汇总（70 行），未计算一致性或 Formal 结果。
+
+## 2026-09-26 — Demo visual acceptance
+- 完成真实 Chrome Headless 视觉验收：1366×768、1440×900、1920×1080、390×844。
+- 发现并修复 390px 移动端文字/状态标签横向裁切风险；仅调整 `reports/demo/index.html` 的响应式 CSS。
+- `reports/demo/visual_acceptance.md`：`DEMO_VISUAL_GATE = PASS`。
+- 截图目录：`reports/demo/visual_acceptance/`。
+- 未修改数学模型、数据、Gate、阈值、R1/R2 或论文正式结论。
+
+## 2026-09-26 — presentation convergence
+MAIN_RESEARCH / PRESENTATION_CONVERGENCE completed: unified evidence-aware model vocabulary across canonical docs, education Demo, paper candidate, and Judge Defense. No model, parameter, human labels, Formal status, or PPT changed.
+
+## 2026-09-26 — Demo visual acceptance (final)
+- 发现按目录直接启动的相对路径 404：`/experiments/transfer_finance/information_missing_validation.json` 无法从 `reports/demo` 提供。
+- 新增只读 `reports/demo/serve_demo.py`，保留 4173 端口并把 `/experiments/` 映射到项目根目录；JSON HTTP 200。
+- Chrome Headless 四尺寸截图重新生成，报告为 `DEMO_VISUAL_GATE = PASS`。
+- 仅修改 Demo 启动映射、移动端 CSS 与验收记录；未修改模型、数据、Gate、阈值、R1/R2 或论文结论。
+## 2026-09-26 — Model tournament protocol and independent comparison
+
+- Frozen `experiments/model_tournament/protocol/model_tournament_protocol.md` before reviewing candidate final results.
+- Added comparison matrix, tradeoff report, failure summary, selection evidence, paper-ready comparison, and defense Q&A under `experiments/model_tournament/final/`.
+- Recorded `NO_SINGLE_DOMINANT_MODEL`; simple-linear and ML challengers are `PENDING`.
+- No main-model code, parameters, formal labels, Gate status, or claims were changed.
+## 2026-09-26 — robustness / perturbation validation
+- Added bounded parameter perturbation, controlled evidence perturbation, counterfactual, and external transfer summaries.
+- Recorded boundary findings without changing frozen formula or formal status.
+- Verified run_all 32/32 and development submission consistency PASS.
+
+## 2026-09-26 — Model tournament integration closeout
+
+- Added unified five-standard Model Comparison sections to both paper candidates.
+- Added reusable core comparison table and non-ranking Demo/PPT trade-off figure specification under `experiments/model_tournament/final/`.
+- Unified primary-model retention rationale as research-question alignment + transparency + explicit missing-evidence semantics; no predictive-superiority claim.
+
+## 2026-09-26 — final visual evidence convergence
+
+- Added deterministic final F1–F6 visual layer under `reports/visual_evidence/final/` from existing development artifacts only.
+- Synced final figure paths into `outputs/final_results.json`, Paper candidates, Paper HTML, Demo home, and model-presentation sensitivity story.
+- Main visual chain is F1→F2→F3; F4/F5 are paper/backup evidence; F6 is external structural transfer / limitation evidence.
+- Historical high-risk figures were retained but removed from the main Paper/Demo/fact-index references. No model, parameter, data, Human R1/R2, Formal Gate, or claim status was changed.

@@ -1,0 +1,23 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "baseline": {
+    "lambda_prompt": 0.5,
+    "lambda_context": 0.5,
+    "r_medium": 0.75,
+    "n": 70,
+    "status_counts": {
+      "NO_EFFECTIVE_EVIDENCE": 54,
+      "LOW_SUPPORT": 16
+    },
+    "raw_readable_count": 16,
+    "effective_weight": 6.0,
+    "effective_coverage": 0.08571428571428572,
+    "adjusted_abl": 3.5625,
+    "mean_abs_reliability_change_max": 0.017142857142857133,
+    "max_abs_reliability_change_max": 0.07499999999999996,
+    "total_status_flips": 0,
+    "total_ranking_changes": "NOT_APPLICABLE",
+    "structural_collapse": false
+  },
+  "interpretation": "Within +/-10% and +/-20%, no decision-state flips occur; formal student-level ranking is NOT_APPLICABLE; support changes are concentrated in the 16 readable prompt-induced records. Context perturbation is inert in this slice because readable records have no context variation."
+}

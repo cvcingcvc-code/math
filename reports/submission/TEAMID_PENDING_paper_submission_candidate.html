@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset='utf-8'><title>DEVELOPMENT ONLY submission candidate</title><style>@page{size:A4;margin:18mm 16mm}body{font-family:'Microsoft YaHei','SimSun',Arial,sans-serif;font-size:10.5pt;line-height:1.55;color:#111}
+<!doctype html><html><head><meta charset='utf-8'><style>@page{size:A4;margin:18mm 16mm}body{font-family:'Microsoft YaHei','SimSun',Arial,sans-serif;font-size:10.5pt;line-height:1.55;color:#111}
 h1{font-size:17pt}h2{font-size:13pt;border-bottom:1px solid #999;margin-top:18px}table{border-collapse:collapse;margin:8px 0}td,th{border:1px solid #888;padding:3px 7px;font-size:9.5pt}
 pre{background:#f4f4f4;padding:8px;font-size:9pt;white-space:pre-wrap}code{font-family:Consolas,monospace}blockquote{border-left:4px solid #c2410c;background:#fff7ed;margin:0;padding:6px 12px}
 .wm{position:fixed;top:4mm;right:0;font-size:8pt;color:#c2410c}</style></head><body><div class='wm'>DEVELOPMENT ONLY · AI_PROVISIONAL · formal_gate_eligible=false</div><h1>教育 AI 交互证据的可信评价：Score 与 Evidence Support 分离报告（Submission Candidate）</h1>
@@ -7,7 +7,7 @@ pre{background:#f4f4f4;padding:8px;font-size:9pt;white-space:pre-wrap}code{font-
 <p>底稿：<code>reports/paper/competition_paper_narrative_draft.md</code>；数字唯一来源：<code>reports/verification/core_numbers_source_of_truth.json</code>。</p>
 </blockquote>
 <h2>摘要</h2>
-<p>AI 进入学习过程后，学生提交的文本混合了学生自身思考、AI 提示与重组、上下文缺失和标注不确定性。本文把问题定位为测量与可识别性问题，而非预测问题：先判断哪些记录构成可判读的学生 Evidence，再在透明假设参数下同时报告 Score（ABL、HOT、Gap）与 Evidence Support（effective evidence weight、effective coverage）。当有效证据权重为零时，模型返回 <code>NO_EFFECTIVE_EVIDENCE</code>，而不是 0 分。开发数据（70 条记录，16 条可判读 Evidence，693 个参数组合，其中 33 个无定义）显示：Score 在全部有定义组合中保持不变（ABL=3.5625，HOT=0.375，Gap=1.125），而 effective coverage 从 0.2286 降到 0.0057。核心结论是：<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong></p>
+<p>AI 进入学习过程后，学生提交的文本混合了学生自身思考、AI 提示与重组、上下文缺失和标注不确定性。本文把问题定位为测量与可识别性问题，而非预测问题：先判断哪些记录构成可判读的学生 Evidence，再在透明假设参数下同时报告 Score（ABL、HOT、Gap）与 Evidence Support（effective evidence weight、effective coverage）。当有效证据权重为零时，模型返回 <code>NO_EFFECTIVE_EVIDENCE</code>，而不是 0 分。开发数据（70 条记录，16 条可判读 Evidence，693 个参数组合，其中 33 个无定义）显示：Raw 与 Adjusted 的 ABL/HOT/Gap 都保持为 <code>3.5625 / 0.375 / 1.125</code>，但 effective evidence weight 从 <code>16</code> 降到 <code>6</code>，effective coverage 从 <code>0.228571</code> 降到 <code>0.085714</code>；在更宽的敏感性范围内，coverage 最低达到 <code>0.0057</code>。核心结论是：<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong></p>
 <h2>1. Problem Background</h2>
 <p>AI 已经进入学习过程。评价者看到的是多种生成过程混合形成的结果，而不是可直接等同于学生能力的纯粹观测。<strong>看到学生提交了什么，不等于观察到了多少可信的学生证据。</strong> 只对最终文本打分，可能把 AI 的引导结构误当作学生的独立表现；只报告一个稳定分数，则可能掩盖支撑分数的有效 Evidence 已经非常稀薄。</p>
 <p>本研究的 AIV 定位是形成性教学诊断，不解释为学生长期稳定能力、无 AI 学习增益或 AI 的因果效果，也不用于高风险排名。</p>
@@ -165,7 +165,7 @@ effective coverage        = Σ w_i / N,   N = 70（全部 development records）
 <li><strong>Support 的敏感性</strong>：effective weight 在有定义组合上的中位数为 5.8，四分位数为 3.15 与 8.85。Support 对假设高度敏感，Score 则不敏感。</li>
 <li><strong>独立复算</strong>：<code>src/verification/recompute_bounds.py</code> 不依赖主实现，独立复现了 70/16/693/660/33 及全部边界值。</li>
 <li><strong>异质性检查</strong>：现有真实开发数据中，可判读 Evidence 的 prompt、context 和 confidence 均无变化，<strong>不支持</strong>异质 Evidence 的经验对比。本文没有修改标注，也没有构造合成数据冒充真实结果。</li>
-<li><strong>可复现性</strong>：从仓库根目录执行 <code>python run_all.py</code> 即可重跑完整开发链路（6 步）并完成 32 项一致性检查；重跑产物与仓库版本逐字节一致。开发版结果表见 <code>reports/submission/development_results_record_level.csv</code>，其中 AIV 与 ranking 均为 <code>NOT_AVAILABLE_PENDING_FORMAL_GATE</code>。环境、命令与边界见 <code>reports/submission/reproduction_notes.md</code>，字段定义见 <code>docs/data_dictionary.md</code>。这些检查只验证一致性与口径，不是效果验证。</li>
+<li><strong>可复现性</strong>：完整开发链路在隔离副本中重跑后，20 个产物与仓库版本逐字节一致（见 <code>reports/submission/reproduction_notes.md</code>）。</li>
 </ol>
 <h2>8. Limitations</h2>
 <p>当前<strong>不能</strong>宣称：正式研究结论；学生真实或长期能力；prompt/agent 的因果效应；正式 AI 增量价值或正式 AIV；学生排名或高风险决策依据。</p>
@@ -186,9 +186,9 @@ effective coverage        = Σ w_i / N,   N = 70（全部 development records）
 <li>同时显示 Score（ABL/HOT/Gap）与 Evidence Support（effective weight / 70 development records）；</li>
 <li><code>lambda_prompt=1</code> 时状态变为 <code>NO_EFFECTIVE_EVIDENCE</code>，Score 不显示为 0。</li>
 </ol>
-<p>正式切换流程见 <code>FORMAL_GATE_SWITCH.md</code>：人工 R1/R2 → test-retest → Gate → Gate PASS 后以 <code>--mode formal</code> 重跑 → 替换本文 Development Only 表格。</p>
+<p>正式切换流程见 <code>handoff/FORMAL_GATE_SWITCH.md</code>：人工 R1/R2 → test-retest → Gate → Gate PASS 后以 <code>--mode formal</code> 重跑 → 替换本文 Development Only 表格。</p>
 <h2>10. Conclusion</h2>
-<p>在 AI 辅助学习中，可信评价不能只报告分数是否稳定，还必须报告支撑分数的学生证据是否存在、可判读且足够充分。开发数据展示了这种分离：Score 恒定，Evidence Support 从 0.2286 降到 0.0057，并在极端假设下变为 <code>NO_EFFECTIVE_EVIDENCE</code>。<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong> 以上结论只描述方法行为；正式效果须等人工 Gate 通过后验证。</p>
+<p>在 AI 辅助学习中，可信评价不能只报告分数是否稳定，还必须报告支撑分数的学生证据是否存在、可判读且足够充分。开发数据展示了这种分离：Raw 与 Adjusted 的 Score 都为 <code>3.5625 / 0.375 / 1.125</code>，但 effective evidence weight 从 <code>16</code> 降到 <code>6</code>，coverage 从 <code>0.228571</code> 降到 <code>0.085714</code>；在完整敏感性范围内，coverage 还可降到 <code>0.0057</code>，并在极端假设下变为 <code>NO_EFFECTIVE_EVIDENCE</code>。<strong>Score 数值稳定，不代表支持它的 Evidence Support 稳定。</strong> 以上结论只描述方法行为；正式效果须等人工 Gate 通过后验证。</p>
 <h2>附录 A：数字来源</h2>
 <table>
 <thead>
@@ -216,3 +216,4 @@ effective coverage        = Σ w_i / N,   N = 70（全部 development records）
 </tr>
 </tbody>
 </table></body></html>
+

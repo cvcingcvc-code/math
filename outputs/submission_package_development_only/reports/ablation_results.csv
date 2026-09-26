@@ -1,0 +1,5 @@
+﻿model,lambda_prompt,lambda_context,confidence_weighting,ABL,HOT,Task_Evidence_Gap,effective_weight,effective_coverage,included_evidence_count,status
+M0_No_correction,0.0,0.0,False,3.5625,0.375,1.125,16.0,0.22857142857142856,16,DEFINED
+M1_Confidence_only,0.0,0.0,True,3.5625,0.375,1.125,12.0,0.17142857142857143,16,DEFINED
+M2_Confidence_Prompt,0.5,0.0,True,3.5625,0.375,1.125,6.0,0.08571428571428572,16,DEFINED
+M3_Confidence_Prompt_Context,0.5,0.5,True,3.5625,0.375,1.125,6.0,0.08571428571428572,16,DEFINED

@@ -1,0 +1,260 @@
+{
+  "metadata": {
+    "experiment_id": "BASELINE_MODEL_TOURNAMENT_V1",
+    "generated_at_utc": "2026-09-26T07:48:29.224470+00:00",
+    "git_head": "667ecf7e25226366014687aa0ff77cbd80d8df34",
+    "input_file": "data/annotations/ai/pilot_ai_provisional.csv",
+    "input_sha256": "1f09059c56e8ba55a9467db93d526d146d505d8159498dd7e7dc3171d3d33b25",
+    "sample_count": 70,
+    "input_identity": "AI_PROVISIONAL / DEVELOPMENT_ONLY",
+    "formal_gate_eligible": false,
+    "parameters": {
+      "main_lambda_prompt": 0.5,
+      "main_lambda_context": 0.5,
+      "main_status_threshold": 0.75,
+      "rule_high_level": 4,
+      "noise_n": 7
+    },
+    "outputs": [
+      "baseline_models.py",
+      "baseline_models.md",
+      "baseline_results.csv",
+      "baseline_results.json",
+      "baseline_record_results.csv",
+      "baseline_failure_cases.md",
+      "baseline_comparison.md"
+    ]
+  },
+  "comparison": {
+    "models": [
+      "MAIN",
+      "BASELINE_A_RAW_ONLY",
+      "BASELINE_B_LINEAR",
+      "BASELINE_C_RULE"
+    ],
+    "main_model": {
+      "formula": "w=I(obs)c(1-0.5p)(1-0.5t)",
+      "status_rule": "w>=0.75 SUPPORTED; 0<w<0.75 LOW_SUPPORT; w=0 NO_EFFECTIVE_EVIDENCE"
+    },
+    "baseline_a": {
+      "formula": "w=I(obs)",
+      "status_rule": "observable SUPPORTED; missing NO_EFFECTIVE_EVIDENCE"
+    },
+    "baseline_b": {
+      "formula": "w=clip(c-0.25p-0.25t,0,1)",
+      "status_rule": "same fixed 0.75 status cutoff as main"
+    },
+    "baseline_c": {
+      "formula": "decision rule: L4-L6 and confidence in {high,medium} and p=t=false -> SUPPORTED; observable otherwise LOW_SUPPORT; missing NO_EFFECTIVE_EVIDENCE",
+      "threshold_source": "existing HOT/high-level boundary L4; predeclared, not tuned"
+    },
+    "aggregate_results": {
+      "MAIN": {
+        "main_metric": "aggregate_evidence_score",
+        "aggregate_evidence_score": 3.5625,
+        "raw_score_mean": 3.5625,
+        "hot_rate": 0.375,
+        "task_evidence_gap": 1.125,
+        "effective_weight": 6.0,
+        "effective_coverage": 0.08571428571428572,
+        "observable_count": 16,
+        "decision_coverage_supported": 0.0,
+        "status_counts": {
+          "NO_EFFECTIVE_EVIDENCE": 54,
+          "LOW_SUPPORT": 16
+        },
+        "missing_evidence_count": 54,
+        "low_support_count": 16,
+        "supported_count": 0,
+        "aggregate_status": "SUPPORTED"
+      },
+      "BASELINE_A_RAW_ONLY": {
+        "main_metric": "aggregate_evidence_score",
+        "aggregate_evidence_score": 3.5625,
+        "raw_score_mean": 3.5625,
+        "hot_rate": 0.375,
+        "task_evidence_gap": 1.125,
+        "effective_weight": 16.0,
+        "effective_coverage": 0.22857142857142856,
+        "observable_count": 16,
+        "decision_coverage_supported": 0.22857142857142856,
+        "status_counts": {
+          "NO_EFFECTIVE_EVIDENCE": 54,
+          "SUPPORTED": 16
+        },
+        "missing_evidence_count": 54,
+        "low_support_count": 0,
+        "supported_count": 16,
+        "aggregate_status": "SUPPORTED"
+      },
+      "BASELINE_B_LINEAR": {
+        "main_metric": "aggregate_evidence_score",
+        "aggregate_evidence_score": 3.5625,
+        "raw_score_mean": 3.5625,
+        "hot_rate": 0.375,
+        "task_evidence_gap": 1.125,
+        "effective_weight": 8.0,
+        "effective_coverage": 0.11428571428571428,
+        "observable_count": 16,
+        "decision_coverage_supported": 0.0,
+        "status_counts": {
+          "NO_EFFECTIVE_EVIDENCE": 54,
+          "LOW_SUPPORT": 16
+        },
+        "missing_evidence_count": 54,
+        "low_support_count": 16,
+        "supported_count": 0,
+        "aggregate_status": "SUPPORTED"
+      },
+      "BASELINE_C_RULE": {
+        "main_metric": "aggregate_evidence_score",
+        "aggregate_evidence_score": 3.5625,
+        "raw_score_mean": 3.5625,
+        "hot_rate": 0.375,
+        "task_evidence_gap": 1.125,
+        "effective_weight": 16.0,
+        "effective_coverage": 0.22857142857142856,
+        "observable_count": 16,
+        "decision_coverage_supported": 0.0,
+        "status_counts": {
+          "NO_EFFECTIVE_EVIDENCE": 54,
+          "LOW_SUPPORT": 16
+        },
+        "missing_evidence_count": 54,
+        "low_support_count": 16,
+        "supported_count": 0,
+        "aggregate_status": "SUPPORTED"
+      }
+    },
+    "noise_perturbation": {
+      "selected_record_ids": [
+        "P094",
+        "P040",
+        "P030",
+        "P118",
+        "P039",
+        "P083",
+        "P033"
+      ],
+      "n": 7,
+      "protocol": "fixed SHA-256 rank; no tuning",
+      "risk_flag_flip_10pct": {
+        "MAIN": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.6956521739130435,
+          "delta_aggregate_evidence_score": 0.13315217391304346,
+          "base_effective_coverage": 0.08571428571428572,
+          "perturbed_effective_coverage": 0.12321428571428572,
+          "decision_flip_count": 7,
+          "score_order_stability": 0.7473684210526316
+        },
+        "BASELINE_A_RAW_ONLY": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5625,
+          "delta_aggregate_evidence_score": 0.0,
+          "base_effective_coverage": 0.22857142857142856,
+          "perturbed_effective_coverage": 0.22857142857142856,
+          "decision_flip_count": 0,
+          "score_order_stability": 1.0
+        },
+        "BASELINE_B_LINEAR": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.641025641025641,
+          "delta_aggregate_evidence_score": 0.07852564102564097,
+          "base_effective_coverage": 0.11428571428571428,
+          "perturbed_effective_coverage": 0.1392857142857143,
+          "decision_flip_count": 7,
+          "score_order_stability": 0.9540229885057471
+        },
+        "BASELINE_C_RULE": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5625,
+          "delta_aggregate_evidence_score": 0.0,
+          "base_effective_coverage": 0.22857142857142856,
+          "perturbed_effective_coverage": 0.22857142857142856,
+          "decision_flip_count": 4,
+          "score_order_stability": 1.0
+        }
+      },
+      "evidence_level_shift_10pct": {
+        "MAIN": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5,
+          "delta_aggregate_evidence_score": -0.0625,
+          "base_effective_coverage": 0.08571428571428572,
+          "perturbed_effective_coverage": 0.08571428571428572,
+          "decision_flip_count": 0,
+          "score_order_stability": 0.9787234042553191
+        },
+        "BASELINE_A_RAW_ONLY": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5,
+          "delta_aggregate_evidence_score": -0.0625,
+          "base_effective_coverage": 0.22857142857142856,
+          "perturbed_effective_coverage": 0.22857142857142856,
+          "decision_flip_count": 0,
+          "score_order_stability": 0.9787234042553191
+        },
+        "BASELINE_B_LINEAR": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5,
+          "delta_aggregate_evidence_score": -0.0625,
+          "base_effective_coverage": 0.11428571428571428,
+          "perturbed_effective_coverage": 0.11428571428571428,
+          "decision_flip_count": 0,
+          "score_order_stability": 0.9787234042553191
+        },
+        "BASELINE_C_RULE": {
+          "base_aggregate_evidence_score": 3.5625,
+          "perturbed_aggregate_evidence_score": 3.5,
+          "delta_aggregate_evidence_score": -0.0625,
+          "base_effective_coverage": 0.22857142857142856,
+          "perturbed_effective_coverage": 0.22857142857142856,
+          "decision_flip_count": 0,
+          "score_order_stability": 0.9787234042553191
+        }
+      }
+    },
+    "main_parameter_sensitivity": {
+      "grid": {
+        "lambda_prompt": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "lambda_context": [
+          0.0,
+          0.25,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "r_medium": [
+          0.5,
+          0.75,
+          1.0
+        ]
+      },
+      "grid_size": 75,
+      "defined_cells": 60,
+      "undefined_cells": 15,
+      "aggregate_evidence_score_range": [
+        3.5625,
+        3.5625
+      ],
+      "effective_weight_range": [
+        2.0,
+        16.0
+      ],
+      "interpretation": "Main-model parameter sensitivity only; no baseline threshold was tuned."
+    },
+    "missing_evidence_protocol": "All methods preserve missing/undetermined evidence as NO_EFFECTIVE_EVIDENCE; no zero substitution.",
+    "counterexample_protocol": "Disagreements are development structural cases, not false/true labels; human Gate is pending.",
+    "external_transfer": {
+      "status": "NOT_SUPPORTED_FOR_COMPARISON",
+      "reason": "No paired educational outcome or human truth; finance artifact is secondary structural transfer only."
+    }
+  }
+}

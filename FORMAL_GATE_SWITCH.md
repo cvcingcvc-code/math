@@ -43,6 +43,7 @@ AI 标注文件保留在仓库中作为开发记录，**不得**作为正式输�
 
 `run_all.py --mode formal` 只做一件事：转交 `src/run_partial_identification.py --mode formal`。后者读取 `reports/annotation_gate_report.json`，当前 `status=PENDING`，不满足 `gate_status=="PASS" and formal_gate_eligible==true`，于是输出 `FORMAL_MODE_BLOCKED` 并以非零码退出；`run_all.py` 随即打印 `RUN_ALL_FORMAL_BLOCKED`。
 另外 `src/annotation_gate_report.py` 会拒绝任何全部为 `AI_PROVISIONAL` / `DEVELOPMENT_ONLY` 的数据作为 Gate 输入。
+即使 Gate 未来 PASS，当前 formal source adapter 仍保持 fail-closed；必须先实现只读取通过 Gate 的 HUMAN_R1、保留开发输入不变的最小正式输入适配器，才可运行 Formal model。当前不提前运行。
 
 ## 6. 禁止人工绕过 Gate
 

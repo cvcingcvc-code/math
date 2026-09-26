@@ -74,6 +74,18 @@ def load(path: Path) -> pd.DataFrame:
     df = read_worksheet(path)
     for c in df.columns:
         df[c] = df[c].map(norm)
+    # Human worksheets may be edited in Excel with inconsistent casing.  Keep
+    # the stored files untouched, but canonicalize categorical values in memory
+    # before validation and reliability calculations.  Bloom levels are kept in
+    # their expected uppercase form; all other controlled vocabulary is
+    # lower-case.  This prevents valid values such as ``L2``/``TRUE`` from being
+    # rejected by a case-sensitive membership check.
+    for c in ALLOWED:
+        if c in df.columns:
+            if c in {"task_bloom", "student_evidence_bloom"}:
+                df[c] = df[c].map(lambda v: v.upper() if v else v)
+            else:
+                df[c] = df[c].map(lambda v: v.lower() if v else v)
     # Never allow provisional AI annotations into the formal human Gate path.
     if {"annotation_source", "annotation_status"}.issubset(df.columns):
         if set(df["annotation_source"]) == {"AI_PROVISIONAL"} or set(df["annotation_status"]) == {"DEVELOPMENT_ONLY"}:
@@ -93,7 +105,7 @@ def completeness(df: pd.DataFrame, coder: str) -> dict:
     for col, allowed in ALLOWED.items():
         if col not in df.columns:
             continue
-        bad = df[col][(df[col] != "") & (~df[col].str.lower().isin(allowed))]
+        bad = df[col][(df[col] != "") & (~df[col].isin(allowed))]
         if len(bad):
             c["invalid_values"][col] = {k: int(v) for k, v in bad.value_counts().items()}
     # conditional requirements from clarification V0.1.1
@@ -111,9 +123,16 @@ def completeness(df: pd.DataFrame, coder: str) -> dict:
             gap = int((mask & (df[col] == "")).sum())
             if gap:
                 c["conditional_gaps"][col] = gap
-    bad_amb = df["ambiguity_type"][(df["ambiguity_type"] != "") &
-                                  (~df["ambiguity_type"].str.lower().str.split(";")
-                                   .explode().str.strip().isin(AMBIGUITY_CODES))]
+    # ``ambiguity_type`` may contain multiple semicolon-separated codes.  Check
+    # each original row after splitting; filtering with an exploded mask would
+    # produce a longer boolean index and crash on otherwise valid worksheets.
+    def has_invalid_ambiguity(value: str) -> bool:
+        if value == "":
+            return False
+        return any(token.strip().lower() not in AMBIGUITY_CODES
+                   for token in value.split(";"))
+
+    bad_amb = df["ambiguity_type"][df["ambiguity_type"].map(has_invalid_ambiguity)]
     if len(bad_amb):
         c["invalid_values"]["ambiguity_type"] = {k: int(v) for k, v in bad_amb.value_counts().items()}
     valid = 1.0
@@ -122,7 +141,9 @@ def completeness(df: pd.DataFrame, coder: str) -> dict:
         for _, r in df.iterrows():
             if any(r[c] == "" for c in REQUIRED_ALWAYS if c in df.columns):
                 continue
-            if any(r[c] != "" and r[c].lower() not in ALLOWED[c] for c in ALLOWED if c in df.columns):
+            if any(r[c] != "" and r[c] not in ALLOWED[c] for c in ALLOWED if c in df.columns):
+                continue
+            if has_invalid_ambiguity(r["ambiguity_type"]):
                 continue
             ok_rows += 1
         valid = ok_rows / len(df)
@@ -320,6 +341,12 @@ def main() -> int:
                 "rate": round(need2 / len(m), 4) if len(m) else None,
                 "medium_or_low_confidence_A": int(m["confidence_A"].str.lower().isin(["medium", "low"]).sum())}
 
+    def evidence_span_rate(frame: pd.DataFrame) -> float:
+        readable = frame[frame["student_evidence_bloom"].isin(LEVELS)]
+        if not len(readable):
+            return 0.0
+        return float(readable["evidence_span"].ne("").mean())
+
     r6 = stats["task_bloom"].get("krippendorff_alpha_nominal")
     r3 = stats["task_bloom"].get("three_tier_krippendorff_alpha")
     e6 = stats["student_evidence_bloom"].get("krippendorff_alpha_nominal")
@@ -329,6 +356,43 @@ def main() -> int:
         if not prereg:
             return "NOT AUTO-DECIDABLE (阈值未预注册)"
         return "PASS" if ok else "FAIL"
+
+    # Persist the frozen Gate decision fields consumed by the fail-closed
+    # formal runner.  These are derived only from the preregistered thresholds;
+    # no threshold or label is altered here.  R1 is the measurement input and
+    # R2 supplies test-retest reliability, so workload/span checks use R1 while
+    # reliability and missingness checks are conservative across both rounds.
+    undetermined_rates = {
+        "task_A": _rate(A["task_bloom"], "UNDETERMINED"),
+        "task_B": _rate(B["task_bloom"], "UNDETERMINED"),
+        "evidence_A": _rate(A["student_evidence_bloom"], "UNDETERMINED"),
+        "evidence_B": _rate(B["student_evidence_bloom"], "UNDETERMINED"),
+    }
+    alpha_checks = {}
+    for axis in ("task_bloom", "student_evidence_bloom"):
+        s6 = stats[axis].get("krippendorff_alpha_nominal")
+        s3 = stats[axis].get("three_tier_krippendorff_alpha")
+        alpha_checks[axis] = bool(
+            s6 is not None and s3 is not None
+            and s6 >= thr["six_level_alpha_min"]
+            and s3 >= thr["three_tier_alpha_min"]
+            and (not thr.get("three_tier_should_exceed_six_level", False) or s3 > s6)
+        )
+    gate_checks = {
+        "completeness_A": comp[0]["valid_row_rate"] >= thr["completeness_valid_value_min"],
+        "completeness_B": comp[1]["valid_row_rate"] >= thr["completeness_valid_value_min"],
+        "alpha_task": alpha_checks["task_bloom"],
+        "alpha_evidence": alpha_checks["student_evidence_bloom"],
+        "undetermined_all_axes": max(undetermined_rates.values()) <= thr["undetermined_rate_max_per_axis"],
+        "second_review_rate_A": (workload["rate"] is not None
+                                  and workload["rate"] <= thr["second_review_rate_max"]),
+        "evidence_span_locatable_A": evidence_span_rate(A) >= thr["evidence_span_locatable_min"],
+        "records_for_estimate": len(m) >= thr["min_records_for_estimate"],
+        "median_sec_per_record_A": (cost["median_sec_per_record"] is not None
+                                     and cost["median_sec_per_record"] <= thr["median_sec_per_record_max"]),
+    }
+    gate_status = "SYNTHETIC_TEST" if synthetic else ("PASS" if all(gate_checks.values()) else "FAIL")
+    formal_gate_eligible = bool(gate_status == "PASS" and prereg)
 
     answers = [
         ("Q1 六级标注是否可执行？",
@@ -406,6 +470,8 @@ def main() -> int:
     for q, obs, v in answers:
         lines.append(f"| {q} | {obs} | {v} |")
     lines += ["", "## 9. 阈值与结论边界", "",
+              f"- gate_status = **{gate_status}**；formal_gate_eligible = **{str(formal_gate_eligible).lower()}**。",
+              f"- 冻结阈值检查：`{json.dumps(gate_checks, ensure_ascii=False)}`。",
               f"- preregistered = **{prereg}**。" + ("" if prereg else
               " 在负责人确认阈值前，本报告不给出 Gate 通过判定。"),
               "- 阈值不得在查看上述数值后回改。",
@@ -415,6 +481,8 @@ def main() -> int:
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text("\n".join(lines), encoding="utf-8")
     payload = {"synthetic_software_test": synthetic, "n": len(m), "preregistered": prereg,
+               "gate_status": gate_status, "formal_gate_eligible": formal_gate_eligible,
+               "gate_checks": gate_checks, "undetermined_rates": undetermined_rates,
                "completeness": comp, "axis_stats": stats, "tier_gap": gap,
                "numeric_gap": numeric_gap, "task_confusion": task_cm,
                "evidence_confusion": ev_cm, "per_agent": per_agent,

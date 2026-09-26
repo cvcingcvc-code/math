@@ -1,0 +1,8 @@
+﻿suite,model,parameter,scenario,n,raw_observed,defined_n,coverage_observed,missing_evidence_n,abstain_n,no_effective_evidence_n,mean_output,rmse_vs_raw,rank_stability_vs_raw
+sample_in,A_multiplicative,,baseline,70,16,16,1.0,54,0,54,1.3359375,2.415566380271923,1.0
+sample_in,B_additive,0.5,baseline,70,16,16,1.0,54,0,54,3.25,0.3125,1.0
+sample_in,B_additive,1.0,baseline,70,16,16,1.0,54,0,54,2.9375,0.625,1.0
+sample_in,C_gated,0.5,baseline,70,16,0,0.0,54,16,54,,,
+sample_in,D_nonlinear,0.5,baseline,70,16,16,1.0,54,0,54,2.1815768021662674,1.498144179839891,1.0
+sample_in,D_nonlinear,1.0,baseline,70,16,16,1.0,54,0,54,1.3359375,2.415566380271923,1.0
+sample_in,D_nonlinear,2.0,baseline,70,16,16,1.0,54,0,54,0.5009765625,3.321403772873894,1.0

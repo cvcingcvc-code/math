@@ -1,0 +1,27 @@
+{
+  "status": "BLOCKED",
+  "formal_metrics_written": false,
+  "issues": [
+    "FORMAL_GATE_NOT_PASS",
+    "R1_MISSING_COLUMNS:annotation_source,annotation_status",
+    "R2_MISSING_COLUMNS:annotation_source,annotation_status"
+  ],
+  "inputs": [
+    {
+      "round": "R1",
+      "rows": 70,
+      "sha256": "ce4d1b8e6df2f45147572cf4f1c5d55d0cfac464ec2d26659e12c2754f75359d"
+    },
+    {
+      "round": "R2",
+      "rows": 70,
+      "sha256": "48f6ab6d7e95bd0bfeb41ed3936253933bffa223103b373c4c57e8f7efbaeff2"
+    }
+  ],
+  "next_steps": [
+    "run R1/R2 consistency",
+    "run preregistered Gate",
+    "run Raw/Adjusted, sensitivity, ablation, counterexamples, accuracy-coverage, failure cases",
+    "emit Formal vs Development table"
+  ]
+}

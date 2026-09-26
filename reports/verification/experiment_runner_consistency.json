@@ -1,0 +1,33 @@
+{
+  "experiment_id": "experiment-runner-consistency-2026-09-26",
+  "timestamp": "2026-09-26T02:35:16.3745866Z",
+  "git_head": "667ecf7e25226366014687aa0ff77cbd80d8df34",
+  "input_files": [
+    "reports/development/ablation_results.csv",
+    "reports/development/reliability_sensitivity.csv"
+  ],
+  "parameters": {
+    "lambda_prompt": [
+      "0",
+      "0.25",
+      "0.5",
+      "0.75",
+      "1"
+    ]
+  },
+  "sample_count": 70,
+  "included_count": 16,
+  "output_files": [
+    "reports/development/ablation_results.csv",
+    "reports/development/reliability_sensitivity.csv"
+  ],
+  "status": "PASS",
+  "input_sha256": "1f09059c56e8ba55a9467db93d526d146d505d8159498dd7e7dc3171d3d33b25",
+  "runtime": {
+    "python": "3.14.2",
+    "pandas": "3.0.1",
+    "numpy": "2.4.1"
+  },
+  "artifact_manifest": "reports/verification/reproducibility_manifest.json",
+  "supersedes_stale_receipt": true
+}

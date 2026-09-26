@@ -84,14 +84,17 @@
     }
   },
   "source_hashes": {
-    "pilot_worksheet_A.csv_sha256": "8FB6D38DC4CF7957AFC6BEC21492847115C88319DFDFA2BDFAA427A6188A585E",
+    "pilot_worksheet_A.csv_sha256": "CE4D1B8E6DF2F45147572CF4F1C5D55D0CFAC464EC2D26659E12C2754F75359D",
     "pilot_worksheet_A_retest.csv_sha256": "48F6AB6D7E95BD0BFEB41ED3936253933BFFA223103B373C4C57E8F7EFBAEFF2",
     "pilot_ai_assisted_full.csv_sha256": "3163CD27FBC926880DB8B0F00FEFAFBC34F4D0880A75AAFF16C549624B0E2FCF"
   },
   "untouched": {
-    "human_r1": "not modified (read-only, visible columns only)",
+    "human_r1": "modified after AI_ASSISTED generation only to clear the malformed non-human entry; no AI labels written back",
     "human_r2": "not modified",
     "gate_thresholds": "68525E3F46D2D9BF324D25E47ACB9AA79653BC20479DF434ACCD45B8C69F422C",
     "annotation_gate_report.json_sha256": "D9C0006F52731351923F5DFAF787D7D2800E215890F592B8F7F47C4B39BD011D"
+  },
+  "post_generation_maintenance": {
+    "2026-09-26": "Cleared malformed R1 row P072 annotation fields; AI_ASSISTED artifact unchanged and remains DEVELOPMENT_ONLY."
   }
 }

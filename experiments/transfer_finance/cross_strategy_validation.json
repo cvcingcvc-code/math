@@ -1,0 +1,821 @@
+{
+  "study_type": "External Transfer Validation / Cross-Strategy Reliability",
+  "data_source": "local historical BTC-USD daily data (Yahoo Finance snapshot already present; no live execution)",
+  "symbol": "BTC-USD",
+  "date_range": [
+    "2021-01-30",
+    "2025-09-23"
+  ],
+  "sample_size_by_strategy": {
+    "A_7d_momentum": 1698,
+    "B_RSI14_mean_reversion": 1698,
+    "C_MA20_50_trend": 1678
+  },
+  "timestamp_grid_size": 5184,
+  "unavailable_warmup_rows": 107,
+  "strategies": {
+    "A_7d_momentum": {
+      "raw_signal": "tanh(7-day close return / 0.05)",
+      "fixed": true
+    },
+    "B_RSI14_mean_reversion": {
+      "raw_signal": "-(RSI14 - 50) / 50, clipped to [-1,1]",
+      "fixed": true
+    },
+    "C_MA20_50_trend": {
+      "raw_signal": "tanh((MA20 / MA50 - 1) / 0.02)",
+      "fixed": true
+    }
+  },
+  "reliability_framework": {
+    "components": [
+      "completeness",
+      "agreement",
+      "stability",
+      "calibration"
+    ],
+    "weights": [
+      0.3,
+      0.3,
+      0.2,
+      0.2
+    ],
+    "calibration_note": "past-only rolling 90-day hit rate; each timestamp uses information available by t"
+  },
+  "unavailable_status": "UNAVAILABLE before a fixed signal/reliability window is computable",
+  "output_schema": [
+    "timestamp",
+    "strategy",
+    "raw_signal",
+    "reliability",
+    "adjusted_signal",
+    "evaluation_status",
+    "future_return",
+    "raw_direction_correct",
+    "accepted",
+    "abstained"
+  ],
+  "reliability_separation": {
+    "matrix": [
+      {
+        "strategy": "A_7d_momentum",
+        "raw_quality": 0.4740871613663133,
+        "low_R_quality": 0.46466431095406363,
+        "medium_R_quality": 0.4734982332155477,
+        "high_R_quality": 0.4840989399293286
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "raw_quality": 0.5023557126030624,
+        "low_R_quality": 0.4876325088339223,
+        "medium_R_quality": 0.49823321554770317,
+        "high_R_quality": 0.5212014134275619
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "raw_quality": 0.48748510131108463,
+        "low_R_quality": 0.5214285714285715,
+        "medium_R_quality": 0.47048300536672627,
+        "high_R_quality": 0.47048300536672627
+      }
+    ],
+    "groups": [
+      {
+        "strategy": "A_7d_momentum",
+        "reliability_group": "low",
+        "n": 566,
+        "raw_quality_hit_rate": 0.46466431095406363,
+        "mean_signed_signal_return": -0.0025494057435017092,
+        "mean_reliability": 0.6201955857612625
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "reliability_group": "medium",
+        "n": 566,
+        "raw_quality_hit_rate": 0.4734982332155477,
+        "mean_signed_signal_return": -4.3391333496892454e-05,
+        "mean_reliability": 0.7177645165033378
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "reliability_group": "high",
+        "n": 566,
+        "raw_quality_hit_rate": 0.4840989399293286,
+        "mean_signed_signal_return": 0.0016920322585996983,
+        "mean_reliability": 0.7920196518813429
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "reliability_group": "low",
+        "n": 566,
+        "raw_quality_hit_rate": 0.4876325088339223,
+        "mean_signed_signal_return": -0.0008365525699750016,
+        "mean_reliability": 0.6250762488650934
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "reliability_group": "medium",
+        "n": 566,
+        "raw_quality_hit_rate": 0.49823321554770317,
+        "mean_signed_signal_return": -0.00011663349891278335,
+        "mean_reliability": 0.7237322905190434
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "reliability_group": "high",
+        "n": 566,
+        "raw_quality_hit_rate": 0.5212014134275619,
+        "mean_signed_signal_return": -0.0014531102242257134,
+        "mean_reliability": 0.7982597826549612
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "reliability_group": "low",
+        "n": 560,
+        "raw_quality_hit_rate": 0.5214285714285715,
+        "mean_signed_signal_return": 0.0013357683831852895,
+        "mean_reliability": 0.6205251362766352
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "reliability_group": "medium",
+        "n": 559,
+        "raw_quality_hit_rate": 0.47048300536672627,
+        "mean_signed_signal_return": 6.688697103926535e-05,
+        "mean_reliability": 0.7189660588524429
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "reliability_group": "high",
+        "n": 559,
+        "raw_quality_hit_rate": 0.47048300536672627,
+        "mean_signed_signal_return": -0.001636317543598479,
+        "mean_reliability": 0.7925760190643084
+      }
+    ],
+    "strategy_status": [
+      {
+        "strategy": "A_7d_momentum",
+        "high_R_better_than_low_R": true,
+        "selective_quality_gain_supported": true,
+        "oos_gain_preserved": true
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "high_R_better_than_low_R": true,
+        "selective_quality_gain_supported": false,
+        "oos_gain_preserved": true
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "high_R_better_than_low_R": false,
+        "selective_quality_gain_supported": false,
+        "oos_gain_preserved": true
+      }
+    ]
+  },
+  "selective_evaluation": {
+    "thresholds": [
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85
+    ],
+    "curves": [
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.5,
+        "accepted_n": 1685,
+        "coverage": 0.9923439340400471,
+        "accepted_hit_rate": 0.47359050445103856,
+        "accepted_mean_signed_return": -0.00028642328026069237
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.55,
+        "accepted_n": 1640,
+        "coverage": 0.9658421672555948,
+        "accepted_hit_rate": 0.47073170731707314,
+        "accepted_mean_signed_return": -0.0004197542048684306
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.6,
+        "accepted_n": 1517,
+        "coverage": 0.8934040047114252,
+        "accepted_hit_rate": 0.46802900461437047,
+        "accepted_mean_signed_return": -0.00032616273986247734
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.65,
+        "accepted_n": 1326,
+        "coverage": 0.7809187279151943,
+        "accepted_hit_rate": 0.47285067873303166,
+        "accepted_mean_signed_return": 0.0001491968971160457
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.7,
+        "accepted_n": 973,
+        "coverage": 0.5730270906949352,
+        "accepted_hit_rate": 0.47687564234326824,
+        "accepted_mean_signed_return": 0.0008950977772120411
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.75,
+        "accepted_n": 629,
+        "coverage": 0.37043580683156657,
+        "accepted_hit_rate": 0.4864864864864865,
+        "accepted_mean_signed_return": 0.0015906159757485049
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.8,
+        "accepted_n": 183,
+        "coverage": 0.10777385159010601,
+        "accepted_hit_rate": 0.4644808743169399,
+        "accepted_mean_signed_return": -0.00017315470165107168
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "threshold": 0.85,
+        "accepted_n": 4,
+        "coverage": 0.002355712603062426,
+        "accepted_hit_rate": 1.0,
+        "accepted_mean_signed_return": 0.025203013521651996
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.5,
+        "accepted_n": 1691,
+        "coverage": 0.9958775029446407,
+        "accepted_hit_rate": 0.5032525133057363,
+        "accepted_mean_signed_return": -0.0007566252789496062
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.55,
+        "accepted_n": 1649,
+        "coverage": 0.9711425206124853,
+        "accepted_hit_rate": 0.501516070345664,
+        "accepted_mean_signed_return": -0.0008767622432477771
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.6,
+        "accepted_n": 1531,
+        "coverage": 0.9016489988221437,
+        "accepted_hit_rate": 0.4990202482037884,
+        "accepted_mean_signed_return": -0.0010281589956499116
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.65,
+        "accepted_n": 1356,
+        "coverage": 0.7985865724381626,
+        "accepted_hit_rate": 0.5022123893805309,
+        "accepted_mean_signed_return": -0.0007205916258216668
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.7,
+        "accepted_n": 1031,
+        "coverage": 0.6071849234393404,
+        "accepted_hit_rate": 0.5082444228903976,
+        "accepted_mean_signed_return": -0.0009111045548771653
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.75,
+        "accepted_n": 681,
+        "coverage": 0.4010600706713781,
+        "accepted_hit_rate": 0.5066079295154186,
+        "accepted_mean_signed_return": -0.0016291672913076485
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.8,
+        "accepted_n": 217,
+        "coverage": 0.12779740871613662,
+        "accepted_hit_rate": 0.5483870967741935,
+        "accepted_mean_signed_return": 0.00029039717950825447
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "threshold": 0.85,
+        "accepted_n": 21,
+        "coverage": 0.012367491166077738,
+        "accepted_hit_rate": 0.23809523809523808,
+        "accepted_mean_signed_return": -0.010234529079736564
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.5,
+        "accepted_n": 1669,
+        "coverage": 0.9946364719904648,
+        "accepted_hit_rate": 0.4859197124026363,
+        "accepted_mean_signed_return": -0.00013553060205138287
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.55,
+        "accepted_n": 1623,
+        "coverage": 0.967222884386174,
+        "accepted_hit_rate": 0.48613678373382624,
+        "accepted_mean_signed_return": -5.5147213623534415e-05
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.6,
+        "accepted_n": 1510,
+        "coverage": 0.899880810488677,
+        "accepted_hit_rate": 0.4847682119205298,
+        "accepted_mean_signed_return": 9.492731776182104e-05
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.65,
+        "accepted_n": 1313,
+        "coverage": 0.7824791418355185,
+        "accepted_hit_rate": 0.4767707539984768,
+        "accepted_mean_signed_return": -0.0004841325304238404
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.7,
+        "accepted_n": 1004,
+        "coverage": 0.5983313468414779,
+        "accepted_hit_rate": 0.4760956175298805,
+        "accepted_mean_signed_return": -0.0005491473913760738
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.75,
+        "accepted_n": 635,
+        "coverage": 0.37842669845053634,
+        "accepted_hit_rate": 0.47401574803149604,
+        "accepted_mean_signed_return": -0.0010957460271443745
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.8,
+        "accepted_n": 169,
+        "coverage": 0.10071513706793803,
+        "accepted_hit_rate": 0.46153846153846156,
+        "accepted_mean_signed_return": -0.0022760222202462405
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "threshold": 0.85,
+        "accepted_n": 10,
+        "coverage": 0.0059594755661501785,
+        "accepted_hit_rate": 0.3,
+        "accepted_mean_signed_return": -0.002072618253971681
+      }
+    ],
+    "status_by_strategy": {
+      "A_7d_momentum": true,
+      "B_RSI14_mean_reversion": false,
+      "C_MA20_50_trend": false
+    }
+  },
+  "walk_forward_oos": {
+    "split_rule": "chronological 70% in-sample / 30% out-of-sample; no future-window information",
+    "rows": [
+      {
+        "strategy": "A_7d_momentum",
+        "sample": "in_sample",
+        "n": 1188,
+        "coverage": 0.7584175084175084,
+        "raw_hit_rate": 0.4772727272727273,
+        "accepted_n": 901,
+        "accepted_hit_rate": 0.46614872364039955,
+        "accepted_mean_signed_return": 0.00019112075360129278,
+        "abstained_n": 287,
+        "date_start": "2021-01-30",
+        "date_end": "2024-05-01"
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "sample": "out_of_sample",
+        "n": 510,
+        "coverage": 0.8333333333333334,
+        "raw_hit_rate": 0.4666666666666667,
+        "accepted_n": 425,
+        "accepted_hit_rate": 0.48705882352941177,
+        "accepted_mean_signed_return": 6.0318321367321894e-05,
+        "abstained_n": 85,
+        "date_start": "2024-05-02",
+        "date_end": "2025-09-23"
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "sample": "in_sample",
+        "n": 1188,
+        "coverage": 0.7794612794612794,
+        "raw_hit_rate": 0.5025252525252525,
+        "accepted_n": 926,
+        "accepted_hit_rate": 0.49892008639308855,
+        "accepted_mean_signed_return": -0.0013169721568590763,
+        "abstained_n": 262,
+        "date_start": "2021-01-30",
+        "date_end": "2024-05-01"
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "sample": "out_of_sample",
+        "n": 510,
+        "coverage": 0.8431372549019608,
+        "raw_hit_rate": 0.5019607843137255,
+        "accepted_n": 430,
+        "accepted_hit_rate": 0.5093023255813953,
+        "accepted_mean_signed_return": 0.0005637069131100568,
+        "abstained_n": 80,
+        "date_start": "2024-05-02",
+        "date_end": "2025-09-23"
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "sample": "in_sample",
+        "n": 1168,
+        "coverage": 0.7542808219178082,
+        "raw_hit_rate": 0.4897260273972603,
+        "accepted_n": 881,
+        "accepted_hit_rate": 0.4767309875141884,
+        "accepted_mean_signed_return": -0.00035405113689238987,
+        "abstained_n": 287,
+        "date_start": "2021-02-19",
+        "date_end": "2024-05-01"
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "sample": "out_of_sample",
+        "n": 510,
+        "coverage": 0.8470588235294118,
+        "raw_hit_rate": 0.4823529411764706,
+        "accepted_n": 432,
+        "accepted_hit_rate": 0.47685185185185186,
+        "accepted_mean_signed_return": -0.0007494142612136735,
+        "abstained_n": 78,
+        "date_start": "2024-05-02",
+        "date_end": "2025-09-23"
+      }
+    ]
+  },
+  "sensitivity": {
+    "levels": [
+      -0.2,
+      -0.1,
+      0.0,
+      0.1,
+      0.2
+    ],
+    "definition": "shift weight mass between completeness/agreement and stability/calibration; sum preserved",
+    "rows": [
+      {
+        "strategy": "A_7d_momentum",
+        "perturbation": -0.2,
+        "weights": [
+          0.24,
+          0.24,
+          0.24000000000000002,
+          0.24000000000000002
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9779120453854488,
+        "accepted_n_at_.65": 751,
+        "coverage_at_.65": 0.44228504122497053,
+        "accepted_hit_rate_at_.65": 0.48468708388814913
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "perturbation": -0.2,
+        "weights": [
+          0.24,
+          0.24,
+          0.24000000000000002,
+          0.24000000000000002
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9775541905308263,
+        "accepted_n_at_.65": 823,
+        "coverage_at_.65": 0.48468786808009423,
+        "accepted_hit_rate_at_.65": 0.5066828675577156
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "perturbation": -0.2,
+        "weights": [
+          0.24,
+          0.24,
+          0.24000000000000002,
+          0.24000000000000002
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9787035979791417,
+        "accepted_n_at_.65": 750,
+        "coverage_at_.65": 0.4469606674612634,
+        "accepted_hit_rate_at_.65": 0.4666666666666667
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "perturbation": -0.1,
+        "weights": [
+          0.27,
+          0.27,
+          0.22000000000000003,
+          0.22000000000000003
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9931082862199077,
+        "accepted_n_at_.65": 1111,
+        "coverage_at_.65": 0.6542991755005889,
+        "accepted_hit_rate_at_.65": 0.47164716471647167
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "perturbation": -0.1,
+        "weights": [
+          0.27,
+          0.27,
+          0.22000000000000003,
+          0.22000000000000003
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9942849502963144,
+        "accepted_n_at_.65": 1138,
+        "coverage_at_.65": 0.6702002355712603,
+        "accepted_hit_rate_at_.65": 0.5043936731107206
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "perturbation": -0.1,
+        "weights": [
+          0.27,
+          0.27,
+          0.22000000000000003,
+          0.22000000000000003
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9951896814990207,
+        "accepted_n_at_.65": 1095,
+        "coverage_at_.65": 0.6525625744934446,
+        "accepted_hit_rate_at_.65": 0.4776255707762557
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "perturbation": 0.0,
+        "weights": [
+          0.3,
+          0.3,
+          0.2,
+          0.2
+        ],
+        "reliability_rank_spearman_vs_baseline": 1.0,
+        "accepted_n_at_.65": 1326,
+        "coverage_at_.65": 0.7809187279151943,
+        "accepted_hit_rate_at_.65": 0.47285067873303166
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "perturbation": 0.0,
+        "weights": [
+          0.3,
+          0.3,
+          0.2,
+          0.2
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9999999999999999,
+        "accepted_n_at_.65": 1356,
+        "coverage_at_.65": 0.7985865724381626,
+        "accepted_hit_rate_at_.65": 0.5022123893805309
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "perturbation": 0.0,
+        "weights": [
+          0.3,
+          0.3,
+          0.2,
+          0.2
+        ],
+        "reliability_rank_spearman_vs_baseline": 1.0,
+        "accepted_n_at_.65": 1313,
+        "coverage_at_.65": 0.7824791418355185,
+        "accepted_hit_rate_at_.65": 0.4767707539984768
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "perturbation": 0.1,
+        "weights": [
+          0.32999999999999996,
+          0.32999999999999996,
+          0.18,
+          0.18
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9969783966793512,
+        "accepted_n_at_.65": 1445,
+        "coverage_at_.65": 0.8510011778563016,
+        "accepted_hit_rate_at_.65": 0.47058823529411764
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "perturbation": 0.1,
+        "weights": [
+          0.32999999999999996,
+          0.32999999999999996,
+          0.18,
+          0.18
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9963646164237723,
+        "accepted_n_at_.65": 1449,
+        "coverage_at_.65": 0.8533568904593639,
+        "accepted_hit_rate_at_.65": 0.5037957211870255
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "perturbation": 0.1,
+        "weights": [
+          0.32999999999999996,
+          0.32999999999999996,
+          0.18,
+          0.18
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9971398631340441,
+        "accepted_n_at_.65": 1424,
+        "coverage_at_.65": 0.8486293206197855,
+        "accepted_hit_rate_at_.65": 0.4859550561797753
+      },
+      {
+        "strategy": "A_7d_momentum",
+        "perturbation": 0.2,
+        "weights": [
+          0.36,
+          0.36,
+          0.16,
+          0.16
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9937512350424168,
+        "accepted_n_at_.65": 1562,
+        "coverage_at_.65": 0.9199057714958775,
+        "accepted_hit_rate_at_.65": 0.469270166453265
+      },
+      {
+        "strategy": "B_RSI14_mean_reversion",
+        "perturbation": 0.2,
+        "weights": [
+          0.36,
+          0.36,
+          0.16,
+          0.16
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9908977165560353,
+        "accepted_n_at_.65": 1565,
+        "coverage_at_.65": 0.9216725559481743,
+        "accepted_hit_rate_at_.65": 0.5003194888178913
+      },
+      {
+        "strategy": "C_MA20_50_trend",
+        "perturbation": 0.2,
+        "weights": [
+          0.36,
+          0.36,
+          0.16,
+          0.16
+        ],
+        "reliability_rank_spearman_vs_baseline": 0.9929913418003096,
+        "accepted_n_at_.65": 1538,
+        "coverage_at_.65": 0.9165673420738975,
+        "accepted_hit_rate_at_.65": 0.48764629388816644
+      }
+    ]
+  },
+  "counterexamples": [
+    {
+      "strategy": "A_7d_momentum",
+      "case": "high_raw_high_reliability",
+      "timestamp": "2021-02-03",
+      "raw_signal": 0.9998083038763576,
+      "reliability": 0.7647058823529411,
+      "adjusted_signal": 0.7645592911995674,
+      "future_return": -0.014571470120209207,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ACCEPT"
+    },
+    {
+      "strategy": "A_7d_momentum",
+      "case": "high_raw_low_reliability",
+      "timestamp": "2021-05-01",
+      "raw_signal": 0.9960112319194897,
+      "reliability": 0.678397631798451,
+      "adjusted_signal": 0.6756916609788396,
+      "future_return": -0.020698824187899145,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ACCEPT"
+    },
+    {
+      "strategy": "A_7d_momentum",
+      "case": "abstain",
+      "timestamp": "2021-01-31",
+      "raw_signal": 0.47071763794523985,
+      "reliability": 0.5516129032258065,
+      "adjusted_signal": 0.2596539228665678,
+      "future_return": 0.012768370405776608,
+      "raw_direction_correct": 1,
+      "evaluation_status": "ABSTAIN"
+    },
+    {
+      "strategy": "B_RSI14_mean_reversion",
+      "case": "high_raw_high_reliability",
+      "timestamp": "2021-02-08",
+      "raw_signal": -0.6194625938828284,
+      "reliability": 0.7769230769230768,
+      "adjusted_signal": -0.48127478447819744,
+      "future_return": 0.006161523959955284,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ACCEPT"
+    },
+    {
+      "strategy": "B_RSI14_mean_reversion",
+      "case": "high_raw_low_reliability",
+      "timestamp": "2021-05-22",
+      "raw_signal": 0.655560226135261,
+      "reliability": 0.6,
+      "adjusted_signal": 0.3933361356811566,
+      "future_return": -0.0736893688644572,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ABSTAIN"
+    },
+    {
+      "strategy": "B_RSI14_mean_reversion",
+      "case": "abstain",
+      "timestamp": "2021-01-31",
+      "raw_signal": 0.15308281748459707,
+      "reliability": 0.564516129032258,
+      "adjusted_signal": 0.0864177195477564,
+      "future_return": 0.012768370405776608,
+      "raw_direction_correct": 1,
+      "evaluation_status": "ABSTAIN"
+    },
+    {
+      "strategy": "C_MA20_50_trend",
+      "case": "high_raw_high_reliability",
+      "timestamp": "2021-08-13",
+      "raw_signal": 0.999998368113099,
+      "reliability": 0.7811924131121238,
+      "adjusted_signal": 0.7811911382944576,
+      "future_return": -0.01457055076832292,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ACCEPT"
+    },
+    {
+      "strategy": "C_MA20_50_trend",
+      "case": "high_raw_low_reliability",
+      "timestamp": "2021-02-22",
+      "raw_signal": 0.9999999758220747,
+      "reliability": 0.6075471698113207,
+      "adjusted_signal": 0.6075471551220907,
+      "future_return": -0.09930198541853996,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ABSTAIN"
+    },
+    {
+      "strategy": "C_MA20_50_trend",
+      "case": "abstain",
+      "timestamp": "2021-02-22",
+      "raw_signal": 0.9999999758220747,
+      "reliability": 0.6075471698113207,
+      "adjusted_signal": 0.6075471551220907,
+      "future_return": -0.09930198541853996,
+      "raw_direction_correct": 0,
+      "evaluation_status": "ABSTAIN"
+    }
+  ],
+  "final_judgement": {
+    "FRAMEWORK_TRANSFER": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT",
+    "CROSS_STRATEGY_RELIABILITY": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT",
+    "SELECTIVE_DECISION_GAIN": "PARTIAL"
+  },
+  "competition_value": {
+    "reliability_cross_raw_strategy_stable_information": "descriptive structural separation across at least two strategies",
+    "supported_strategies": [
+      "A_7d_momentum",
+      "B_RSI14_mean_reversion"
+    ],
+    "unsupported_strategies": [
+      "C_MA20_50_trend"
+    ],
+    "oos_conclusion": "reported separately above; no claim pooled across strategies",
+    "strengthens_raw_output_not_equal_reliable_evidence": true,
+    "paper_body_recommendation": "include as a compact external validation if framed as partial/qualified evidence",
+    "recommended_defense_figure": "one cross-strategy low/medium/high reliability quality matrix; omit extra trading curves unless needed"
+  },
+  "prohibitions_respected": [
+    "no real trading",
+    "no leverage",
+    "no future data in signal/reliability",
+    "no threshold retuning",
+    "no LLM"
+  ],
+  "paper_use": "historical/paper simulation validation only; not a trading strategy"
+}

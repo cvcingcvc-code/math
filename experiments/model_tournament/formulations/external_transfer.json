@@ -1,0 +1,221 @@
+{
+  "source": "experiments\\transfer_finance\\information_missing_validation.json",
+  "sample_size": 1698,
+  "scope": "three fixed cases from existing small external transfer artifact; structural transfer only",
+  "cases": [
+    {
+      "model": "A_multiplicative",
+      "parameter": null,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.7217944717467087,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 0.5,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.8608968816566418,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 1.0,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.7217943175540776,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "C_gated",
+      "parameter": 0.5,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.999999445759206,
+      "status": "ACCEPT",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 0.5,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.8495846465766479,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 1.0,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.7217944717467087,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 2.0,
+      "case": "Case 1 · full high reliability",
+      "raw": 0.999999445759206,
+      "R": 0.7217948717948717,
+      "output": 0.5209875481966628,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "A_multiplicative",
+      "parameter": null,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.5267945798236638,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 0.5,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.7633968816566419,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 1.0,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.5267943175540778,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "C_gated",
+      "parameter": 0.5,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.999999445759206,
+      "status": "ACCEPT",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 0.5,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.7258059574380866,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 1.0,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.5267945798236638,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 2.0,
+      "case": "Case 2 · missing evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5267948717948718,
+      "output": 0.27751268314044036,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "A_multiplicative",
+      "parameter": null,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.5217945825948677,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 0.5,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.7608968816566418,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "B_additive",
+      "parameter": 1.0,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.5217943175540777,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "C_gated",
+      "parameter": 0.5,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.999999445759206,
+      "status": "ACCEPT",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 0.5,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.722353302335515,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 1.0,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.5217945825948677,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    },
+    {
+      "model": "D_nonlinear",
+      "parameter": 2.0,
+      "case": "Case 3 · conflicting evidence",
+      "raw": 0.999999445759206,
+      "R": 0.5217948717948717,
+      "output": 0.2722697373283476,
+      "status": "DEFINED",
+      "future_outcome_available": true
+    }
+  ],
+  "limitations": [
+    "No row-level external dataset is imported here; no model is claimed predictive.",
+    "External evidence is synthetic/controlled and DEVELOPMENT_ONLY."
+  ]
+}

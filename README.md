@@ -1,29 +1,99 @@
-# 赛道一：教育 AI 增量价值评价
+# 教育 AI 增量价值评价：一个证据可靠性与拒判建模框架
 
-当前项目处于 S4 Pilot Annotation Gate。正式人工 R1/R2 由负责人亲自完成，本窗口不读取、不推断、不建议任何 R1 标签判断。
+中国第一届数学建模黑客松 · 赛道一：《新时代教育中 AI 增量价值评价的建模方法》
 
-## 当前可交付状态
+> **状态**：Development submission。所有结果为 `AI_PROVISIONAL / DEVELOPMENT_ONLY`，`formal_gate_eligible=false`。Human R1/R2 尚未产生，Formal Gate `NOT_RUN`。
 
-研究核心已冻结为 `RESEARCH_CORE_FROZEN_FOR_SUBMISSION`。开发版闭环可复现，正式 AIV 仍为 `NOT_AVAILABLE_PENDING_FORMAL_GATE`。
+---
 
-核心开发数字：70 条 development records 中 16 条可判读 Evidence；Raw/Adjusted ABL、HOT、Gap 均为 `3.5625 / 0.375 / 1.125`；effective weight `16 → 6`；coverage `0.228571 → 0.085714`，分母为 70。
+## Research Question
 
-核心表达：**Score stability does not imply Evidence Support stability.**
+当观测到的学习表现存在**缺失、冲突或可信度差异**时，如何显式建模**证据可靠性（Evidence Reliability）**，并在证据不足时拒绝给出过度确定的结论（`ABSTAIN` / `NO_EFFECTIVE_EVIDENCE`），而不是把 Raw Signal 直接当成可信结论？
 
-## 入口
+## Main Conclusion
 
-- 开发版复现：`python run_all.py`，预期 6 步、32 项一致性检查通过。
-- Formal 模式：`python run_all.py --mode formal`，在 Gate PASS 前保持 fail-closed。
-- Demo：`reports/demo/index.html`，顶部明确 `DEVELOPMENT_ONLY · AI_PROVISIONAL`。
-- 路演 PPT：`outputs/education_ai_evidence_roadshow_v1_final.pptx`。
-- 内部提交包：`outputs/submission_package_development_only/`，含 MANIFEST 与复现说明。
+**Score Stability ≠ Evidence Support Stability.**
 
-## 目录
+归一化分数（ABL/HOT/Gap = 3.5625 / 0.375 / 1.125）在加入可靠性权重前后保持不变，但有效证据权重从 16 降到 6、有效覆盖率从 0.228571 降到 0.085714（分母为全部 70 条开发记录）。**分数看起来稳定，并不能保证支撑它的证据充分、可靠或完整。**
 
-`data/` 数据与标注；`docs/` 标注规则与数据字典；`research/` 研究设计；`src/` 代码；`validation/` Gate 阈值；`reports/` 审计、开发结果与复现记录；`slides/` 路演大纲；`outputs/` 用户可交付材料；`handoff/` 持久项目状态。
+## Main Model
 
-## 边界
+```
+Observed Evidence → Raw Signal → Evidence Reliability → Adjusted Evaluation → Support/Coverage → Decision
+```
 
-当前不声称正式 Gate 通过、Formal AIV、学生排名、学生真实能力或 prompt/agent 因果效应。不要把 development 结果包装为 Formal AIV，也不要把 16 条 Evidence 外推到 140 条正式样本或总体。
+- **Raw Signal**：Student Evidence 的 Bloom 层级（冻结手册 L2–L6），只回答"证据有多高"。
+- **Reliability**：`w_i = I(observable_i) · c_i · (1 − λ_prompt·p_i) · (1 − λ_context·t_i)`，把证据质量/冲突/低可信显式纳入（不是校准概率，是声明性支持权重）。
+- **Adjusted**：`Adjusted_i = Raw_i × w_i`，弱支持不被放大。
+- **Support/Coverage**：`S = Σ w_i`、`C_eff = S / N`（分母 N=70，含无证据/不可判读记录）。
+- **Decision**：`ACCEPT` / `ABSTAIN`（`LOW_SUPPORT`）/ `NO_EFFECTIVE_EVIDENCE`（有效证据为零时**不填 0 分**）。
 
-恢复工作前先读 `AGENTS.md` 与 `handoff/PROJECT_STATE.md`、`DECISIONS.md`、`NEXT_TASK.md`、`ARTIFACT_INDEX.md`、`BLOCKERS.md`。
+## Validation Framework
+
+五条互补路径攻击同一核心命题：
+
+1. **Baseline Comparison** — 可靠性层是否必要（Raw-only 忽略支持质量）。
+2. **Ablation Study** — 组件是否真正改变支持语义（M0→M3 有效权重 16→12→6→6）。
+3. **Sensitivity / Robustness** — 结论是否非单点偶然（±10%/±20% 扰动 0 决策翻转）。
+4. **Failure / Counterexample** — 高 Raw 是否仍应被接受（P108 L6 → LOW_SUPPORT）。
+5. **External Transfer** — 结构能否迁移到另一证据场景（BTC 历史模拟，非泛化）。
+
+外加两个对照：**ML Challenger**（`INSUFFICIENT_FOR_STRONG_ML_CLAIM`）与 **Alternative Formulations**（`NO_SINGLE_DOMINANT_MODEL`）。
+
+## Repository Structure
+
+| 目录 | 内容 |
+|---|---|
+| `paper/` | 论文与溯源（`development_submission_candidate.md`、`PAPER_NUMBER_LOCK.md`、`PAPER_EVIDENCE_TRACE.md`、`LITERATURE_CITATION_MAP.md`） |
+| `data/` | 已处理数据与标注（`processed/` 主清洗结果、`annotations/` AI/人工标注） |
+| `src/` `scripts/` `run_all.py` | 代码与入口 |
+| `docs/` | 数据字典、数据结构、运行指南、指标字典、声明边界、模型呈现、研究故事 |
+| `reports/` | 开发结果、验证、审计、稳健性、失败案例、可视化证据 |
+| `experiments/` | 模型锦标赛与外部迁移 |
+| `outputs/` | 统一事实源 `final_results.json`、PPT、提交包 |
+| `handoff/` | 持久项目状态与多工具交接 |
+| `validation/` | 冻结 Gate 阈值（`preregistered=true`） |
+
+## How to Run
+
+```bash
+# 只读完整性核验（21 项冻结不变量 + 2 个已知缺陷）
+python src/verify_pilot_integrity.py
+
+# 开发版复现（6 步、32/32 检查）
+python run_all.py
+
+# 门禁入口（需真实人工 R1/R2 后）
+python src/run_s4_gate.py
+```
+
+环境：需使用已装 pandas 的 Python（实测系统 Python 3.14.2 + pandas 3.0.1；`requirements.txt` 钉 pandas==3.0.6/numpy==2.5.3）。详见 `docs/RUN_GUIDE.md`。
+
+## Paper / Demo / Evidence
+
+- **论文**：`paper/development_submission_candidate.md`（canonical development paper）
+- **Demo**：`reports/demo/index.html`（顶部标注 `DEVELOPMENT_ONLY · AI_PROVISIONAL`）
+- **统一事实源**：`outputs/final_results.json`
+- **核心数字源**：`paper/PAPER_NUMBER_LOCK.md`；证据映射 `paper/PAPER_EVIDENCE_TRACE.md`
+
+## Current Evidence Status
+
+最高证据等级 **Level 1 — descriptive / structural development evidence**。70 条开发记录中 16 条可判读（L2×5/L3×5/L4×1/L5×2/L6×3）、19 条 NO_EVIDENCE、35 条 UNDETERMINED；后两者（共 54 条）返回 `NO_EFFECTIVE_EVIDENCE`。16 条可判读记录高度同质（全部 `prompt=true / context=false / confidence=medium`），因此只能支持公共缩放层面的结构性结论。
+
+## Limitations
+
+- 输入为 AI provisional 标签，非人工验证。
+- 无合法配对的 `Outcome_AI` / `Outcome_baseline` → `AI_INCREMENT_IDENTIFICATION = NOT_SUPPORTED`，不识别因果增量。
+- 稳健性只覆盖当前同质切片，不构成 universal robustness。
+- External Transfer 是 synthetic/controlled 结构演示，非教育泛化。
+
+## Formal Human Gate Status
+
+- **Human R1 = 0/70**，**Human R2 = 0/70**，**Formal Gate = NOT_RUN**。
+- 冻结设计为同一标注者 test-retest（R1 → ≥24h → R2），**不是** inter-rater reliability。
+- 最近收到的 `filled_from_B_master_all.zip` 已核验为同一 B 标签的派生副本，**不作为** R1/R2（见 `work/intake/.../INTAKE_RECEIPT.md`）。
+- 在 Formal Gate PASS 前，所有结果保持 `DEVELOPMENT_ONLY`，不报告正式一致性、正式 AIV、学生排名或因果 AI 增量。
+
+---
+
+**接手入口**：`handoff/PROJECT_NOW.md` → `handoff/PROJECT_STATE.md` → `handoff/NEXT_TASK.md`。仓库审计见 `handoff/PROJECT_TAKEOVER_AUDIT.md`，清理计划见 `handoff/CLEANUP_PLAN.md`。

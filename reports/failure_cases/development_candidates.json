@@ -1,0 +1,83 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "formal_replacement": "WAITING_FOR_HUMAN",
+  "cases": [
+    {
+      "case_id": "F2_P105",
+      "case_type": "F2",
+      "record_id": "P105",
+      "raw_score": 2.0,
+      "reliability": 0.375,
+      "adjusted_score": 0.75,
+      "decision": "ABSTAIN",
+      "true_label": null,
+      "status": "DEVELOPMENT_ONLY",
+      "raw_score_defined": true,
+      "adjusted_score_defined": true,
+      "evaluation_status": "LOW_SUPPORT",
+      "undefined_reason": "",
+      "source_artifact": "outputs/final_results.json"
+    },
+    {
+      "case_id": "F2_P108",
+      "case_type": "F2",
+      "record_id": "P108",
+      "raw_score": 6.0,
+      "reliability": 0.375,
+      "adjusted_score": 2.25,
+      "decision": "ABSTAIN",
+      "true_label": null,
+      "status": "DEVELOPMENT_ONLY",
+      "raw_score_defined": true,
+      "adjusted_score_defined": true,
+      "evaluation_status": "LOW_SUPPORT",
+      "undefined_reason": "",
+      "source_artifact": "outputs/final_results.json"
+    },
+    {
+      "case_id": "F2_P072",
+      "case_type": "F2",
+      "record_id": "P072",
+      "raw_score": null,
+      "reliability": 0.0,
+      "adjusted_score": null,
+      "decision": "ABSTAIN",
+      "true_label": null,
+      "status": "DEVELOPMENT_ONLY",
+      "raw_score_defined": false,
+      "adjusted_score_defined": false,
+      "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "source_artifact": "outputs/final_results.json"
+    },
+    {
+      "case_id": "F2_P035",
+      "case_type": "F2",
+      "record_id": "P035",
+      "raw_score": null,
+      "reliability": 0.0,
+      "adjusted_score": null,
+      "decision": "ABSTAIN",
+      "true_label": null,
+      "status": "DEVELOPMENT_ONLY",
+      "raw_score_defined": false,
+      "adjusted_score_defined": false,
+      "evaluation_status": "NO_EFFECTIVE_EVIDENCE",
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "source_artifact": "outputs/final_results.json"
+    }
+  ],
+  "score_contract": {
+    "raw_score": "M0 descriptive Evidence level for readable L1-L6 rows; null when no effective Evidence exists",
+    "adjusted_score": "M3 contribution under lambda_prompt=.5, lambda_context=.5, r_medium=.75; null when no effective Evidence exists",
+    "undefined_cases": [
+      "P072",
+      "P035"
+    ],
+    "numeric_cases": [
+      "P105",
+      "P108"
+    ],
+    "no_zero_filling": true
+  }
+}

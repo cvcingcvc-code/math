@@ -1,0 +1,116 @@
+[
+  {
+    "status": "M",
+    "path": "README.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "M",
+    "path": "docs/data_dictionary.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "M",
+    "path": "reports/submission/TEAMID_PENDING_paper_submission_candidate.html",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "M",
+    "path": "reports/submission/reproduction_notes.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "M",
+    "path": "reports/submission/roadshow_outline.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": ".codex-finalizer/",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "new delivery/build artifact"
+  },
+  {
+    "status": "??",
+    "path": "outputs/",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "new delivery/build artifact"
+  },
+  {
+    "status": "??",
+    "path": "paper/submission_candidate.html",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "paper/submission_candidate.pdf",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/RESEARCH_GATE_STATUS.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/core_figure_2_support_heatmap.svg",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/core_figure_5_model_flow.svg",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/identifiability_audit.csv",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/identifiability_audit.json",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/provenance_separation_audit.csv",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/development/provenance_separation_audit.json",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/review/claim_audit.md",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "reports/verification/experiment_runner_consistency.json",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "pre-existing or generated project artifact; source ownership not confirmed"
+  },
+  {
+    "status": "??",
+    "path": "slides/",
+    "disposition": "REVIEW_ONLY_NOT_DELETED",
+    "reason": "new roadshow source"
+  }
+]

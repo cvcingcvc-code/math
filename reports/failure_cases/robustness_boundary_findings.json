@@ -1,0 +1,25 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "cases": [
+    {
+      "case_id": "parameter_boundary",
+      "finding": "No state flips under +/-10% and +/-20% because readable records share weight 0.375",
+      "severity": "boundary"
+    },
+    {
+      "case_id": "context_identifiability",
+      "finding": "Context perturbation has no effect in readable subset; independent context response NOT_IDENTIFIED",
+      "severity": "high"
+    },
+    {
+      "case_id": "external_strategy_C",
+      "finding": "MA20/50 trend does not show high-R quality above low-R quality",
+      "severity": "boundary"
+    },
+    {
+      "case_id": "missing_evidence",
+      "finding": "P072 remains NO_EFFECTIVE_EVIDENCE after context-only restoration",
+      "severity": "expected_refusal"
+    }
+  ]
+}

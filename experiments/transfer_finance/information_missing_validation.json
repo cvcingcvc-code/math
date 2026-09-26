@@ -1,0 +1,202 @@
+{
+  "study_type": "External Information-Missing Validation",
+  "data_identity": {
+    "source": "historical BTC-USD daily snapshot",
+    "evidence_identity": "synthetic / controlled evidence; no live news feed",
+    "sample_size": 1698
+  },
+  "frozen_parameters": {
+    "strategy": "A_7d_momentum",
+    "threshold": 0.65,
+    "weights": {
+      "data_quality": 0.3,
+      "information_completeness": 0.3,
+      "signal_agreement": 0.2,
+      "evidence_freshness": 0.2
+    }
+  },
+  "models": {
+    "M0_Raw_Baseline": {
+      "n": 1698,
+      "accept_n": 870,
+      "abstain_n": 828,
+      "coverage": 0.5123674911660777,
+      "abstain_rate": 0.4876325088339223,
+      "mean_reliability": 1.0,
+      "median_reliability": 1.0,
+      "error_rate_accepted": 0.5275862068965518,
+      "error_rate_low_reliability": null
+    },
+    "M1_AI_Information_Added": {
+      "n": 1698,
+      "accept_n": 669,
+      "abstain_n": 1029,
+      "coverage": 0.39399293286219084,
+      "abstain_rate": 0.6060070671378092,
+      "mean_reliability": 0.6027420217404228,
+      "median_reliability": 0.6,
+      "error_rate_accepted": 0.5276532137518685,
+      "error_rate_low_reliability": 0.5247813411078717
+    },
+    "M2_AI_Information_Reliability": {
+      "n": 1698,
+      "accept_n": 669,
+      "abstain_n": 1029,
+      "coverage": 0.39399293286219084,
+      "abstain_rate": 0.6060070671378092,
+      "mean_reliability": 0.6027420217404228,
+      "median_reliability": 0.6,
+      "error_rate_accepted": 0.5276532137518685,
+      "error_rate_low_reliability": 0.5247813411078717
+    },
+    "M3_Stress_Test": {
+      "full": {
+        "n": 1698,
+        "accept_n": 669,
+        "abstain_n": 1029,
+        "coverage": 0.39399293286219084,
+        "abstain_rate": 0.6060070671378092,
+        "mean_reliability": 0.6027420217404228,
+        "median_reliability": 0.6,
+        "error_rate_accepted": 0.5276532137518685,
+        "error_rate_low_reliability": 0.5247813411078717
+      },
+      "missing_evidence": {
+        "n": 1698,
+        "accept_n": 2,
+        "abstain_n": 1696,
+        "coverage": 0.001177856301531213,
+        "abstain_rate": 0.9988221436984688,
+        "mean_reliability": 0.4077420217404228,
+        "median_reliability": 0.405,
+        "error_rate_accepted": 0,
+        "error_rate_low_reliability": 0.5265330188679245
+      },
+      "delayed_evidence": {
+        "n": 1698,
+        "accept_n": 538,
+        "abstain_n": 1160,
+        "coverage": 0.3168433451118963,
+        "abstain_rate": 0.6831566548881036,
+        "mean_reliability": 0.5604733689022596,
+        "median_reliability": 0.555,
+        "error_rate_accepted": 0.5390334572490707,
+        "error_rate_low_reliability": 0.5198275862068966
+      },
+      "conflicting_evidence": {
+        "n": 1698,
+        "accept_n": 618,
+        "abstain_n": 1080,
+        "coverage": 0.36395759717314485,
+        "abstain_rate": 0.6360424028268551,
+        "mean_reliability": 0.5942614563693981,
+        "median_reliability": 0.5876620639706551,
+        "error_rate_accepted": 0.5097087378640777,
+        "error_rate_low_reliability": 0.5351851851851852
+      },
+      "low_trust_evidence": {
+        "n": 1698,
+        "accept_n": 378,
+        "abstain_n": 1320,
+        "coverage": 0.2226148409893993,
+        "abstain_rate": 0.7773851590106007,
+        "mean_reliability": 0.5452277520624215,
+        "median_reliability": 0.5936081500123586,
+        "error_rate_accepted": 0.5555555555555556,
+        "error_rate_low_reliability": 0.5174242424242423
+      }
+    }
+  },
+  "gates": {
+    "Gate_1": {
+      "criterion": "Reliability decreases when information quality/completeness decreases",
+      "full_mean": 0.6027420217404228,
+      "missing_mean": 0.4077420217404228,
+      "full_median": 0.6,
+      "missing_median": 0.405,
+      "paired_n": 1698,
+      "supported": true
+    },
+    "Gate_2": {
+      "criterion": "Lower reliability increases abstention and reduces coverage",
+      "full": {
+        "n": 1698,
+        "accept_n": 669,
+        "abstain_n": 1029,
+        "coverage": 0.39399293286219084,
+        "abstain_rate": 0.6060070671378092,
+        "mean_reliability": 0.6027420217404228,
+        "median_reliability": 0.6,
+        "error_rate_accepted": 0.5276532137518685,
+        "error_rate_low_reliability": 0.5247813411078717
+      },
+      "missing": {
+        "n": 1698,
+        "accept_n": 2,
+        "abstain_n": 1696,
+        "coverage": 0.001177856301531213,
+        "abstain_rate": 0.9988221436984688,
+        "mean_reliability": 0.4077420217404228,
+        "median_reliability": 0.405,
+        "error_rate_accepted": 0,
+        "error_rate_low_reliability": 0.5265330188679245
+      },
+      "supported": true
+    },
+    "Gate_3": {
+      "criterion": "Low-reliability decisions have higher future error rate",
+      "high_reliability_error_rate": 0.5276532137518685,
+      "low_reliability_error_rate": 0.5247813411078717,
+      "supported": false
+    }
+  },
+  "cases": [
+    {
+      "label": "Case 1 · full high reliability",
+      "timestamp": "2021-02-08",
+      "raw_signal": 0.999999445759206,
+      "reliability": 0.7217948717948717,
+      "adjusted_signal": 0.7217944717467087,
+      "decision": "ACCEPT",
+      "future_outcome": 0.006161523959955284,
+      "components": {
+        "data_quality": 0.5,
+        "information_completeness": 1.0,
+        "evidence_freshness": 0.358974358974359,
+        "signal_agreement": 1.0
+      }
+    },
+    {
+      "label": "Case 2 · missing evidence",
+      "timestamp": "2021-02-08",
+      "raw_signal": 0.999999445759206,
+      "reliability": 0.5267948717948718,
+      "adjusted_signal": 0.5267945798236638,
+      "decision": "ABSTAIN",
+      "future_outcome": 0.006161523959955284,
+      "components": {
+        "data_quality": 0.5,
+        "information_completeness": 0.35,
+        "evidence_freshness": 0.358974358974359,
+        "signal_agreement": 1.0
+      }
+    },
+    {
+      "label": "Case 3 · conflicting evidence",
+      "timestamp": "2021-02-08",
+      "raw_signal": 0.999999445759206,
+      "reliability": 0.5217948717948717,
+      "adjusted_signal": 0.5217945825948677,
+      "decision": "ABSTAIN",
+      "future_outcome": 0.006161523959955284,
+      "components": {
+        "data_quality": 0.5,
+        "information_completeness": 1.0,
+        "evidence_freshness": 0.358974358974359,
+        "signal_agreement": 0.0
+      }
+    }
+  ],
+  "status": "DEVELOPMENT_ONLY",
+  "paper_use": "External Transfer Validation only; no trading advantage claim"
+}

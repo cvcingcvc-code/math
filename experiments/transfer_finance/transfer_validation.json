@@ -1,0 +1,217 @@
+{
+  "study_type": "External Transfer Validation / Generalization Demonstration",
+  "data_source": "https://query1.finance.yahoo.com/v8/finance/chart/BTC-USD?period1=1609459200&period2=1758672000&interval=1d&events=history",
+  "symbol": "BTC-USD",
+  "date_range": [
+    "2021-01-30",
+    "2025-09-23"
+  ],
+  "sample_size": 1698,
+  "raw_signal": "tanh(7-day close return / 0.05)",
+  "reliability_formula": "0.30 completeness_30d + 0.30 agreement(3/7/14d) + 0.20 stability(rolling volatility) + 0.20 calibration(90d past hit rate)",
+  "adjusted_signal": "raw_signal * R_market; abstain if R_market < 0.65",
+  "reliability_separation": {
+    "groups": [
+      {
+        "support_group": "low",
+        "n": 566,
+        "raw_hit_rate": 0.46466431095406363,
+        "mean_next_return": -0.00015421683568938275,
+        "mean_abs_next_return": 0.022063082835153538,
+        "mean_reliability": 0.6201955857612625
+      },
+      {
+        "support_group": "medium",
+        "n": 566,
+        "raw_hit_rate": 0.4734982332155477,
+        "mean_next_return": 0.0029682365570600036,
+        "mean_abs_next_return": 0.021085823629636943,
+        "mean_reliability": 0.7177645165033377
+      },
+      {
+        "support_group": "high",
+        "n": 566,
+        "raw_hit_rate": 0.4840989399293286,
+        "mean_next_return": 0.0006834981493213949,
+        "mean_abs_next_return": 0.019371737931073458,
+        "mean_reliability": 0.7920196518813428
+      }
+    ],
+    "supported": true
+  },
+  "risk_coverage": {
+    "curve": [
+      {
+        "threshold": 0.4,
+        "accepted_n": 1698,
+        "coverage": 1.0,
+        "error_rate": 0.5259128386336867,
+        "mean_abs_return": 0.02084021479862131,
+        "mean_signed_signal_return": 9.026128071371874e-05
+      },
+      {
+        "threshold": 0.45,
+        "accepted_n": 1698,
+        "coverage": 1.0,
+        "error_rate": 0.5259128386336867,
+        "mean_abs_return": 0.02084021479862131,
+        "mean_signed_signal_return": 9.026128071371874e-05
+      },
+      {
+        "threshold": 0.5,
+        "accepted_n": 1685,
+        "coverage": 0.9923439340400471,
+        "error_rate": 0.5264094955489614,
+        "mean_abs_return": 0.02084546726179949,
+        "mean_signed_signal_return": 5.0317732091661266e-05
+      },
+      {
+        "threshold": 0.55,
+        "accepted_n": 1640,
+        "coverage": 0.9658421672555948,
+        "error_rate": 0.5292682926829269,
+        "mean_abs_return": 0.020834869515518318,
+        "mean_signed_signal_return": 6.0085757788996055e-05
+      },
+      {
+        "threshold": 0.6,
+        "accepted_n": 1517,
+        "coverage": 0.8934040047114252,
+        "error_rate": 0.5319709953856295,
+        "mean_abs_return": 0.02056944713042802,
+        "mean_signed_signal_return": 0.0001140373533625895
+      },
+      {
+        "threshold": 0.65,
+        "accepted_n": 1326,
+        "coverage": 0.7809187279151943,
+        "error_rate": 0.5271493212669683,
+        "mean_abs_return": 0.02030769678151249,
+        "mean_signed_signal_return": 0.00035731308373807024
+      },
+      {
+        "threshold": 0.7,
+        "accepted_n": 973,
+        "coverage": 0.5730270906949352,
+        "error_rate": 0.5231243576567317,
+        "mean_abs_return": 0.020550433558078767,
+        "mean_signed_signal_return": 0.0007239519238377991
+      },
+      {
+        "threshold": 0.75,
+        "accepted_n": 629,
+        "coverage": 0.37043580683156657,
+        "error_rate": 0.5135135135135135,
+        "mean_abs_return": 0.02026045784325716,
+        "mean_signed_signal_return": 0.0011275090657177015
+      },
+      {
+        "threshold": 0.8,
+        "accepted_n": 183,
+        "coverage": 0.10777385159010601,
+        "error_rate": 0.53551912568306,
+        "mean_abs_return": 0.016341246199311592,
+        "mean_signed_signal_return": -0.00010320069700351402
+      },
+      {
+        "threshold": 0.85,
+        "accepted_n": 4,
+        "coverage": 0.002355712603062426,
+        "error_rate": 0.0,
+        "mean_abs_return": 0.025203013521651996,
+        "mean_signed_signal_return": 0.018963424500214134
+      },
+      {
+        "threshold": 0.9,
+        "accepted_n": 0,
+        "coverage": 0.0,
+        "error_rate": NaN,
+        "mean_abs_return": NaN,
+        "mean_signed_signal_return": NaN
+      }
+    ],
+    "supported": false
+  },
+  "sensitivity": {
+    "weights_tested": "completeness +/-10%/+/-20%, renormalized",
+    "rows": [
+      {
+        "perturbation_completeness": -0.2,
+        "spearman_reliability": 1.0,
+        "accepted_at_.65": 1241,
+        "abstained_at_.65": 457
+      },
+      {
+        "perturbation_completeness": -0.1,
+        "spearman_reliability": 0.9999999981616376,
+        "accepted_at_.65": 1291,
+        "abstained_at_.65": 407
+      },
+      {
+        "perturbation_completeness": 0.1,
+        "spearman_reliability": 1.0,
+        "accepted_at_.65": 1370,
+        "abstained_at_.65": 328
+      },
+      {
+        "perturbation_completeness": 0.2,
+        "spearman_reliability": 1.0,
+        "accepted_at_.65": 1394,
+        "abstained_at_.65": 304
+      }
+    ],
+    "supported": true
+  },
+  "counterexamples": [
+    {
+      "case": "A_raw_strong_high_reliability",
+      "close": 46196.46484375,
+      "raw_signal": 0.999999445759206,
+      "next_return": 0.006161523959955284,
+      "completeness": 1.0,
+      "agreement": 1.0,
+      "stability": 0.5,
+      "calibration": 0.358974358974359,
+      "reliability": 0.7717948717948717,
+      "adjusted_signal": 0.7717944440346691,
+      "correct": 1,
+      "adjusted_correct": 1,
+      "support_group": "high",
+      "decision": "accept"
+    },
+    {
+      "case": "B_raw_strong_low_reliability",
+      "close": 20553.271484375,
+      "raw_signal": -0.9998135984643771,
+      "next_return": 0.002251010260589048,
+      "completeness": 1.0,
+      "agreement": 0.6666666666666666,
+      "stability": 0.0,
+      "calibration": 0.5444444444444444,
+      "reliability": 0.6088888888888889,
+      "adjusted_signal": -0.6087753910649764,
+      "correct": 0,
+      "adjusted_correct": 0,
+      "support_group": "low",
+      "decision": "downweight"
+    },
+    {
+      "case": "C_insufficient_evidence",
+      "close": 16610.70703125,
+      "raw_signal": -0.07035077618879942,
+      "next_return": -0.0003757930043709612,
+      "completeness": 1.0,
+      "agreement": 0.3333333333333333,
+      "stability": 0.004095749695579798,
+      "calibration": 0.4444444444444444,
+      "reliability": 0.48970803882800484,
+      "adjusted_signal": -0.034451340637444865,
+      "correct": 1,
+      "adjusted_correct": 1,
+      "support_group": "low",
+      "decision": "abstain"
+    }
+  ],
+  "overall_status": "PASS",
+  "paper_use": "small external validation only; not a trading strategy"
+}

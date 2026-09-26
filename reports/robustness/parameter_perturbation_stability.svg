@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="460">
+<rect width="100%" height="100%" fill="white"/>
+<text x="410" y="28" text-anchor="middle" font-family="Arial" font-size="16">Parameter perturbation: effective coverage</text>
+<text x="20" y="220" transform="rotate(-90 20 220)" text-anchor="middle" font-family="Arial" font-size="12">mean absolute reliability change</text>
+<line x1="90" y1="355" x2="740" y2="355" stroke="#374151"/>
+<line x1="90" y1="55" x2="90" y2="355" stroke="#374151"/>
+<rect x="72.0" y="94.1" width="36" height="260.9" fill="#2f855a"/>
+<text x="90.0" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 90.0 375)">lambda_prompt -20%</text>
+<text x="90.0" y="89.1" text-anchor="middle" font-family="Arial" font-size="10">0.017</text>
+<rect x="131.1" y="224.6" width="36" height="130.4" fill="#2f855a"/>
+<text x="149.1" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 149.1 375)">lambda_prompt -10%</text>
+<text x="149.1" y="219.6" text-anchor="middle" font-family="Arial" font-size="10">0.009</text>
+<rect x="190.2" y="224.6" width="36" height="130.4" fill="#2f855a"/>
+<text x="208.2" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 208.2 375)">lambda_prompt +10%</text>
+<text x="208.2" y="219.6" text-anchor="middle" font-family="Arial" font-size="10">0.009</text>
+<rect x="249.3" y="94.1" width="36" height="260.9" fill="#2f855a"/>
+<text x="267.3" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 267.3 375)">lambda_prompt +20%</text>
+<text x="267.3" y="89.1" text-anchor="middle" font-family="Arial" font-size="10">0.017</text>
+<rect x="308.4" y="355.0" width="36" height="0.0" fill="#2f855a"/>
+<text x="326.4" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 326.4 375)">lambda_context -20%</text>
+<text x="326.4" y="350.0" text-anchor="middle" font-family="Arial" font-size="10">0.000</text>
+<rect x="367.5" y="355.0" width="36" height="0.0" fill="#2f855a"/>
+<text x="385.5" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 385.5 375)">lambda_context -10%</text>
+<text x="385.5" y="350.0" text-anchor="middle" font-family="Arial" font-size="10">0.000</text>
+<rect x="426.5" y="355.0" width="36" height="0.0" fill="#2f855a"/>
+<text x="444.5" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 444.5 375)">lambda_context +10%</text>
+<text x="444.5" y="350.0" text-anchor="middle" font-family="Arial" font-size="10">0.000</text>
+<rect x="485.6" y="355.0" width="36" height="0.0" fill="#2f855a"/>
+<text x="503.6" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 503.6 375)">lambda_context +20%</text>
+<text x="503.6" y="350.0" text-anchor="middle" font-family="Arial" font-size="10">0.000</text>
+<rect x="544.7" y="94.1" width="36" height="260.9" fill="#2f855a"/>
+<text x="562.7" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 562.7 375)">r_medium -20%</text>
+<text x="562.7" y="89.1" text-anchor="middle" font-family="Arial" font-size="10">0.017</text>
+<rect x="603.8" y="224.6" width="36" height="130.4" fill="#2f855a"/>
+<text x="621.8" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 621.8 375)">r_medium -10%</text>
+<text x="621.8" y="219.6" text-anchor="middle" font-family="Arial" font-size="10">0.009</text>
+<rect x="662.9" y="224.6" width="36" height="130.4" fill="#2f855a"/>
+<text x="680.9" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 680.9 375)">r_medium +10%</text>
+<text x="680.9" y="219.6" text-anchor="middle" font-family="Arial" font-size="10">0.009</text>
+<rect x="722.0" y="94.1" width="36" height="260.9" fill="#2f855a"/>
+<text x="740.0" y="375" text-anchor="middle" font-family="Arial" font-size="10" transform="rotate(35 740.0 375)">r_medium +20%</text>
+<text x="740.0" y="89.1" text-anchor="middle" font-family="Arial" font-size="10">0.017</text>
+<text x="410" y="430" text-anchor="middle" font-family="Arial" font-size="11" fill="#991b1b">DEVELOPMENT_ONLY · no formal human validation</text>
+</svg>

@@ -1,0 +1,31 @@
+{
+  "independent_reproduction": true,
+  "payload": "reports/demo/demo_payload.json",
+  "source_of_truth": "reports/verification/core_numbers_source_of_truth.json",
+  "checks": {
+    "records": {"payload": 70, "independent": 70, "match": true},
+    "readable_evidence": {"payload": 16, "independent": 16, "match": true},
+    "prompt_true_in_readable": {"payload": 16, "independent": 16, "match": true},
+    "context_truncated_true_in_readable": {"payload": 0, "independent": 0, "match": true},
+    "baseline_ABL": {"payload": 3.5625, "independent": 3.5625, "match": true},
+    "baseline_HOT": {"payload": 0.375, "independent": 0.375, "match": true},
+    "baseline_Gap": {"payload": 1.125, "independent": 1.125, "match": true},
+    "baseline_effective_weight": {"payload": 12.0, "independent": 12.0, "match": true},
+    "baseline_effective_coverage": {"payload": 0.17142857142857143, "independent": 0.17142857142857143, "match": true},
+    "effective_weight_min_nonzero": {"payload": 0.40000000000000036, "independent": 0.40000000000000036, "match": true},
+    "effective_weight_max": {"payload": 16.0, "independent": 16.0, "match": true},
+    "effective_coverage_min_nonzero": {"payload": 0.0057142857142857195, "independent": 0.0057142857142857195, "match": true},
+    "effective_coverage_max": {"payload": 0.22857142857142856, "independent": 0.22857142857142856, "match": true},
+    "undefined_example": {"payload": "NO_EFFECTIVE_EVIDENCE", "independent": "NO_EFFECTIVE_EVIDENCE", "match": true},
+    "annotation_source": {"payload": "AI_PROVISIONAL", "independent": "AI_PROVISIONAL", "match": true},
+    "annotation_status": {"payload": "DEVELOPMENT_ONLY", "independent": "DEVELOPMENT_ONLY", "match": true},
+    "source_type": {"payload": "AI_PROVISIONAL", "independent": "AI_PROVISIONAL", "match": true},
+    "formal_gate_eligible": {"payload": false, "independent": false, "match": true}
+  },
+  "overall_match": true,
+  "notes": [
+    "Coverage denominator is all 70 development records.",
+    "Stress-test rows are subset diagnostics and are not the main bounds range.",
+    "Undefined metrics remain null in the payload; they are not encoded as zero scores."
+  ]
+}

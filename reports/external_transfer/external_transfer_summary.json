@@ -1,0 +1,20 @@
+{
+  "status": "EXTERNAL_TRANSFER",
+  "source": "experiments/transfer_finance/cross_strategy_validation.json",
+  "strategies": [
+    "A_7d_momentum",
+    "B_RSI14_mean_reversion",
+    "C_MA20_50_trend"
+  ],
+  "framework_transfer": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT",
+  "cross_strategy_reliability": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT",
+  "selective_decision_gain": "PARTIAL",
+  "supported_strategies": [
+    "A_7d_momentum",
+    "B_RSI14_mean_reversion"
+  ],
+  "unsupported_strategies": [
+    "C_MA20_50_trend"
+  ],
+  "no_trading_claim": true
+}

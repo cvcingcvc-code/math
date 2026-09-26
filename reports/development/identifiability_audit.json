@@ -1,0 +1,1105 @@
+{
+  "input_file": "data/annotations/ai/pilot_ai_provisional.csv",
+  "n_rows": 70,
+  "readable_evidence_definition": "student_evidence_bloom in L1-L6",
+  "readable_evidence_n": 16,
+  "small_cell_threshold_n": 5,
+  "provenance": {
+    "annotation_source": "AI_PROVISIONAL",
+    "annotation_status": "DEVELOPMENT_ONLY",
+    "formal_gate_eligible": false,
+    "not_human_R1_R2": true
+  },
+  "marginal_counts": {
+    "student_evidence_bloom": {
+      "UNDETERMINED": 35,
+      "NO_EVIDENCE": 19,
+      "L2": 5,
+      "L5": 2,
+      "L3": 5,
+      "L6": 3,
+      "L4": 1
+    },
+    "prompt_induced": {
+      "true": 53,
+      "false": 17
+    },
+    "context_truncated": {
+      "true": 28,
+      "false": 42
+    },
+    "confidence": {
+      "low": 51,
+      "medium": 19
+    },
+    "task_actor": {
+      "ai": 53,
+      "student": 11,
+      "unknown": 6
+    },
+    "task_bloom": {
+      "L4": 21,
+      "L3": 7,
+      "L6": 22,
+      "UNDETERMINED": 9,
+      "L5": 10,
+      "L2": 1
+    }
+  },
+  "requested_checks": {
+    "readable_evidence_and_prompt_induced_false": 0,
+    "readable_evidence_and_context_truncated_true": 0,
+    "readable_evidence_and_confidence_low": 0,
+    "readable_evidence_by_task_actor": {
+      "ai": 16
+    }
+  },
+  "identifiability": {
+    "prompt_induced": {
+      "status": "NOT_IDENTIFIABLE",
+      "estimand": "prompt_induced correction/stratification contrast conditional on readable Student Evidence",
+      "support": {
+        "false": {
+          "total_n": 17,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        },
+        "true": {
+          "total_n": 53,
+          "readable_n": 16,
+          "zero_readable_cell": false,
+          "small_readable_cell": false
+        }
+      },
+      "interpretation": "Both levels are marginally observed, but readable Evidence has only true=16 and false=0: no prompt counterfactual contrast."
+    },
+    "context_truncated": {
+      "status": "NOT_IDENTIFIABLE",
+      "estimand": "context_truncated correction/stratification contrast conditional on readable Student Evidence",
+      "support": {
+        "false": {
+          "total_n": 42,
+          "readable_n": 16,
+          "zero_readable_cell": false,
+          "small_readable_cell": false
+        },
+        "true": {
+          "total_n": 28,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        }
+      },
+      "interpretation": "Both levels are marginally observed, but readable Evidence has only false=16 and true=0: no truncation counterfactual contrast."
+    },
+    "confidence": {
+      "status": "NOT_IDENTIFIABLE",
+      "estimand": "confidence correction/stratification contrast conditional on readable Student Evidence",
+      "support": {
+        "low": {
+          "total_n": 51,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        },
+        "medium": {
+          "total_n": 19,
+          "readable_n": 16,
+          "zero_readable_cell": false,
+          "small_readable_cell": false
+        },
+        "high": {
+          "total_n": 0,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        }
+      },
+      "interpretation": "Only medium confidence has readable Evidence (16); low=0 and high=0, so confidence stratification/calibration is not identified."
+    },
+    "task_actor": {
+      "status": "NOT_IDENTIFIABLE",
+      "estimand": "task_actor correction/stratification contrast conditional on readable Student Evidence",
+      "support": {
+        "ai": {
+          "total_n": 53,
+          "readable_n": 16,
+          "zero_readable_cell": false,
+          "small_readable_cell": false
+        },
+        "student": {
+          "total_n": 11,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        },
+        "unknown": {
+          "total_n": 6,
+          "readable_n": 0,
+          "zero_readable_cell": true,
+          "small_readable_cell": false
+        }
+      },
+      "interpretation": "Only ai has readable Evidence (16); student=0 and unknown=0, so actor-stratified correction is not identified."
+    }
+  },
+  "matrices": [
+    {
+      "row_variable": "student_evidence_bloom",
+      "column_variable": "prompt_induced",
+      "row_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "NO_EVIDENCE",
+        "UNDETERMINED"
+      ],
+      "column_levels": [
+        "false",
+        "true"
+      ],
+      "cells": [
+        {
+          "row": "L2",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "true",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "true",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "true",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "true",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "true",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "false",
+          "n": 9,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "true",
+          "n": 10,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "false",
+          "n": 8,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "true",
+          "n": 27,
+          "zero_cell": false,
+          "small_cell": false
+        }
+      ]
+    },
+    {
+      "row_variable": "student_evidence_bloom",
+      "column_variable": "context_truncated",
+      "row_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "NO_EVIDENCE",
+        "UNDETERMINED"
+      ],
+      "column_levels": [
+        "false",
+        "true"
+      ],
+      "cells": [
+        {
+          "row": "L2",
+          "column": "false",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "false",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "false",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "false",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "false",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "false",
+          "n": 15,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "true",
+          "n": 4,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "false",
+          "n": 11,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "true",
+          "n": 24,
+          "zero_cell": false,
+          "small_cell": false
+        }
+      ]
+    },
+    {
+      "row_variable": "student_evidence_bloom",
+      "column_variable": "confidence",
+      "row_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "NO_EVIDENCE",
+        "UNDETERMINED"
+      ],
+      "column_levels": [
+        "low",
+        "medium"
+      ],
+      "cells": [
+        {
+          "row": "L2",
+          "column": "low",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "medium",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "low",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "medium",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "low",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "medium",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "low",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "medium",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "low",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "medium",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "low",
+          "n": 16,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "medium",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "low",
+          "n": 35,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "medium",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        }
+      ]
+    },
+    {
+      "row_variable": "student_evidence_bloom",
+      "column_variable": "task_actor",
+      "row_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "NO_EVIDENCE",
+        "UNDETERMINED"
+      ],
+      "column_levels": [
+        "ai",
+        "student",
+        "unknown"
+      ],
+      "cells": [
+        {
+          "row": "L2",
+          "column": "ai",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "student",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "unknown",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "ai",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "student",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "unknown",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "ai",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "student",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "unknown",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "ai",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "student",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "unknown",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "ai",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "student",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "unknown",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "ai",
+          "n": 10,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "student",
+          "n": 7,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "NO_EVIDENCE",
+          "column": "unknown",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "ai",
+          "n": 27,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "student",
+          "n": 4,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "unknown",
+          "n": 4,
+          "zero_cell": false,
+          "small_cell": true
+        }
+      ]
+    },
+    {
+      "row_variable": "prompt_induced",
+      "column_variable": "context_truncated",
+      "row_levels": [
+        "false",
+        "true"
+      ],
+      "column_levels": [
+        "false",
+        "true"
+      ],
+      "cells": [
+        {
+          "row": "false",
+          "column": "false",
+          "n": 17,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "false",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "true",
+          "column": "false",
+          "n": 25,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "true",
+          "column": "true",
+          "n": 28,
+          "zero_cell": false,
+          "small_cell": false
+        }
+      ]
+    },
+    {
+      "row_variable": "task_bloom",
+      "column_variable": "student_evidence_bloom",
+      "row_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "UNDETERMINED"
+      ],
+      "column_levels": [
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "NO_EVIDENCE",
+        "UNDETERMINED"
+      ],
+      "cells": [
+        {
+          "row": "L2",
+          "column": "L2",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "L3",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "L4",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "L5",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "L6",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L2",
+          "column": "NO_EVIDENCE",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L2",
+          "column": "UNDETERMINED",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "L2",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "L3",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L3",
+          "column": "L4",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "L5",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "L6",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L3",
+          "column": "NO_EVIDENCE",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L3",
+          "column": "UNDETERMINED",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "L2",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "L3",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "L4",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "L5",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "L6",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L4",
+          "column": "NO_EVIDENCE",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L4",
+          "column": "UNDETERMINED",
+          "n": 10,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "L2",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "L3",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "L4",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L5",
+          "column": "L5",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "L6",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "NO_EVIDENCE",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L5",
+          "column": "UNDETERMINED",
+          "n": 3,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "L2",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "L3",
+          "n": 2,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "L4",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "L5",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "L6",
+          "column": "L6",
+          "n": 1,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "NO_EVIDENCE",
+          "n": 4,
+          "zero_cell": false,
+          "small_cell": true
+        },
+        {
+          "row": "L6",
+          "column": "UNDETERMINED",
+          "n": 15,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "L2",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "L3",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "L4",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "L5",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "L6",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "NO_EVIDENCE",
+          "n": 5,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "UNDETERMINED",
+          "column": "UNDETERMINED",
+          "n": 4,
+          "zero_cell": false,
+          "small_cell": true
+        }
+      ]
+    },
+    {
+      "row_variable": "task_actor",
+      "column_variable": "prompt_induced",
+      "row_levels": [
+        "ai",
+        "student",
+        "unknown"
+      ],
+      "column_levels": [
+        "false",
+        "true"
+      ],
+      "cells": [
+        {
+          "row": "ai",
+          "column": "false",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "ai",
+          "column": "true",
+          "n": 53,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "student",
+          "column": "false",
+          "n": 11,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "student",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        },
+        {
+          "row": "unknown",
+          "column": "false",
+          "n": 6,
+          "zero_cell": false,
+          "small_cell": false
+        },
+        {
+          "row": "unknown",
+          "column": "true",
+          "n": 0,
+          "zero_cell": true,
+          "small_cell": false
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Observed cross-support is not causal identification; prompt_induced and context_truncated are observational flags confounded with task progression/content in this provisional sample.",
+    "Confidence is an annotation-confidence field, not an independent treatment; no low/high readable cases exist.",
+    "Zero and small cells are retained; no smoothing or complex model is used.",
+    "All results are AI_PROVISIONAL, DEVELOPMENT_ONLY, and ineligible for formal Gate or final AIV claims."
+  ],
+  "conclusion": {
+    "supported": [
+      "Marginal observability of prompt_induced, context_truncated, confidence, and task_actor. No requested correction contrast is supported."
+    ],
+    "weak_support": [
+      "None for correction parameters; the 16 readable cases all fall in a single level for each requested factor."
+    ],
+    "not_identifiable": [
+      "prompt penalty",
+      "context penalty",
+      "confidence correction/calibration",
+      "task_actor correction"
+    ],
+    "largest_support_gap": "Readable Evidence has no prompt_induced=false comparison: 0 cases versus 16 prompt_induced=true. This is the primary support gap and blocks estimating a prompt penalty."
+  },
+  "model_decision": "Do not estimate correction parameters. Keep prompt/context/confidence/task_actor effects as sensitivity assumptions only until comparable support exists."
+}

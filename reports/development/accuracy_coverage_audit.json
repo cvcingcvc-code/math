@@ -1,0 +1,12 @@
+{
+  "audit": "accuracy_coverage",
+  "status": "NOT_SUPPORTED",
+  "result_scope": "DEVELOPMENT_ONLY",
+  "input": "reports\\development\\counterexamples.csv",
+  "n": 4,
+  "coverage_denominator": 4,
+  "missing_required_columns": [
+    "prediction",
+    "true_label"
+  ]
+}

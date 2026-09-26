@@ -1,0 +1,72 @@
+{
+  "status": "DEVELOPMENT_ONLY",
+  "design": "single-variable controlled variants of existing records; no source labels changed",
+  "cases": [
+    {
+      "case_id": "P108",
+      "variant": "Original",
+      "changed_variable": "none",
+      "raw_signal": 6.0,
+      "reliability": 0.375,
+      "adjusted_signal": 2.25,
+      "decision": "LOW_SUPPORT",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "P108",
+      "variant": "Prompt removed",
+      "changed_variable": "prompt_induced true→false",
+      "raw_signal": 6.0,
+      "reliability": 0.75,
+      "adjusted_signal": 4.5,
+      "decision": "DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "P108",
+      "variant": "Confidence low",
+      "changed_variable": "confidence medium→low",
+      "raw_signal": 6.0,
+      "reliability": 0.25,
+      "adjusted_signal": 1.5,
+      "decision": "LOW_SUPPORT",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "P072",
+      "variant": "Original",
+      "changed_variable": "none",
+      "raw_signal": null,
+      "reliability": 0.0,
+      "adjusted_signal": null,
+      "decision": "NO_EFFECTIVE_EVIDENCE",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "P072",
+      "variant": "Context restored",
+      "changed_variable": "context_truncated true→false",
+      "raw_signal": null,
+      "reliability": 0.0,
+      "adjusted_signal": null,
+      "decision": "NO_EFFECTIVE_EVIDENCE",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "P072",
+      "variant": "Evidence remains undetermined",
+      "changed_variable": "context only; evidence unchanged",
+      "raw_signal": null,
+      "reliability": 0.0,
+      "adjusted_signal": null,
+      "decision": "NO_EFFECTIVE_EVIDENCE",
+      "source": "AI_PROVISIONAL",
+      "status": "DEVELOPMENT_ONLY"
+    }
+  ]
+}
