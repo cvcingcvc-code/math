@@ -1,0 +1,97 @@
+{
+  "artifact": "data/annotations/ai/pilot_ai_assisted_full.csv",
+  "generated_at": "2026-09-26T11:42:08",
+  "annotation_source": "AI_ASSISTED",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "not_human_validation": true,
+  "declaration": "AI-assisted annotation over the 70-record blind worksheet. NOT HUMAN_R1/R2, NOT formal human validation, NOT eligible for the Formal Human Gate. Never merge into human worksheets or formal Gate inputs.",
+  "manual_version": "docs/annotation/annotation_manual_v0.1.md (SHA-256 F8E42B17...C64F119) + docs/annotation/annotation_clarification_v0.1.1.md (frozen 2026-09-25 19:40)",
+  "total_records": 70,
+  "input_scope": "Only visible worksheet columns were read: case_order, record_id, student_text, prior_ai_context, context_truncated. Human R1/R2 label columns and the AI_PROVISIONAL prelabel file were not used as label sources.",
+  "execution": {
+    "model": "deepseek-flash (opencode CLI session)",
+    "python": "3.14.2",
+    "pandas": "3.0.1",
+    "method": "per-record S1-S8 judgement per the frozen manual; no automatic labeler"
+  },
+  "conventions": [
+    "AI-prompt-originated tasks record task_source=ai_prompt, task_actor=ai (clarification V0.1.1 sec.3 table).",
+    "Topic-only first turns with no recoverable operation -> task_bloom=UNDETERMINED, student=NO_EVIDENCE.",
+    "low confidence is paired with an UNDETERMINED affected axis and needs_second_review=true (manual sec.6)."
+  ],
+  "counts": {
+    "records": 70,
+    "unique_record_ids": 70,
+    "task_bloom_counts": {
+      "L1": 4,
+      "L2": 22,
+      "L3": 4,
+      "L4": 15,
+      "L5": 4,
+      "L6": 1,
+      "STATUS:NOT_APPLICABLE": 2,
+      "STATUS:UNDETERMINED": 18
+    },
+    "student_evidence_counts": {
+      "L1": 5,
+      "L2": 18,
+      "L3": 4,
+      "L4": 7,
+      "L5": 4,
+      "L6": 1,
+      "STATUS:NO_EVIDENCE": 28,
+      "STATUS:UNDETERMINED": 3
+    },
+    "confidence_counts": {
+      "medium": 31,
+      "high": 20,
+      "low": 19
+    },
+    "task_confidence_counts": {
+      "high": 32,
+      "medium": 21,
+      "low": 17
+    },
+    "evidence_confidence_counts": {
+      "high": 43,
+      "medium": 24,
+      "low": 3
+    },
+    "needs_second_review_true": 50,
+    "ambiguity_counts": {
+      "level_boundary": 28,
+      "none": 20,
+      "task_unspecified": 17,
+      "source_attribution": 5,
+      "correctness_uncertain": 4,
+      "prompt_induced": 2,
+      "other": 1,
+      "context_missing": 1
+    },
+    "prompt_induced_true": 41,
+    "content_relation_counts": {
+      "independent": 32,
+      "reworked_with_addition": 7,
+      "copied_verbatim": 4,
+      "reworked_without_addition": 2,
+      "not_comparable": 1
+    },
+    "correctness_counts": {
+      "not_assessable": 27,
+      "correct": 10,
+      "partially_correct": 2
+    }
+  },
+  "source_hashes": {
+    "pilot_worksheet_A.csv_sha256": "8FB6D38DC4CF7957AFC6BEC21492847115C88319DFDFA2BDFAA427A6188A585E",
+    "pilot_worksheet_A_retest.csv_sha256": "48F6AB6D7E95BD0BFEB41ED3936253933BFFA223103B373C4C57E8F7EFBAEFF2",
+    "pilot_ai_assisted_full.csv_sha256": "3163CD27FBC926880DB8B0F00FEFAFBC34F4D0880A75AAFF16C549624B0E2FCF"
+  },
+  "untouched": {
+    "human_r1": "not modified (read-only, visible columns only)",
+    "human_r2": "not modified",
+    "gate_thresholds": "68525E3F46D2D9BF324D25E47ACB9AA79653BC20479DF434ACCD45B8C69F422C",
+    "annotation_gate_report.json_sha256": "D9C0006F52731351923F5DFAF787D7D2800E215890F592B8F7F47C4B39BD011D"
+  }
+}
