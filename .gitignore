@@ -22,3 +22,6 @@ work/_e2e/_retest_pipeline_test.*
 work/_e2e/_retest_order_identical_labels.csv
 work/_e2e/_SYNTHETIC_orig_order.*
 work/_e2e/_SYNTHETIC_retest_order.*
+
+# Paper export build artifacts (temp HTML/PNG/intermediate PDF)
+build/
