@@ -35,6 +35,9 @@ from pathlib import Path
 
 import pandas as pd
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from csv_safe_read import read_worksheet
+
 ROOT = Path(__file__).resolve().parents[1]
 HUMAN = ROOT / "data" / "annotations" / "human"
 R1_BLANK = HUMAN / "pilot_worksheet_A.csv"
@@ -56,7 +59,7 @@ def sha(path: Path) -> str:
 
 
 def build(args) -> int:
-    r1 = pd.read_csv(R1_BLANK, dtype=str, keep_default_na=False)
+    r1 = read_worksheet(R1_BLANK)
     label_cols = [c for c in r1.columns if c not in
                   ("case_order", "record_id", "student_text", "prior_ai_context", "context_truncated")]
     if r1[label_cols].apply(lambda s: s.str.strip().ne("")).any().any():
@@ -104,7 +107,7 @@ def report(args) -> int:
     gap_h = (args.r2.stat().st_mtime - args.r1.stat().st_mtime) / 3600
     # Never emit a research-looking report while either real worksheet is blank.
     for p in (args.r1, args.r2):
-        frame = pd.read_csv(p, dtype=str, keep_default_na=False)
+        frame = read_worksheet(p)
         label_cols = [c for c in frame.columns if c not in
                       ("case_order", "record_id", "student_text", "prior_ai_context", "context_truncated")]
         if not frame[label_cols].apply(lambda s: s.str.strip().ne("")).any().any():

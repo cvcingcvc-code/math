@@ -26,6 +26,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from csv_safe_read import read_worksheet
 from reliability import (agreement_rate, bootstrap_ci, cohen_kappa,
                          krippendorff_alpha, weighted_kappa)
 
@@ -70,7 +71,7 @@ def norm(v) -> str:
 
 
 def load(path: Path) -> pd.DataFrame:
-    df = pd.read_csv(path, dtype=str, keep_default_na=False)
+    df = read_worksheet(path)
     for c in df.columns:
         df[c] = df[c].map(norm)
     # Never allow provisional AI annotations into the formal human Gate path.

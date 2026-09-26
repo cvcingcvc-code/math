@@ -72,12 +72,13 @@ def main() -> int:
         print("  R2 worksheet is not present; run build_retest_worksheet.py before annotation.")
 
     print("\n--- step 3: gate report ---")
-    import pandas as pd
+    sys.path.insert(0, str(SRC))
+    from csv_safe_read import read_worksheet
 
     def has_labels(path: Path) -> bool:
         if not path.exists():
             return False
-        df = pd.read_csv(path, dtype=str, keep_default_na=False)
+        df = read_worksheet(path)
         return "task_bloom" in df.columns and int(df["task_bloom"].astype(str).str.strip().ne("").sum()) > 0
 
     filled = [args.a, args.b] if args.a and args.b else [r1_default, r2_default]
