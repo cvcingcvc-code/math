@@ -10,13 +10,16 @@ class DemoHandler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
         # Strip query string / fragment before resolving.
         path = path.split('?', 1)[0].split('#', 1)[0]
-        # Demo-local files (index.html, demo_payload.json) take priority.
-        demo_path = DEMO_ROOT / path.lstrip('/')
-        if demo_path.exists():
-            return str(demo_path)
-        # Fall back to the project root so canonical assets in
-        # visual_evidence/, experiments/, reports/, outputs/ resolve.
-        return str(PROJECT_ROOT / path.lstrip('/'))
+        rel = path.lstrip('/')
+        # Canonical figures live under reports/visual_evidence/; the demo page
+        # references them as ../visual_evidence/... (browser normalizes ".." away).
+        if rel.startswith('visual_evidence/'):
+            return str(DEMO_ROOT.parent / rel)
+        # experiments/ lives at the project root.
+        if rel.startswith('experiments/'):
+            return str(PROJECT_ROOT / rel)
+        # Everything else is demo-local (index.html, demo_payload.json).
+        return str(DEMO_ROOT / rel)
 
     def log_message(self, fmt, *args):
         print('%s - %s' % (self.address_string(), fmt % args), flush=True)
