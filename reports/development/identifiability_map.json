@@ -1,0 +1,67 @@
+{
+  "annotation_source": "AI_PROVISIONAL",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "quantities": [
+    {
+      "quantity": "Evidence coverage",
+      "status": "OBSERVABLE",
+      "reason": "Direct descriptive proportion of student_evidence_bloom in L1-L6 within provisional data."
+    },
+    {
+      "quantity": "Bloom distribution",
+      "status": "OBSERVABLE",
+      "reason": "Descriptive distribution of provisional labels only."
+    },
+    {
+      "quantity": "Task/Evidence gap",
+      "status": "OBSERVABLE",
+      "reason": "Descriptive gap on rows with both numeric provisional labels."
+    },
+    {
+      "quantity": "prompt frequency/context frequency",
+      "status": "OBSERVABLE",
+      "reason": "Field frequencies are directly tabulated."
+    },
+    {
+      "quantity": "prompt penalty",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only assumption-based bounds/sensitivity; no readable prompt=false support."
+    },
+    {
+      "quantity": "context penalty",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only assumption-based bounds/sensitivity; no readable context_truncated=true support."
+    },
+    {
+      "quantity": "confidence reliability",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only medium confidence among readable Evidence; no low/high calibration support."
+    },
+    {
+      "quantity": "task_actor correction",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "All readable Evidence has task_actor=ai and task_source=ai_prompt."
+    },
+    {
+      "quantity": "student-level ability",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "No validated human labels and no supported student-level measurement target here."
+    },
+    {
+      "quantity": "session trajectory",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "This development file lacks a validated session trajectory and labels are provisional."
+    },
+    {
+      "quantity": "agent-type causal effect",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "No comparable treatment/control or causal support."
+    },
+    {
+      "quantity": "formal AIV/student ranking",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "Human R1/R2, outcome and identification support are absent."
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "banner": [
+    "DEVELOPMENT_ONLY",
+    "AI_PROVISIONAL",
+    "NOT FOR FORMAL GATE OR FINAL CLAIMS"
+  ],
+  "data_mode": "development",
+  "input": "data/annotations/ai/pilot_ai_provisional.csv",
+  "model": "transparent_row_level_development_score",
+  "model_definition": {
+    "evidence_level": "L1..L6 -> 1..6; NO_EVIDENCE/UNDETERMINED excluded from ABL/HOT denominator",
+    "ABL": "mean observed student_evidence_bloom numeric level",
+    "HOT": "share of observed evidence in L4/L5/L6",
+    "coverage": "share of rows with observable L1..L6 evidence",
+    "gap": "task_level - evidence_level on observed rows"
+  },
+  "metrics": {
+    "rows": 70,
+    "evidence_coverage": 0.228571,
+    "evidence_high_order_share_among_observed": 0.375,
+    "abl_mean_observed": 3.5625,
+    "abl_median_observed": 3.0,
+    "task_evidence_gap_mean_observed": 1.125,
+    "prompt_induced_share": 0.757143,
+    "context_truncated_share": 0.4,
+    "low_confidence_share": 0.728571,
+    "task_actor_counts": {
+      "ai": 53,
+      "student": 11,
+      "unknown": 6
+    }
+  },
+  "field_limits": [
+    "No student_id, semester, session_id/session_proxy, or verified agent_type in this input: no student-level aggregation, CTQ, DHI, MAB, or agent-type comparison.",
+    "No human R1/R2 labels: no reliability, calibration, formal Gate, or claim of validated model performance.",
+    "task_actor and prompt_induced are descriptive pathway flags, not causal agent effects."
+  ],
+  "formal_gate_eligible": false,
+  "results_csv": "reports\\development\\development_metrics.csv"
+}

@@ -1,0 +1,67 @@
+{
+  "annotation_source": "AI_PROVISIONAL",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "input": "data/annotations/ai/pilot_ai_provisional.csv",
+  "model": "assumption_based_identification_interval",
+  "interval_name": "assumption-based identification interval (not a statistical confidence interval)",
+  "parameter_space": {
+    "lambda_prompt": "0.00..1.00 step 0.05",
+    "lambda_context": "0.00..1.00 step 0.10",
+    "r_medium": [
+      0.5,
+      0.75,
+      1.0
+    ]
+  },
+  "n_grid": 693,
+  "undefined_cells": 33,
+  "bounds": {
+    "adjusted_ABL": {
+      "min": 3.5624999999999996,
+      "max": 3.5625000000000004
+    },
+    "adjusted_HOT": {
+      "min": 0.37499999999999994,
+      "max": 0.37500000000000006
+    },
+    "adjusted_gap": {
+      "min": 1.1249999999999998,
+      "max": 1.1250000000000002
+    },
+    "effective_weight": {
+      "min": 0.40000000000000036,
+      "max": 16.0
+    },
+    "effective_coverage": {
+      "min": 0.0057142857142857195,
+      "max": 0.22857142857142856
+    }
+  },
+  "findings": {
+    "raw_baseline": {
+      "lambda_prompt": 0,
+      "lambda_context": 0,
+      "r_medium": 0.75,
+      "effective_weight": 12.0,
+      "effective_coverage": 0.17142857142857143,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": ""
+    },
+    "baseline_ABL": 3.5625,
+    "baseline_HOT": 0.375,
+    "baseline_gap": 1.125,
+    "ABL_within_0.01_fraction_of_valid_grid": 1.0,
+    "score_stability_vs_support": "ABL/HOT/gap remain constant across valid penalty assumptions because every readable row shares the same prompt/context flags; effective evidence weight collapses as lambda_prompt approaches 1.",
+    "primary_uncertainty": "evidence availability uncertainty, not score uncertainty"
+  },
+  "limitations": [
+    "All 16 readable Evidence rows have prompt_induced=true and context_truncated=false; prompt/context penalties are not empirically identified.",
+    "r_medium is an assumption range, not calibrated reliability.",
+    "Undefined cells are recorded when effective evidence weight is zero; no smoothing is used.",
+    "No formal AIV, Gate, Kappa, Alpha, causal effect, or student ranking is produced."
+  ]
+}

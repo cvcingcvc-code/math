@@ -1,0 +1,377 @@
+{
+  "annotation_source": "AI_PROVISIONAL",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "model_status": "PARTIAL_IDENTIFICATION_BOUNDS",
+  "project_status": "S4 blocked by human annotation; development bounds prepared",
+  "source_type": "AI_PROVISIONAL",
+  "data_source": "data/annotations/ai/pilot_ai_provisional.csv",
+  "development_only": true,
+  "parameter_configuration": {
+    "lambda_prompt": {
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.05,
+      "role": "assumption/sensitivity"
+    },
+    "lambda_context": {
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.1,
+      "role": "assumption/sensitivity"
+    },
+    "r_medium": {
+      "values": [
+        0.5,
+        0.75,
+        1.0
+      ],
+      "role": "assumption/sensitivity"
+    }
+  },
+  "measurement_problem": {
+    "records": 70,
+    "readable_evidence": 16,
+    "prompt_true_in_readable": 16,
+    "context_truncated_true_in_readable": 0
+  },
+  "identifiability": [
+    {
+      "quantity": "Evidence coverage",
+      "status": "OBSERVABLE",
+      "reason": "Direct descriptive proportion of student_evidence_bloom in L1-L6 within provisional data."
+    },
+    {
+      "quantity": "Bloom distribution",
+      "status": "OBSERVABLE",
+      "reason": "Descriptive distribution of provisional labels only."
+    },
+    {
+      "quantity": "Task/Evidence gap",
+      "status": "OBSERVABLE",
+      "reason": "Descriptive gap on rows with both numeric provisional labels."
+    },
+    {
+      "quantity": "prompt frequency/context frequency",
+      "status": "OBSERVABLE",
+      "reason": "Field frequencies are directly tabulated."
+    },
+    {
+      "quantity": "prompt penalty",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only assumption-based bounds/sensitivity; no readable prompt=false support."
+    },
+    {
+      "quantity": "context penalty",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only assumption-based bounds/sensitivity; no readable context_truncated=true support."
+    },
+    {
+      "quantity": "confidence reliability",
+      "status": "PARTIALLY_IDENTIFIABLE",
+      "reason": "Only medium confidence among readable Evidence; no low/high calibration support."
+    },
+    {
+      "quantity": "task_actor correction",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "All readable Evidence has task_actor=ai and task_source=ai_prompt."
+    },
+    {
+      "quantity": "student-level ability",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "No validated human labels and no supported student-level measurement target here."
+    },
+    {
+      "quantity": "session trajectory",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "This development file lacks a validated session trajectory and labels are provisional."
+    },
+    {
+      "quantity": "agent-type causal effect",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "No comparable treatment/control or causal support."
+    },
+    {
+      "quantity": "formal AIV/student ranking",
+      "status": "NOT_IDENTIFIABLE",
+      "reason": "Human R1/R2, outcome and identification support are absent."
+    }
+  ],
+  "raw_metrics": {
+    "lambda_prompt": 0,
+    "lambda_context": 0,
+    "r_medium": 0.75,
+    "effective_weight": 12.0,
+    "effective_coverage": 0.17142857142857143,
+    "valid_or_undefined": true,
+    "adjusted_ABL": 3.5625,
+    "adjusted_HOT": 0.375,
+    "adjusted_gap": 1.125,
+    "undefined_reason": ""
+  },
+  "baseline_support": {
+    "effective_weight": 12.0,
+    "effective_coverage": 0.17142857142857143
+  },
+  "bounds": {
+    "adjusted_ABL": {
+      "min": 3.5624999999999996,
+      "max": 3.5625000000000004
+    },
+    "adjusted_HOT": {
+      "min": 0.37499999999999994,
+      "max": 0.37500000000000006
+    },
+    "adjusted_gap": {
+      "min": 1.1249999999999998,
+      "max": 1.1250000000000002
+    },
+    "effective_weight": {
+      "min": 0.40000000000000036,
+      "max": 16.0
+    },
+    "effective_coverage": {
+      "min": 0.0057142857142857195,
+      "max": 0.22857142857142856
+    }
+  },
+  "stress_tests": [
+    {
+      "lambda_prompt": 0.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 12.0,
+      "effective_coverage": 0.17142857142857143,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": "",
+      "stress_test": "A_no_prompt_penalty"
+    },
+    {
+      "lambda_prompt": 0.25,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 9.0,
+      "effective_coverage": 0.12857142857142856,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": "",
+      "stress_test": "B_light_prompt_penalty"
+    },
+    {
+      "lambda_prompt": 0.5,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 6.0,
+      "effective_coverage": 0.08571428571428572,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": "",
+      "stress_test": "C_medium_prompt_penalty"
+    },
+    {
+      "lambda_prompt": 1.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 0.0,
+      "effective_coverage": 0.0,
+      "valid_or_undefined": false,
+      "adjusted_ABL": null,
+      "adjusted_HOT": null,
+      "adjusted_gap": null,
+      "undefined_reason": "NO_EFFECTIVE_EVIDENCE",
+      "stress_test": "D_extreme_prompt_penalty"
+    },
+    {
+      "lambda_prompt": 0.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 6.0,
+      "effective_coverage": 0.08571428571428572,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.75,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 0.375,
+      "undefined_reason": "",
+      "stress_test": "E_strict_medium_scaffold"
+    },
+    {
+      "lambda_prompt": 0.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 12.0,
+      "effective_coverage": 0.17142857142857143,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": "",
+      "stress_test": "F_remove_context_risk"
+    },
+    {
+      "lambda_prompt": 0.0,
+      "lambda_context": 0.0,
+      "r_medium": 0.75,
+      "effective_weight": 12.0,
+      "effective_coverage": 0.17142857142857143,
+      "valid_or_undefined": true,
+      "adjusted_ABL": 3.5625,
+      "adjusted_HOT": 0.375,
+      "adjusted_gap": 1.125,
+      "undefined_reason": "",
+      "stress_test": "G_remove_low_confidence"
+    }
+  ],
+  "example_records": [
+    "P105",
+    "P118",
+    "P094",
+    "P050",
+    "P047",
+    "P083",
+    "P040",
+    "P108"
+  ],
+  "demo_records": [
+    {
+      "record_id": "P105",
+      "student_evidence_bloom": "L2",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P118",
+      "student_evidence_bloom": "L5",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P094",
+      "student_evidence_bloom": "L3",
+      "task_bloom": "L3",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P050",
+      "student_evidence_bloom": "L2",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P047",
+      "student_evidence_bloom": "L3",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P083",
+      "student_evidence_bloom": "L2",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P040",
+      "student_evidence_bloom": "L2",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P108",
+      "student_evidence_bloom": "L6",
+      "task_bloom": "L6",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P067",
+      "student_evidence_bloom": "L3",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P024",
+      "student_evidence_bloom": "L2",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P076",
+      "student_evidence_bloom": "L3",
+      "task_bloom": "L6",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P033",
+      "student_evidence_bloom": "L6",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P100",
+      "student_evidence_bloom": "L5",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P030",
+      "student_evidence_bloom": "L4",
+      "task_bloom": "L4",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P059",
+      "student_evidence_bloom": "L3",
+      "task_bloom": "L6",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    },
+    {
+      "record_id": "P039",
+      "student_evidence_bloom": "L6",
+      "task_bloom": "L5",
+      "confidence": "medium",
+      "prompt_induced": "true",
+      "context_truncated": "false"
+    }
+  ],
+  "limitations": [
+    "All 16 readable Evidence rows have prompt_induced=true and context_truncated=false; prompt/context penalties are not empirically identified.",
+    "r_medium is an assumption range, not calibrated reliability.",
+    "Undefined cells are recorded when effective evidence weight is zero; no smoothing is used.",
+    "No formal AIV, Gate, Kappa, Alpha, causal effect, or student ranking is produced."
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "annotation_source": "AI_PROVISIONAL",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "models": [
+    {
+      "model": "M0 Raw Evidence",
+      "status": "OBSERVED_BASELINE",
+      "metric": {
+        "effective_weight": 16,
+        "effective_coverage": 0.22857142857142856,
+        "valid_or_undefined": true,
+        "adjusted_ABL": 3.5625,
+        "adjusted_HOT": 0.375,
+        "adjusted_gap": 1.125,
+        "undefined_reason": ""
+      }
+    },
+    {
+      "model": "M1 confidence weighting",
+      "status": "NOT_TESTABLE_WITH_CURRENT_SUPPORT",
+      "metric": {
+        "lambda_prompt": 0,
+        "lambda_context": 0,
+        "r_medium": 0.75,
+        "effective_weight": 12.0,
+        "effective_coverage": 0.17142857142857143,
+        "valid_or_undefined": true,
+        "adjusted_ABL": 3.5625,
+        "adjusted_HOT": 0.375,
+        "adjusted_gap": 1.125,
+        "undefined_reason": ""
+      }
+    },
+    {
+      "model": "M2 prompt uncertainty",
+      "status": "SENSITIVITY_ONLY",
+      "metric": {
+        "lambda_prompt": 0.5,
+        "lambda_context": 0,
+        "r_medium": 0.75,
+        "effective_weight": 6.0,
+        "effective_coverage": 0.08571428571428572,
+        "valid_or_undefined": true,
+        "adjusted_ABL": 3.5625,
+        "adjusted_HOT": 0.375,
+        "adjusted_gap": 1.125,
+        "undefined_reason": ""
+      }
+    },
+    {
+      "model": "M3 context uncertainty",
+      "status": "NOT_TESTABLE_WITH_CURRENT_SUPPORT",
+      "metric": {
+        "lambda_prompt": 0,
+        "lambda_context": 0.5,
+        "r_medium": 0.75,
+        "effective_weight": 12.0,
+        "effective_coverage": 0.17142857142857143,
+        "valid_or_undefined": true,
+        "adjusted_ABL": 3.5625,
+        "adjusted_HOT": 0.375,
+        "adjusted_gap": 1.125,
+        "undefined_reason": ""
+      }
+    },
+    {
+      "model": "M4 full bounds framework",
+      "status": "PARTIALLY_SUPPORTED_BOUNDS_ONLY",
+      "metric": {
+        "lambda_prompt": 0.5,
+        "lambda_context": 0.5,
+        "r_medium": 0.75,
+        "effective_weight": 6.0,
+        "effective_coverage": 0.08571428571428572,
+        "valid_or_undefined": true,
+        "adjusted_ABL": 3.5625,
+        "adjusted_HOT": 0.375,
+        "adjusted_gap": 1.125,
+        "undefined_reason": ""
+      }
+    }
+  ],
+  "note": "No accuracy comparison is meaningful without human labels."
+}

@@ -109,7 +109,15 @@ def svg_score_support(path, rows):
         return top + (1 - v) * ph
     def py_cov(v):
         return top + (cov_max - v) / cov_max * ph
-    score_points = " ".join(f"{px(x):.1f},{py_score(1.0):.1f}" for x in xs)
+    # Score is only drawn where effective weight > 0; zero support is undefined, not a score.
+    defined_xs = [x for x, y in zip(xs, coverage) if y > 0]
+    undefined_xs = [x for x, y in zip(xs, coverage) if y <= 0]
+    score_points = " ".join(f"{px(x):.1f},{py_score(1.0):.1f}" for x in defined_xs)
+    undefined_marks = [
+        f'<circle cx="{px(x):.1f}" cy="{py_score(1.0):.1f}" r="6" fill="white" stroke="#dc2626" stroke-width="2"/>'
+        f'<text x="{px(x)-8:.1f}" y="{py_score(1.0)-14:.1f}" text-anchor="end" font-family="Arial" font-size="11" font-weight="700" fill="#991b1b">NO_EFFECTIVE_EVIDENCE at lambda_prompt={x:.2f}: Score undefined, not 0</text>'
+        for x in undefined_xs
+    ]
     support_points = " ".join(f"{px(x):.1f},{py_cov(y):.1f}" for x, y in zip(xs, coverage))
     tick_parts = []
     for value in (0.0, 0.25, 0.5, 0.75, 1.0):
@@ -127,6 +135,7 @@ def svg_score_support(path, rows):
         f'<line x1="{left}" y1="{py_score(1.0):.1f}" x2="{left+pw}" y2="{py_score(1.0):.1f}" stroke="#dc2626" stroke-dasharray="6 5"/>',
         f'<polyline points="{score_points}" fill="none" stroke="#dc2626" stroke-width="4"/>',
         f'<polyline points="{support_points}" fill="none" stroke="#2563eb" stroke-width="4"/>',
+        *undefined_marks,
         *tick_parts,
         f'<text x="{left-12}" y="{top+5}" text-anchor="end" font-family="Arial" font-size="11" fill="#b91c1c">1.00</text>',
         f'<text x="{left+pw+12}" y="{top+5}" text-anchor="start" font-family="Arial" font-size="11" fill="#1d4ed8">{cov_max:.4f}</text>',

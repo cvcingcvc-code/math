@@ -73,6 +73,12 @@ def load(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path, dtype=str, keep_default_na=False)
     for c in df.columns:
         df[c] = df[c].map(norm)
+    # Never allow provisional AI annotations into the formal human Gate path.
+    if {"annotation_source", "annotation_status"}.issubset(df.columns):
+        if set(df["annotation_source"]) == {"AI_PROVISIONAL"} or set(df["annotation_status"]) == {"DEVELOPMENT_ONLY"}:
+            raise ValueError(
+                "AI_PROVISIONAL / DEVELOPMENT_ONLY data cannot be used as formal Gate input"
+            )
     return df
 
 

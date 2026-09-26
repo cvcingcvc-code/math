@@ -1,0 +1,13 @@
+{
+  "source": "AI_PROVISIONAL",
+  "status": "DEVELOPMENT_ONLY",
+  "disclaimer": "仅用于开发、流程验证和探索性分析；不得作为 human annotation、test-retest reliability 或正式 Gate 通过证据。",
+  "input": "pilot_worksheet_A.csv visible fields only",
+  "rows": 70,
+  "manuals": [
+    "annotation_manual_v0.1.md",
+    "annotation_clarification_v0.1.1.md"
+  ],
+  "human_files_modified": false,
+  "generation_method": "conservative rule execution; uncertain source/context mapped to UNDETERMINED or NO_EVIDENCE per frozen rules"
+}

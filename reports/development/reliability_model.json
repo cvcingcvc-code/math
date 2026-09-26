@@ -1,0 +1,66 @@
+{
+  "banner": [
+    "DEVELOPMENT_ONLY",
+    "AI_PROVISIONAL",
+    "NOT FOR FORMAL GATE OR FINAL CLAIMS"
+  ],
+  "data_mode": "development",
+  "input": "data/annotations/ai/pilot_ai_provisional.csv",
+  "model": "transparent_evidence_reliability_weight_sensitivity",
+  "formal_gate_eligible": false,
+  "formula": "w_i = I(observable_i) * c_i * (1 - lambda_prompt * prompt_i) * (1 - lambda_context * truncation_i)",
+  "definitions": {
+    "observable": "student_evidence_bloom in L1..L6; NO_EVIDENCE/UNDETERMINED receive zero weight",
+    "c_i": "confidence weight: high=1.0, medium=0.75, low=0.5",
+    "adjusted_abl": "sum(w_i * evidence_level_i) / sum(w_i)",
+    "adjusted_hot": "sum(w_i * I(evidence_level_i in L4..L6)) / sum(w_i)",
+    "effective_evidence_coverage": "sum(w_i) / 70",
+    "adjusted_task_evidence_gap": "weighted mean(task_level - evidence_level) where both levels are observable"
+  },
+  "parameter_grid": {
+    "lambda_prompt": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "lambda_context": [
+      0.0,
+      0.5,
+      1.0
+    ],
+    "sensitivity_note": "Small finite grid; no unique penalty claim is made."
+  },
+  "confidence_weight_assumption": {
+    "high": 1.0,
+    "medium": 0.75,
+    "low": 0.5
+  },
+  "baseline_raw": {
+    "raw_abl": 3.5625,
+    "raw_hot": 0.375,
+    "raw_evidence_coverage": 0.22857142857142856,
+    "raw_task_evidence_gap": 1.125
+  },
+  "prompt_only_range": {
+    "adjusted_abl_min": 3.5625,
+    "adjusted_abl_max": 3.5625,
+    "adjusted_hot_min": 0.375,
+    "adjusted_hot_max": 0.375
+  },
+  "context_only_range": {
+    "adjusted_abl_min": 3.5625,
+    "adjusted_abl_max": 3.5625,
+    "adjusted_hot_min": 0.375,
+    "adjusted_hot_max": 0.375
+  },
+  "field_limits": [
+    "No human R1/R2 labels: weights are not empirically calibrated reliability probabilities.",
+    "No student_id/session/verified agent_type: no student-level or agent-level correction is attempted.",
+    "Prompt and truncation flags are association/risk flags, not causal effects.",
+    "This model does not calculate AIV and cannot establish a formal research conclusion."
+  ],
+  "results_csv": "reports\\development\\reliability_sensitivity.csv",
+  "results_png": "reports\\development\\reliability_sensitivity.svg"
+}

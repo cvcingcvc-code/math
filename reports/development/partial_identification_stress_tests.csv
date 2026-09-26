@@ -1,0 +1,8 @@
+﻿lambda_prompt,lambda_context,r_medium,effective_weight,effective_coverage,valid_or_undefined,adjusted_ABL,adjusted_HOT,adjusted_gap,undefined_reason,stress_test
+0.0,0.0,0.75,12.0,0.17142857142857143,True,3.5625,0.375,1.125,,A_no_prompt_penalty
+0.25,0.0,0.75,9.0,0.12857142857142856,True,3.5625,0.375,1.125,,B_light_prompt_penalty
+0.5,0.0,0.75,6.0,0.08571428571428572,True,3.5625,0.375,1.125,,C_medium_prompt_penalty
+1.0,0.0,0.75,0.0,0.0,False,,,,NO_EFFECTIVE_EVIDENCE,D_extreme_prompt_penalty
+0.0,0.0,0.75,6.0,0.08571428571428572,True,3.75,0.375,0.375,,E_strict_medium_scaffold
+0.0,0.0,0.75,12.0,0.17142857142857143,True,3.5625,0.375,1.125,,F_remove_context_risk
+0.0,0.0,0.75,12.0,0.17142857142857143,True,3.5625,0.375,1.125,,G_remove_low_confidence

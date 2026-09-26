@@ -1,0 +1,176 @@
+{
+  "annotation_source": "AI_PROVISIONAL",
+  "annotation_status": "DEVELOPMENT_ONLY",
+  "formal_gate_eligible": false,
+  "claim_boundary": "Development-only reproduction; not formal Gate, AIV, ranking or causal evidence.",
+  "steps": [
+    {
+      "step": "src/run_development_experiment.py",
+      "exit_code": 0
+    },
+    {
+      "step": "src/run_reliability_sensitivity.py",
+      "exit_code": 0
+    },
+    {
+      "step": "src/run_partial_identification.py --mode development",
+      "exit_code": 0
+    },
+    {
+      "step": "src/verification/recompute_bounds.py",
+      "exit_code": 0
+    },
+    {
+      "step": "src/build_development_results_csv.py",
+      "exit_code": 0
+    }
+  ],
+  "checks": [
+    {
+      "check": "source_of_truth.total_records==70",
+      "pass": true,
+      "detail": "70"
+    },
+    {
+      "check": "source_of_truth.interpretable_evidence_count==16",
+      "pass": true,
+      "detail": "16"
+    },
+    {
+      "check": "source_of_truth.no_evidence_count==19",
+      "pass": true,
+      "detail": "19"
+    },
+    {
+      "check": "source_of_truth.undetermined_count==35",
+      "pass": true,
+      "detail": "35"
+    },
+    {
+      "check": "source_of_truth.parameter_grid_size==693",
+      "pass": true,
+      "detail": "693"
+    },
+    {
+      "check": "source_of_truth.defined_grid_count==660",
+      "pass": true,
+      "detail": "660"
+    },
+    {
+      "check": "source_of_truth.undefined_grid_count==33",
+      "pass": true,
+      "detail": "33"
+    },
+    {
+      "check": "ABL stable at 3.5625",
+      "pass": true,
+      "detail": "3.5624999999999996..3.5625000000000004"
+    },
+    {
+      "check": "HOT stable at 0.375",
+      "pass": true,
+      "detail": "0.37499999999999994..0.37500000000000006"
+    },
+    {
+      "check": "GAP stable at 1.125",
+      "pass": true,
+      "detail": "1.1249999999999998..1.1250000000000002"
+    },
+    {
+      "check": "effective_weight range 0.4..16.0",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "coverage denominator is 70 records",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "status labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo labels",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo records/evidence == 70/16",
+      "pass": true,
+      "detail": "{'records': 70, 'readable_evidence': 16, 'prompt_true_in_readable': 16, 'context_truncated_true_in_readable': 0}"
+    },
+    {
+      "check": "figure4 contains 'lambda_prompt'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains 'lambda_context = 0.00'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains 'r_medium = 0.75'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains '/ 70 development records'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains 'NO_EFFECTIVE_EVIDENCE'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains 'not a causal effect'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "figure4 contains 'AI_PROVISIONAL / DEVELOPMENT_ONLY'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo html contains 'DEVELOPMENT_ONLY'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo html contains 'AI_PROVISIONAL'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo html contains 'NO_EFFECTIVE_EVIDENCE'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "demo html contains '70 development records'",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "formal gate not passed (expected while R1/R2 pending)",
+      "pass": true,
+      "detail": "None"
+    },
+    {
+      "check": "result csv: 70 records, 16 scored",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "result csv: AIV/ranking pending, labels kept",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "result": "PASS"
+}
