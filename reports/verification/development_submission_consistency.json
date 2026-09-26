@@ -1,5 +1,5 @@
 {
-  "status": "PASS",
+  "status": "FAIL",
   "checks": {
     "artifact_identity": true,
     "artifact_sections": true,
@@ -10,7 +10,7 @@
     "ablation": true,
     "transfer": true,
     "paper": true,
-    "demo": true,
+    "demo": false,
     "figures": true,
     "ppt_core_numbers_checked": true
   },

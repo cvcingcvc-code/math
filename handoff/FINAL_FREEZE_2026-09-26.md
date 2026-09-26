@@ -27,7 +27,15 @@
 
 `FINAL_CROSS_ARTIFACT_CONSISTENCY = PASS`。核心数字无冲突；Paper ↔ Demo ↔ `outputs/final_results.json` 一致；Human Gate 未错误升级；Finance 未包装为交易优势。
 
-> 已知 checker 漂移（登记，不修改）：`src/development_submission_checker.py` 的 `demo` 检查为 11/12——唯一 FAIL 项来自其对旧版 demo 的启发式字符串检查（要求 `../../outputs/final_results.json` 与 `Explain`/`What-if`/`Evaluation Status` 标签）。当前 demo 已重构为「内联数字 + 内联 JS」，这些字符串被移除；demo 本身数字对齐、smoke test 通过，仅 checker 该项过时。`reports/verification/development_submission_consistency.json` 保留 HEAD 的 PASS 记录。
+### Checker 状态（当前真实状态，非历史）
+
+- **CURRENT_CHECKER = 11/12**
+- **DEMO_SMOKE = PASS**
+- **CHECKER_CONTRACT_DRIFT = OPEN**
+
+`src/development_submission_checker.py` 的 12 项检查中 11 项 PASS，唯一 FAIL 是 `demo` 检查。该检查是**旧版 Demo contract 的启发式字符串断言**，要求 demo 含旧 fetch 路径 `../../outputs/final_results.json` 以及 `Explain`/`What-if`/`Evaluation Status` 标签。当前新 Demo 已重构为「内联数字 + 内联 JS」，上述字符串被移除，故该检查 FAIL。**这是 checker 与 demo 的 contract 漂移，不是 PAPER/DATA/DEMO 数字错误**：新 Demo 已独立验证——HTTP smoke test 通过（首页 + F1–F6 全部 200）、canonical 数字一致、页面正常运行。
+
+`reports/verification/development_submission_consistency.json` 记录的是本次真实运行结果（`status=FAIL`、`demo=false`、11/12），**未用历史 PASS 冒充当前状态**。不得为得到 12/12 而回改 Demo。
 
 ## 6. Human Gate status
 
