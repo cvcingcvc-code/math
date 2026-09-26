@@ -1,0 +1,13 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>为什么 Raw Signal 不够</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>表现水平与证据支持必须分开报告</Text></Box>
+  <Box style={{ height: 510, flexDirection: 'row', gap: 28, paddingTop: 18 }}>
+    <Box style={{ width: 700, height: 480, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F2_raw_vs_adjusted.svg" style={{ width: 676, height: 456, objectFit: 'contain' }} /></Box>
+    <Box style={{ width: 460, height: 480, padding: 22, gap: 20, background: '#F0F5FC' }}>
+      <Text style={{ fontSize: 27, color: '#0E3F8C', fontWeight: 'bold' }}>两个独立问题</Text>
+      <Text style={{ fontSize: 23, color: '#1A2230', lineHeight: 1.45 }}>Raw Signal：观察到的表现水平</Text>
+      <Text style={{ fontSize: 23, color: '#1A2230', lineHeight: 1.45 }}>Evidence Reliability：这些观察能否支撑结论</Text>
+      <Box style={{ borderLeft: '5px solid #D9534F', paddingLeft: 16 }}><Text style={{ fontSize: 22, color: '#D9534F', lineHeight: 1.45 }}>归一化分数不变，不代表支持范围不变</Text></Box>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#8B97A8' }}>冻结图 F2 · Raw vs Adjusted</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>02 / 10</Text></Box>
+</Slide>

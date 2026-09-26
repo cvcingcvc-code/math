@@ -1,0 +1,6 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>Reliability-aware evaluation</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>从观察证据到可审查决策</Text></Box>
+  <Box style={{ height: 472, paddingTop: 16, background: '#F7F9FC' }}><Image src="assets/F1_model_flow.svg" style={{ width: 1200, height: 450, objectFit: 'contain' }} /></Box>
+  <Box style={{ height: 68, background: '#E8EFF8', padding: 14, justifyContent: 'center' }}><Text style={{ fontSize: 21, color: '#0E3F8C' }}>wᵢ = I(observableᵢ) · cᵢ · (1 − λprompt·pᵢ) · (1 − λcontext·tᵢ)　　Adjustedᵢ = Rawᵢ × wᵢ　　Ceff = Σwᵢ / N</Text></Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#8B97A8' }}>R 是支持权重，不是校准概率；无证据时 fail-closed</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>03 / 10</Text></Box>
+</Slide>

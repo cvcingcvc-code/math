@@ -1,0 +1,17 @@
+<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', padding: 40 }}>
+  <Box style={{ height: 72, background: '#0E3F8C', padding: 18, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 22, color: '#FFFFFF', fontWeight: 'bold' }}>教育 AI 增量价值评价｜现场答辩</Text>
+  </Box>
+  <Box style={{ height: 500, padding: 54, justifyContent: 'center', gap: 24 }}>
+    <Text style={{ fontSize: 42, color: '#0E3F8C', fontWeight: 'bold', lineHeight: 1.2 }}>观察到的结果，不等于可靠证据</Text>
+    <Text style={{ fontSize: 25, color: '#4A5568', lineHeight: 1.45 }}>当证据缺失、冲突或可信度不同，如何避免把 Raw Signal 直接当成可信结论？</Text>
+    <Box style={{ background: '#E8EFF8', border: '2px solid #1E4FA8', padding: 28, width: 900 }}>
+      <Text style={{ fontSize: 34, color: '#1E4FA8', fontWeight: 'bold' }}>Score Stability ≠ Evidence Support Stability</Text>
+      <Text style={{ fontSize: 22, color: '#1A2230', marginTop: 12 }}>分数稳定，不等于证据支撑稳定</Text>
+    </Box>
+    <Text style={{ fontSize: 18, color: '#8B97A8' }}>AI_PROVISIONAL · DEVELOPMENT_ONLY · NOT_HUMAN_VALIDATED</Text>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 14, color: '#8B97A8' }}>PPT_FINAL_CONVERGENCE</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>01 / 10</Text>
+  </Box>
+</Slide>

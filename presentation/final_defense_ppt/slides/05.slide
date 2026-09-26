@@ -1,0 +1,8 @@
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>公共缩放退化：分数不动，但支持下降</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>稳定的归一化 score 不能替代稳定的 evidence support</Text></Box>
+  <Box style={{ height: 500, flexDirection: 'row', gap: 28, paddingTop: 18 }}>
+    <Box style={{ width: 770, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F4_parameter_perturbation.svg" style={{ width: 744, height: 444, objectFit: 'contain' }} /></Box>
+    <Box style={{ width: 402, height: 470, padding: 24, gap: 18, background: '#F0F5FC' }}><Text style={{ fontSize: 25, color: '#0E3F8C', fontWeight: 'bold' }}>锁定机制</Text><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.4 }}>16 条可判读记录共享：</Text><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.4 }}>prompt=true<br />context=false<br />confidence=medium<br />R = 0.375</Text><Box style={{ borderTop: '2px solid #1E4FA8', paddingTop: 14 }}><Text style={{ fontSize: 21, color: '#1E4FA8', fontWeight: 'bold' }}>weight：16 → 12 → 6 → 6</Text><Text style={{ fontSize: 21, color: '#1E4FA8', fontWeight: 'bold', marginTop: 8 }}>coverage：0.228571 → 0.085714</Text></Box></Box>
+  </Box>
+  <Box style={{ height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 17, color: '#4A5568' }}>ABL / HOT / Gap = 3.5625 / 0.375 / 1.125（Raw=Adjusted，不是提升）</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>05 / 10</Text></Box>
+</Slide>
