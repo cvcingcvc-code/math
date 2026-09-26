@@ -32,6 +32,7 @@ python run_all.py --mode formal  # 预期被拒绝，见第 5 节
 | 3 | `src/run_partial_identification.py --mode development` | 693 格参数网格、**Figure 4**（`core_figure_4_bounds_support.svg`）、Figure 3、Demo 数据 `reports/demo/demo_payload.json`、`reports/paper/method_results_skeleton.md` |
 | 4 | `src/verification/recompute_bounds.py` | 独立复算：`reports/verification/core_numbers_source_of_truth.json` 等 |
 | 5 | `src/build_development_results_csv.py` | 开发版结果表：`reports/submission/development_results_record_level.csv`、`development_results_summary.csv` |
+| 6 | `src/build_core_closure.py` | Raw/Adjusted 指标、M0–M3 消融、反例与研究核心闭环报告 |
 
 最终写出 `reports/submission/run_all_report.json`，并打印 `checks: 32/32 passed; result=PASS`。
 
