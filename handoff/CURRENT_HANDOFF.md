@@ -26,6 +26,7 @@ S4 Pilot Annotation Gate：等待真实人工 R1/R2。开发版比赛提交候�
 
 - `git clone` → 新 venv（Python 3.13.14）→ `pip install --only-binary=:all: -r requirements.txt` → `python run_all.py`
 - `python run_all.py`：6 步全部退出码 0；**32/32 PASS**。
+- 新建干净克隆 `work/clean_core_closure_444f7ae` 后再次运行：6 步全部退出码 0；**32/32 PASS**；克隆工作区 clean。
 - `python run_all.py --mode formal` → `FORMAL_MODE_BLOCKED` / `RUN_ALL_FORMAL_BLOCKED`，退出码 1。
 
 6. 当前 formal Gate 状态
