@@ -142,3 +142,9 @@ Python 3.14.2 / pandas 3.0.1 / numpy 2.4.1 / scipy 1.18.0 / scikit-learn 1.9.0�
 - `run_all.py` 纳入核心闭环步骤；6 步、32/32 checks 通过。
 - 开发版结论：Raw ABL/HOT/Gap=3.5625/0.375/1.125；调整后分数保持不变，effective weight 16→6，coverage 0.228571→0.085714；16 条可判读 Evidence 全部 prompt-induced。
 - 未修改正式 R1/R2、Gate 阈值、冻结标注手册、原始数据或 Formal AIV 边界；来源不明的未跟踪成果未纳入。
+
+# 2026-09-26 — Align Gate runner with frozen test-retest design
+
+- 修正 `src/run_s4_gate.py` 的入口行为：默认使用 R1 `pilot_worksheet_A.csv` 与 R2 `pilot_worksheet_A_retest.csv`，保留已存在文件，不再以旧 B 表覆盖人工输入。
+- Gate 占位报告同步标注 `single_annotator_test_retest` / `inter_rater=false`；正式 Gate 判定逻辑与阈值未改。
+- 空标签状态下运行 `python src/run_s4_gate.py`：21/21 integrity checks 通过，正确保持 PENDING。

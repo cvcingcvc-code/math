@@ -6,12 +6,12 @@
 
 ## 为什么这里是空的
 
-Gate 需要两名独立人工标注者对同一批记录完成盲标。工作已就绪：
+当前 Gate 采用同一名人工标注者的两轮盲重测（R1→R2，间隔至少 24 小时）。这不是 inter-rater reliability。工作已就绪：
 
 | 就绪项 | 路径 |
 |---|---|
 | 盲标表 A | `data/annotations/human/pilot_worksheet_A.csv` |
-| 盲标表 B | `data/annotations/human/pilot_worksheet_B.csv` |
+| R2 重测表 | `data/annotations/human/pilot_worksheet_A_retest.csv` |
 | 标注者说明 | `data/annotations/human/README_ANNOTATOR.md` |
 | 规则本体 | `docs/annotation/annotation_manual_v0.1.md` |
 | 执行澄清件 | `docs/annotation/annotation_clarification_v0.1.1.md` |
@@ -38,4 +38,5 @@ python src/run_s4_gate.py
 
 - D008：人工标注完成前不计算正式 Kappa / Alpha。本文件遵守该约束。
 - 在 `validation/gate_thresholds.json` 已确认为 `preregistered: true`，但 R1/R2 尚未返回，因此本文件仍只是 PENDING 占位，不构成 Gate 通过判定；阈值不得在看到结果后回改。
+- 结果报告必须标注为同一标注者 test-retest reliability，不得写成两名标注者一致性。
 - 不得把 AI 预标注结果描述为人工标注（D007）。

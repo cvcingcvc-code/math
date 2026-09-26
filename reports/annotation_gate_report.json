@@ -2,13 +2,15 @@
   "status": "PENDING",
   "gate_report_generated": false,
   "reason": "No real human annotations have been returned yet. No reliability coefficient is computed (D008).",
+  "design": "single_annotator_test_retest",
+  "inter_rater": false,
   "awaiting": [
-    "data/annotations/human/pilot_worksheet_A.csv (labels)",
-    "data/annotations/human/pilot_worksheet_B.csv (labels)"
+    "data/annotations/human/pilot_worksheet_A.csv (R1 labels)",
+    "data/annotations/human/pilot_worksheet_A_retest.csv (R2 labels, >=24h later)"
   ],
   "ready": {
     "clarification": "docs/annotation/annotation_clarification_v0.1.1.md",
-    "worksheets": ["data/annotations/human/pilot_worksheet_A.csv", "data/annotations/human/pilot_worksheet_B.csv"],
+    "worksheets": ["data/annotations/human/pilot_worksheet_A.csv", "data/annotations/human/pilot_worksheet_A_retest.csv"],
     "key": "data/annotations/_keys/pilot_worksheet_key.csv",
     "thresholds": "validation/gate_thresholds.json",
     "preregistered": true
