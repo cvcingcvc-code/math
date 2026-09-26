@@ -9,14 +9,16 @@
 ## 一、晋升结论摘要
 
 ```
-DEMO_FINAL_REVIEW        = PASS
-DEMO_PROMOTION           = DONE
-P0                       = 0
-P1                       = 0
-P2                       = 2（仅记录，不阻塞）
-NUMBER_DRIFT             = 0
-CLAIM_DRIFT              = 0
-OFFLINE_DEMO             = PASS
+DEMO_FINAL                 = FROZEN
+FUNCTIONAL_VALIDATION      = PASS
+DEMO_FINAL_REVIEW          = PASS
+DEMO_PROMOTION             = DONE
+P0                         = 0
+P1                         = 0
+P2                         = favicon.ico 404 only（KNOWN_NON_BLOCKING_ISSUE）
+NUMBER_DRIFT               = 0
+CLAIM_DRIFT                = 0
+OFFLINE_DEMO               = PASS
 ```
 
 ---
@@ -163,8 +165,11 @@ OFFLINE_DEMO             = PASS
 
 ### P2（仅记录，不修）
 
+- **KNOWN_NON_BLOCKING_ISSUE / P2**｜`/favicon.ico` 404 only：浏览器自动请求站点图标时返回 404；页面主体、F1–F6、交互和离线演示均正常。按用户裁定保留现状，不修改 `serve_demo.py`，不修改 `index.html`，不重新晋升，不回滚，不生成新 Demo 版本。
 - **P2-1**｜`.pos/.warn/.neg` 在 `<td>` 上不生效（CSS 后代选择器 `td .pos` 与 `<td class="pos">` 不匹配，7 个单元格拿不到预期颜色）。基线既有缺陷，非中文化引入；信息仍完整可读。
 - **P2-2**｜F6 图内最小字号 10.2px（其余五张 11.1px），属 `reports/visual_evidence/final/` canonical 图件固有，禁止修改。
+
+> 本窗口冻结后不再处理 Demo。
 
 ---
 
@@ -182,21 +187,26 @@ OFFLINE_DEMO             = PASS
 ## 十一、最终输出
 
 ```
-DEMO_FINAL_REVIEW        = PASS
-DEMO_PROMOTION           = DONE
-P0                       = 0
-P1                       = 0
-P2                       = 2
-NUMBER_DRIFT             = 0
-CLAIM_DRIFT              = 0
-OFFLINE_DEMO             = PASS
-FORMAL_DEMO_PATH         = C:\Users\lin\Documents\Codex\2026-09-25\yu\reports\demo\index.html
-FORMAL_DEMO_SHA256       = d15d124c256df7cc7d1d9cc6f12a458455ca30df183c4114b16c842b415a4632
-GIT_HEAD_BEFORE          = 837a192045647378c886218fd4a668a80e14e154
-GIT_HEAD_AFTER           = 837a192045647378c886218fd4a668a80e14e154
-COMMIT                   = NO
-PUSH                     = NO
-NEXT_STAGE               = PPT_FINAL_CONVERGENCE
+DEMO_FINAL                 = FROZEN
+FUNCTIONAL_VALIDATION      = PASS
+DEMO_FINAL_REVIEW          = PASS
+DEMO_PROMOTION             = DONE
+P0                         = 0
+P1                         = 0
+P2                         = favicon.ico 404 only
+KNOWN_NON_BLOCKING_ISSUE   = /favicon.ico 404 only
+NUMBER_DRIFT               = 0
+CLAIM_DRIFT                = 0
+OFFLINE_DEMO               = PASS
+FORMAL_DEMO_PATH           = C:\Users\lin\Documents\Codex\2026-09-25\yu\reports\demo\index.html
+FORMAL_DEMO_SHA256         = d15d124c256df7cc7d1d9cc6f12a458455ca30df183c4114b16c842b415a4632
+PAPER_CHANGED              = NO
+DEMO_CHANGED               = NO（冻结后不再处理 Demo）
+GIT_HEAD_BEFORE            = 27c0c083b132533a187ff3c83d6fbaacbea26ce6
+GIT_HEAD_AFTER             = 27c0c083b132533a187ff3c83d6fbaacbea26ce6
+COMMIT                     = NO
+PUSH                       = NO
+NEXT_STAGE                 = FINAL_DELIVERY_ALIGNMENT_AND_REHEARSAL
 ```
 
 ---

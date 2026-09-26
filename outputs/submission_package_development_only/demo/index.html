@@ -229,7 +229,7 @@
     </div>
 
     <figure>
-      <img src="../development/F1_model_flow.svg" alt="F1 模型流程">
+      <img src="../visual_evidence/final/F1_model_flow.svg" alt="F1 模型流程">
       <figcaption><b>F1 · 模型流程。</b> Raw 与 Reliability 是两个独立层；AI 增量（AIV）不在当前开发结果内。来源：reports/visual_evidence/final/F1_model_flow.svg。</figcaption>
     </figure>
 
@@ -290,7 +290,7 @@
     <p class="muted" style="margin-top:8px">数据构成（N=70）：16 条可判读（L2×5、L3×5、L4×1、L5×2、L6×3）+ 19 条 NO_EVIDENCE + 35 条 UNDETERMINED = <b>54 条 NO_EFFECTIVE_EVIDENCE</b>。16 条可判读共享 prompt=true / context=false / confidence=medium，各加权方案施加同一常数因子，归一化后抵消 —— 因此 Raw 与 Adjusted 相同，<b>不得写成 improvement</b>。</p>
 
     <figure>
-      <img src="../development/F5_ablation_refusal.svg" alt="F5 消融与拒判边界">
+      <img src="../visual_evidence/final/F5_ablation_refusal.svg" alt="F5 消融与拒判边界">
       <figcaption><b>F5 · 组件消融。</b> M0→M1→M2→M3 有效权重 16→12→6→6；分数恒 3.5625，支持变化可见。来源：reports/visual_evidence/final/F5_ablation_refusal.svg。</figcaption>
     </figure>
   </section>
@@ -339,7 +339,7 @@
     </div>
 
     <figure>
-      <img src="../development/F4_parameter_perturbation.svg" alt="F4 参数扰动">
+      <img src="../visual_evidence/final/F4_parameter_perturbation.svg" alt="F4 参数扰动">
       <figcaption><b>F4 · 局部参数扰动。</b> 支持度随参数变化，但 ranking NOT_APPLICABLE；分数稳定而支持变化。来源：reports/visual_evidence/final/F4_parameter_perturbation.svg。</figcaption>
     </figure>
   </section>
@@ -376,11 +376,11 @@
     <div class="note">P105 参考：Raw = L2、R = 0.375、Adjusted = 0.75、LOW_SUPPORT —— 同样是低支持，但 Raw 等级低。与 P108 对照说明：<b>无论 Raw 高低，缺少支持时都被降权</b>。以上均为 DEVELOPMENT EXAMPLE / AI_PROVISIONAL。</div>
 
     <figure>
-      <img src="../development/F3_evidence_degradation.svg" alt="F3 证据退化与拒判">
+      <img src="../visual_evidence/final/F3_evidence_degradation.svg" alt="F3 证据退化与拒判">
       <figcaption><b>F3 · 证据退化与拒判。</b> P108 去掉 prompt 风险时 R 从 0.375 升到 0.750（机械响应，非因果结论）；证据缺失时触发拒判。来源：reports/visual_evidence/final/F3_evidence_degradation.svg。</figcaption>
     </figure>
     <figure>
-      <img src="../development/F2_raw_vs_adjusted.svg" alt="F2 Raw 与 Adjusted">
+      <img src="../visual_evidence/final/F2_raw_vs_adjusted.svg" alt="F2 Raw 与 Adjusted">
       <figcaption><b>F2 · Raw 证据 ≠ 有支撑的证据。</b> 逐条 adjusted contribution；54 条未定义记录保持显式（不填 0）。来源：reports/visual_evidence/final/F2_raw_vs_adjusted.svg。</figcaption>
     </figure>
   </section>
@@ -430,7 +430,7 @@
     <div class="note red">risk-coverage improvement = <b>false</b>。此节为 <b>STRUCTURAL ONLY</b>（结构迁移演示），<b>不</b>写 profitable trading / prediction advantage / universal generalization。</div>
 
     <figure>
-      <img src="../development/F6_external_structural_transfer.svg" alt="F6 外部结构迁移">
+      <img src="../visual_evidence/final/F6_external_structural_transfer.svg" alt="F6 外部结构迁移">
       <figcaption><b>F6 · 外部结构迁移。</b> 低/中/高 R 并排展示；Strategy C 是保留的反例。仅为结构迁移，非交易策略。来源：reports/visual_evidence/final/F6_external_structural_transfer.svg。</figcaption>
     </figure>
   </section>
