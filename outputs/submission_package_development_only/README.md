@@ -12,15 +12,17 @@
 
 ## 入口
 
-- 开发版复现：`python run_all.py`，预期 6 步、32 项一致性检查通过。
+- 开发版复现：`python run_all.py`，脚本保留完整链路说明；当前包按交付清单提供结果与审计产物，正式 Gate 仍 fail-closed。
 - Formal 模式：`python run_all.py --mode formal`，在 Gate PASS 前保持 fail-closed。
-- Demo：`reports/demo/index.html`，顶部明确 `DEVELOPMENT_ONLY · AI_PROVISIONAL`。
-- 路演 PPT：`outputs/education_ai_evidence_roadshow_v1_final.pptx`。
-- 内部提交包：`outputs/submission_package_development_only/`，含 MANIFEST 与复现说明。
+- Demo：`demo/index.html`，顶部明确 `DEVELOPMENT_ONLY · AI_PROVISIONAL`。
+- 路演 PPT：`slides/final_roadshow.pptx`（10 页最终版）。
+- 最终论文：`paper/final_paper.pdf`、`paper/final_paper.md`、`paper/final_paper_editable.docx`。
+- 最终图件：`development/F1_model_flow.svg` 至 `development/F6_external_structural_transfer.svg`。
+- 包完整性：`MANIFEST.sha256.json`，共 41 项，逐项校验 PASS。
 
 ## 目录
 
-`data/` 数据与标注；`docs/` 标注规则与数据字典；`research/` 研究设计；`src/` 代码；`validation/` Gate 阈值；`reports/` 审计、开发结果与复现记录；`slides/` 路演大纲；`outputs/` 用户可交付材料；`handoff/` 持久项目状态。
+`data/` 数据与标注；`docs_data_dictionary.md` 数据字典；`src/` 开发版复现代码；`reports/` 审计、开发结果与复现记录；`reproduction/` 运行说明；`demo/` 离线演示；`paper/` 论文交付物；`slides/` 路演 PPT。
 
 ## 边界
 

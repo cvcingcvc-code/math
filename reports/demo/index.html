@@ -13,7 +13,7 @@
   html{-webkit-text-size-adjust:100%}
   body{
     margin:0; background:var(--bg); color:var(--ink);
-    font:16px/1.65 system-ui,"Microsoft YaHei","Segoe UI",sans-serif;
+    font:17px/1.75 system-ui,"Microsoft YaHei","Segoe UI",sans-serif;
     overflow-x:hidden;
   }
   .wrap{max-width:1160px; margin:0 auto; padding:22px 24px 80px;}
@@ -22,14 +22,14 @@
   .banner{
     border:1px solid var(--orange); border-left:5px solid var(--orange);
     background:var(--card); color:var(--ink);
-    padding:9px 14px; border-radius:8px; font-size:13.5px;
+    padding:9px 14px; border-radius:8px; font-size:14.5px;
     display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; margin-bottom:22px;
   }
   .banner b{color:var(--orange); font-weight:700}
   .banner .sep{color:var(--line)}
   .chips{display:flex; flex-wrap:wrap; gap:6px}
   .chip{
-    font-size:11.5px; font-weight:700; letter-spacing:.06em;
+    font-size:12.5px; font-weight:700; letter-spacing:.06em;
     padding:2px 9px; border-radius:999px; border:1px solid;
     white-space:nowrap;
   }
@@ -37,10 +37,10 @@
   .chip.mute{color:var(--muted); border-color:var(--line)}
 
   /* ---- hero ---- */
-  .tag{color:var(--green); font-weight:700; letter-spacing:.12em; font-size:12px; text-transform:uppercase}
+  .tag{color:var(--green); font-weight:700; letter-spacing:.12em; font-size:13px; text-transform:uppercase}
   h1{font-size:clamp(30px,5vw,50px); line-height:1.08; margin:10px 0 10px; font-weight:800; letter-spacing:-.01em}
-  .subtitle{font-size:clamp(17px,2.4vw,22px); color:#354138; margin:0 0 8px; font-weight:600}
-  .rq{font-size:16px; color:var(--muted); max-width:820px; margin:0 0 6px}
+  .subtitle{font-size:clamp(18px,2.4vw,23px); color:#354138; margin:0 0 8px; font-weight:600}
+  .rq{font-size:17px; color:var(--muted); max-width:820px; margin:0 0 6px}
   .rq b{color:var(--ink)}
 
   /* ---- metric cards ---- */
@@ -49,10 +49,10 @@
     background:var(--card); border:1px solid var(--line); border-top:3px solid var(--green);
     border-radius:12px; padding:18px 18px 16px;
   }
-  .metric .k{font-size:12px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin-bottom:6px}
+  .metric .k{font-size:13px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin-bottom:6px}
   .metric .v{font-size:clamp(26px,3.4vw,34px); font-weight:800; color:var(--green); line-height:1.1}
-  .metric .v small{font-size:15px; font-weight:600; color:var(--muted)}
-  .metric .d{font-size:13px; color:var(--muted); margin-top:8px}
+  .metric .v small{font-size:16px; font-weight:600; color:var(--muted)}
+  .metric .d{font-size:14px; color:var(--muted); margin-top:8px}
   .metric.alt{border-top-color:var(--orange)}
   .metric.alt .v{color:var(--orange)}
 
@@ -60,11 +60,11 @@
   section{margin-top:44px}
   .sec-head{display:flex; align-items:baseline; gap:12px; border-bottom:2px solid var(--ink); padding-bottom:8px; margin-bottom:16px}
   .sec-num{
-    font-size:13px; font-weight:800; color:var(--card); background:var(--ink);
+    font-size:14px; font-weight:800; color:var(--card); background:var(--ink);
     padding:2px 10px; border-radius:5px; letter-spacing:.05em; white-space:nowrap;
   }
   h2{font-size:clamp(20px,2.6vw,26px); margin:0; font-weight:750; letter-spacing:-.01em}
-  h3{font-size:12.5px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin:0 0 6px}
+  h3{font-size:13.5px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin:0 0 6px}
   .lede{color:#354138; max-width:880px; margin:0 0 14px}
   .muted{color:var(--muted)}
   a{color:var(--green)}
@@ -76,9 +76,9 @@
     border:1px solid var(--line); border-radius:10px; padding:12px 12px 10px;
   }
   .node.key{border-color:var(--green); border-width:1.5px}
-  .node .step{font-size:11px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase}
+  .node .step{font-size:12px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase}
   .node .name{font-weight:700; margin:3px 0 4px}
-  .node .plain{font-size:12.5px; color:var(--muted)}
+  .node .plain{font-size:13.5px; color:var(--muted); overflow-wrap:anywhere} color:var(--muted)}
   .arrow{align-self:center; font-size:22px; color:var(--orange); font-weight:700; flex:0 0 auto}
   .formula{
     background:#eef3ec; border:1px solid var(--line); border-left:4px solid var(--green);
@@ -88,7 +88,7 @@
   .decision-row{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
   .decision{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:11px 13px}
   .decision .d-name{font-weight:800; font-size:14px}
-  .decision .d-plain{font-size:12.5px; color:var(--muted); margin-top:3px}
+  .decision .d-plain{font-size:13.5px; color:var(--muted); margin-top:3px}
   .decision.ok .d-name{color:var(--green)}
   .decision.hold .d-name{color:var(--orange)}
   .decision.no .d-name{color:var(--red)}
@@ -96,13 +96,13 @@
   /* ---- figures ---- */
   figure{margin:16px 0 6px}
   figure img{width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:10px; background:#fff}
-  figcaption{font-size:12.5px; color:var(--muted); margin-top:7px}
+  figcaption{font-size:13.5px; color:var(--muted); margin-top:7px}
   figcaption b{color:var(--ink)}
 
   /* ---- table ---- */
   table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden}
-  th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; font-size:14px}
-  th{background:#eef3ec; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); border-bottom:2px solid var(--line)}
+  th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; font-size:15px}
+  th{background:#eef3ec; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); border-bottom:2px solid var(--line)}
   tr:last-child td{border-bottom:none}
   td b, td .big{color:var(--ink)}
   td .pos{color:var(--green); font-weight:700}
@@ -112,15 +112,15 @@
   .table-wrap table{min-width:560px}
 
   /* ---- callout ---- */
-  .note{background:#f6ecdc; border-left:4px solid var(--orange); padding:11px 15px; border-radius:8px; margin:12px 0; font-size:14px}
+  .note{background:#f6ecdc; border-left:4px solid var(--orange); padding:11px 15px; border-radius:8px; margin:12px 0; font-size:15px}
   .note.green{background:#e9eee5; border-left-color:var(--green)}
   .note.red{background:#f6e7e6; border-left-color:var(--red)}
 
   /* ---- grids of cards ---- */
   .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px}
   .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 16px 14px}
-  .card .c-title{font-weight:750; margin-bottom:6px; font-size:15.5px}
-  .card .c-row{font-size:13.5px; margin-top:6px}
+  .card .c-title{font-weight:750; margin-bottom:6px; font-size:16.5px}
+  .card .c-row{font-size:14.5px; margin-top:6px; overflow-wrap:anywhere}
   .card .c-row .lbl{color:var(--muted); font-weight:600}
   .stat{font-size:20px; font-weight:800}
   .stat.pos{color:var(--green)} .stat.warn{color:var(--orange)} .stat.neg{color:var(--red)}
@@ -129,20 +129,20 @@
   .demo-box{background:var(--card); border:1px dashed var(--orange); border-radius:12px; padding:18px 18px 14px}
   .toggle{display:inline-flex; gap:10px; align-items:center; flex-wrap:wrap; margin:8px 0}
   .toggle button{
-    font:inherit; font-size:13.5px; font-weight:700; cursor:pointer;
+    font:inherit; font-size:14.5px; font-weight:700; cursor:pointer;
     padding:6px 14px; border-radius:8px; border:1.5px solid var(--line); background:#fff; color:var(--ink);
   }
   .toggle button.active{border-color:var(--green); background:var(--green); color:#fff}
   .live{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:12px}
   .live .box{background:#fbfaf4; border:1px solid var(--line); border-radius:10px; padding:11px 13px}
-  .live .box .lk{font-size:11.5px; letter-spacing:.06em; color:var(--muted); text-transform:uppercase}
+  .live .box .lk{font-size:12.5px; letter-spacing:.06em; color:var(--muted); text-transform:uppercase}
   .live .box .lv{font-size:22px; font-weight:800; margin-top:2px}
 
   .footer{
     margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
-    font-size:12.5px; color:var(--muted);
+    font-size:13.5px; color:var(--muted);
   }
-  .footer code{font-family:ui-monospace,"Consolas",monospace; font-size:12px; color:var(--ink)}
+  .footer code{font-family:ui-monospace,"Consolas",monospace; font-size:13px; color:var(--ink)}
 
   /* ---- responsive ---- */
   @media (max-width:720px){
@@ -158,28 +158,28 @@
 <main class="wrap">
 
   <div class="banner">
-    <span><b>DEVELOPMENT ONLY</b> · AI_PROVISIONAL</span>
+    <span><b>仅开发版</b> · AI_PROVISIONAL（AI 临时标注）</span>
     <span class="sep">|</span>
     <span>全部数字来自开发切片（N=70），未经正式验证。</span>
     <span class="sep">|</span>
     <span class="chips">
-      <span class="chip warn">FORMAL GATE NOT_RUN</span>
-      <span class="chip mute">R1 0/70 · R2 0/70</span>
+      <span class="chip warn">正式门未运行 · FORMAL GATE NOT_RUN</span>
+      <span class="chip mute">人工复核 R1 0/70 · R2 0/70</span>
     </span>
   </div>
 
   <header>
     <div class="tag">赛道一 · 教育 AI 增量价值评价</div>
-    <h1>Evidence-Aware Evaluation Framework</h1>
-    <p class="subtitle">Separating Observed Performance from Evidence Support</p>
-    <p class="rq"><b>Observed Result ≠ Reliable Evidence.</b> 当证据缺失、冲突或低可信时，Raw Signal 不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
+    <h1>证据感知评价框架</h1>
+    <p class="subtitle">Evidence-Aware Evaluation Framework ｜ 把「表现水平」与「证据支持」分开</p>
+    <p class="rq"><b>观察到的结果 ≠ 可靠证据（Observed Result ≠ Reliable Evidence）。</b> 当证据缺失、冲突或低可信时，原始信号（Raw Signal）不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
   </header>
 
   <section class="metrics">
     <div class="metric">
       <div class="k">Score · 归一化证据分数 (ABL)</div>
       <div class="v">3.5625</div>
-      <div class="d">Raw 与 Adjusted 相同 —— 公共缩放退化，<b>不是提升</b>。伴生 HOT 0.375 · Gap 1.125。</div>
+      <div class="d">原始 Raw 与调整后 Adjusted 相同 —— 公共缩放退化，<b>不是提升</b>。伴随 HOT 0.375 · Gap 1.125。</div>
     </div>
     <div class="metric alt">
       <div class="k">Support Mass · 有效支持权重</div>
@@ -195,37 +195,37 @@
 
   <!-- ================= SECTION 1 ================= -->
   <section id="rq">
-    <div class="sec-head"><span class="sec-num">1</span><h2>Research Question</h2></div>
+    <div class="sec-head"><span class="sec-num">1</span><h2>研究问题 Research Question</h2></div>
     <p class="lede">AI 辅助学习里，学生的答案、操作和行为并不都同样可信：有的记录信息完整、学生独立完成；有的带有明显 AI 引导、上下文截断或来源冲突。<b>看见一个高分，不等于这条分数有同样高的证据支持。</b></p>
     <p class="muted">研究问题：给定可观察的学生证据记录，如何显式地把 <b>表现水平</b> 与 <b>证据支持度</b> 分开，从而在证据不足时拒绝装作确定？</p>
   </section>
 
   <!-- ================= SECTION 2 ================= -->
   <section id="model">
-    <div class="sec-head"><span class="sec-num">2</span><h2>Core Model</h2></div>
-    <p class="lede">每条观察拆成 <b>Raw Signal</b>（表现有多高）与 <b>Evidence Reliability</b>（这条表现有多可信），再降权汇总。</p>
+    <div class="sec-head"><span class="sec-num">2</span><h2>核心模型 Core Model</h2></div>
+    <p class="lede">每条观察拆成 <b>原始信号 Raw Signal</b>（表现有多高）与 <b>证据可靠性 Evidence Reliability</b>（这条表现有多可信），再降权汇总。</p>
 
     <div class="pipeline">
-      <div class="node key"><div class="step">Input</div><div class="name">Observed Evidence</div><div class="plain">学生证据记录：Task/Student Bloom、confidence、prompt/context 标志</div></div>
+      <div class="node key"><div class="step">输入 Input</div><div class="name">可观察证据（Observed Evidence）</div><div class="plain">学生证据记录：任务/学生 Bloom 层级、置信度 confidence、提示与上下文标志</div></div>
       <div class="arrow">→</div>
-      <div class="node"><div class="step">Signal</div><div class="name">Raw Signal</div><div class="plain">可判读则编码 L1–L6；不可判读不强行编码</div></div>
+      <div class="node"><div class="step">信号 Signal</div><div class="name">原始信号（Raw Signal）</div><div class="plain">可判读则编码 L1–L6；不可判读不强行编码</div></div>
       <div class="arrow">→</div>
-      <div class="node key"><div class="step">Support</div><div class="name">Reliability</div><div class="plain">w<sub>i</sub>：确定性支持权重（不是概率）</div></div>
+      <div class="node key"><div class="step">支持 Support</div><div class="name">可靠性（Reliability）</div><div class="plain">w<sub>i</sub>：确定性支持权重（不是概率）</div></div>
       <div class="arrow">→</div>
-      <div class="node"><div class="step">Adjust</div><div class="name">Adjusted Evaluation</div><div class="plain">Adjusted<sub>i</sub> = Raw<sub>i</sub> × w<sub>i</sub></div></div>
+      <div class="node"><div class="step">调整 Adjust</div><div class="name">调整后评价（Adjusted Evaluation）</div><div class="plain">Adjusted<sub>i</sub> = Raw<sub>i</sub> × w<sub>i</sub></div></div>
       <div class="arrow">→</div>
-      <div class="node"><div class="step">Aggregate</div><div class="name">Support / Coverage</div><div class="plain">S = Σw<sub>i</sub>；C<sub>eff</sub> = Σw<sub>i</sub>/N，N=70</div></div>
+      <div class="node"><div class="step">汇总 Aggregate</div><div class="name">支持 / 覆盖（Support / Coverage）</div><div class="plain">S = Σw<sub>i</sub>；C<sub>eff</sub> = Σw<sub>i</sub>/N，N=70</div></div>
       <div class="arrow">→</div>
-      <div class="node key"><div class="step">Decide</div><div class="name">Decision</div><div class="plain">ACCEPT / ABSTAIN / NO_EFFECTIVE_EVIDENCE</div></div>
+      <div class="node key"><div class="step">判定 Decide</div><div class="name">决策（Decision）</div><div class="plain">ACCEPT（接受）/ ABSTAIN（暂不判断）/ NO_EFFECTIVE_EVIDENCE（无有效证据）</div></div>
     </div>
 
     <div class="formula">w<sub>i</sub> = I(observable<sub>i</sub>) · c<sub>i</sub> · (1 − λ<sub>prompt</sub>·p<sub>i</sub>) · (1 − λ<sub>context</sub>·t<sub>i</sub>)</div>
     <p class="muted" style="margin-top:-2px">人话：先确认有可判读证据，再按置信度（c<sub>i</sub> ∈ {high=1, medium=0.75, low=0.5}）、提示风险（p<sub>i</sub>）与上下文风险（t<sub>i</sub>）给支持权重。默认 λ<sub>prompt</sub>=0.5、λ<sub>context</sub>=0.5。乘法结构让低支持贡献<b>不被放大</b>。</p>
 
     <div class="decision-row">
-      <div class="decision ok"><div class="d-name">ACCEPT</div><div class="d-plain">支持规则通过才接受（本切片记作 DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT）。</div></div>
-      <div class="decision hold"><div class="d-name">ABSTAIN</div><div class="d-plain">证据不足或冲突时暂缓判断（低支持记作 LOW_SUPPORT）。</div></div>
-      <div class="decision no"><div class="d-name">NO_EFFECTIVE_EVIDENCE</div><div class="d-plain">权重为零或无可判读证据 —— 不填 0 分。</div></div>
+      <div class="decision ok"><div class="d-name">ACCEPT · 接受</div><div class="d-plain">支持规则通过才接受（本切片记作 DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT）。</div></div>
+      <div class="decision hold"><div class="d-name">ABSTAIN · 暂不判断</div><div class="d-plain">证据不足或冲突时暂缓判断（低支持记作 LOW_SUPPORT）。</div></div>
+      <div class="decision no"><div class="d-name">NO_EFFECTIVE_EVIDENCE · 无有效证据</div><div class="d-plain">权重为零或无可判读证据 —— 不填 0 分。</div></div>
     </div>
 
     <figure>
@@ -235,25 +235,25 @@
 
     <!-- interactive demo -->
     <div class="demo-box" id="interactive">
-      <h3>Interactive Demonstration · 交互演示（确定性复算，非 LLM 输出）</h3>
-      <p class="muted" style="font-size:13.5px">以真实开发案例 <b>P108</b>（Raw Evidence = L6，confidence = medium，context 未截断）为起点，只切换「是否带 prompt 风险」。这是冻结公式对输入字段的机械响应，<b>不是新实验、不是实时 AI 分析、不构成研究证据</b>。</p>
+      <h3>交互演示 Interactive Demonstration（确定性复算，非 LLM 输出）</h3>
+      <p class="muted" style="font-size:14.5px">以真实开发案例 <b>P108</b>（Raw Evidence = L6，confidence = medium，context 未截断）为起点，只切换「是否带 prompt 风险」。这是冻结公式对输入字段的机械响应，<b>不是新实验、不是实时 AI 分析、不构成研究证据</b>。</p>
       <div class="toggle">
         <span class="muted">prompt_induced：</span>
         <button id="btnPromptOn" class="active" type="button">true（默认）</button>
         <button id="btnPromptOff" type="button">false（移除提示风险）</button>
       </div>
       <div class="live">
-        <div class="box"><div class="lk">Reliability w</div><div class="lv" id="demoR">0.375</div></div>
-        <div class="box"><div class="lk">Adjusted (Raw 6 × w)</div><div class="lv" id="demoA">2.25</div></div>
-        <div class="box"><div class="lk">Status → Decision</div><div class="lv" id="demoD" style="font-size:16px">LOW_SUPPORT → ABSTAIN</div></div>
+        <div class="box"><div class="lk">可靠性 Reliability w</div><div class="lv" id="demoR">0.375</div></div>
+        <div class="box"><div class="lk">调整后 Adjusted（Raw 6 × w）</div><div class="lv" id="demoA">2.25</div></div>
+        <div class="box"><div class="lk">状态 → 决策 Status → Decision</div><div class="lv" id="demoD" style="font-size:16px">LOW_SUPPORT → ABSTAIN</div></div>
       </div>
     </div>
   </section>
 
   <!-- ================= SECTION 3 ================= -->
   <section id="result">
-    <div class="sec-head"><span class="sec-num">3</span><h2>Core Finding</h2></div>
-    <p class="lede"><b>Score Stability ≠ Evidence Support Stability.</b> 归一化分数保持不变，而有效证据支持显著下降 —— 分数稳定，不等于支撑它的证据同样稳定。</p>
+    <div class="sec-head"><span class="sec-num">3</span><h2>核心发现 Core Finding</h2></div>
+    <p class="lede"><b>分数稳定 ≠ 证据支撑稳定（Score Stability ≠ Evidence Support Stability）。</b> 归一化分数保持不变，而有效证据支持显著下降 —— 分数稳定，不等于支撑它的证据同样稳定。</p>
 
     <div class="cards" style="margin-bottom:14px">
       <div class="card" style="border-top:3px solid var(--green)">
@@ -262,12 +262,12 @@
         <div class="c-row muted">M0 → M3 全程不变 —— 公共缩放退化，<b>不是提升</b>。</div>
       </div>
       <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="c-title">Effective Support（Σw）</div>
+        <div class="c-title">有效支持 Effective Support（Σw）</div>
         <div class="stat warn">16 → 12 → 6 → 6</div>
         <div class="c-row muted">M0 → M1 → M2 → M3，<b>证据支撑下降</b>。</div>
       </div>
       <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="c-title">Coverage（Σw / N，N=70）</div>
+        <div class="c-title">覆盖率 Coverage（Σw / N，N=70）</div>
         <div class="stat warn" style="font-size:16px">0.228571 → 0.171429 → 0.085714 → 0.085714</div>
         <div class="c-row muted">覆盖率随支持同步下降。</div>
       </div>
@@ -275,7 +275,7 @@
 
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Model</th><th>Components</th><th>Score (ABL)</th><th>Effective Support</th><th>Coverage (N=70)</th></tr></thead>
+        <thead><tr><th>模型 Model</th><th>组件 Components</th><th>分数 Score (ABL)</th><th>有效支持 Effective Support</th><th>覆盖率 Coverage (N=70)</th></tr></thead>
         <tbody>
           <tr><td>M0</td><td>无校正（Raw-only）</td><td>3.5625</td><td class="big">16</td><td>0.228571</td></tr>
           <tr><td>M1</td><td>+ confidence</td><td>3.5625</td><td>12</td><td>0.171429</td></tr>
@@ -297,44 +297,44 @@
 
   <!-- ================= SECTION 4 ================= -->
   <section id="validation">
-    <div class="sec-head"><span class="sec-num">4</span><h2>Five Validation Paths</h2></div>
-    <p class="lede">每条路径只给 <b>Question / Key Result / Meaning / Limit</b>，不铺长文。</p>
+    <div class="sec-head"><span class="sec-num">4</span><h2>五条验证路径 Five Validation Paths</h2></div>
+    <p class="lede">每条路径只给 <b>问题 Question / 关键结果 Key Result / 含义 Meaning / 证据边界 Limit</b>，不铺长文。</p>
 
     <div class="cards">
       <div class="card">
-        <div class="c-title">1 · Baseline</div>
-        <div class="c-row"><span class="lbl">Question</span>：可靠性层是否必要？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：四模型 ABL 均 3.5625；Raw-only support=16，主模型=6。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：可靠性层带来 Raw-only 没有的 graded support。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不证明乘法形式必需；不证明精度/预测优越。</div>
+        <div class="c-title">1 · 基线对比 Baseline</div>
+        <div class="c-row"><span class="lbl">问题 Question</span>：可靠性层是否必要？</div>
+        <div class="c-row"><span class="lbl">关键结果 Key Result</span>：四模型 ABL 均 3.5625；Raw-only support=16，主模型=6。</div>
+        <div class="c-row"><span class="lbl">含义 Meaning</span>：可靠性层带来 Raw-only 没有的 graded support。</div>
+        <div class="c-row"><span class="lbl">证据边界 Limit</span>：不证明乘法形式必需；不证明精度/预测优越。</div>
       </div>
       <div class="card">
-        <div class="c-title">2 · Ablation</div>
-        <div class="c-row"><span class="lbl">Question</span>：组件是否只是装饰？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：有效权重 16→12→6→6，分数恒 3.5625。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：confidence / prompt 组件确实改变 support accounting。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：模块差异 ≠ 独立因果效应；context 无变异不可识别。</div>
+        <div class="c-title">2 · 组件消融 Ablation</div>
+        <div class="c-row"><span class="lbl">问题 Question</span>：组件是否只是装饰？</div>
+        <div class="c-row"><span class="lbl">关键结果 Key Result</span>：有效权重 16→12→6→6，分数恒 3.5625。</div>
+        <div class="c-row"><span class="lbl">含义 Meaning</span>：confidence / prompt 组件确实改变 support accounting。</div>
+        <div class="c-row"><span class="lbl">证据边界 Limit</span>：模块差异 ≠ 独立因果效应；context 无变异不可识别。</div>
       </div>
       <div class="card">
-        <div class="c-title">3 · Sensitivity / Robustness</div>
-        <div class="c-row"><span class="lbl">Question</span>：现象是否只是单一参数点产生？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：±10%/±20% → 0 个 decision-state flips；693 网格 660 defined / 33 undefined。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：局部结构稳定性；学生 ranking 为 NOT_APPLICABLE。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不是统计置信区间，也不是全局稳健性。</div>
+        <div class="c-title">3 · 敏感性与稳健性 Sensitivity / Robustness</div>
+        <div class="c-row"><span class="lbl">问题 Question</span>：现象是否只是单一参数点产生？</div>
+        <div class="c-row"><span class="lbl">关键结果 Key Result</span>：±10%/±20% → 0 个 decision-state flips；693 网格 660 defined / 33 undefined。</div>
+        <div class="c-row"><span class="lbl">含义 Meaning</span>：局部结构稳定性；学生 ranking 为 NOT_APPLICABLE。</div>
+        <div class="c-row"><span class="lbl">证据边界 Limit</span>：不是统计置信区间，也不是全局稳健性。</div>
       </div>
       <div class="card">
-        <div class="c-title">4 · Failure Case</div>
-        <div class="c-row"><span class="lbl">Question</span>：高 Raw 是否仍被接受？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：P108 L6 → R=0.375 → LOW_SUPPORT；P072/P035 返回 NO_EFFECTIVE_EVIDENCE。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：High Raw ≠ High Evidence Support；Missing Evidence ≠ Score 0。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不是准确率/真实错误率；无 true outcome。</div>
+        <div class="c-title">4 · 反例与失败分析 Failure Case</div>
+        <div class="c-row"><span class="lbl">问题 Question</span>：高 Raw 是否仍被接受？</div>
+        <div class="c-row"><span class="lbl">关键结果 Key Result</span>：P108 L6 → R=0.375 → LOW_SUPPORT；P072/P035 返回 NO_EFFECTIVE_EVIDENCE。</div>
+        <div class="c-row"><span class="lbl">含义 Meaning</span>：High Raw ≠ High Evidence Support；Missing Evidence ≠ Score 0。</div>
+        <div class="c-row"><span class="lbl">证据边界 Limit</span>：不是准确率/真实错误率；无 true outcome。</div>
       </div>
       <div class="card">
-        <div class="c-title">5 · External Transfer</div>
-        <div class="c-row"><span class="lbl">Question</span>：是否只为教育数据硬写？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：BTC n=1698：Gate1/Gate2 SUPPORTED，Gate3 NOT SUPPORTED。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：结构可迁移（structural portability）。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：非教育泛化/交易优势；不能成为第二主线。</div>
+        <div class="c-title">5 · 外部迁移 External Transfer</div>
+        <div class="c-row"><span class="lbl">问题 Question</span>：是否只为教育数据硬写？</div>
+        <div class="c-row"><span class="lbl">关键结果 Key Result</span>：BTC n=1698：Gate1/Gate2 SUPPORTED，Gate3 NOT SUPPORTED。</div>
+        <div class="c-row"><span class="lbl">含义 Meaning</span>：结构可迁移（structural portability）。</div>
+        <div class="c-row"><span class="lbl">证据边界 Limit</span>：非教育泛化/交易优势；不能成为第二主线。</div>
       </div>
     </div>
 
@@ -346,30 +346,30 @@
 
   <!-- ================= SECTION 5 ================= -->
   <section id="failure">
-    <div class="sec-head"><span class="sec-num">5</span><h2>Failure Case</h2></div>
-    <p class="lede">让评委一眼看懂两件事：<b>High Raw ≠ High Evidence Support</b>；<b>Missing Evidence ≠ Score 0</b>。</p>
+    <div class="sec-head"><span class="sec-num">5</span><h2>失败案例 Failure Case</h2></div>
+    <p class="lede">让评委一眼看懂两件事：<b>高原始信号 ≠ 高证据支持（High Raw ≠ High Evidence Support）</b>；<b>证据缺失 ≠ 零分（Missing Evidence ≠ Score 0）</b>。</p>
 
     <div class="cards">
       <div class="card" style="border-left:4px solid var(--orange)">
         <div class="c-title">P108 · 高 Raw / 低支持</div>
-        <div class="c-row"><span class="lbl">Raw</span> = L6（最高证据等级）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="warn">0.375</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="warn">2.25</span>（6 × 0.375）</div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="warn">LOW_SUPPORT / ABSTAIN</span></div>
+        <div class="c-row"><span class="lbl">原始 Raw</span> = L6（最高证据等级）</div>
+        <div class="c-row"><span class="lbl">可靠性 Reliability</span> = <span class="warn">0.375</span></div>
+        <div class="c-row"><span class="lbl">调整后 Adjusted</span> = <span class="warn">2.25</span>（6 × 0.375）</div>
+        <div class="c-row"><span class="lbl">决策 Decision</span> = <span class="warn">LOW_SUPPORT / ABSTAIN</span></div>
       </div>
       <div class="card" style="border-left:4px solid var(--red)">
         <div class="c-title">P072 · 无有效证据</div>
-        <div class="c-row"><span class="lbl">Raw</span> = 不可判读（未编码）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="neg">0</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="neg">null（不填 0）</span></div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
+        <div class="c-row"><span class="lbl">原始 Raw</span> = 不可判读（未编码）</div>
+        <div class="c-row"><span class="lbl">可靠性 Reliability</span> = <span class="neg">0</span></div>
+        <div class="c-row"><span class="lbl">调整后 Adjusted</span> = <span class="neg">null（不填 0）</span></div>
+        <div class="c-row"><span class="lbl">决策 Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
       </div>
       <div class="card" style="border-left:4px solid var(--red)">
         <div class="c-title">P035 · 无有效证据</div>
-        <div class="c-row"><span class="lbl">Raw</span> = 不可判读（未编码）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="neg">0</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="neg">null（不填 0）</span></div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
+        <div class="c-row"><span class="lbl">原始 Raw</span> = 不可判读（未编码）</div>
+        <div class="c-row"><span class="lbl">可靠性 Reliability</span> = <span class="neg">0</span></div>
+        <div class="c-row"><span class="lbl">调整后 Adjusted</span> = <span class="neg">null（不填 0）</span></div>
+        <div class="c-row"><span class="lbl">决策 Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
       </div>
     </div>
 
@@ -387,26 +387,26 @@
 
   <!-- ================= SECTION 6 ================= -->
   <section id="challenger">
-    <div class="sec-head"><span class="sec-num">6</span><h2>Challenger Models</h2></div>
+    <div class="sec-head"><span class="sec-num">6</span><h2>对比模型 Challenger Models</h2></div>
     <p class="lede">简洁比较，<b>不做 winner 排名</b>。ranking 在当前切片为 NOT_APPLICABLE。</p>
 
     <div class="cards">
       <div class="card" style="border-top:3px solid var(--green)">
-        <div class="c-title">Main Model</div>
+        <div class="c-title">主模型 Main Model</div>
         <div class="c-row">transparent · auditable · abstention-aware</div>
         <div class="c-row muted">显式分离 performance 与 evidence support；证据不足即拒判，不伪装确定。</div>
       </div>
       <div class="card" style="border-top:3px solid var(--blue)">
-        <div class="c-title">ML Challenger</div>
+        <div class="c-title">机器学习对照 ML Challenger</div>
         <div class="c-row">LogReg acc ≈ 0.876 · Tree ≈ 0.919 · RF ≈ 0.922（CV）</div>
         <div class="c-row muted">16 个正例、代理标签、无 holdout、缺失降级 0.71–0.81、RF 跨学期 0.588。</div>
-        <div class="c-row"><span class="lbl">结论</span>：<span class="warn">INSUFFICIENT_FOR_STRONG_ML_CLAIM</span></div>
+        <div class="c-row"><span class="lbl">结论 Conclusion</span>：<span class="warn">INSUFFICIENT_FOR_STRONG_ML_CLAIM</span></div>
       </div>
       <div class="card" style="border-top:3px solid var(--blue)">
-        <div class="c-title">Alternative Formulations</div>
+        <div class="c-title">备选形式 Alternative Formulations</div>
         <div class="c-row">乘法 / 加法 / gated / 非线性，四种结构。</div>
         <div class="c-row muted">B(λ=0.5) RMSE vs Raw = 0.3125（最小）；C gated 在 16 条全部 ABSTAIN；rank stability 1.0。</div>
-        <div class="c-row"><span class="lbl">结论</span>：<span class="warn">NO_SINGLE_DOMINANT_MODEL</span></div>
+        <div class="c-row"><span class="lbl">结论 Conclusion</span>：<span class="warn">NO_SINGLE_DOMINANT_MODEL</span></div>
       </div>
     </div>
     <div class="note green">没有模型在拟合、安全、覆盖、可解释、迁移、复杂度上全面胜出 —— 主模型的价值在「可审计 + 拒判意识」，而非「预测更准」。</div>
@@ -414,12 +414,12 @@
 
   <!-- ================= SECTION 7 ================= -->
   <section id="transfer">
-    <div class="sec-head"><span class="sec-num">7</span><h2>External Structural Transfer</h2></div>
+    <div class="sec-head"><span class="sec-num">7</span><h2>外部结构迁移 External Structural Transfer</h2></div>
     <p class="lede">金融案例（BTC，n = 1698，threshold 0.65）只表达一件事：<b>同一结构可以迁移</b> —— Raw → Reliability → Adjusted → Accept / Abstain。<b>失败结果必须保留。</b></p>
 
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Gate</th><th>判据</th><th>结果</th><th>数字</th></tr></thead>
+        <thead><tr><th>关卡 Gate</th><th>判据</th><th>结果</th><th>数字</th></tr></thead>
         <tbody>
           <tr><td>Gate 1</td><td>信息质量/完整度下降时 Reliability 是否下降</td><td class="pos">SUPPORTED</td><td>Reliability 0.603 → 0.408</td></tr>
           <tr><td>Gate 2</td><td>低 Reliability 是否提高 abstention、降低 coverage</td><td class="pos">SUPPORTED</td><td>coverage 0.394 → 0.001</td></tr>
@@ -437,31 +437,31 @@
 
   <!-- ================= SECTION 8 ================= -->
   <section id="limitations">
-    <div class="sec-head"><span class="sec-num">8</span><h2>Limitations / Evidence Status</h2></div>
+    <div class="sec-head"><span class="sec-num">8</span><h2>局限与证据状态 Limitations / Evidence Status</h2></div>
     <p class="lede">这不是「自曝缺点」，而是<b>证据边界</b> —— 明确当前证据能支持什么、不能支持什么。</p>
 
     <div class="table-wrap" style="margin-bottom:14px">
       <table style="min-width:0">
-        <thead><tr><th>Evidence Status</th><th>值</th></tr></thead>
+        <thead><tr><th>证据状态 Evidence Status</th><th>值</th></tr></thead>
         <tbody>
-          <tr><td>Development Sample</td><td class="big">70</td></tr>
-          <tr><td>Readable Evidence</td><td class="big">16</td></tr>
-          <tr><td>NO_EFFECTIVE_EVIDENCE</td><td class="big">54</td></tr>
-          <tr><td>Human R1 / R2</td><td class="warn">0 / 70 · 0 / 70</td></tr>
-          <tr><td>Formal Gate</td><td class="warn">NOT_RUN</td></tr>
-          <tr><td>AI Increment</td><td class="neg">NOT_SUPPORTED</td></tr>
-          <tr><td>External Transfer</td><td class="warn">STRUCTURAL ONLY</td></tr>
+          <tr><td>开发样本 Development Sample</td><td class="big">70</td></tr>
+          <tr><td>可判读证据 Readable Evidence</td><td class="big">16</td></tr>
+          <tr><td>NO_EFFECTIVE_EVIDENCE（无有效证据）</td><td class="big">54</td></tr>
+          <tr><td>人工复核 Human R1 / R2</td><td class="warn">0 / 70 · 0 / 70</td></tr>
+          <tr><td>正式验证门 Formal Gate</td><td class="warn">NOT_RUN</td></tr>
+          <tr><td>AI 增量 AI Increment</td><td class="neg">NOT_SUPPORTED</td></tr>
+          <tr><td>外部迁移 External Transfer</td><td class="warn">STRUCTURAL ONLY</td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="cards">
-      <div class="card"><div class="c-title">Development-only</div><div class="c-row muted">全部结果来自 AI_PROVISIONAL 开发切片，不是正式验证结果。</div></div>
-      <div class="card"><div class="c-title">Human Gate</div><div class="c-row"><span class="lbl">R1</span> = 0/70 · <span class="lbl">R2</span> = 0/70 · <span class="lbl">Formal Gate</span> = <span class="warn">NOT_RUN</span></div></div>
-      <div class="card"><div class="c-title">External Transfer</div><div class="c-row"><span class="warn">STRUCTURAL ONLY</span> —— 非教育泛化证据。</div></div>
-      <div class="card"><div class="c-title">AI Increment</div><div class="c-row"><span class="neg">NOT_SUPPORTED</span> —— 无合法配对的 Outcome_AI / Outcome_baseline。</div></div>
+      <div class="card"><div class="c-title">仅开发版 Development-only</div><div class="c-row muted">全部结果来自 AI_PROVISIONAL 开发切片，不是正式验证结果。</div></div>
+      <div class="card"><div class="c-title">人工验证门 Human Gate</div><div class="c-row"><span class="lbl">R1</span> = 0/70 · <span class="lbl">R2</span> = 0/70 · <span class="lbl">Formal Gate</span> = <span class="warn">NOT_RUN</span></div></div>
+      <div class="card"><div class="c-title">外部迁移 External Transfer</div><div class="c-row"><span class="warn">STRUCTURAL ONLY</span> —— 非教育泛化证据。</div></div>
+      <div class="card"><div class="c-title">AI 增量 AI Increment</div><div class="c-row"><span class="neg">NOT_SUPPORTED</span> —— 无合法配对的 Outcome_AI / Outcome_baseline。</div></div>
       <div class="card"><div class="c-title">参数身份</div><div class="c-row muted">c<sub>i</sub>、λ<sub>prompt</sub>、λ<sub>context</sub> 为 WEAKLY_JUSTIFIED_COMPONENT，未校准为概率。</div></div>
-      <div class="card"><div class="c-title">Outcome</div><div class="c-row muted">无正式 outcome —— 不能判断「预测对错」，OUTCOME NOT AVAILABLE。</div></div>
+      <div class="card"><div class="c-title">结果 Outcome</div><div class="c-row muted">无正式 outcome —— 不能判断「预测对错」，OUTCOME NOT AVAILABLE。</div></div>
     </div>
     <p class="muted" style="margin-top:12px">模型当前评价的是 AI 辅助环境下的<b>可观察表现与证据支持程度</b>，不能推出学生真实能力提升、长期学习增益、AI 因果效果、正式 AI 增量或能力排名。</p>
   </section>

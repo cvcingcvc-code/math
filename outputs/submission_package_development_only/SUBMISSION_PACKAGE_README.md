@@ -12,9 +12,10 @@ This package is ready for internal review, rehearsal, and development-only demon
 
 ## Contents
 
-- `paper/`: current paper PDF/HTML candidate
-- `slides/`: complete roadshow deck
-- `demo/`: self-contained browser demo and payload
+- `paper/`: final paper PDF/Markdown/editable DOCX plus submission candidate copies
+- `slides/`: complete 10-page final roadshow deck
+- `demo/`: self-contained Chinese browser demo and payload
+- `development/`: final F1–F6 SVG evidence figures
 - `reproduction/`: run instructions, run report, and development CSV outputs
 - `reports/`: core metrics, ablation, counterexamples, and numeric consistency records
 - `data/`: canonical Pilot V1 and AI exploratory prelabels
@@ -28,7 +29,7 @@ From the project root:
 python run_all.py
 ```
 
-Expected result: `PASS` with 32 checks. The chain never reads human R1/R2 labels. Formal mode remains fail-closed:
+The chain never reads human R1/R2 labels. The included package contains the frozen development outputs and audit records; Formal mode remains fail-closed:
 
 ```text
 python run_all.py --mode formal
