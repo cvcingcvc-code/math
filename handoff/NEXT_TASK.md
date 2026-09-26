@@ -6,9 +6,9 @@ Stage: S4-Pilot Annotation Gate
 
 ## 唯一下一任务
 
-**由同一名人工标注者完成 R1=`data/annotations/human/pilot_worksheet_A.csv`，至少间隔 24 小时后完成 R2=`data/annotations/human/pilot_worksheet_A_retest.csv`，然后运行 Gate 分析器。**
+**明天第一优先：负责人继续并完成 HUMAN R1=`data/annotations/human/pilot_worksheet_A.csv` 70/70；R1 完成后保存并记录完成时间与 SHA-256，满足至少 24 小时重测间隔后，再由负责人独立完成 R2=`data/annotations/human/pilot_worksheet_A_retest.csv` 70/70，然后运行 Gate 分析器。**
 
-明天先继续 R2；今天不得代填、不得复制 R1 到 R2、不得展示 R1 与 AI 标签对比。
+R1 未完成前不得开始 R2；今天不得代填、不得复制 R1 到 R2、不得展示 R1 与 AI 标签对比。
 
 执行前必读（顺序）：
 1. `data/annotations/human/README_ANNOTATOR.md`

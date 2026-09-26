@@ -49,9 +49,12 @@ Development-only：70 / 16 / 19 / 35；693 格中 660 defined、33 undefined；A
 - **P0**：正式人工 R1/R2 未完成 → Gate PENDING → 正式一致性系数、Formal AIV、学生排名均不可产生。
 - **P1**：team-ID 命名与最终封装命名/页数核对尚未完成；提交包目前只对内部评审/演示有效。
 
-## TOMORROW FIRST STEP
-1. 负责人继续人工标注：先完成 R1，再**至少间隔 24 小时**完成 R2（`data/annotations/human/pilot_worksheet_A_retest.csv`）。编辑器保存为 UTF-8 或 GB18030 均可，读取器已兼容。
-2. R1、R2 都完成后运行：
+## NEXT STEP (明天第一优先：继续 HUMAN R1)
+1. **负责人继续并完成 HUMAN R1 70/70**（`data/annotations/human/pilot_worksheet_A.csv`）；R1 未完成前不进入 R2。
+2. R1 完成后保存并冻结，记录完成时间与文件 SHA-256（备份到 `work/backups/`）。
+3. 按冻结标注协议满足 R1→R2 所需的重测间隔（至少 24 小时）。
+4. 再由负责人在不查看 R1 的前提下独立完成 HUMAN R2 70/70（`data/annotations/human/pilot_worksheet_A_retest.csv`）。
+5. R1、R2 都完整后运行：
    ```
    python src/run_s4_gate.py
    ```
@@ -59,7 +62,10 @@ Development-only：70 / 16 / 19 / 35；693 格中 660 defined、33 undefined；A
    ```
    python src/solo_retest_gate.py report --r1 data/annotations/human/pilot_worksheet_A.csv --r2 data/annotations/human/pilot_worksheet_A_retest.csv
    ```
-3. Gate PASS → 按 `FORMAL_GATE_SWITCH.md` 以 `python run_all.py --mode formal` 重跑并替换正式结果；Gate 不通过 → 保持开发边界、缩小结论，不得回改阈值。
+6. Gate PASS 后按 `FORMAL_GATE_SWITCH.md` 运行 `python run_all.py --mode formal` 并替换正式结果。
+7. 若 Gate 未通过：不修改预注册阈值、不倒推标签、不强行 formal，保持 `DEVELOPMENT_ONLY` 并如实报告验证结果。
+
+工作表保存为 UTF-8 或 GB18030 均可，读取器已兼容（只读，不回写标签）。
 
 ## DO NOT REDO / DO NOT TOUCH
 - 不重跑已冻结的开发实验（`run_all.py` 一致性验证除外）。
