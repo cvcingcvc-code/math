@@ -1,4 +1,10 @@
-# CHANGELOG
+## 2026-09-26 — 提交包验收与状态校正
+
+- 以当前 Git 与 handoff 为准完成提交包验收：论文、Figure 4、Demo、Demo payload 与核心数字来源均可读取；开发数字与状态口径一致。
+- 修正过期交付状态：`CURRENT_HANDOFF.md` 更新为实际 HEAD `f0c115f`；PENDING Gate 占位报告改为反映阈值文件已 `preregistered=true`，同时保留 Gate 未生成、R1/R2 未完成；历史 Figure 4 P1 标记改为已修复。
+- 赛题终版文件实际列出四类提交物：论文 PDF、复现包 ZIP（含 README/环境/数据字典/run_all）、结果数据表 CSV、路演 PDF/PPT；当前仓库未发现这些最终封装物，命名和页数要求仍需提交前核对。
+- `src/run_development_experiment.py` 与 `src/run_reliability_sensitivity.py` 因 pandas 环境安装失败，本轮标记为 `NOT RUN / BLOCKED_BY_PANDAS_ENVIRONMENT`，不得写成测试通过。
+- 正式 R1/R2 Gate 保持未完成；未生成正式一致性系数、Gate PASS、正式 AIV 或学生排名。
 
 ## 2026-09-25（深夜）— Figure 4 与 Score/Support 口径修复
 

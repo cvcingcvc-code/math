@@ -168,8 +168,8 @@ Demo payload 中的 stress test `E_strict_medium_scaffold` 会得到 ABL=3.75、
 ## 9. Difference classification
 
 - P0：0 个
-- P1：1 个
-  - Figure 4 SVG 标题暗示 Score + Support，但实际只画 effective coverage；同时横轴标为 `x`。当前 caption 文件已明确限制解释，但图文件本身仍存在展示风险。
+- P1：0 个（Figure 4 原 P1 已修复并由提交 `2359fbf` 固化）
+  - 历史问题：Figure 4 曾只画 effective coverage 且横轴为 `x`；当前 SVG 已直接画出 Score 与 Support，横轴也已修正。
 - P2：1 个
   - 正式论文首次介绍 coverage 时应显式注明 denominator = 70，避免评委误以为 denominator 是 16。现有数字没有算错，属于表达清晰度问题。
 

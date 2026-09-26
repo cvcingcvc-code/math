@@ -6,7 +6,7 @@
 
 2. 最新 commit SHA
 
-`c041e283fd97c437a4ce19c337c86fba03744627`
+`f0c115f`（当前 HEAD；此前提交 `2359fbf` 已修复 Figure 4）
 
 3. 当前唯一主任务
 

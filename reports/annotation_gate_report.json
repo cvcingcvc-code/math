@@ -11,7 +11,7 @@
     "worksheets": ["data/annotations/human/pilot_worksheet_A.csv", "data/annotations/human/pilot_worksheet_B.csv"],
     "key": "data/annotations/_keys/pilot_worksheet_key.csv",
     "thresholds": "validation/gate_thresholds.json",
-    "preregistered": false
+    "preregistered": true
   },
   "completed_checks": {
     "integrity_invariants_passed": 21,
