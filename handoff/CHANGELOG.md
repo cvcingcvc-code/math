@@ -148,3 +148,17 @@ Python 3.14.2 / pandas 3.0.1 / numpy 2.4.1 / scipy 1.18.0 / scikit-learn 1.9.0�
 - 修正 `src/run_s4_gate.py` 的入口行为：默认使用 R1 `pilot_worksheet_A.csv` 与 R2 `pilot_worksheet_A_retest.csv`，保留已存在文件，不再以旧 B 表覆盖人工输入。
 - Gate 占位报告同步标注 `single_annotator_test_retest` / `inter_rater=false`；正式 Gate 判定逻辑与阈值未改。
 - 空标签状态下运行 `python src/run_s4_gate.py`：21/21 integrity checks 通过，正确保持 PENDING。
+
+- 2026-09-26: completed 10-slide roadshow deck, assembled development-only submission package, updated README/reproduction status to 6 steps/32 checks, audited untracked files without deletion, and reran run_all.py (32/32 PASS). Formal R1/Gate untouched.
+
+# 2026-09-26 — Human R1 checkpoint + Gate 编码修复 + Demo 口径修复
+
+- **R1 保护**：为已开始填写的 `data/annotations/human/pilot_worksheet_A.csv` 建立备份（`work/backups/…_2026-09-26_1117_checkpoint.csv`）并提交 Git 检查点 `e8d4f67`；未改动任何标签。R1 状态记为 `IN_PROGRESS`（检查点 1/70），R2 `NOT_STARTED`，Formal Gate `NOT_RUN`。
+- **修复 Gate 读取编码崩溃（P0）**：负责人编辑器将 R1 保存为 GB18030，`src/run_s4_gate.py` 读取时 `UnicodeDecodeError`。新增 `src/csv_safe_read.py`（只读检测 UTF-8/GB18030），`src/run_s4_gate.py`、`src/annotation_gate_report.py`、`src/solo_retest_gate.py` 改用该读取器；不修改、不回写人工文件。用 GB18030 合成工作表完成 Gate 报告端到端软件测试。
+- **修复 Demo coverage 分母（P3）**：`reports/demo/index.html` 原先按 16 条可判读记录计算 effective coverage（显示 75%），与论文/报告的分母 70 不一致；改为 `total / 70`，基线恢复 17.14%。
+- **Demo 增强（P4）**：Panel C 增加 Raw baseline（λ=0）与 Adjusted Score 标注；新增 Panel E · Counterexamples（读取 `reports/development/counterexamples.csv`）；保留 `NO_EFFECTIVE_EVIDENCE`（不填 0）。Node 运行时自检 10/10 通过。
+- **提交包同步**：`outputs/submission_package_development_only/` 更新 `demo/index.html`、补入 4 张核心图至 `development/`，重新生成 MANIFEST（35 项逐一核对一致）。
+- `python run_all.py`：6 步 32/32 PASS；`python src/run_s4_gate.py` 在 R2 空白时保持 PENDING，R1 文件哈希前后不变。
+- 未修改：论文主体、冻结阈值、标注手册/澄清件、provisional 标签、正式 Gate 判定逻辑。
+
+

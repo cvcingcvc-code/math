@@ -33,11 +33,11 @@ python run_all.py --mode formal  # 预期被拒绝，见第 5 节
 | 4 | `src/verification/recompute_bounds.py` | 独立复算：`reports/verification/core_numbers_source_of_truth.json` 等 |
 | 5 | `src/build_development_results_csv.py` | 开发版结果表：`reports/submission/development_results_record_level.csv`、`development_results_summary.csv` |
 
-最终写出 `reports/submission/run_all_report.json`，并打印 `checks: 29/29 passed; result=PASS`。
+最终写出 `reports/submission/run_all_report.json`，并打印 `checks: 32/32 passed; result=PASS`。
 
-## 4. 29 项检查的含义
+## 4. 32 项检查的含义
 
-原有 27 项加上结果 CSV 的 2 项，全部是**一致性与口径检查，不是效果验证**：
+原有 30 项加上结果 CSV 与 core closure 的 2 项，全部是**一致性与口径检查，不是效果验证**：
 
 - 记录计数：70 / 16 / 19 / 35；参数网格 693 / 660 / 33。
 - Score 在所有有定义格上恒为 ABL=3.5625、HOT=0.375、Gap=1.125（容差 1e-9）。
@@ -66,3 +66,5 @@ python run_all.py --mode formal  # 预期被拒绝，见第 5 节
 - prompt 或 agent 的因果效应、AI 增量价值的因果估计。
 - “Score 稳定证明模型稳健”：当前 Score 稳定是 16 条 Evidence 参数字段完全相同带来的**公共缩放代数结果**。
 - 把 16 条开发 Evidence 的结论外推到 140 条正式样本或总体。
+
+

@@ -55,6 +55,7 @@
 | Development annotation loader | `src/development_data.py` | Added 2026-09-25 | 显式 `--mode development` 读取 AI_PROVISIONAL；默认 formal 路径不变；不可进入正式 Gate |
 | Development experiment entry | `src/run_development_experiment.py` | Added 2026-09-25 | 70 条 provisional 数据的透明行级 ABL/HOT/coverage/gap 探索链路；不训练分类器、不进入正式 Gate |
 | Core closure builder | `src/build_core_closure.py` | Added 2026-09-26 | Raw/Adjusted 指标、M0–M3 消融、真实反例与研究结论；仅 DEVELOPMENT_ONLY |
+| Worksheet-safe reader | `src/csv_safe_read.py` | Added 2026-09-26 | 兼容 UTF-8 / GB18030 只读读取人工工作表；不改写文件与标签 |
 
 ## Reports
 
@@ -103,4 +104,10 @@
 | Paper numeric consistency | `reports/verification/paper_numeric_consistency.md` | Verified 2026-09-25 | 论文数字和状态口径核对 |
 | Core numbers source of truth | `reports/verification/core_numbers_source_of_truth.json` | Verified 2026-09-25 | 当前开发数字唯一验真汇总 |
 | Reproduction review | `reports/verification/reproduction_review.md` | Verified 2026-09-25 | 独立审稿式复算结论与 P0/P1/P2 分类 |
+
+
+## Parallel closeout artifacts (2026-09-26)
+| Roadshow deck | outputs/education_ai_evidence_roadshow_v1_final.pptx | Complete, 10 slides, validation receipt in .codex-finalizer | Competition roadshow |
+| Development submission package | outputs/submission_package_development_only/ | Complete, 35 manifest entries | Internal review/demo package only |
+| Untracked audit | reports/verification/untracked_files_audit_2026-09-26.json | Complete, review-only, no deletions | Source ownership audit |
 

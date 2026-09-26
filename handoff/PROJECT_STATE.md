@@ -123,7 +123,7 @@ S4 Pilot Annotation Gate
 - Gate 分析器：`src/annotation_gate_report.py`（标签返回后一条命令出 Gate Report）
 - 一键入口：`src/run_s4_gate.py`
 
-**仍缺**：真实人工双标结果。当前 `pilot_worksheet_A|B.csv` 标注列全为空。
+**仍缺**：完整真实人工结果。2026-09-26 起负责人已在 `pilot_worksheet_A.csv` 开始填写（检查点 1/70，保存编码 GB18030），R2 `pilot_worksheet_A_retest.csv` 仍为空白；完整 R1/R2 返回前不得计算正式一致性。
 
 禁止在人工标注完成前报告正式 Cohen Kappa、weighted Kappa、Krippendorff Alpha。
 
@@ -174,3 +174,16 @@ Gate 状态不变：仍无人工标签。
 开发版测量闭环已完成并标记为 `RESEARCH_CORE_FROZEN_FOR_SUBMISSION`。`src/build_core_closure.py` 生成统一 Raw/Adjusted 指标、M0–M3 消融、真实记录反例和六问结论；`run_all.py` 已纳入该步骤，当前 32/32 检查通过。
 
 本冻结不改变正式 Gate、R1/R2、原始数据、标注手册、阈值或 Formal AIV 边界。16 条可判读 Evidence 全部 `prompt_induced=true`，因此当前数据只能支持“分数稳定与证据支持不稳定并存”的开发版测量结论；Formal AIV 仍为 `NOT_AVAILABLE_PENDING_FORMAL_GATE`。
+
+## Parallel closeout (2026-09-26)
+- Roadshow deck completed: outputs/education_ai_evidence_roadshow_v1_final.pptx (10 slides; structural/layout/import validation passed).
+- Demo, core numbers, status boundaries, and development artifacts rechecked; run_all.py passed 32/32.
+- Development-only submission package assembled at outputs/submission_package_development_only/ with manifest; no R1/Gate labels read or inferred.
+
+## Human R1 checkpoint and Gate-readiness fix (2026-09-26 late morning)
+- HUMAN_R1 = IN_PROGRESS（`pilot_worksheet_A.csv` 已开始填写，检查点 1/70，11:17 备份 + Git `e8d4f67`）；HUMAN_R2 = NOT_STARTED / WAITING_FOR_HUMAN；FORMAL_HUMAN_GATE = NOT_RUN。
+- 修复 Gate 读取崩溃：R1 被本地编辑器保存为 GB18030，新增 `src/csv_safe_read.py` 并让 Gate 三个脚本兼容 UTF-8/GB18030（只读，不回写）。
+- 修复 Demo coverage 分母错误（原按 16 条可判读记录计算，显示 75%；现按 70 条记录，显示 17.14%），并新增 Raw baseline 与 Counterexamples 面板；`run_all.py` 仍 32/32 PASS。
+- 提交包同步 `demo/index.html` 与 4 张核心图，MANIFEST 35 项一致。未修改论文主体、阈值、R1/R2 标签。
+
+

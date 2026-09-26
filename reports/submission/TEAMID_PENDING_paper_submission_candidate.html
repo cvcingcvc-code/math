@@ -165,7 +165,7 @@ effective coverage        = Σ w_i / N,   N = 70（全部 development records）
 <li><strong>Support 的敏感性</strong>：effective weight 在有定义组合上的中位数为 5.8，四分位数为 3.15 与 8.85。Support 对假设高度敏感，Score 则不敏感。</li>
 <li><strong>独立复算</strong>：<code>src/verification/recompute_bounds.py</code> 不依赖主实现，独立复现了 70/16/693/660/33 及全部边界值。</li>
 <li><strong>异质性检查</strong>：现有真实开发数据中，可判读 Evidence 的 prompt、context 和 confidence 均无变化，<strong>不支持</strong>异质 Evidence 的经验对比。本文没有修改标注，也没有构造合成数据冒充真实结果。</li>
-<li><strong>可复现性</strong>：从仓库根目录执行 <code>python run_all.py</code> 即可重跑完整开发链路（5 步）并完成 29 项一致性检查；重跑产物与仓库版本逐字节一致。开发版结果表见 <code>reports/submission/development_results_record_level.csv</code>，其中 AIV 与 ranking 均为 <code>NOT_AVAILABLE_PENDING_FORMAL_GATE</code>。环境、命令与边界见 <code>reports/submission/reproduction_notes.md</code>，字段定义见 <code>docs/data_dictionary.md</code>。这些检查只验证一致性与口径，不是效果验证。</li>
+<li><strong>可复现性</strong>：从仓库根目录执行 <code>python run_all.py</code> 即可重跑完整开发链路（6 步）并完成 32 项一致性检查；重跑产物与仓库版本逐字节一致。开发版结果表见 <code>reports/submission/development_results_record_level.csv</code>，其中 AIV 与 ranking 均为 <code>NOT_AVAILABLE_PENDING_FORMAL_GATE</code>。环境、命令与边界见 <code>reports/submission/reproduction_notes.md</code>，字段定义见 <code>docs/data_dictionary.md</code>。这些检查只验证一致性与口径，不是效果验证。</li>
 </ol>
 <h2>8. Limitations</h2>
 <p>当前<strong>不能</strong>宣称：正式研究结论；学生真实或长期能力；prompt/agent 的因果效应；正式 AI 增量价值或正式 AIV；学生排名或高风险决策依据。</p>

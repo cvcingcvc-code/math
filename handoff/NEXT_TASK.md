@@ -2,11 +2,13 @@
 
 Stage: S4-Pilot Annotation Gate
 
-当前状态：**READY_FOR_ANNOTATION**。协议阻塞已处理，标注包已交付；只差真实人工标签。
+当前状态：**HUMAN_R1_IN_PROGRESS**（负责人 2026-09-26 已开始填写 R1，检查点 1/70）。R2 未开始，Formal Gate 未运行。工作表可用 UTF-8 或 GB18030 保存，Gate 读取器已兼容两种编码。
 
 ## 唯一下一任务
 
-**由同一名人工标注者执行 R1=`data/annotations/human/pilot_worksheet_A.csv`，至少间隔 24 小时后执行 R2=`data/annotations/human/pilot_worksheet_A_retest.csv`，然后运行 Gate 分析器。**
+**由同一名人工标注者完成 R1=`data/annotations/human/pilot_worksheet_A.csv`，至少间隔 24 小时后完成 R2=`data/annotations/human/pilot_worksheet_A_retest.csv`，然后运行 Gate 分析器。**
+
+明天先继续 R2；今天不得代填、不得复制 R1 到 R2、不得展示 R1 与 AI 标签对比。
 
 执行前必读（顺序）：
 1. `data/annotations/human/README_ANNOTATOR.md`
@@ -80,3 +82,7 @@ python src/run_s4_gate.py
 
 在 `research/module_c_candidates.md` 增补"小样本收缩 AIV"：Beta-Binomial / 经验贝叶斯 HOT、最低证据量门槛、
 CTQ 降为 session/组级；用合成标签做误差传播与排名稳定性模拟（明确标为模拟，不是结果）。
+
+## Parallel closeout completed (2026-09-26)
+- Continue only non-R1 work: preserve deck/demo/package; after formal R1/R2 are complete, run the frozen Gate workflow supplied by the owner.
+

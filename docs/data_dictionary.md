@@ -85,4 +85,5 @@
 | `reports/verification/core_numbers_source_of_truth.json` | 独立复算得到的核心数字，`run_all.py` 以它为检查基准 |
 | `reports/demo/demo_payload.json` | Demo 数据（带状态标记） |
 | `reports/development/core_figure_4_bounds_support.svg` | Figure 4：Score 与 Support 随 `lambda_prompt` 变化 |
-| `reports/submission/run_all_report.json` | 每步退出码与 29 项检查结果 |
+| `reports/submission/run_all_report.json` | 每步退出码与 32 项检查结果 |
+
