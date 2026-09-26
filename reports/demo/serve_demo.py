@@ -7,6 +7,16 @@ PROJECT_ROOT = DEMO_ROOT.parent.parent
 
 
 class DemoHandler(SimpleHTTPRequestHandler):
+    def do_GET(self):
+        # Browsers auto-request /favicon.ico; the page ships an inline data-URI
+        # icon, so answer 204 instead of letting it 404 and pollute the console.
+        if self.path.split('?', 1)[0].split('#', 1)[0] in ('/favicon.ico', 'favicon.ico'):
+            self.send_response(204)
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return
+        return super().do_GET()
+
     def translate_path(self, path):
         # Strip query string / fragment before resolving.
         path = path.split('?', 1)[0].split('#', 1)[0]

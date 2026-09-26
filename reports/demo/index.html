@@ -3,507 +3,1207 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evidence-Aware Evaluation Framework · 赛道一 Demo</title>
+<title>当观测不等于证据 · Evidence-Aware Evaluation Framework</title>
 <style>
+  /* =========================================================
+     Design tokens — 浅色学术风，与 F1–F6 冻结图表同色系
+     主强调色：--green（学术深绿）  风险/限制强调色：--orange / --red
+     ========================================================= */
   :root{
-    --bg:#f7f3e8; --card:#fffdf7; --ink:#19231d; --muted:#667269; --line:#dcd8ca;
-    --green:#176b52; --orange:#d56634; --red:#a94442; --blue:#3f6f8f;
+    --bg:#f7f3e8;          /* 与 F1–F6 SVG 背景完全一致，投影时无色差 */
+    --card:#fffdf7;
+    --card-alt:#f5f1e6;
+    --ink:#19231d;
+    --ink-soft:#354138;
+    --muted:#667269;
+    --line:#dcd8ca;
+    --line-soft:#e8e4d8;
+    --green:#176b52;
+    --green-bg:#e9eee5;
+    --orange:#d56634;
+    --orange-bg:#f6ecdc;
+    --red:#a94442;
+    --red-bg:#f6e7e6;
+    --blue:#3f6f8f;
+    --blue-bg:#eaf0f4;
+    --shadow:0 1px 2px rgba(25,35,29,.05), 0 6px 18px rgba(25,35,29,.055);
+    --shadow-sm:0 1px 2px rgba(25,35,29,.05);
+    --nav-h:56px;
+    --r:12px;
   }
   *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:calc(var(--nav-h) + 14px)}
   body{
     margin:0; background:var(--bg); color:var(--ink);
-    font:16px/1.65 system-ui,"Microsoft YaHei","Segoe UI",sans-serif;
+    font:16px/1.62 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
     overflow-x:hidden;
   }
-  .wrap{max-width:1160px; margin:0 auto; padding:22px 24px 80px;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 26px}
+  .num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1}
 
-  /* ---- top banner ---- */
-  .banner{
-    border:1px solid var(--orange); border-left:5px solid var(--orange);
-    background:var(--card); color:var(--ink);
-    padding:9px 14px; border-radius:8px; font-size:13.5px;
-    display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; margin-bottom:22px;
+  /* ---------------- fixed top nav ---------------- */
+  .nav{
+    position:sticky; top:0; z-index:50; height:var(--nav-h);
+    background:rgba(247,243,232,.94); border-bottom:1px solid var(--line);
+    backdrop-filter:saturate(1.2) blur(6px);
   }
-  .banner b{color:var(--orange); font-weight:700}
-  .banner .sep{color:var(--line)}
-  .chips{display:flex; flex-wrap:wrap; gap:6px}
-  .chip{
-    font-size:11.5px; font-weight:700; letter-spacing:.06em;
-    padding:2px 9px; border-radius:999px; border:1px solid;
-    white-space:nowrap;
+  .nav-in{max-width:1200px; margin:0 auto; padding:0 26px; height:var(--nav-h);
+    display:flex; align-items:center; gap:18px}
+  .brand{font-weight:800; font-size:14.5px; letter-spacing:.01em; white-space:nowrap; color:var(--ink)}
+  .brand span{color:var(--green)}
+  .nav-links{display:flex; gap:2px; margin-left:auto; flex-wrap:nowrap; overflow:hidden}
+  .nav-links a{
+    font-size:13.5px; font-weight:650; color:var(--muted); text-decoration:none;
+    padding:6px 10px; border-radius:7px; white-space:nowrap; transition:color .18s, background .18s;
   }
-  .chip.warn{color:var(--orange); border-color:var(--orange)}
-  .chip.mute{color:var(--muted); border-color:var(--line)}
+  .nav-links a:hover{color:var(--ink); background:var(--card)}
+  .nav-links a.on{color:var(--green); background:var(--green-bg)}
+  .btn-demo{
+    flex:0 0 auto; font:inherit; font-size:13.5px; font-weight:750; cursor:pointer;
+    background:var(--green); color:#fff; border:1px solid var(--green);
+    padding:7px 15px; border-radius:8px; text-decoration:none; white-space:nowrap;
+    transition:filter .18s, transform .18s;
+  }
+  .btn-demo:hover{filter:brightness(1.08)}
+  .btn-demo:active{transform:translateY(1px)}
 
-  /* ---- hero ---- */
-  .tag{color:var(--green); font-weight:700; letter-spacing:.12em; font-size:12px; text-transform:uppercase}
-  h1{font-size:clamp(30px,5vw,50px); line-height:1.08; margin:10px 0 10px; font-weight:800; letter-spacing:-.01em}
-  .subtitle{font-size:clamp(17px,2.4vw,22px); color:#354138; margin:0 0 8px; font-weight:600}
-  .rq{font-size:16px; color:var(--muted); max-width:820px; margin:0 0 6px}
-  .rq b{color:var(--ink)}
+  /* ---------------- hero (first screen) ---------------- */
+  .hero{padding:26px 0 10px}
+  .hero-top{display:flex; align-items:flex-start; gap:20px; flex-wrap:wrap}
+  .hero-main{flex:1 1 620px; min-width:0}
+  .status-box{
+    flex:0 0 auto; text-align:right; border:1px solid var(--line); border-right:4px solid var(--orange);
+    background:var(--card); border-radius:10px; padding:8px 13px; box-shadow:var(--shadow-sm);
+  }
+  .status-box .s1{font-size:12.5px; font-weight:800; letter-spacing:.09em; color:var(--orange)}
+  .status-box .s2{font-size:12.5px; color:var(--muted); margin-top:2px; white-space:nowrap}
+  .status-box .s2 b{color:var(--ink); font-weight:750}
 
-  /* ---- metric cards ---- */
-  .metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:26px 0 6px}
-  .metric{
+  .kicker{color:var(--green); font-weight:800; letter-spacing:.13em; font-size:13px; text-transform:uppercase}
+  h1{font-size:clamp(34px,4.6vw,54px); line-height:1.06; margin:9px 0 8px; font-weight:800; letter-spacing:-.015em}
+  .sub-en{font-size:clamp(16px,1.9vw,21px); font-weight:700; color:var(--ink-soft); margin:0; letter-spacing:.005em}
+  .sub-en2{font-size:clamp(13.5px,1.45vw,16px); color:var(--muted); margin:3px 0 0}
+
+  .hero-metrics{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0 14px}
+  .hm{
     background:var(--card); border:1px solid var(--line); border-top:3px solid var(--green);
-    border-radius:12px; padding:18px 18px 16px;
+    border-radius:var(--r); padding:14px 17px 13px; box-shadow:var(--shadow);
   }
-  .metric .k{font-size:12px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; margin-bottom:6px}
-  .metric .v{font-size:clamp(26px,3.4vw,34px); font-weight:800; color:var(--green); line-height:1.1}
-  .metric .v small{font-size:15px; font-weight:600; color:var(--muted)}
-  .metric .d{font-size:13px; color:var(--muted); margin-top:8px}
-  .metric.alt{border-top-color:var(--orange)}
-  .metric.alt .v{color:var(--orange)}
+  .hm.risk{border-top-color:var(--orange)}
+  .hm .k{font-size:12px; letter-spacing:.09em; color:var(--muted); text-transform:uppercase; font-weight:750}
+  .hm .v{font-size:clamp(28px,3.5vw,42px); font-weight:800; color:var(--green); line-height:1.08; margin-top:5px}
+  .hm.risk .v{color:var(--orange)}
+  .hm .v small{font-size:.5em; font-weight:750; color:var(--muted)}
+  .hm .d{font-size:12.5px; color:var(--muted); margin-top:6px; line-height:1.5}
+  .thesis{
+    border-left:4px solid var(--ink); background:var(--card); border-radius:0 10px 10px 0;
+    padding:12px 17px; font-size:clamp(15px,1.75vw,19px); font-weight:750; box-shadow:var(--shadow-sm);
+  }
+  .thesis .neq{color:var(--orange); font-weight:800; padding:0 3px}
+  .thesis small{display:block; font-size:12.5px; font-weight:500; color:var(--muted); margin-top:4px}
 
-  /* ---- sections ---- */
-  section{margin-top:44px}
-  .sec-head{display:flex; align-items:baseline; gap:12px; border-bottom:2px solid var(--ink); padding-bottom:8px; margin-bottom:16px}
+  /* ---------------- sections ---------------- */
+  section.blk{padding:34px 0 4px}
+  .sec-head{display:flex; align-items:flex-end; gap:13px; border-bottom:2px solid var(--ink); padding-bottom:9px; margin-bottom:18px}
   .sec-num{
     font-size:13px; font-weight:800; color:var(--card); background:var(--ink);
-    padding:2px 10px; border-radius:5px; letter-spacing:.05em; white-space:nowrap;
+    padding:3px 10px 2px; border-radius:5px; letter-spacing:.06em; white-space:nowrap;
   }
-  h2{font-size:clamp(20px,2.6vw,26px); margin:0; font-weight:750; letter-spacing:-.01em}
-  h3{font-size:12.5px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin:0 0 6px}
-  .lede{color:#354138; max-width:880px; margin:0 0 14px}
+  h2{font-size:clamp(21px,2.5vw,29px); margin:0; font-weight:800; letter-spacing:-.012em; line-height:1.2}
+  .sec-head .zh{font-size:13.5px; color:var(--muted); margin-left:auto; text-align:right; font-weight:600; padding-bottom:3px}
+  h3{font-size:12.5px; letter-spacing:.11em; color:var(--muted); text-transform:uppercase; margin:0 0 7px; font-weight:800}
+  p{margin:0 0 11px}
+  .lede{color:var(--ink-soft); max-width:900px; font-size:16px}
   .muted{color:var(--muted)}
+  .small{font-size:13px; color:var(--muted); line-height:1.55}
+  b,strong{font-weight:750}
   a{color:var(--green)}
 
-  /* ---- pipeline (Section 2) ---- */
-  .pipeline{display:flex; flex-wrap:wrap; gap:8px; align-items:stretch; margin:14px 0 6px}
-  .node{
-    flex:1 1 150px; min-width:140px; background:var(--card);
-    border:1px solid var(--line); border-radius:10px; padding:12px 12px 10px;
-  }
-  .node.key{border-color:var(--green); border-width:1.5px}
-  .node .step{font-size:11px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase}
-  .node .name{font-weight:700; margin:3px 0 4px}
-  .node .plain{font-size:12.5px; color:var(--muted)}
-  .arrow{align-self:center; font-size:22px; color:var(--orange); font-weight:700; flex:0 0 auto}
-  .formula{
-    background:#eef3ec; border:1px solid var(--line); border-left:4px solid var(--green);
-    padding:12px 16px; border-radius:8px; margin:12px 0; overflow-x:auto; white-space:nowrap;
-    font-family:ui-monospace,"Consolas","Menlo",monospace; font-size:15px;
-  }
-  .decision-row{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px}
-  .decision{background:var(--card); border:1px solid var(--line); border-radius:10px; padding:11px 13px}
-  .decision .d-name{font-weight:800; font-size:14px}
-  .decision .d-plain{font-size:12.5px; color:var(--muted); margin-top:3px}
-  .decision.ok .d-name{color:var(--green)}
-  .decision.hold .d-name{color:var(--orange)}
-  .decision.no .d-name{color:var(--red)}
+  /* Q / R / M triad — 每个 section 都有问题、结果、含义 */
+  .qrm{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:0 0 16px}
+  .qrm > div{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:13px 15px; box-shadow:var(--shadow-sm)}
+  .qrm .lbl{font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-weight:800; color:var(--muted); margin-bottom:5px}
+  .qrm .q .lbl{color:var(--blue)}
+  .qrm .r .lbl{color:var(--green)}
+  .qrm .m .lbl{color:var(--orange)}
+  .qrm .txt{font-size:14.5px; line-height:1.55}
+  .qrm .r .txt{font-weight:650}
 
-  /* ---- figures ---- */
-  figure{margin:16px 0 6px}
-  figure img{width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:10px; background:#fff}
-  figcaption{font-size:12.5px; color:var(--muted); margin-top:7px}
+  /* stat strip */
+  .strip{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px}
+  .pill{
+    font-size:12.5px; font-weight:700; padding:5px 12px; border-radius:999px;
+    border:1px solid var(--line); background:var(--card); color:var(--ink-soft); white-space:nowrap;
+  }
+  .pill b{font-weight:800; color:var(--ink)}
+  .pill.warn{border-color:var(--orange); color:var(--orange); background:var(--orange-bg)}
+  .pill.bad{border-color:var(--red); color:var(--red); background:var(--red-bg)}
+  .pill.ok{border-color:var(--green); color:var(--green); background:var(--green-bg)}
+  .pill.mute{color:var(--muted)}
+
+  /* ---------------- model pipeline ---------------- */
+  .flow{display:flex; flex-wrap:nowrap; gap:6px; align-items:stretch; margin:14px 0 10px; overflow-x:auto; padding-bottom:4px}
+  .fnode{
+    flex:1 1 0; min-width:148px; background:var(--card); border:1px solid var(--line);
+    border-radius:11px; padding:12px 12px 11px; box-shadow:var(--shadow-sm); position:relative;
+    transition:transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .fnode:hover{transform:translateY(-2px); box-shadow:var(--shadow); border-color:var(--green)}
+  .fnode.key{border-color:var(--green); border-width:1.5px; background:linear-gradient(180deg,#fff 0%,var(--green-bg) 160%)}
+  .fnode .st{font-size:12px; letter-spacing:.09em; color:var(--muted); text-transform:uppercase; font-weight:800}
+  .fnode .nm{font-weight:800; margin:4px 0 5px; font-size:15px; line-height:1.25}
+  .fnode.key .nm{color:var(--green)}
+  .fnode .pl{font-size:12.5px; color:var(--muted); line-height:1.5}
+  .farrow{align-self:center; font-size:20px; color:var(--orange); font-weight:800; flex:0 0 auto; padding:0 1px}
+
+  .formula{
+    background:var(--green-bg); border:1px solid var(--line); border-left:4px solid var(--green);
+    padding:13px 17px; border-radius:9px; margin:12px 0 9px; overflow-x:auto;
+    font-family:ui-monospace,"Consolas","Menlo",monospace; font-size:15.5px; white-space:nowrap;
+  }
+  .tri{display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin-top:13px}
+  .tri > div{background:var(--card); border:1px solid var(--line); border-radius:11px; padding:12px 14px; box-shadow:var(--shadow-sm);
+    transition:transform .18s, box-shadow .18s}
+  .tri > div:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+  .tri .dn{font-weight:800; font-size:15px; letter-spacing:.01em}
+  .tri .dc{font-size:12px; color:var(--muted); font-family:ui-monospace,"Consolas",monospace; margin:2px 0 6px; word-break:break-all}
+  .tri .dp{font-size:13px; color:var(--muted); line-height:1.5}
+  .tri .ok{border-top:3px solid var(--green)} .tri .ok .dn{color:var(--green)}
+  .tri .hold{border-top:3px solid var(--orange)} .tri .hold .dn{color:var(--orange)}
+  .tri .no{border-top:3px solid var(--red)} .tri .no .dn{color:var(--red)}
+
+  /* ---------------- figures ---------------- */
+  figure{margin:15px 0 6px; max-width:960px}
+  figure.wide{max-width:none}
+  .figbox{background:#f7f3e8; border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-sm)}
+  .figbox img{width:100%; height:auto; display:block}
+  figcaption{font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.55}
   figcaption b{color:var(--ink)}
 
-  /* ---- table ---- */
-  table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden}
-  th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top; font-size:14px}
-  th{background:#eef3ec; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); border-bottom:2px solid var(--line)}
+  /* ---------------- tables ---------------- */
+  .tw{overflow-x:auto; border-radius:var(--r); box-shadow:var(--shadow-sm)}
+  table{width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+  th,td{text-align:left; padding:10px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top; font-size:14px}
+  th{background:var(--green-bg); font-size:12px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:800; border-bottom:1.5px solid var(--line)}
   tr:last-child td{border-bottom:none}
-  td b, td .big{color:var(--ink)}
-  td .pos{color:var(--green); font-weight:700}
-  td .warn{color:var(--orange); font-weight:700}
-  td .neg{color:var(--red); font-weight:700}
-  .table-wrap{overflow-x:auto}
-  .table-wrap table{min-width:560px}
+  tbody tr:hover{background:#fbf8f0}
+  td.big{font-weight:800; font-size:15px}
+  .pos{color:var(--green); font-weight:800}
+  .warn{color:var(--orange); font-weight:800}
+  .neg{color:var(--red); font-weight:800}
 
-  /* ---- callout ---- */
-  .note{background:#f6ecdc; border-left:4px solid var(--orange); padding:11px 15px; border-radius:8px; margin:12px 0; font-size:14px}
-  .note.green{background:#e9eee5; border-left-color:var(--green)}
-  .note.red{background:#f6e7e6; border-left-color:var(--red)}
+  /* ---------------- validation matrix ---------------- */
+  .vgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin:14px 0 6px}
+  .vcol{background:var(--card); border:1px solid var(--line); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-sm);
+    display:flex; flex-direction:column; transition:transform .18s, box-shadow .18s}
+  .vcol:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+  .vcol .vh{background:var(--ink); color:var(--card); padding:9px 12px; font-weight:800; font-size:13.5px; letter-spacing:.01em}
+  .vcol .vh em{display:block; font-style:normal; font-size:12px; letter-spacing:.09em; color:#b9c4bb; font-weight:700; text-transform:uppercase; margin-bottom:2px}
+  .vcol .vb{padding:11px 12px 12px; font-size:13px; line-height:1.5; flex:1 1 auto}
+  .vcol .vb .row + .row{margin-top:9px; padding-top:9px; border-top:1px dashed var(--line)}
+  .vcol .vb .t{font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-weight:800; color:var(--muted); margin-bottom:2px}
+  .vcol .vb .t.q{color:var(--blue)} .vcol .vb .t.r{color:var(--green)} .vcol .vb .t.m{color:var(--orange)}
+  .vcol .vb .c{color:var(--ink-soft)}
+  .vcol .vb .c b{color:var(--ink)}
 
-  /* ---- grids of cards ---- */
-  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px}
-  .card{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 16px 14px}
-  .card .c-title{font-weight:750; margin-bottom:6px; font-size:15.5px}
-  .card .c-row{font-size:13.5px; margin-top:6px}
-  .card .c-row .lbl{color:var(--muted); font-weight:600}
-  .stat{font-size:20px; font-weight:800}
-  .stat.pos{color:var(--green)} .stat.warn{color:var(--orange)} .stat.neg{color:var(--red)}
+  /* ---------------- finding chart ---------------- */
+  .chart{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:14px 12px 8px; box-shadow:var(--shadow); margin:14px 0 6px}
+  .chart svg{width:100%; height:auto; display:block}
+  .chart-cap{display:flex; gap:16px; flex-wrap:wrap; justify-content:center; padding:6px 4px 4px; font-size:12.5px; color:var(--muted)}
+  .chart-cap i{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:6px; vertical-align:-1px}
 
-  /* ---- interactive ---- */
-  .demo-box{background:var(--card); border:1px dashed var(--orange); border-radius:12px; padding:18px 18px 14px}
-  .toggle{display:inline-flex; gap:10px; align-items:center; flex-wrap:wrap; margin:8px 0}
-  .toggle button{
-    font:inherit; font-size:13.5px; font-weight:700; cursor:pointer;
-    padding:6px 14px; border-radius:8px; border:1.5px solid var(--line); background:#fff; color:var(--ink);
+  /* ---------------- failure case ---------------- */
+  .case-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:14px; margin:14px 0 6px}
+  .case{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:15px 17px; box-shadow:var(--shadow)}
+  .case h4{margin:0 0 3px; font-size:16px; font-weight:800}
+  .case .cid{font-size:12px; letter-spacing:.08em; color:var(--muted); font-weight:800; text-transform:uppercase; margin-bottom:11px}
+  .vflow{display:flex; flex-direction:column; gap:0}
+  .vstep{display:flex; align-items:center; gap:12px; background:var(--card-alt); border:1px solid var(--line); border-radius:10px; padding:9px 13px}
+  .vstep .sk{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:800; flex:0 0 96px}
+  .vstep .sv{font-size:20px; font-weight:800; line-height:1.15}
+  .vstep .sn{font-size:12px; color:var(--muted); margin-left:auto; text-align:right}
+  .vstep.hl{border-color:var(--orange); background:var(--orange-bg)}
+  .vstep.hl .sv{color:var(--orange)}
+  .vstep.bad{border-color:var(--red); background:var(--red-bg)}
+  .vstep.bad .sv{color:var(--red)}
+  .vdown{text-align:center; color:var(--orange); font-size:16px; font-weight:800; line-height:1.1; padding:2px 0}
+  .takeaway{display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-top:13px}
+  .takeaway div{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--orange); border-radius:0 10px 10px 0;
+    padding:11px 14px; font-size:14px; font-weight:700; box-shadow:var(--shadow-sm)}
+  .takeaway .neq{color:var(--orange); padding:0 2px}
+
+  /* ---------------- 3-column challenger ---------------- */
+  .three{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:14px 0 6px}
+  .col{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:15px 16px; box-shadow:var(--shadow-sm);
+    transition:transform .18s, box-shadow .18s}
+  .col:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+  .col.main{border-top:3px solid var(--green)}
+  .col.alt{border-top:3px solid var(--blue)}
+  .col .ct{font-size:15.5px; font-weight:800; margin-bottom:3px}
+  .col .cs{font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:10px}
+  .col ul{margin:0 0 10px; padding-left:18px}
+  .col li{font-size:13.5px; margin-bottom:5px; line-height:1.5; color:var(--ink-soft)}
+  .col li b{color:var(--ink)}
+  .verdict{border-top:1px dashed var(--line); padding-top:9px; font-size:12.5px}
+  .verdict .vt{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:800; margin-bottom:3px}
+  .verdict .vv{font-family:ui-monospace,"Consolas",monospace; font-size:12.5px; font-weight:800; color:var(--orange); word-break:break-word}
+
+  /* ---------------- gates ---------------- */
+  .gates{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:14px 0 6px}
+  .gate{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:14px 16px; box-shadow:var(--shadow-sm)}
+  .gate.pass{border-top:3px solid var(--green)}
+  .gate.fail{border-top:3px solid var(--red); background:linear-gradient(180deg,var(--card) 0%,var(--red-bg) 220%)}
+  .gate .gn{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:800}
+  .gate .gq{font-size:14px; font-weight:650; margin:5px 0 9px; line-height:1.45}
+  .gate .gv{font-size:17px; font-weight:800; letter-spacing:.01em}
+  .gate.pass .gv{color:var(--green)} .gate.fail .gv{color:var(--red)}
+  .gate .gd{font-size:12.5px; color:var(--muted); margin-top:6px; line-height:1.5}
+
+  /* ---------------- notes ---------------- */
+  .note{background:var(--orange-bg); border-left:4px solid var(--orange); padding:12px 16px; border-radius:0 9px 9px 0; margin:13px 0; font-size:14px; line-height:1.55}
+  .note.green{background:var(--green-bg); border-left-color:var(--green)}
+  .note.red{background:var(--red-bg); border-left-color:var(--red)}
+  .note.blue{background:var(--blue-bg); border-left-color:var(--blue)}
+  .note b{color:var(--ink)}
+
+  /* ---------------- interactive ---------------- */
+  .demo{background:var(--card); border:1px solid var(--orange); border-radius:var(--r); padding:17px 19px 15px; box-shadow:var(--shadow); margin:15px 0 6px}
+  .demo-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:4px}
+  .demo-head h3{margin:0; color:var(--orange)}
+  .demo-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:12px}
+  .ctrl{margin-bottom:13px}
+  .ctrl .cl{display:flex; justify-content:space-between; align-items:baseline; font-size:13px; font-weight:700; margin-bottom:5px; gap:10px}
+  .ctrl .cl .cv{font-family:ui-monospace,"Consolas",monospace; font-size:14px; color:var(--green); font-weight:800}
+  .ctrl input[type=range]{width:100%; accent-color:var(--green); margin:0; cursor:pointer}
+  .seg{display:flex; gap:6px; flex-wrap:wrap}
+  .seg button{
+    font:inherit; font-size:12.5px; font-weight:700; cursor:pointer; padding:5px 11px;
+    border-radius:7px; border:1.5px solid var(--line); background:#fff; color:var(--ink-soft); transition:all .16s;
   }
-  .toggle button.active{border-color:var(--green); background:var(--green); color:#fff}
-  .live{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:12px}
-  .live .box{background:#fbfaf4; border:1px solid var(--line); border-radius:10px; padding:11px 13px}
-  .live .box .lk{font-size:11.5px; letter-spacing:.06em; color:var(--muted); text-transform:uppercase}
-  .live .box .lv{font-size:22px; font-weight:800; margin-top:2px}
+  .seg button:hover{border-color:var(--green)}
+  .seg button.on{border-color:var(--green); background:var(--green); color:#fff}
+  .live{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .live .box{background:var(--card-alt); border:1px solid var(--line); border-radius:10px; padding:11px 13px}
+  .live .box.wide{grid-column:1 / -1}
+  .live .lk{font-size:12px; letter-spacing:.09em; color:var(--muted); text-transform:uppercase; font-weight:800}
+  .live .lv{font-size:26px; font-weight:800; margin-top:3px; line-height:1.1; transition:color .25s}
+  .live .lv.sm{font-size:16px; line-height:1.35; font-family:ui-monospace,"Consolas",monospace; word-break:break-word}
+  .reset{font:inherit; font-size:12.5px; font-weight:750; cursor:pointer; background:#fff; color:var(--ink-soft);
+    border:1.5px solid var(--line); padding:5px 12px; border-radius:7px; margin-left:auto; transition:all .16s}
+  .reset:hover{border-color:var(--orange); color:var(--orange)}
 
-  .footer{
-    margin-top:52px; padding-top:18px; border-top:1px solid var(--line);
-    font-size:12.5px; color:var(--muted);
+  /* ---------------- conclusion ---------------- */
+  .concl{background:var(--ink); color:#f2f0e6; border-radius:var(--r); padding:26px 28px; box-shadow:var(--shadow); margin:16px 0 6px}
+  .concl h2{color:#fff; font-size:clamp(20px,2.4vw,28px); margin:0 0 12px}
+  .concl .cl{font-size:clamp(15px,1.7vw,18px); line-height:1.6; margin:0 0 9px; color:#e6e3d6}
+  .concl .cl b{color:#fff}
+  .concl .neq{color:#f0a074; font-weight:800; padding:0 2px}
+  .concl .cb{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
+  .concl .pill{background:transparent; border-color:#4a564d; color:#cfd6cf}
+  .concl .pill b{color:#fff}
+  .concl .pill.warn{border-color:#d56634; color:#f0a074; background:transparent}
+
+  .footer{margin:38px 0 0; padding:18px 0 40px; border-top:1px solid var(--line); font-size:12.5px; color:var(--muted); line-height:1.6}
+  .footer code{font-family:ui-monospace,"Consolas",monospace; font-size:12px; color:var(--ink-soft)}
+
+  /* ---------------- scroll reveal ---------------- */
+  .rv{opacity:0; transform:translateY(12px); transition:opacity .5s ease, transform .5s ease}
+  .rv.in{opacity:1; transform:none}
+
+  /* ---------------- responsive ---------------- */
+  @media (max-width:1080px){
+    .vgrid{grid-template-columns:repeat(2,1fr)}
+    .case-grid{grid-template-columns:1fr}
+    .nav-links a{padding:6px 7px; font-size:12.5px}
   }
-  .footer code{font-family:ui-monospace,"Consolas",monospace; font-size:12px; color:var(--ink)}
+  @media (max-width:900px){
+    .hero-metrics,.qrm,.tri,.three,.gates,.takeaway,.demo-grid,.live{grid-template-columns:1fr}
+    .live .box.wide{grid-column:auto}
+    .flow{flex-wrap:wrap}
+    .fnode{flex:1 1 44%; min-width:0}
+    .farrow{display:none}
+    .nav-links{display:none}
+    .status-box{text-align:left}
+    .wrap{padding:0 18px}
+    .nav-in{padding:0 18px}
+  }
 
-  /* ---- responsive ---- */
-  @media (max-width:720px){
-    .metrics{grid-template-columns:1fr}
-    .decision-row{grid-template-columns:1fr}
-    .pipeline{flex-direction:column}
-    .arrow{transform:rotate(90deg); align-self:flex-start; margin:-2px 0 -2px 8px}
-    .wrap{padding:16px 16px 64px}
+  /* ---------------- motion off ---------------- */
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none !important; transition:none !important}
+    .rv{opacity:1 !important; transform:none !important}
+    .fnode:hover,.vcol:hover,.col:hover,.tri > div:hover{transform:none}
   }
 </style>
 </head>
 <body>
-<main class="wrap">
 
-  <div class="banner">
-    <span><b>DEVELOPMENT ONLY</b> · AI_PROVISIONAL</span>
-    <span class="sep">|</span>
-    <span>全部数字来自开发切片（N=70），未经正式验证。</span>
-    <span class="sep">|</span>
-    <span class="chips">
-      <span class="chip warn">FORMAL GATE NOT_RUN</span>
-      <span class="chip mute">R1 0/70 · R2 0/70</span>
-    </span>
+<!-- ===================== NAV ===================== -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="brand">当观测不等于证据 <span>·</span> Evidence-Aware Evaluation</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#research">Research</a>
+      <a href="#model">Model</a>
+      <a href="#finding">Finding</a>
+      <a href="#validation">Validation</a>
+      <a href="#cases">Cases</a>
+      <a href="#transfer">Transfer</a>
+      <a href="#limitations">Limitations</a>
+    </div>
+    <a class="btn-demo" href="#interactive">Start Demo</a>
   </div>
+</nav>
 
-  <header>
-    <div class="tag">赛道一 · 教育 AI 增量价值评价</div>
-    <h1>Evidence-Aware Evaluation Framework</h1>
-    <p class="subtitle">Separating Observed Performance from Evidence Support</p>
-    <p class="rq"><b>Observed Result ≠ Reliable Evidence.</b> 当证据缺失、冲突或低可信时，Raw Signal 不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
+<main>
+<div class="wrap">
+
+  <!-- ===================== HERO / FIRST SCREEN ===================== -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <div class="hero-main">
+        <div class="kicker">赛道一 · 教育 AI 增量价值评价 · Development Demo</div>
+        <h1>当观测不等于证据</h1>
+        <p class="sub-en">Evidence-Aware Evaluation Framework</p>
+        <p class="sub-en2">Separating Observed Performance from Evidence Support</p>
+      </div>
+      <div class="status-box">
+        <div class="s1">DEVELOPMENT ONLY</div>
+        <div class="s2">Formal Gate: <b>NOT_RUN</b></div>
+        <div class="s2">Human R1 <b>0/70</b> · R2 <b>0/70</b></div>
+      </div>
+    </div>
+
+    <div class="hero-metrics">
+      <div class="hm">
+        <div class="k">Score · ABL</div>
+        <div class="v num" data-count="3.5625" data-dec="4">3.5625</div>
+        <div class="d">M0–M3 全程不变（Raw = Adjusted，公共缩放退化，<b>不是提升</b>）</div>
+      </div>
+      <div class="hm risk">
+        <div class="k">Support · 有效支持</div>
+        <div class="v num">16 <small>→</small> 6</div>
+        <div class="d">加入 Reliability 层后，真正参与评价的证据权重下降</div>
+      </div>
+      <div class="hm risk">
+        <div class="k">Coverage · 有效覆盖率</div>
+        <div class="v num">22.86<small>%</small> <small>→</small> 8.57<small>%</small></div>
+        <div class="d">0.228571 → 0.085714，分母 N = 70 全部开发记录</div>
+      </div>
+    </div>
+
+    <div class="thesis">
+      Score Stability <span class="neq">≠</span> Evidence Support Stability
+      <small>分数稳定，不代表支撑它的证据同样稳定 —— 这是本研究的核心命题。</small>
+    </div>
   </header>
 
-  <section class="metrics">
-    <div class="metric">
-      <div class="k">Score · 归一化证据分数 (ABL)</div>
-      <div class="v">3.5625</div>
-      <div class="d">Raw 与 Adjusted 相同 —— 公共缩放退化，<b>不是提升</b>。伴生 HOT 0.375 · Gap 1.125。</div>
+  <!-- ===================== 01 RESEARCH QUESTION ===================== -->
+  <section class="blk rv" id="research">
+    <div class="sec-head">
+      <span class="sec-num">01</span><h2>Research Question</h2>
+      <span class="zh">为什么 Raw 不够？</span>
     </div>
-    <div class="metric alt">
-      <div class="k">Support Mass · 有效支持权重</div>
-      <div class="v">16 <small>→ 6</small></div>
-      <div class="d">M0→M3：16 → 12 → 6 → 6。分数几乎不变，<b>证据支撑却下降了</b>。</div>
+
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">看到学生的高分观测，能否直接当作可靠结论？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">70 条开发记录中，<b>54 条没有有效可判读证据</b>，只有 16 条可判读。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">Observed performance 不能直接作为可靠结论 —— 必须显式区分「表现有多高」与「有多少可审查支撑」。</div></div>
     </div>
-    <div class="metric alt">
-      <div class="k">Coverage · 有效覆盖率</div>
-      <div class="v">22.86% <small>→ 8.57%</small></div>
-      <div class="d">0.228571 → 0.085714，分母 N=70（全部开发记录，含无证据行）。</div>
+
+    <p class="lede">AI 辅助学习里，学生的答案与操作并不都同样可信：有的记录信息完整、独立完成，有的带明显 AI 引导、上下文截断或来源冲突。<b>Observed Result ≠ Reliable Evidence。</b></p>
+
+    <div class="strip">
+      <span class="pill">Development N <b>70</b></span>
+      <span class="pill ok">Readable Evidence <b>16</b></span>
+      <span class="pill bad">NO_EFFECTIVE_EVIDENCE <b>54</b></span>
+      <span class="pill mute">= NO_EVIDENCE 19 + UNDETERMINED 35</span>
+      <span class="pill warn">AI_PROVISIONAL · 非人工标注</span>
     </div>
+    <p class="small" style="margin-top:9px">可判读 16 条的等级构成：L2×5、L3×5、L4×1、L5×2、L6×3。54 条无有效证据的记录<b>保持未定义，不填 0 分</b>。</p>
   </section>
 
-  <!-- ================= SECTION 1 ================= -->
-  <section id="rq">
-    <div class="sec-head"><span class="sec-num">1</span><h2>Research Question</h2></div>
-    <p class="lede">AI 辅助学习里，学生的答案、操作和行为并不都同样可信：有的记录信息完整、学生独立完成；有的带有明显 AI 引导、上下文截断或来源冲突。<b>看见一个高分，不等于这条分数有同样高的证据支持。</b></p>
-    <p class="muted">研究问题：给定可观察的学生证据记录，如何显式地把 <b>表现水平</b> 与 <b>证据支持度</b> 分开，从而在证据不足时拒绝装作确定？</p>
-  </section>
+  <!-- ===================== 02 CORE MODEL ===================== -->
+  <section class="blk rv" id="model">
+    <div class="sec-head">
+      <span class="sec-num">02</span><h2>Core Model</h2>
+      <span class="zh">把「表现」与「支撑」拆成两个量</span>
+    </div>
 
-  <!-- ================= SECTION 2 ================= -->
-  <section id="model">
-    <div class="sec-head"><span class="sec-num">2</span><h2>Core Model</h2></div>
-    <p class="lede">每条观察拆成 <b>Raw Signal</b>（表现有多高）与 <b>Evidence Reliability</b>（这条表现有多可信），再降权汇总。</p>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">怎样让评价在证据不足时<b>拒绝装作确定</b>？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">Raw → Reliability → Adjusted → Support / Coverage → <b>三态 Decision</b>。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">Reliability 是声明性支持权重（不是概率），弱支持被降权而非放大；无证据时返回未定义而非 0。</div></div>
+    </div>
 
-    <div class="pipeline">
-      <div class="node key"><div class="step">Input</div><div class="name">Observed Evidence</div><div class="plain">学生证据记录：Task/Student Bloom、confidence、prompt/context 标志</div></div>
-      <div class="arrow">→</div>
-      <div class="node"><div class="step">Signal</div><div class="name">Raw Signal</div><div class="plain">可判读则编码 L1–L6；不可判读不强行编码</div></div>
-      <div class="arrow">→</div>
-      <div class="node key"><div class="step">Support</div><div class="name">Reliability</div><div class="plain">w<sub>i</sub>：确定性支持权重（不是概率）</div></div>
-      <div class="arrow">→</div>
-      <div class="node"><div class="step">Adjust</div><div class="name">Adjusted Evaluation</div><div class="plain">Adjusted<sub>i</sub> = Raw<sub>i</sub> × w<sub>i</sub></div></div>
-      <div class="arrow">→</div>
-      <div class="node"><div class="step">Aggregate</div><div class="name">Support / Coverage</div><div class="plain">S = Σw<sub>i</sub>；C<sub>eff</sub> = Σw<sub>i</sub>/N，N=70</div></div>
-      <div class="arrow">→</div>
-      <div class="node key"><div class="step">Decide</div><div class="name">Decision</div><div class="plain">ACCEPT / ABSTAIN / NO_EFFECTIVE_EVIDENCE</div></div>
+    <div class="flow">
+      <div class="fnode key">
+        <div class="st">Input</div><div class="nm">Observed Evidence</div>
+        <div class="pl">学生证据记录：Task / Student Bloom、confidence、prompt 与 context 标志</div>
+      </div>
+      <div class="farrow">→</div>
+      <div class="fnode">
+        <div class="st">Signal</div><div class="nm">Raw Signal</div>
+        <div class="pl"><b>观察到什么</b>：可判读则编码 L1–L6；不可判读不强行编码</div>
+      </div>
+      <div class="farrow">→</div>
+      <div class="fnode key">
+        <div class="st">Support</div><div class="nm">Evidence Reliability</div>
+        <div class="pl"><b>证据有多可信</b>：w<sub>i</sub> 确定性支持权重，不是校准概率</div>
+      </div>
+      <div class="farrow">→</div>
+      <div class="fnode">
+        <div class="st">Adjust</div><div class="nm">Adjusted Evaluation</div>
+        <div class="pl"><b>按支持程度调整</b>：Adjusted<sub>i</sub> = Raw<sub>i</sub> × w<sub>i</sub></div>
+      </div>
+      <div class="farrow">→</div>
+      <div class="fnode">
+        <div class="st">Aggregate</div><div class="nm">Support / Coverage</div>
+        <div class="pl"><b>有多少证据真正参与</b>：S = Σw<sub>i</sub>；C<sub>eff</sub> = Σw<sub>i</sub> / N，N = 70</div>
+      </div>
+      <div class="farrow">→</div>
+      <div class="fnode key">
+        <div class="st">Decide</div><div class="nm">Decision</div>
+        <div class="pl"><b>证据不足时拒判</b>：ACCEPT / ABSTAIN / NO_EFFECTIVE_EVIDENCE</div>
+      </div>
     </div>
 
     <div class="formula">w<sub>i</sub> = I(observable<sub>i</sub>) · c<sub>i</sub> · (1 − λ<sub>prompt</sub>·p<sub>i</sub>) · (1 − λ<sub>context</sub>·t<sub>i</sub>)</div>
-    <p class="muted" style="margin-top:-2px">人话：先确认有可判读证据，再按置信度（c<sub>i</sub> ∈ {high=1, medium=0.75, low=0.5}）、提示风险（p<sub>i</sub>）与上下文风险（t<sub>i</sub>）给支持权重。默认 λ<sub>prompt</sub>=0.5、λ<sub>context</sub>=0.5。乘法结构让低支持贡献<b>不被放大</b>。</p>
+    <p class="small">先确认存在可判读证据，再按置信度（c<sub>i</sub> ∈ high 1 / medium 0.75 / low 0.5）、提示风险 p<sub>i</sub> 与上下文风险 t<sub>i</sub> 给支持权重；默认 λ<sub>prompt</sub> = 0.5、λ<sub>context</sub> = 0.5。乘法结构让低支持贡献<b>不被放大</b>。</p>
 
-    <div class="decision-row">
-      <div class="decision ok"><div class="d-name">ACCEPT</div><div class="d-plain">支持规则通过才接受（本切片记作 DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT）。</div></div>
-      <div class="decision hold"><div class="d-name">ABSTAIN</div><div class="d-plain">证据不足或冲突时暂缓判断（低支持记作 LOW_SUPPORT）。</div></div>
-      <div class="decision no"><div class="d-name">NO_EFFECTIVE_EVIDENCE</div><div class="d-plain">权重为零或无可判读证据 —— 不填 0 分。</div></div>
+    <div class="tri">
+      <div class="ok">
+        <div class="dn">ACCEPT</div>
+        <div class="dc">w ≥ 0.75 → DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT</div>
+        <div class="dp">支持规则通过才接受；当前切片仅为结构性支持，不是正式验证结论。</div>
+      </div>
+      <div class="hold">
+        <div class="dn">ABSTAIN</div>
+        <div class="dc">0 &lt; w &lt; 0.75 → LOW_SUPPORT</div>
+        <div class="dp">证据不足或冲突时暂缓判断 —— 不按高支持接受，也不宣称预测对错。</div>
+      </div>
+      <div class="no">
+        <div class="dn">NO_EFFECTIVE_EVIDENCE</div>
+        <div class="dc">w = 0 → adjusted 未定义</div>
+        <div class="dp">无可判读证据或权重为零：保持未定义，<b>不填 0 分</b>。</div>
+      </div>
     </div>
 
     <figure>
-      <img src="../visual_evidence/final/F1_model_flow.svg" alt="F1 模型流程">
-      <figcaption><b>F1 · 模型流程。</b> Raw 与 Reliability 是两个独立层；AI 增量（AIV）不在当前开发结果内。来源：reports/visual_evidence/final/F1_model_flow.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F1_model_flow.svg" alt="F1 模型流程：Observed Evidence → Reliability → Decision"></div>
+      <figcaption><b>F1 · 模型总流程。</b> Raw 与 Reliability 是两个独立层；AI 增量（AIV）不在当前开发结果内。</figcaption>
     </figure>
 
-    <!-- interactive demo -->
-    <div class="demo-box" id="interactive">
-      <h3>Interactive Demonstration · 交互演示（确定性复算，非 LLM 输出）</h3>
-      <p class="muted" style="font-size:13.5px">以真实开发案例 <b>P108</b>（Raw Evidence = L6，confidence = medium，context 未截断）为起点，只切换「是否带 prompt 风险」。这是冻结公式对输入字段的机械响应，<b>不是新实验、不是实时 AI 分析、不构成研究证据</b>。</p>
-      <div class="toggle">
-        <span class="muted">prompt_induced：</span>
-        <button id="btnPromptOn" class="active" type="button">true（默认）</button>
-        <button id="btnPromptOff" type="button">false（移除提示风险）</button>
+    <!-- ---------- interactive exploration ---------- -->
+    <div class="demo" id="interactive">
+      <div class="demo-head">
+        <h3>Interactive Exploration</h3>
+        <span class="pill warn">确定性复算 · 非正式实验</span>
+        <button class="reset" id="btnReset" type="button">恢复默认参数</button>
       </div>
-      <div class="live">
-        <div class="box"><div class="lk">Reliability w</div><div class="lv" id="demoR">0.375</div></div>
-        <div class="box"><div class="lk">Adjusted (Raw 6 × w)</div><div class="lv" id="demoA">2.25</div></div>
-        <div class="box"><div class="lk">Status → Decision</div><div class="lv" id="demoD" style="font-size:16px">LOW_SUPPORT → ABSTAIN</div></div>
+      <p class="small" style="margin-top:6px">冻结公式对输入字段的机械响应：调参数 → Reliability → Adjusted → Decision。<b>不调用任何 LLM / 网络 API</b>，不产生新实验、不构成研究证据。默认 λ<sub>prompt</sub> = 0.5、λ<sub>context</sub> = 0.5、r<sub>medium</sub> = 0.75。</p>
+
+      <div class="demo-grid">
+        <div>
+          <div class="ctrl">
+            <div class="cl"><span>案例记录</span></div>
+            <div class="seg" id="segRec">
+              <button type="button" data-rec="P108" class="on">P108 · Raw L6</button>
+              <button type="button" data-rec="P105">P105 · Raw L2</button>
+            </div>
+          </div>
+          <div class="ctrl">
+            <div class="cl"><label for="slP">λ<sub>prompt</sub> · 提示风险惩罚</label><span class="cv num" id="vP">0.50</span></div>
+            <input type="range" id="slP" min="0" max="1" step="0.05" value="0.5">
+          </div>
+          <div class="ctrl">
+            <div class="cl"><label for="slC">λ<sub>context</sub> · 上下文风险惩罚</label><span class="cv num" id="vC">0.50</span></div>
+            <input type="range" id="slC" min="0" max="1" step="0.05" value="0.5">
+          </div>
+          <div class="ctrl">
+            <div class="cl"><label>r<sub>medium</sub> · medium 置信度权重</label></div>
+            <div class="seg" id="segR">
+              <button type="button" data-r="0.5">0.50</button>
+              <button type="button" data-r="0.75" class="on">0.75（默认）</button>
+              <button type="button" data-r="1">1.00</button>
+            </div>
+          </div>
+          <div class="ctrl" style="margin-bottom:2px">
+            <div class="cl"><label>记录字段（P108 / P105 实际取值）</label></div>
+            <div class="seg">
+              <button type="button" id="btnPrompt" class="on">prompt_induced = true</button>
+              <button type="button" id="btnCtx">context_truncated = false</button>
+            </div>
+            <p class="small" style="margin:7px 0 0">两条记录在开发切片中均为 prompt_induced = true、context_truncated = false、confidence = medium；此处可手动切换以观察公式响应。</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="live">
+            <div class="box">
+              <div class="lk">Raw Signal</div>
+              <div class="lv num" id="oRaw">6</div>
+            </div>
+            <div class="box">
+              <div class="lk">Reliability w</div>
+              <div class="lv num" id="oR" style="color:var(--orange)">0.375</div>
+            </div>
+            <div class="box">
+              <div class="lk">Adjusted = Raw × w</div>
+              <div class="lv num" id="oA" style="color:var(--orange)">2.25</div>
+            </div>
+            <div class="box">
+              <div class="lk">Status</div>
+              <div class="lv sm" id="oS" style="color:var(--orange)">LOW_SUPPORT</div>
+            </div>
+            <div class="box wide">
+              <div class="lk">Decision</div>
+              <div class="lv" id="oD" style="font-size:22px;color:var(--orange)">ABSTAIN</div>
+            </div>
+            <div class="box wide" style="background:var(--card)">
+              <div class="lk">代入过程</div>
+              <div class="lv sm num" id="oF" style="font-size:13.5px;color:var(--ink-soft)">w = 0.75 × (1 − 0.5×1) × (1 − 0.5×0) = 0.375</div>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="note" style="margin-bottom:0">对照点：默认参数下 <b>P108</b>（Raw L6）得 w = 0.375、Adjusted = 2.25、LOW_SUPPORT / ABSTAIN；<b>P105</b>（Raw L2）得 Adjusted = 0.75，同样 LOW_SUPPORT。<b>Raw 高低不改变「支持不足即降权」这条规则。</b></div>
     </div>
   </section>
 
-  <!-- ================= SECTION 3 ================= -->
-  <section id="result">
-    <div class="sec-head"><span class="sec-num">3</span><h2>Core Finding</h2></div>
-    <p class="lede"><b>Score Stability ≠ Evidence Support Stability.</b> 归一化分数保持不变，而有效证据支持显著下降 —— 分数稳定，不等于支撑它的证据同样稳定。</p>
+  <!-- ===================== 03 CORE FINDING ===================== -->
+  <section class="blk rv" id="finding">
+    <div class="sec-head">
+      <span class="sec-num">03</span><h2>Core Finding</h2>
+      <span class="zh">整站最重要的一张图</span>
+    </div>
 
-    <div class="cards" style="margin-bottom:14px">
-      <div class="card" style="border-top:3px solid var(--green)">
-        <div class="c-title">Score（ABL / HOT / Gap）</div>
-        <div class="stat pos">3.5625 / 0.375 / 1.125</div>
-        <div class="c-row muted">M0 → M3 全程不变 —— 公共缩放退化，<b>不是提升</b>。</div>
-      </div>
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="c-title">Effective Support（Σw）</div>
-        <div class="stat warn">16 → 12 → 6 → 6</div>
-        <div class="c-row muted">M0 → M1 → M2 → M3，<b>证据支撑下降</b>。</div>
-      </div>
-      <div class="card" style="border-top:3px solid var(--orange)">
-        <div class="c-title">Coverage（Σw / N，N=70）</div>
-        <div class="stat warn" style="font-size:16px">0.228571 → 0.171429 → 0.085714 → 0.085714</div>
-        <div class="c-row muted">覆盖率随支持同步下降。</div>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">分数没变，是否说明校正层没有作用？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">M0–M3 分数恒为 <b>3.5625</b>，而支持从 <b>16 降到 6</b>、覆盖率从 <b>0.228571 降到 0.085714</b>。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt"><b>Score Stability ≠ Evidence Support Stability。</b>只看分数会完全错过证据支撑的塌缩。</div></div>
+    </div>
+
+    <div class="chart">
+      <svg viewBox="0 0 1000 360" role="img" aria-label="Score 保持不变而 Support 与 Coverage 大幅下降的对比图">
+        <!-- ---------- Panel A : Score (flat) ---------- -->
+        <text x="30" y="34" font-size="15" font-weight="800" fill="#19231d" font-family="system-ui,Microsoft YaHei,sans-serif">Score (ABL)</text>
+        <text x="30" y="54" font-size="12.5" fill="#667269" font-family="system-ui,Microsoft YaHei,sans-serif">M0 → M3 完全不变</text>
+        <rect x="30" y="70" width="270" height="220" rx="10" fill="#f5f1e6" stroke="#dcd8ca"/>
+        <line x1="52" y1="150" x2="278" y2="150" stroke="#176b52" stroke-width="3"/>
+        <g fill="#176b52">
+          <circle cx="80" cy="150" r="7"/><circle cx="145" cy="150" r="7"/>
+          <circle cx="210" cy="150" r="7"/><circle cx="275" cy="150" r="7"/>
+        </g>
+        <text x="165" y="122" font-size="30" font-weight="800" fill="#176b52" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">3.5625</text>
+        <text x="165" y="196" font-size="14" font-weight="700" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">Δ = 0 · 四个模型同值</text>
+        <text x="165" y="222" font-size="12.5" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">HOT 0.375 · Gap 1.125（同样不变）</text>
+        <text x="165" y="262" font-size="12.5" fill="#a94442" text-anchor="middle" font-weight="700" font-family="system-ui,Microsoft YaHei,sans-serif">Raw = Adjusted：公共缩放退化</text>
+        <g font-size="13" font-weight="700" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">
+          <text x="80" y="312">M0</text><text x="145" y="312">M1</text><text x="210" y="312">M2</text><text x="275" y="312">M3</text>
+        </g>
+
+        <!-- ---------- center ≠ ---------- -->
+        <text x="330" y="192" font-size="46" font-weight="800" fill="#d56634" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">≠</text>
+
+        <!-- ---------- Panel B : Support bars + coverage ---------- -->
+        <text x="370" y="34" font-size="15" font-weight="800" fill="#19231d" font-family="system-ui,Microsoft YaHei,sans-serif">Effective Support (Σw)</text>
+        <text x="370" y="54" font-size="12.5" fill="#667269" font-family="system-ui,Microsoft YaHei,sans-serif">同一批数据，支撑显著下降 · Coverage 同步下降</text>
+        <rect x="370" y="70" width="600" height="220" rx="10" fill="#f5f1e6" stroke="#dcd8ca"/>
+        <line x1="392" y1="272" x2="948" y2="272" stroke="#dcd8ca" stroke-width="1.5"/>
+        <!-- bars: 16 -> h200, 12 -> h150, 6 -> h75 -->
+        <g>
+          <rect x="415" y="72" width="86" height="200" rx="6" fill="#d56634"/>
+          <rect x="555" y="122" width="86" height="150" rx="6" fill="#d56634" opacity=".82"/>
+          <rect x="695" y="197" width="86" height="75" rx="6" fill="#a94442"/>
+          <rect x="835" y="197" width="86" height="75" rx="6" fill="#a94442" opacity=".82"/>
+        </g>
+        <g font-size="30" font-weight="800" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">
+          <text x="458" y="62" fill="#d56634">16</text>
+          <text x="598" y="112" fill="#d56634">12</text>
+          <text x="738" y="187" fill="#a94442">6</text>
+          <text x="878" y="187" fill="#a94442">6</text>
+        </g>
+        <g font-size="13" font-weight="700" fill="#19231d" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">
+          <text x="458" y="240">22.86%</text>
+          <text x="598" y="240">17.14%</text>
+          <text x="738" y="240">8.57%</text>
+          <text x="878" y="240">8.57%</text>
+        </g>
+        <g font-size="12.5" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">
+          <text x="458" y="258">0.228571</text>
+          <text x="598" y="258">0.171429</text>
+          <text x="738" y="258">0.085714</text>
+          <text x="878" y="258">0.085714</text>
+        </g>
+        <g font-size="13" font-weight="700" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">
+          <text x="458" y="312">M0 无校正</text>
+          <text x="598" y="312">M1 +confidence</text>
+          <text x="738" y="312">M2 +prompt</text>
+          <text x="878" y="312">M3 +context</text>
+        </g>
+        <text x="670" y="345" font-size="13" fill="#667269" text-anchor="middle" font-family="system-ui,Microsoft YaHei,sans-serif">柱高 = Effective Support（Σw）· 柱内数字 = Coverage（Σw / N，N = 70）</text>
+      </svg>
+      <div class="chart-cap">
+        <span><i style="background:#176b52"></i>Score 3.5625（M0 = M1 = M2 = M3）</span>
+        <span><i style="background:#d56634"></i>Support 16 → 12</span>
+        <span><i style="background:#a94442"></i>Support 6 → 6</span>
       </div>
     </div>
 
-    <div class="table-wrap">
+    <div class="tw">
       <table>
-        <thead><tr><th>Model</th><th>Components</th><th>Score (ABL)</th><th>Effective Support</th><th>Coverage (N=70)</th></tr></thead>
-        <tbody>
-          <tr><td>M0</td><td>无校正（Raw-only）</td><td>3.5625</td><td class="big">16</td><td>0.228571</td></tr>
-          <tr><td>M1</td><td>+ confidence</td><td>3.5625</td><td>12</td><td>0.171429</td></tr>
-          <tr><td>M2</td><td>+ confidence + prompt</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
-          <tr><td>M3</td><td>+ confidence + prompt + context</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
+        <thead><tr><th>Model</th><th>Components</th><th>Score (ABL)</th><th>Effective Support</th><th>Coverage（分母 N = 70）</th></tr></thead>
+        <tbody class="num">
+          <tr><td class="big">M0</td><td>无校正（Raw-only）</td><td>3.5625</td><td class="big">16</td><td>0.228571</td></tr>
+          <tr><td class="big">M1</td><td>+ confidence</td><td>3.5625</td><td>12</td><td>0.171429</td></tr>
+          <tr><td class="big">M2</td><td>+ confidence + prompt</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
+          <tr><td class="big">M3</td><td>+ confidence + prompt + context</td><td>3.5625</td><td class="big">6</td><td>0.085714</td></tr>
         </tbody>
       </table>
     </div>
 
-    <p class="muted" style="margin-top:10px">视觉重点：<b>Score 稳定 ≠ Evidence Support 稳定。</b> 四个模型的归一化分数完全相同（3.5625），但有效支持从 16 降到 6、覆盖率从 0.228571 降到 0.085714。prompt 模块承担主要支持下降（M1→M2）；context 模块在当前可判读记录中无变异（M2=M3，不可识别独立效应）。</p>
-
-    <p class="muted" style="margin-top:8px">数据构成（N=70）：16 条可判读（L2×5、L3×5、L4×1、L5×2、L6×3）+ 19 条 NO_EVIDENCE + 35 条 UNDETERMINED = <b>54 条 NO_EFFECTIVE_EVIDENCE</b>。16 条可判读共享 prompt=true / context=false / confidence=medium，各加权方案施加同一常数因子，归一化后抵消 —— 因此 Raw 与 Adjusted 相同，<b>不得写成 improvement</b>。</p>
+    <p class="small" style="margin-top:11px">prompt 模块承担当前切片的主要支持下降（M1 → M2）；context 模块在 16 条可判读记录中<b>无变异</b>（M2 = M3），因此其独立效应不可识别 —— 不等于「已证明无作用」。16 条可判读记录共享 prompt = true / context = false / confidence = medium，各加权方案施加同一常数因子，归一化后抵消，因此 Raw 与 Adjusted 同值，<b>不得写成 improvement</b>。</p>
 
     <figure>
-      <img src="../visual_evidence/final/F5_ablation_refusal.svg" alt="F5 消融与拒判边界">
-      <figcaption><b>F5 · 组件消融。</b> M0→M1→M2→M3 有效权重 16→12→6→6；分数恒 3.5625，支持变化可见。来源：reports/visual_evidence/final/F5_ablation_refusal.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F5_ablation_refusal.svg" alt="F5 组件消融与拒判边界"></div>
+      <figcaption><b>F5 · 组件消融与拒判。</b> M0 → M3 有效权重 16 → 12 → 6 → 6，分数恒为 3.5625；支持变化与拒判语义可见。</figcaption>
     </figure>
   </section>
 
-  <!-- ================= SECTION 4 ================= -->
-  <section id="validation">
-    <div class="sec-head"><span class="sec-num">4</span><h2>Five Validation Paths</h2></div>
-    <p class="lede">每条路径只给 <b>Question / Key Result / Meaning / Limit</b>，不铺长文。</p>
+  <!-- ===================== 04 VALIDATION ===================== -->
+  <section class="blk rv" id="validation">
+    <div class="sec-head">
+      <span class="sec-num">04</span><h2>Five Validation Paths</h2>
+      <span class="zh">同一命题的五条互补检查</span>
+    </div>
 
-    <div class="cards">
-      <div class="card">
-        <div class="c-title">1 · Baseline</div>
-        <div class="c-row"><span class="lbl">Question</span>：可靠性层是否必要？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：四模型 ABL 均 3.5625；Raw-only support=16，主模型=6。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：可靠性层带来 Raw-only 没有的 graded support。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不证明乘法形式必需；不证明精度/预测优越。</div>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">这个现象是真实结构，还是调参调出来的展示？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">Baseline / Ablation / Robustness / Failure Case / External Transfer 五条路径一致指向同一结论。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">「分数稳定、支持变化」是<b>局部结构现象</b>，不是单点展示；但均限于开发切片。</div></div>
+    </div>
+
+    <div class="vgrid">
+      <div class="vcol">
+        <div class="vh"><em>Path 1</em>Baseline</div>
+        <div class="vb">
+          <div class="row"><div class="t q">Question</div><div class="c">Reliability 层有必要吗？</div></div>
+          <div class="row"><div class="t r">Result</div><div class="c">四模型 Score 相同（3.5625），Support <b>16 vs 6</b>。</div></div>
+          <div class="row"><div class="t m">Meaning</div><div class="c">Score 相同不代表 Evidence Support 相同；Raw-only 缺少 graded support。</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="c-title">2 · Ablation</div>
-        <div class="c-row"><span class="lbl">Question</span>：组件是否只是装饰？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：有效权重 16→12→6→6，分数恒 3.5625。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：confidence / prompt 组件确实改变 support accounting。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：模块差异 ≠ 独立因果效应；context 无变异不可识别。</div>
+      <div class="vcol">
+        <div class="vh"><em>Path 2</em>Ablation</div>
+        <div class="vb">
+          <div class="row"><div class="t q">Question</div><div class="c">组件只是装饰吗？</div></div>
+          <div class="row"><div class="t r">Result</div><div class="c">有效权重 <b>16 → 12 → 6 → 6</b>，分数恒 3.5625。</div></div>
+          <div class="row"><div class="t m">Meaning</div><div class="c">confidence / prompt 确实改变 support accounting；context 无变异不可识别。</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="c-title">3 · Sensitivity / Robustness</div>
-        <div class="c-row"><span class="lbl">Question</span>：现象是否只是单一参数点产生？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：±10%/±20% → 0 个 decision-state flips；693 网格 660 defined / 33 undefined。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：局部结构稳定性；学生 ranking 为 NOT_APPLICABLE。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不是统计置信区间，也不是全局稳健性。</div>
+      <div class="vcol">
+        <div class="vh"><em>Path 3</em>Robustness</div>
+        <div class="vb">
+          <div class="row"><div class="t q">Question</div><div class="c">是否只在单一参数点成立？</div></div>
+          <div class="row"><div class="t r">Result</div><div class="c">±10% / ±20% 扰动 → <b>0 个 decision-state flips</b>；693 网格 = 660 defined + 33 undefined。</div></div>
+          <div class="row"><div class="t m">Meaning</div><div class="c">局部结构稳定；学生 ranking 为 NOT_APPLICABLE。非统计置信区间。</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="c-title">4 · Failure Case</div>
-        <div class="c-row"><span class="lbl">Question</span>：高 Raw 是否仍被接受？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：P108 L6 → R=0.375 → LOW_SUPPORT；P072/P035 返回 NO_EFFECTIVE_EVIDENCE。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：High Raw ≠ High Evidence Support；Missing Evidence ≠ Score 0。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：不是准确率/真实错误率；无 true outcome。</div>
+      <div class="vcol">
+        <div class="vh"><em>Path 4</em>Failure Case</div>
+        <div class="vb">
+          <div class="row"><div class="t q">Question</div><div class="c">高 Raw 是否仍被无条件接受？</div></div>
+          <div class="row"><div class="t r">Result</div><div class="c">P108 L6 → R = 0.375 → <b>LOW_SUPPORT</b>；P072 / P035 → <b>NO_EFFECTIVE_EVIDENCE</b>。</div></div>
+          <div class="row"><div class="t m">Meaning</div><div class="c">High Raw ≠ High Evidence Support；Missing Evidence ≠ Score 0。</div></div>
+        </div>
       </div>
-      <div class="card">
-        <div class="c-title">5 · External Transfer</div>
-        <div class="c-row"><span class="lbl">Question</span>：是否只为教育数据硬写？</div>
-        <div class="c-row"><span class="lbl">Key Result</span>：BTC n=1698：Gate1/Gate2 SUPPORTED，Gate3 NOT SUPPORTED。</div>
-        <div class="c-row"><span class="lbl">Meaning</span>：结构可迁移（structural portability）。</div>
-        <div class="c-row"><span class="lbl">Limit</span>：非教育泛化/交易优势；不能成为第二主线。</div>
+      <div class="vcol">
+        <div class="vh"><em>Path 5</em>External Transfer</div>
+        <div class="vb">
+          <div class="row"><div class="t q">Question</div><div class="c">是否只为教育数据硬写？</div></div>
+          <div class="row"><div class="t r">Result</div><div class="c">BTC n = 1698：Gate1 / Gate2 <b>SUPPORTED</b>，Gate3 <b>NOT SUPPORTED</b>。</div></div>
+          <div class="row"><div class="t m">Meaning</div><div class="c">结构可迁移（structural portability），<b>不是</b>教育泛化或预测优势。</div></div>
+        </div>
       </div>
+    </div>
+
+    <div class="strip">
+      <span class="pill">Robustness 网格 <b>693</b> = 21 × 11 × 3</span>
+      <span class="pill ok">defined <b>660</b></span>
+      <span class="pill bad">undefined <b>33</b>（保持未定义，不填 0）</span>
+      <span class="pill">effective weight <b>0.4 – 16.0</b></span>
+      <span class="pill">coverage <b>0.005714 – 0.228571</b></span>
+      <span class="pill warn">ranking <b>NOT_APPLICABLE</b></span>
     </div>
 
     <figure>
-      <img src="../visual_evidence/final/F4_parameter_perturbation.svg" alt="F4 参数扰动">
-      <figcaption><b>F4 · 局部参数扰动。</b> 支持度随参数变化，但 ranking NOT_APPLICABLE；分数稳定而支持变化。来源：reports/visual_evidence/final/F4_parameter_perturbation.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F4_parameter_perturbation.svg" alt="F4 局部参数扰动"></div>
+      <figcaption><b>F4 · 局部参数扰动。</b> 支持度随参数变化而分数保持稳定；33 个 undefined 单元显式保留，学生 ranking 不适用。</figcaption>
     </figure>
   </section>
 
-  <!-- ================= SECTION 5 ================= -->
-  <section id="failure">
-    <div class="sec-head"><span class="sec-num">5</span><h2>Failure Case</h2></div>
-    <p class="lede">让评委一眼看懂两件事：<b>High Raw ≠ High Evidence Support</b>；<b>Missing Evidence ≠ Score 0</b>。</p>
+  <!-- ===================== 05 FAILURE CASES ===================== -->
+  <section class="blk rv" id="cases">
+    <div class="sec-head">
+      <span class="sec-num">05</span><h2>Failure Cases</h2>
+      <span class="zh">模型在哪里拒绝下判断</span>
+    </div>
 
-    <div class="cards">
-      <div class="card" style="border-left:4px solid var(--orange)">
-        <div class="c-title">P108 · 高 Raw / 低支持</div>
-        <div class="c-row"><span class="lbl">Raw</span> = L6（最高证据等级）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="warn">0.375</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="warn">2.25</span>（6 × 0.375）</div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="warn">LOW_SUPPORT / ABSTAIN</span></div>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">最高 Raw 等级是否就等于最强证据？证据缺失时该给几分？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">P108 Raw = L6 却只得到 R = 0.375、Adjusted = 2.25，判为 <b>LOW_SUPPORT / ABSTAIN</b>；P072 / P035 判为 <b>NO_EFFECTIVE_EVIDENCE</b>。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">拒判不是模型失败，而是<b>把不确定性如实交回</b>；缺失证据不被伪装成 0 分。</div></div>
+    </div>
+
+    <div class="case-grid">
+      <div class="case" style="border-left:4px solid var(--orange)">
+        <h4>P108 · 高 Raw / 低支持</h4>
+        <div class="cid">Counterexample · Raw Evidence = L6（最高等级）</div>
+        <div class="vflow">
+          <div class="vstep"><span class="sk">Raw</span><span class="sv num">L6 = 6</span><span class="sn">观察到什么</span></div>
+          <div class="vdown">↓</div>
+          <div class="vstep hl"><span class="sk">Reliability</span><span class="sv num">0.375</span><span class="sn">0.75 × (1 − 0.5×1) × (1 − 0.5×0)</span></div>
+          <div class="vdown">↓</div>
+          <div class="vstep hl"><span class="sk">Adjusted</span><span class="sv num">2.25</span><span class="sn">6 × 0.375</span></div>
+          <div class="vdown">↓</div>
+          <div class="vstep hl"><span class="sk">Status</span><span class="sv">LOW_SUPPORT</span><span class="sn">0 &lt; w &lt; 0.75</span></div>
+          <div class="vdown">↓</div>
+          <div class="vstep hl"><span class="sk">Decision</span><span class="sv">ABSTAIN</span><span class="sn">暂缓判断，不宣称对错</span></div>
+        </div>
       </div>
-      <div class="card" style="border-left:4px solid var(--red)">
-        <div class="c-title">P072 · 无有效证据</div>
-        <div class="c-row"><span class="lbl">Raw</span> = 不可判读（未编码）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="neg">0</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="neg">null（不填 0）</span></div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
-      </div>
-      <div class="card" style="border-left:4px solid var(--red)">
-        <div class="c-title">P035 · 无有效证据</div>
-        <div class="c-row"><span class="lbl">Raw</span> = 不可判读（未编码）</div>
-        <div class="c-row"><span class="lbl">Reliability</span> = <span class="neg">0</span></div>
-        <div class="c-row"><span class="lbl">Adjusted</span> = <span class="neg">null（不填 0）</span></div>
-        <div class="c-row"><span class="lbl">Decision</span> = <span class="neg">NO_EFFECTIVE_EVIDENCE</span></div>
+
+      <div>
+        <div class="case" style="border-left:4px solid var(--red); margin-bottom:12px">
+          <h4>Missing Evidence</h4>
+          <div class="cid">P072 / P035 · 不可判读记录</div>
+          <div class="vflow">
+            <div class="vstep bad"><span class="sk">Raw</span><span class="sv">未编码</span><span class="sn">不强行赋值</span></div>
+            <div class="vdown" style="color:var(--red)">↓</div>
+            <div class="vstep bad"><span class="sk">Reliability</span><span class="sv num">w = 0</span><span class="sn">无可判读证据</span></div>
+            <div class="vdown" style="color:var(--red)">↓</div>
+            <div class="vstep bad"><span class="sk">Adjusted</span><span class="sv">null</span><span class="sn">未定义，<b>不填 0</b></span></div>
+            <div class="vdown" style="color:var(--red)">↓</div>
+            <div class="vstep bad"><span class="sk">Decision</span><span class="sv" style="font-size:17px">NO_EFFECTIVE_EVIDENCE</span><span class="sn">共 54 条</span></div>
+          </div>
+        </div>
+        <div class="note blue" style="margin:0">对照 <b>P105</b>：Raw = L2、R = 0.375、Adjusted = 0.75，同样 LOW_SUPPORT。<br>说明<b>无论 Raw 高低，缺少支持时都被降权</b> —— 降权来自证据，不来自分数。以上均为 DEVELOPMENT EXAMPLE / AI_PROVISIONAL。</div>
       </div>
     </div>
 
-    <div class="note">P105 参考：Raw = L2、R = 0.375、Adjusted = 0.75、LOW_SUPPORT —— 同样是低支持，但 Raw 等级低。与 P108 对照说明：<b>无论 Raw 高低，缺少支持时都被降权</b>。以上均为 DEVELOPMENT EXAMPLE / AI_PROVISIONAL。</div>
+    <div class="takeaway">
+      <div>High Raw <span class="neq">≠</span> High Evidence Support</div>
+      <div>Missing Evidence <span class="neq">≠</span> Score 0</div>
+    </div>
 
     <figure>
-      <img src="../visual_evidence/final/F3_evidence_degradation.svg" alt="F3 证据退化与拒判">
-      <figcaption><b>F3 · 证据退化与拒判。</b> P108 去掉 prompt 风险时 R 从 0.375 升到 0.750（机械响应，非因果结论）；证据缺失时触发拒判。来源：reports/visual_evidence/final/F3_evidence_degradation.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F3_evidence_degradation.svg" alt="F3 证据退化与拒判边界"></div>
+      <figcaption><b>F3 · 证据退化与拒判。</b> P108 在移除 prompt 风险时 R 由 0.375 升至 0.750（公式的机械响应，非因果结论）；证据缺失时触发拒判。</figcaption>
     </figure>
     <figure>
-      <img src="../visual_evidence/final/F2_raw_vs_adjusted.svg" alt="F2 Raw 与 Adjusted">
-      <figcaption><b>F2 · Raw 证据 ≠ 有支撑的证据。</b> 逐条 adjusted contribution；54 条未定义记录保持显式（不填 0）。来源：reports/visual_evidence/final/F2_raw_vs_adjusted.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F2_raw_vs_adjusted.svg" alt="F2 Raw 与 Adjusted 逐条对比"></div>
+      <figcaption><b>F2 · Raw 证据 ≠ 有支撑的证据。</b> 逐条 adjusted contribution；54 条未定义记录显式保留，不被填成 0。</figcaption>
     </figure>
   </section>
 
-  <!-- ================= SECTION 6 ================= -->
-  <section id="challenger">
-    <div class="sec-head"><span class="sec-num">6</span><h2>Challenger Models</h2></div>
-    <p class="lede">简洁比较，<b>不做 winner 排名</b>。ranking 在当前切片为 NOT_APPLICABLE。</p>
+  <!-- ===================== 06 CHALLENGER MODELS ===================== -->
+  <section class="blk rv" id="challenger">
+    <div class="sec-head">
+      <span class="sec-num">06</span><h2>Challenger Models</h2>
+      <span class="zh">不做 winner 排名</span>
+    </div>
 
-    <div class="cards">
-      <div class="card" style="border-top:3px solid var(--green)">
-        <div class="c-title">Main Model</div>
-        <div class="c-row">transparent · auditable · abstention-aware</div>
-        <div class="c-row muted">显式分离 performance 与 evidence support；证据不足即拒判，不伪装确定。</div>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">换成 ML 或别的公式，会不会更好？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">ML 表面 CV 指标不低（RF ≈ 0.922），但跨学期仅 <b>0.588</b>；四种替代公式无一全面胜出。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">主模型的价值在<b>可审计 + 拒判意识</b>，不在「预测更准」；ranking 在当前切片 NOT_APPLICABLE。</div></div>
+    </div>
+
+    <div class="three">
+      <div class="col main">
+        <div class="ct">Current Model</div>
+        <div class="cs">乘法式 Reliability 层</div>
+        <ul>
+          <li><b>Transparent</b>：每一项权重可追溯到输入字段</li>
+          <li><b>Auditable</b>：确定性复算，无需重训</li>
+          <li><b>Abstention-aware</b>：证据不足即拒判，不伪造 0 分</li>
+        </ul>
+        <div class="verdict">
+          <div class="vt">Position</div>
+          <div class="vv" style="color:var(--green)">DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT</div>
+        </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--blue)">
-        <div class="c-title">ML Challenger</div>
-        <div class="c-row">LogReg acc ≈ 0.876 · Tree ≈ 0.919 · RF ≈ 0.922（CV）</div>
-        <div class="c-row muted">16 个正例、代理标签、无 holdout、缺失降级 0.71–0.81、RF 跨学期 0.588。</div>
-        <div class="c-row"><span class="lbl">结论</span>：<span class="warn">INSUFFICIENT_FOR_STRONG_ML_CLAIM</span></div>
+
+      <div class="col alt">
+        <div class="ct">ML Challenger</div>
+        <div class="cs">LogReg / Tree / RF</div>
+        <ul>
+          <li>CV accuracy：LogReg ≈ 0.876 · Tree ≈ 0.919 · <b>RF up to ≈ 0.922</b></li>
+          <li>但：正例仅 <b>n = 16</b>、代理标签、无 holdout</li>
+          <li>缺失降级至 <b>0.71 – 0.81</b>；RF 跨学期 <b>0.588</b></li>
+        </ul>
+        <div class="verdict">
+          <div class="vt">Status</div>
+          <div class="vv">INSUFFICIENT_FOR_STRONG_ML_CLAIM</div>
+        </div>
       </div>
-      <div class="card" style="border-top:3px solid var(--blue)">
-        <div class="c-title">Alternative Formulations</div>
-        <div class="c-row">乘法 / 加法 / gated / 非线性，四种结构。</div>
-        <div class="c-row muted">B(λ=0.5) RMSE vs Raw = 0.3125（最小）；C gated 在 16 条全部 ABSTAIN；rank stability 1.0。</div>
-        <div class="c-row"><span class="lbl">结论</span>：<span class="warn">NO_SINGLE_DOMINANT_MODEL</span></div>
+
+      <div class="col alt">
+        <div class="ct">Alternative Formulations</div>
+        <div class="cs">结构对照</div>
+        <ul>
+          <li><b>Additive</b>：B(λ = 0.5) RMSE vs Raw = 0.3125（最小）</li>
+          <li><b>Gated</b>：C 在 16 条可判读记录上全部 ABSTAIN</li>
+          <li><b>Nonlinear</b>：rank stability 1.0，但可解释性下降</li>
+        </ul>
+        <div class="verdict">
+          <div class="vt">Status</div>
+          <div class="vv">NO_SINGLE_DOMINANT_MODEL</div>
+        </div>
       </div>
     </div>
-    <div class="note green">没有模型在拟合、安全、覆盖、可解释、迁移、复杂度上全面胜出 —— 主模型的价值在「可审计 + 拒判意识」，而非「预测更准」。</div>
+
+    <div class="note green">没有模型在拟合、安全、覆盖、可解释、迁移、复杂度六个维度上全面胜出。本节<b>不产生 winner、不做排名、不评金牌模型</b>；ML 是有价值的 robustness challenger，不是被击败的对手。</div>
   </section>
 
-  <!-- ================= SECTION 7 ================= -->
-  <section id="transfer">
-    <div class="sec-head"><span class="sec-num">7</span><h2>External Structural Transfer</h2></div>
-    <p class="lede">金融案例（BTC，n = 1698，threshold 0.65）只表达一件事：<b>同一结构可以迁移</b> —— Raw → Reliability → Adjusted → Accept / Abstain。<b>失败结果必须保留。</b></p>
-
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Gate</th><th>判据</th><th>结果</th><th>数字</th></tr></thead>
-        <tbody>
-          <tr><td>Gate 1</td><td>信息质量/完整度下降时 Reliability 是否下降</td><td class="pos">SUPPORTED</td><td>Reliability 0.603 → 0.408</td></tr>
-          <tr><td>Gate 2</td><td>低 Reliability 是否提高 abstention、降低 coverage</td><td class="pos">SUPPORTED</td><td>coverage 0.394 → 0.001</td></tr>
-          <tr><td>Gate 3</td><td>低 Reliability 决策是否有更高未来误差</td><td class="neg">NOT SUPPORTED</td><td>低 R 误差 0.525 vs 高 R 0.528（无改善）</td></tr>
-        </tbody>
-      </table>
+  <!-- ===================== 07 EXTERNAL TRANSFER ===================== -->
+  <section class="blk rv" id="transfer">
+    <div class="sec-head">
+      <span class="sec-num">07</span><h2>External Structural Transfer</h2>
+      <span class="zh">失败结果同样保留</span>
     </div>
-    <div class="note red">risk-coverage improvement = <b>false</b>。此节为 <b>STRUCTURAL ONLY</b>（结构迁移演示），<b>不</b>写 profitable trading / prediction advantage / universal generalization。</div>
+
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">同一套结构能否在性质完全不同的数据上运行？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">BTC <b>n = 1698</b>（threshold 0.65）：Gate1 SUPPORTED、Gate2 SUPPORTED、<b>Gate3 NOT SUPPORTED</b>。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">结构可迁移，但<b>不</b>代表预测优势；risk-coverage improvement = false。</div></div>
+    </div>
+
+    <div class="gates">
+      <div class="gate pass">
+        <div class="gn">Gate 1</div>
+        <div class="gq">信息质量 / 完整度下降时，Reliability 是否下降？</div>
+        <div class="gv">SUPPORTED</div>
+        <div class="gd num">Reliability 0.603 → 0.408</div>
+      </div>
+      <div class="gate pass">
+        <div class="gn">Gate 2</div>
+        <div class="gq">低 Reliability 是否提高 abstention、降低 coverage？</div>
+        <div class="gv">SUPPORTED</div>
+        <div class="gd num">coverage 0.394 → 0.001</div>
+      </div>
+      <div class="gate fail">
+        <div class="gn">Gate 3</div>
+        <div class="gq">低 Reliability 决策是否对应更高未来误差？</div>
+        <div class="gv">NOT SUPPORTED</div>
+        <div class="gd num">low-R error ≈ 0.525 vs high-R error ≈ 0.528 —— 无改善</div>
+      </div>
+    </div>
+
+    <div class="note red"><b>Gate 3 失败被明确保留。</b>本节为 <b>STRUCTURAL ONLY</b>（结构迁移演示）：risk-coverage improvement = <b>false</b>，不写 profitable trading、prediction advantage 或 universal generalization。</div>
+
+    <div class="thesis" style="border-left-color:var(--orange)">
+      Structural portability <span class="neq">≠</span> prediction superiority
+      <small>同一接口能在性质不同的 Raw Signal 上运行 —— 这只说明结构可迁移，不说明预测更好。</small>
+    </div>
 
     <figure>
-      <img src="../visual_evidence/final/F6_external_structural_transfer.svg" alt="F6 外部结构迁移">
-      <figcaption><b>F6 · 外部结构迁移。</b> 低/中/高 R 并排展示；Strategy C 是保留的反例。仅为结构迁移，非交易策略。来源：reports/visual_evidence/final/F6_external_structural_transfer.svg。</figcaption>
+      <div class="figbox"><img src="../visual_evidence/final/F6_external_structural_transfer.svg" alt="F6 外部结构迁移三 Gate"></div>
+      <figcaption><b>F6 · 外部结构迁移。</b> 低 / 中 / 高 Reliability 并排展示；Strategy C 是保留的反例。BTC n = 1698，仅为结构迁移，非交易策略。</figcaption>
     </figure>
   </section>
 
-  <!-- ================= SECTION 8 ================= -->
-  <section id="limitations">
-    <div class="sec-head"><span class="sec-num">8</span><h2>Limitations / Evidence Status</h2></div>
-    <p class="lede">这不是「自曝缺点」，而是<b>证据边界</b> —— 明确当前证据能支持什么、不能支持什么。</p>
-
-    <div class="table-wrap" style="margin-bottom:14px">
-      <table style="min-width:0">
-        <thead><tr><th>Evidence Status</th><th>值</th></tr></thead>
-        <tbody>
-          <tr><td>Development Sample</td><td class="big">70</td></tr>
-          <tr><td>Readable Evidence</td><td class="big">16</td></tr>
-          <tr><td>NO_EFFECTIVE_EVIDENCE</td><td class="big">54</td></tr>
-          <tr><td>Human R1 / R2</td><td class="warn">0 / 70 · 0 / 70</td></tr>
-          <tr><td>Formal Gate</td><td class="warn">NOT_RUN</td></tr>
-          <tr><td>AI Increment</td><td class="neg">NOT_SUPPORTED</td></tr>
-          <tr><td>External Transfer</td><td class="warn">STRUCTURAL ONLY</td></tr>
-        </tbody>
-      </table>
+  <!-- ===================== 08 EVIDENCE BOUNDARY ===================== -->
+  <section class="blk rv" id="limitations">
+    <div class="sec-head">
+      <span class="sec-num">08</span><h2>Evidence Boundary</h2>
+      <span class="zh">当前证据能支持什么、不能支持什么</span>
     </div>
 
-    <div class="cards">
-      <div class="card"><div class="c-title">Development-only</div><div class="c-row muted">全部结果来自 AI_PROVISIONAL 开发切片，不是正式验证结果。</div></div>
-      <div class="card"><div class="c-title">Human Gate</div><div class="c-row"><span class="lbl">R1</span> = 0/70 · <span class="lbl">R2</span> = 0/70 · <span class="lbl">Formal Gate</span> = <span class="warn">NOT_RUN</span></div></div>
-      <div class="card"><div class="c-title">External Transfer</div><div class="c-row"><span class="warn">STRUCTURAL ONLY</span> —— 非教育泛化证据。</div></div>
-      <div class="card"><div class="c-title">AI Increment</div><div class="c-row"><span class="neg">NOT_SUPPORTED</span> —— 无合法配对的 Outcome_AI / Outcome_baseline。</div></div>
-      <div class="card"><div class="c-title">参数身份</div><div class="c-row muted">c<sub>i</sub>、λ<sub>prompt</sub>、λ<sub>context</sub> 为 WEAKLY_JUSTIFIED_COMPONENT，未校准为概率。</div></div>
-      <div class="card"><div class="c-title">Outcome</div><div class="c-row muted">无正式 outcome —— 不能判断「预测对错」，OUTCOME NOT AVAILABLE。</div></div>
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">这套结论能推到多远？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">Human Gate <b>NOT_RUN</b>、可判读证据仅 <b>16/70</b>、无 true outcome、外部迁移仅结构性。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">结论限于开发切片的<b>结构与方法</b>，不能升级为正式验证、精度或学习增益主张。</div></div>
     </div>
-    <p class="muted" style="margin-top:12px">模型当前评价的是 AI 辅助环境下的<b>可观察表现与证据支持程度</b>，不能推出学生真实能力提升、长期学习增益、AI 因果效果、正式 AI 增量或能力排名。</p>
+
+    <p class="lede">这不是「自曝缺点」，而是<b>证据边界</b>：明确划定结论的适用范围，是这套方法本身的一部分。</p>
+
+    <div class="three" style="grid-template-columns:repeat(2,1fr)">
+      <div class="col" style="border-top:3px solid var(--orange)">
+        <div class="ct">1 · Human Gate 未完成</div>
+        <div class="cs">Formal validation pending</div>
+        <ul>
+          <li>R1 = <b>0 / 70</b> · R2 = <b>0 / 70</b></li>
+          <li>Formal Gate = <b>NOT_RUN</b></li>
+          <li>全部数字来自 <b>AI_PROVISIONAL</b> 开发切片，不得升级为正式验证结果</li>
+        </ul>
+      </div>
+      <div class="col" style="border-top:3px solid var(--orange)">
+        <div class="ct">2 · 可判读证据稀少且同质</div>
+        <div class="cs">16 / 70</div>
+        <ul>
+          <li>仅 <b>16</b> 条可判读，<b>54</b> 条 NO_EFFECTIVE_EVIDENCE</li>
+          <li>16 条<b>高度同质</b>：全部 prompt = true、context = false、confidence = medium</li>
+          <li>因此 prompt / context 惩罚<b>未被经验识别</b>，只是假设性边界</li>
+        </ul>
+      </div>
+      <div class="col" style="border-top:3px solid var(--orange)">
+        <div class="ct">3 · 没有 true outcome</div>
+        <div class="cs">OUTCOME NOT AVAILABLE</div>
+        <ul>
+          <li>不能证明 accuracy improvement，也不能证明 causal learning gain</li>
+          <li>ABSTAIN 不等于「预测正确」；NEE 不等于「模型失败」</li>
+          <li>AI 增量识别 = <b>NOT_SUPPORTED</b>（无合法配对 outcome）</li>
+        </ul>
+      </div>
+      <div class="col" style="border-top:3px solid var(--orange)">
+        <div class="ct">4 · 外部迁移仅为结构性</div>
+        <div class="cs">STRUCTURAL ONLY</div>
+        <ul>
+          <li>BTC 案例只说明接口可运行，<b>不是</b>教育泛化证据</li>
+          <li>Gate3 NOT SUPPORTED、risk-coverage improvement = false 必须同时呈现</li>
+          <li>参数 c<sub>i</sub> / λ 为 WEAKLY_JUSTIFIED_COMPONENT，<b>未校准为概率</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="strip" style="margin-top:14px">
+      <span class="pill">Development N <b>70</b></span>
+      <span class="pill ok">Readable <b>16</b></span>
+      <span class="pill bad">NEE <b>54</b></span>
+      <span class="pill warn">R1 / R2 <b>0/70 · 0/70</b></span>
+      <span class="pill warn">Formal Gate <b>NOT_RUN</b></span>
+      <span class="pill bad">AI Increment <b>NOT_SUPPORTED</b></span>
+      <span class="pill mute">External Transfer <b>STRUCTURAL ONLY</b></span>
+    </div>
+
+    <p class="small" style="margin-top:11px">模型当前评价的是 AI 辅助环境下的<b>可观察表现与证据支持程度</b>，不能推出学生真实能力提升、长期学习增益、AI 因果效果、正式 AI 增量或能力排名。</p>
+  </section>
+
+  <!-- ===================== 09 CONCLUSION ===================== -->
+  <section class="blk rv" id="conclusion">
+    <div class="sec-head">
+      <span class="sec-num">09</span><h2>Conclusion</h2>
+      <span class="zh">一屏结论</span>
+    </div>
+
+    <div class="qrm">
+      <div class="q"><div class="lbl">Question</div><div class="txt">那么，评价系统应当怎么做？</div></div>
+      <div class="r"><div class="lbl">Result</div><div class="txt">同时报告 <b>Raw / Reliability / Adjusted / Evaluability</b>，并在证据不足时拒判。</div></div>
+      <div class="m"><div class="lbl">Meaning</div><div class="txt">这是可迁移的方法论结论，但当前<b>仅限开发切片</b>，正式结论待 Human Gate。</div></div>
+    </div>
+
+    <div class="concl">
+      <h2>把「看见的分数」与「支撑它的证据」分开报告</h2>
+      <p class="cl">评价系统必须同时给出 <b>Raw</b>、<b>Evidence Reliability</b>、<b>Adjusted</b> 与 <b>Evaluability</b>；只有分数，会掩盖证据支撑的塌缩。</p>
+      <p class="cl">在本开发切片上：Score 恒为 <b>3.5625</b>，而 Effective Support 由 <b>16 降到 6</b>、Coverage 由 <b>0.228571 降到 0.085714</b> —— <span class="neq">Score Stability ≠ Evidence Support Stability</span>。</p>
+      <p class="cl" style="margin-bottom:0">证据不足时，模型选择 <b>ABSTAIN</b> 或返回 <b>NO_EFFECTIVE_EVIDENCE</b>，而不是伪造一个确定的数字。全部结论限于 <b>DEVELOPMENT_ONLY</b>，正式结论须等待 Human Gate 完成。</p>
+      <div class="cb">
+        <span class="pill">N <b>70</b></span>
+        <span class="pill">Readable <b>16</b></span>
+        <span class="pill">NEE <b>54</b></span>
+        <span class="pill">ABL <b>3.5625</b></span>
+        <span class="pill">Support <b>16 → 6</b></span>
+        <span class="pill">Coverage <b>0.228571 → 0.085714</b></span>
+        <span class="pill warn">Formal Gate <b>NOT_RUN</b></span>
+      </div>
+    </div>
   </section>
 
   <div class="footer">
     数字唯一来源：<code>outputs/final_results.json</code> · <code>paper/PAPER_NUMBER_LOCK.md</code> · <code>paper/PAPER_EVIDENCE_TRACE.md</code> · <code>docs/metric_dictionary.md</code>。
-    图表：<code>reports/visual_evidence/final/F1–F6</code>。状态：DEVELOPMENT_ONLY · AI_PROVISIONAL · FORMAL GATE NOT_RUN。
+    图表：<code>reports/visual_evidence/final/F1–F6</code>（冻结，未修改）。
+    状态：<b>DEVELOPMENT_ONLY · AI_PROVISIONAL · FORMAL GATE NOT_RUN</b> —— 本页所有数字均为开发切片结果，未经人工正式验证。
   </div>
 
+</div>
 </main>
 
 <script>
 (function () {
-  // Frozen formula replay for P108: c=0.75 (medium), lambda_prompt=0.5, lambda_context=0.5, context=false.
-  var C = 0.75, LP = 0.5, LC = 0.5, RAW = 6;
-  var btnOn = document.getElementById('btnPromptOn');
-  var btnOff = document.getElementById('btnPromptOff');
-  var elR = document.getElementById('demoR');
-  var elA = document.getElementById('demoA');
-  var elD = document.getElementById('demoD');
+  'use strict';
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function render(promptTrue) {
-    var p = promptTrue ? 1 : 0;
-    var t = 0; // P108 context_truncated = false
-    var w = C * (1 - LP * p) * (1 - LC * t);
-    var a = RAW * w;
-    elR.textContent = w.toFixed(3);
-    elA.textContent = a.toFixed(2);
-    if (promptTrue) {
-      elD.textContent = 'LOW_SUPPORT → ABSTAIN';
-      elD.style.color = 'var(--orange)';
-    } else {
-      elD.textContent = 'STRUCTURAL_SUPPORT → ACCEPT';
-      elD.style.color = 'var(--green)';
-    }
-    btnOn.classList.toggle('active', promptTrue);
-    btnOff.classList.toggle('active', !promptTrue);
+  /* ============ 1. scroll reveal ============ */
+  var rvs = Array.prototype.slice.call(document.querySelectorAll('.rv'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    rvs.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    rvs.forEach(function (el) { io.observe(el); });
   }
 
-  btnOn.addEventListener('click', function () { render(true); });
-  btnOff.addEventListener('click', function () { render(false); });
-  render(true);
+  /* ============ 2. nav scroll-spy ============ */
+  var links = Array.prototype.slice.call(document.querySelectorAll('#navLinks a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var targets = Object.keys(map).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  function spy() {
+    var y = window.scrollY || window.pageYOffset;
+    // Same offset the anchor navigation uses (html scroll-padding-top = nav-h + 14),
+    // plus a small tolerance so the section you jumped to is the one highlighted.
+    var offset = 56 + 14 + 12;
+    var cur = null;
+    for (var i = 0; i < targets.length; i++) {
+      if (targets[i].offsetTop - offset <= y) { cur = targets[i]; }
+    }
+    if (!cur) { cur = targets[0]; }
+    links.forEach(function (a) { a.classList.remove('on'); });
+    if (cur && map[cur.id]) { map[cur.id].classList.add('on'); }
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) { return; }
+    ticking = true;
+    window.requestAnimationFrame(function () { spy(); ticking = false; });
+  }, { passive: true });
+  spy();
+
+  /* ============ 3. hero number transition ============ */
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-count'));
+    var dec = parseInt(el.getAttribute('data-dec'), 10) || 0;
+    if (reduce || !isFinite(target)) { return; }
+    var t0 = null, dur = 750;
+    function step(ts) {
+      if (t0 === null) { t0 = ts; }
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * e).toFixed(dec);
+      if (p < 1) { window.requestAnimationFrame(step); } else { el.textContent = target.toFixed(dec); }
+    }
+    el.textContent = (0).toFixed(dec);
+    window.requestAnimationFrame(step);
+  }
+  document.querySelectorAll('[data-count]').forEach(animateCount);
+
+  /* ============ 4. Interactive Exploration ============
+     冻结公式的确定性复算（无网络、无 LLM）：
+       w = I(observable) * c * (1 - lambda_prompt*p) * (1 - lambda_context*t)
+       adjusted = raw * w
+     状态边界来自 canonical artifact 生成逻辑：
+       w = 0            -> NO_EFFECTIVE_EVIDENCE
+       0 < w < 0.75     -> LOW_SUPPORT            -> ABSTAIN
+       w >= 0.75        -> STRUCTURAL_SUPPORT     -> ACCEPT (candidate)
+     默认参数：lambda_prompt = 0.5, lambda_context = 0.5, r_medium = 0.75
+     默认案例 P108：raw = 6 (L6), prompt = true, context = false
+       -> w = 0.375, adjusted = 2.25, LOW_SUPPORT / ABSTAIN（与 PAPER_NUMBER_LOCK §15 一致）
+  ==================================================== */
+  var RECORDS = {
+    P108: { raw: 6, level: 'L6' },
+    P105: { raw: 2, level: 'L2' }
+  };
+  var DEFAULTS = { rec: 'P108', lp: 0.5, lc: 0.5, r: 0.75, prompt: true, ctx: false };
+  var st = { rec: DEFAULTS.rec, lp: DEFAULTS.lp, lc: DEFAULTS.lc, r: DEFAULTS.r, prompt: DEFAULTS.prompt, ctx: DEFAULTS.ctx };
+
+  var slP = document.getElementById('slP');
+  var slC = document.getElementById('slC');
+  var vP = document.getElementById('vP');
+  var vC = document.getElementById('vC');
+  var oRaw = document.getElementById('oRaw');
+  var oR = document.getElementById('oR');
+  var oA = document.getElementById('oA');
+  var oS = document.getElementById('oS');
+  var oD = document.getElementById('oD');
+  var oF = document.getElementById('oF');
+  var btnPrompt = document.getElementById('btnPrompt');
+  var btnCtx = document.getElementById('btnCtx');
+
+  var C_GREEN = 'var(--green)', C_ORANGE = 'var(--orange)', C_RED = 'var(--red)';
+
+  function fmt(v, d) { return (Math.round(v * Math.pow(10, d)) / Math.pow(10, d)).toFixed(d); }
+
+  function tween(el, to, dec, color) {
+    el.style.color = color;
+    if (reduce) { el.textContent = to.toFixed(dec); return; }
+    var from = parseFloat(el.textContent);
+    if (!isFinite(from)) { from = 0; }
+    var t0 = null, dur = 320;
+    function step(ts) {
+      if (t0 === null) { t0 = ts; }
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = (from + (to - from) * e).toFixed(dec);
+      if (p < 1) { window.requestAnimationFrame(step); } else { el.textContent = to.toFixed(dec); }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  function render() {
+    var rec = RECORDS[st.rec];
+    var p = st.prompt ? 1 : 0;
+    var t = st.ctx ? 1 : 0;
+    var w = st.r * (1 - st.lp * p) * (1 - st.lc * t);
+    if (w < 0) { w = 0; }
+
+    vP.textContent = fmt(st.lp, 2);
+    vC.textContent = fmt(st.lc, 2);
+    oRaw.textContent = rec.raw + '（' + rec.level + '）';
+
+    var status, decision, color;
+    if (w === 0) {
+      status = 'NO_EFFECTIVE_EVIDENCE';
+      decision = 'NO_EFFECTIVE_EVIDENCE';
+      color = C_RED;
+      oA.textContent = 'null（未定义）';
+      oA.style.color = C_RED;
+    } else {
+      var adj = rec.raw * w;
+      tween(oA, adj, 2, adj >= 4.5 ? C_GREEN : C_ORANGE);
+      if (w >= 0.75) {
+        status = 'DEVELOPMENT_ONLY_STRUCTURAL_SUPPORT';
+        decision = 'ACCEPT（candidate）';
+        color = C_GREEN;
+      } else {
+        status = 'LOW_SUPPORT';
+        decision = 'ABSTAIN';
+        color = C_ORANGE;
+      }
+    }
+    tween(oR, w, 3, color);
+    oS.textContent = status;
+    oS.style.color = color;
+    oD.textContent = decision;
+    oD.style.color = color;
+    oF.textContent = 'w = ' + fmt(st.r, 2) + ' × (1 − ' + fmt(st.lp, 2) + '×' + p + ') × (1 − ' + fmt(st.lc, 2) + '×' + t + ') = ' + fmt(w, 3);
+
+    btnPrompt.classList.toggle('on', st.prompt);
+    btnPrompt.textContent = 'prompt_induced = ' + (st.prompt ? 'true' : 'false');
+    btnCtx.classList.toggle('on', st.ctx);
+    btnCtx.textContent = 'context_truncated = ' + (st.ctx ? 'true' : 'false');
+    Array.prototype.forEach.call(document.querySelectorAll('#segRec button'), function (b) {
+      b.classList.toggle('on', b.getAttribute('data-rec') === st.rec);
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('#segR button'), function (b) {
+      b.classList.toggle('on', parseFloat(b.getAttribute('data-r')) === st.r);
+    });
+    slP.value = String(st.lp);
+    slC.value = String(st.lc);
+  }
+
+  slP.addEventListener('input', function () { st.lp = parseFloat(slP.value); render(); });
+  slC.addEventListener('input', function () { st.lc = parseFloat(slC.value); render(); });
+  document.getElementById('segRec').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-rec]');
+    if (b) { st.rec = b.getAttribute('data-rec'); render(); }
+  });
+  document.getElementById('segR').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-r]');
+    if (b) { st.r = parseFloat(b.getAttribute('data-r')); render(); }
+  });
+  btnPrompt.addEventListener('click', function () { st.prompt = !st.prompt; render(); });
+  btnCtx.addEventListener('click', function () { st.ctx = !st.ctx; render(); });
+  document.getElementById('btnReset').addEventListener('click', function () {
+    st.rec = DEFAULTS.rec; st.lp = DEFAULTS.lp; st.lc = DEFAULTS.lc;
+    st.r = DEFAULTS.r; st.prompt = DEFAULTS.prompt; st.ctx = DEFAULTS.ctx;
+    render();
+  });
+
+  render();
 })();
 </script>
 </body>
