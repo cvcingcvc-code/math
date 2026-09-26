@@ -6,7 +6,7 @@
 
 ## 摘要
 
-AI 进入学习过程后，学生提交的文本混合了学生自身思考、AI 提示与重组、上下文缺失和标注不确定性。本文把问题定位为测量与可识别性问题，而非预测问题：先判断哪些记录构成可判读的学生 Evidence，再在透明假设参数下同时报告 Score（ABL、HOT、Gap）与 Evidence Support（effective evidence weight、effective coverage）。当有效证据权重为零时，模型返回 `NO_EFFECTIVE_EVIDENCE`，而不是 0 分。开发数据（70 条记录，16 条可判读 Evidence，693 个参数组合，其中 33 个无定义）显示：Score 在全部有定义组合中保持不变（ABL=3.5625，HOT=0.375，Gap=1.125），而 effective coverage 从 0.2286 降到 0.0057。核心结论是：**Score 数值稳定，不代表支持它的 Evidence Support 稳定。**
+AI 进入学习过程后，学生提交的文本混合了学生自身思考、AI 提示与重组、上下文缺失和标注不确定性。本文把问题定位为测量与可识别性问题，而非预测问题：先判断哪些记录构成可判读的学生 Evidence，再在透明假设参数下同时报告 Score（ABL、HOT、Gap）与 Evidence Support（effective evidence weight、effective coverage）。当有效证据权重为零时，模型返回 `NO_EFFECTIVE_EVIDENCE`，而不是 0 分。开发数据（70 条记录，16 条可判读 Evidence，693 个参数组合，其中 33 个无定义）显示：Score 在全部有定义组合中保持不变（ABL=3.5625，HOT=0.375，Gap=1.125），而 effective coverage 在有定义组合中从 0.2286 变化到 0.0057。核心结论是：**Score 数值稳定，不代表支持它的 Evidence Support 稳定。**
 
 ## 1. Problem Background
 
@@ -68,7 +68,7 @@ w_i(θ) = I(student_evidence_bloom_i ∈ L1…L6)
 ```text
 ABL(θ) = Σ w_i · Bloom_i / Σ w_i
 HOT(θ) = Σ w_i · I(Bloom_i ≥ L4) / Σ w_i
-Gap(θ) = Σ w_i · (Task_i − Bloom_i) / Σ w_i
+Gap(θ) = Σ_{i: Task_i defined} w_i · (Task_i − Bloom_i) / Σ_{i: Task_i defined} w_i
 ```
 
 **Evidence Support（支持层）**：
@@ -112,13 +112,19 @@ effective coverage        = Σ w_i / N,   N = 70（全部 development records）
 
 解释：当前 16 条可判读 Evidence 的参数相关字段完全相同，满足第 5 节公共缩放条件，所以 Score 稳定是**结构必然**，不能解释为模型稳健性或 prompt 的因果作用。
 
+### 消融与典型反例
+
+在同一批 70 条开发记录上，M0（无校正）、M1（仅置信度）、M2（置信度+prompt）、M3（置信度+prompt+context）的 ABL/HOT/Gap 均为 3.5625/0.375/1.125；effective weight 依次为 16、12、6、6。当前可判读 Evidence 全部带 prompt 风险，context 在可判读集合中没有变异，因此这组消融定位了支持度变化，却不能估计 context 的独立经验效应。完整表见 `reports/development/ablation_results.csv`。
+
+四条反例均直接来自开发输入：P105 的 Task L5 与 Evidence L2 同时带 prompt 风险；P108 的 Raw Evidence 为 L6 但支持度有限；P072 因 context 截断而为 `UNDETERMINED`；P035 同时低置信、context 截断且无法形成有效 Evidence。后两条返回 `NO_EFFECTIVE_EVIDENCE`，不被填成低分。完整记录见 `reports/development/counterexamples.csv`。
+
 ## 7. Robustness / Sensitivity
 
 1. **无定义边界**：33 个无定义组合全部位于 `lambda_prompt=1.0`（11 个 lambda_context × 3 个 r_medium）。此时 16 条 Evidence 的 prompt 因子全部为 0，返回 `NO_EFFECTIVE_EVIDENCE`。
 2. **Support 的敏感性**：effective weight 在有定义组合上的中位数为 5.8，四分位数为 3.15 与 8.85。Support 对假设高度敏感，Score 则不敏感。
 3. **独立复算**：`src/verification/recompute_bounds.py` 不依赖主实现，独立复现了 70/16/693/660/33 及全部边界值。
 4. **异质性检查**：现有真实开发数据中，可判读 Evidence 的 prompt、context 和 confidence 均无变化，**不支持**异质 Evidence 的经验对比。本文没有修改标注，也没有构造合成数据冒充真实结果。
-5. **可复现性**：从仓库根目录执行 `python run_all.py` 即可重跑完整开发链路（5 步）并完成 29 项一致性检查；重跑产物与仓库版本逐字节一致。开发版结果表见 `reports/submission/development_results_record_level.csv`，其中 AIV 与 ranking 均为 `NOT_AVAILABLE_PENDING_FORMAL_GATE`。环境、命令与边界见 `reports/submission/reproduction_notes.md`，字段定义见 `docs/data_dictionary.md`。这些检查只验证一致性与口径，不是效果验证。
+5. **可复现性**：从仓库根目录执行 `python run_all.py` 即可重跑完整开发链路（6 步）并完成 32 项一致性检查；干净克隆复现同样通过。开发版结果表见 `reports/submission/development_results_record_level.csv`，其中 AIV 与 ranking 均为 `NOT_AVAILABLE_PENDING_FORMAL_GATE`。环境、命令与边界见 `reports/submission/reproduction_notes.md`，字段定义见 `docs/data_dictionary.md`。这些检查只验证一致性与口径，不是效果验证。
 
 ## 8. Limitations
 
@@ -145,7 +151,7 @@ Demo：`reports/demo/index.html`（读取 `reports/demo/demo_payload.json`，需
 
 ## 10. Conclusion
 
-在 AI 辅助学习中，可信评价不能只报告分数是否稳定，还必须报告支撑分数的学生证据是否存在、可判读且足够充分。开发数据展示了这种分离：Score 恒定，Evidence Support 从 0.2286 降到 0.0057，并在极端假设下变为 `NO_EFFECTIVE_EVIDENCE`。**Score 数值稳定，不代表支持它的 Evidence Support 稳定。** 以上结论只描述方法行为；正式效果须等人工 Gate 通过后验证。
+在 AI 辅助学习中，可信评价不能只报告分数是否稳定，还必须报告支撑分数的学生证据是否存在、可判读且足够充分。开发数据展示了这种分离：Score 恒定，Evidence Support 在有定义参数组合中从 0.2286 变化到 0.0057，并在极端假设下变为 `NO_EFFECTIVE_EVIDENCE`。**Score 数值稳定，不代表支持它的 Evidence Support 稳定。** 以上结论只描述方法行为；正式效果须等人工 Gate 通过后验证。
 
 ## 附录 A：数字来源
 
