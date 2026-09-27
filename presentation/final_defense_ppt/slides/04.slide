@@ -1,8 +1,31 @@
 <Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>Development slice：70 条记录，只有 16 条可判读</Text></Box>
-  <Box style={{ height: 510, flexDirection: 'row', gap: 28, paddingTop: 18 }}>
-    <Box style={{ width: 300, height: 470, background: '#0E3F8C', padding: 24, gap: 18, justifyContent: 'center' }}><Text style={{ fontSize: 72, color: '#FFFFFF', fontWeight: 'bold' }}>70</Text><Text style={{ fontSize: 24, color: '#FFFFFF' }}>AI provisional records</Text><Box style={{ height: 1, background: '#8EB5F0' }} /><Text style={{ fontSize: 21, color: '#DCEBFF', lineHeight: 1.4 }}>16 readable<br />19 NO_EVIDENCE<br />35 UNDETERMINED<br />54 NO_EFFECTIVE_EVIDENCE</Text></Box>
-    <Box style={{ width: 872, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F3_evidence_degradation.svg" style={{ width: 846, height: 446, objectFit: 'contain' }} /></Box>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 30, color: '#0E3F8C', fontWeight: 'bold' }}>70 条开发记录的证据分布</Text>
+    <Text style={{ fontSize: 13, color: '#4A5568', marginTop: 6 }}>可判读与不可判读必须分别报告</Text>
   </Box>
-  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#D9534F' }}>54 不是 54 个零分，而是没有有效证据支持数值判断</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>04 / 10</Text></Box>
+  <Box style={{ height: 270, flexDirection: 'row', gap: 25, paddingTop: 24 }}>
+    <Box style={{ width: 390, height: 230, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 20, justifyContent: 'center' }}>
+      <Text style={{ fontSize: 54, color: '#0E3F8C', fontWeight: 'bold' }}>70</Text>
+      <Text style={{ fontSize: 18, color: '#1A2230', fontWeight: 'bold' }}>70 条开发记录</Text>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>（AI provisional records）</Text>
+    </Box>
+    <Box style={{ width: 390, height: 230, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 20, justifyContent: 'center' }}>
+      <Text style={{ fontSize: 54, color: '#0E3F8C', fontWeight: 'bold' }}>16</Text>
+      <Text style={{ fontSize: 18, color: '#1A2230', fontWeight: 'bold' }}>16 条可判读证据</Text>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>（readable evidence）</Text>
+    </Box>
+    <Box style={{ width: 390, height: 230, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 20, justifyContent: 'center' }}>
+      <Text style={{ fontSize: 54, color: '#D9534F', fontWeight: 'bold' }}>54</Text>
+      <Text style={{ fontSize: 18, color: '#1A2230', fontWeight: 'bold' }}>54 条无有效证据</Text>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>（NO_EFFECTIVE_EVIDENCE）</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 162, background: '#FDECEA', borderLeft: '5px solid #D9534F', padding: 18, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 26, color: '#D9534F', fontWeight: 'bold' }}>54 不是 54 个零分。</Text>
+    <Text style={{ fontSize: 18, color: '#1A2230', fontWeight: 'bold', marginTop: 8 }}>而是 54 条没有足够证据进行可靠数值判断的记录。</Text>
+    <Text style={{ fontSize: 11, color: '#4A5568', marginTop: 8 }}>其中 19 条无可判读证据、35 条证据不确定；二者合计 54，均不填 0。</Text>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 9.5, color: '#8B97A8' }}>数据状态：AI 临时标注 · 仅开发阶段</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>04 / 10</Text>
+  </Box>
 </Slide>

@@ -1,8 +1,28 @@
 <Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>公共缩放退化：分数不动，但支持下降</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>稳定的归一化 score 不能替代稳定的 evidence support</Text></Box>
-  <Box style={{ height: 500, flexDirection: 'row', gap: 28, paddingTop: 18 }}>
-    <Box style={{ width: 770, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F4_parameter_perturbation.svg" style={{ width: 744, height: 444, objectFit: 'contain' }} /></Box>
-    <Box style={{ width: 402, height: 470, padding: 24, gap: 18, background: '#F0F5FC' }}><Text style={{ fontSize: 25, color: '#0E3F8C', fontWeight: 'bold' }}>锁定机制</Text><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.4 }}>16 条可判读记录共享：</Text><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.4 }}>prompt=true<br />context=false<br />confidence=medium<br />R = 0.375</Text><Box style={{ borderTop: '2px solid #1E4FA8', paddingTop: 14 }}><Text style={{ fontSize: 21, color: '#1E4FA8', fontWeight: 'bold' }}>weight：16 → 12 → 6 → 6</Text><Text style={{ fontSize: 21, color: '#1E4FA8', fontWeight: 'bold', marginTop: 8 }}>coverage：0.228571 → 0.085714</Text></Box></Box>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 26, color: '#0E3F8C', fontWeight: 'bold' }}>分数没有变化，但支撑这个分数的证据明显减少</Text>
+    <Text style={{ fontSize: 13, color: '#D9534F', fontWeight: 'bold', marginTop: 6 }}>这是全场最重要的一页：分数稳定 ≠ 证据支撑稳定</Text>
   </Box>
-  <Box style={{ height: 50, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 17, color: '#4A5568' }}>ABL / HOT / Gap = 3.5625 / 0.375 / 1.125（Raw=Adjusted，不是提升）</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>05 / 10</Text></Box>
+  <Box style={{ height: 440, flexDirection: 'row', gap: 28, paddingTop: 16 }}>
+    <Box style={{ width: 700, height: 420, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}>
+      <Image src="assets/F5_ablation_refusal.svg" style={{ width: 676, height: 396, objectFit: 'contain' }} />
+    </Box>
+    <Box style={{ width: 460, height: 420, padding: 22, gap: 12, background: '#F0F5FC' }}>
+      <Text style={{ fontSize: 14, color: '#0E3F8C', fontWeight: 'bold' }}>三项按重要性排序</Text>
+      <Text style={{ fontSize: 13, color: '#4A5568' }}>① 有效支持</Text>
+      <Text style={{ fontSize: 19, color: '#1E4FA8', fontWeight: 'bold' }}>16 → 12 → 6 → 6</Text>
+      <Text style={{ fontSize: 13, color: '#4A5568' }}>② 有效覆盖率</Text>
+      <Text style={{ fontSize: 19, color: '#1E4FA8', fontWeight: 'bold' }}>22.86% → 8.57%</Text>
+      <Text style={{ fontSize: 8.5, color: '#8B97A8', lineHeight: 1.4 }}>0.228571 → 0.171429 → 0.085714 → 0.085714</Text>
+      <Text style={{ fontSize: 13, color: '#4A5568' }}>③ 分数</Text>
+      <Text style={{ fontSize: 19, color: '#4A5568', fontWeight: 'bold' }}>3.5625 → 3.5625</Text>
+      <Text style={{ fontSize: 10.5, color: '#4A5568', lineHeight: 1.4 }}>支持与覆盖率下降，分数保持不变。</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 56, background: '#FDECEA', borderLeft: '5px solid #D9534F', padding: 12, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 16, color: '#D9534F', fontWeight: 'bold' }}>分数稳定 ≠ 证据支撑稳定</Text>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 10.5, color: '#4A5568' }}>ABL / HOT / Gap = 3.5625 / 0.375 / 1.125（分数不变，不是提升）　冻结图 F5 · 组件消融与拒判边界</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>05 / 10</Text>
+  </Box>
 </Slide>

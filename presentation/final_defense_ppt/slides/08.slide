@@ -1,8 +1,33 @@
 <Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>Challenger 与外部迁移：支持边界同样重要</Text></Box>
-  <Box style={{ height: 500, flexDirection: 'row', gap: 24, paddingTop: 18 }}>
-    <Box style={{ width: 440, height: 470, padding: 22, background: '#F0F5FC', gap: 15 }}><Text style={{ fontSize: 26, color: '#0E3F8C', fontWeight: 'bold' }}>ML Challenger</Text><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.45 }}>LogReg ≈ 0.876<br />Tree ≈ 0.919<br />RF ≈ 0.922</Text><Box style={{ borderTop: '2px solid #1E4FA8', paddingTop: 14 }}><Text style={{ fontSize: 21, color: '#1A2230', lineHeight: 1.45 }}>RF 跨学期：0.588<br />缺失后：0.71–0.81</Text></Box><Text style={{ fontSize: 20, color: '#D9534F', fontWeight: 'bold', lineHeight: 1.35 }}>INSUFFICIENT_FOR_STRONG_ML_CLAIM</Text></Box>
-    <Box style={{ width: 720, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F6_external_structural_transfer.svg" style={{ width: 694, height: 444, objectFit: 'contain' }} /></Box>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 30, color: '#0E3F8C', fontWeight: 'bold' }}>补充压力测试与结构迁移</Text>
+    <Text style={{ fontSize: 13, color: '#4A5568', marginTop: 6 }}>支持边界与支持范围同样重要</Text>
   </Box>
-  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#D9534F' }}>BTC n=1698：Gate1/2 SUPPORTED；Gate3 NOT SUPPORTED；risk-coverage improvement=false</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>08 / 10</Text></Box>
+  <Box style={{ height: 60, background: '#F0F5FC', borderLeft: '5px solid #1E4FA8', padding: 16, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 19, color: '#1A2230', fontWeight: 'bold' }}>结构可以迁移，预测优势没有被证明。</Text>
+  </Box>
+  <Box style={{ height: 216, flexDirection: 'row', gap: 20, paddingTop: 16 }}>
+    <Box style={{ width: 600, height: 216, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 16, gap: 6 }}>
+      <Text style={{ fontSize: 14, color: '#0E3F8C', fontWeight: 'bold' }}>机器学习对照（ML Challenger）</Text>
+      <Text style={{ fontSize: 12.5, color: '#1A2230', fontWeight: 'bold' }}>核心结论：没有足够证据选出 winner。</Text>
+      <Text style={{ fontSize: 10, color: '#4A5568', lineHeight: 1.4 }}>表面判别指标 0.876 / 0.919 / 0.922</Text>
+      <Text style={{ fontSize: 10, color: '#4A5568', lineHeight: 1.4 }}>RF 跨学期 ≈ 0.588；缺失后约 0.71–0.81</Text>
+      <Text style={{ fontSize: 10, color: '#4A5568', lineHeight: 1.4 }}>但 positive 仅 16 条且为 AI 代理标签</Text>
+      <Text style={{ fontSize: 8.5, color: '#D9534F' }}>INSUFFICIENT_FOR_STRONG_ML_CLAIM</Text>
+    </Box>
+    <Box style={{ width: 600, height: 216, background: '#F0F5FC', padding: 16, gap: 6 }}>
+      <Text style={{ fontSize: 14, color: '#0E3F8C', fontWeight: 'bold' }}>外部结构迁移（External Structural Transfer）</Text>
+      <Text style={{ fontSize: 12, color: '#1A2230' }}>BTC 历史数据，仅做结构迁移验证（n = 1698）。</Text>
+      <Text style={{ fontSize: 13, color: '#1A2230', fontWeight: 'bold' }}>Gate 1：支持</Text>
+      <Text style={{ fontSize: 13, color: '#1A2230', fontWeight: 'bold' }}>Gate 2：支持</Text>
+      <Text style={{ fontSize: 13, color: '#D9534F', fontWeight: 'bold' }}>Gate 3：当前证据不支持</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>低可靠误差 0.5248 vs 高可靠误差 0.5277</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 260, paddingTop: 16, justifyContent: 'center' }}>
+    <Image src="assets/F6_external_structural_transfer.svg" style={{ width: 1200, height: 240, objectFit: 'contain' }} />
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 9.5, color: '#8B97A8' }}>负结果必须保留：Gate 3 不支持</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>08 / 10</Text>
+  </Box>
 </Slide>

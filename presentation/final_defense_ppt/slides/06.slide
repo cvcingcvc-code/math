@@ -1,12 +1,49 @@
-<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>五条验证路径，回答同一个问题</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>当 score 看似稳定时，evidence support 是否也稳定？</Text></Box>
-  <Box style={{ height: 420, flexDirection: 'row', gap: 16, paddingTop: 24 }}>
-    <Box style={{ width: 224, height: 360, background: '#FFFFFF', border: '1px solid #D6DCE5', padding: 18, gap: 12 }}><Text style={{ fontSize: 22, color: '#1E4FA8', fontWeight: 'bold' }}>01 Robustness</Text><Text style={{ fontSize: 19, color: '#1A2230', lineHeight: 1.4 }}>693 = 21×11×3<br />660 defined<br />33 undefined</Text></Box>
-    <Box style={{ width: 224, height: 360, background: '#FFFFFF', border: '1px solid #D6DCE5', padding: 18, gap: 12 }}><Text style={{ fontSize: 22, color: '#1E4FA8', fontWeight: 'bold' }}>02 Perturbation</Text><Text style={{ fontSize: 19, color: '#1A2230', lineHeight: 1.4 }}>±10% / ±20%<br /><span style={{ color: '#D9534F', fontWeight: 'bold' }}>0 flips</span><br />ranking N/A</Text></Box>
-    <Box style={{ width: 224, height: 360, background: '#FFFFFF', border: '1px solid #D6DCE5', padding: 18, gap: 12 }}><Text style={{ fontSize: 22, color: '#1E4FA8', fontWeight: 'bold' }}>03 Ablation</Text><Text style={{ fontSize: 19, color: '#1A2230', lineHeight: 1.4 }}>support falls<br />coverage falls<br />score can persist</Text></Box>
-    <Box style={{ width: 224, height: 360, background: '#FFFFFF', border: '1px solid #D6DCE5', padding: 18, gap: 12 }}><Text style={{ fontSize: 22, color: '#1E4FA8', fontWeight: 'bold' }}>04 Failure</Text><Text style={{ fontSize: 19, color: '#1A2230', lineHeight: 1.4 }}>ABSTAIN<br />NO_EFFECTIVE_EVIDENCE<br />not zero</Text></Box>
-    <Box style={{ width: 224, height: 360, background: '#FFFFFF', border: '1px solid #D6DCE5', padding: 18, gap: 12 }}><Text style={{ fontSize: 22, color: '#1E4FA8', fontWeight: 'bold' }}>05 Transfer / ML</Text><Text style={{ fontSize: 19, color: '#1A2230', lineHeight: 1.4 }}>constraint<br />not superiority<br />not generalization</Text></Box>
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 30, color: '#0E3F8C', fontWeight: 'bold' }}>五种方法，验证同一个问题</Text>
+    <Text style={{ fontSize: 14, color: '#1A2230', fontWeight: 'bold', marginTop: 6 }}>当分数看起来稳定时，证据支持是否也稳定？</Text>
   </Box>
-  <Box style={{ height: 90, background: '#0E3F8C', padding: 20, justifyContent: 'center' }}><Text style={{ fontSize: 27, color: '#FFFFFF', fontWeight: 'bold' }}>五条路径不是五个新主张，而是同一个可审查问题的五种压力测试</Text></Box>
-  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#8B97A8' }}>不新增实验解释，只收束既有冻结证据</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>06 / 10</Text></Box>
+  <Box style={{ height: 190, flexDirection: 'row', gap: 17, paddingTop: 16 }}>
+    <Box style={{ width: 233, height: 180, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 14, gap: 6 }}>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>01</Text>
+      <Text style={{ fontSize: 15, color: '#1E4FA8', fontWeight: 'bold' }}>基线对比</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>（Baseline）</Text>
+      <Text style={{ fontSize: 11, color: '#1A2230' }}>不建模可靠性会怎样</Text>
+    </Box>
+    <Box style={{ width: 233, height: 180, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 14, gap: 6 }}>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>02</Text>
+      <Text style={{ fontSize: 15, color: '#1E4FA8', fontWeight: 'bold' }}>组件消融</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>（Ablation）</Text>
+      <Text style={{ fontSize: 11, color: '#1A2230' }}>支持量是否真被组件改变</Text>
+    </Box>
+    <Box style={{ width: 233, height: 180, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 14, gap: 6 }}>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>03</Text>
+      <Text style={{ fontSize: 15, color: '#1E4FA8', fontWeight: 'bold' }}>参数敏感性</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>（Sensitivity）</Text>
+      <Text style={{ fontSize: 11, color: '#1A2230' }}>结论是否只是碰巧</Text>
+    </Box>
+    <Box style={{ width: 233, height: 180, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 14, gap: 6 }}>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>04</Text>
+      <Text style={{ fontSize: 15, color: '#1E4FA8', fontWeight: 'bold' }}>失败案例</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>（Failure Case）</Text>
+      <Text style={{ fontSize: 11, color: '#1A2230' }}>高 Raw 是否仍被接受</Text>
+    </Box>
+    <Box style={{ width: 233, height: 180, background: '#F7F9FC', border: '1px solid #D6DCE5', padding: 14, gap: 6 }}>
+      <Text style={{ fontSize: 10, color: '#8B97A8' }}>05</Text>
+      <Text style={{ fontSize: 15, color: '#1E4FA8', fontWeight: 'bold' }}>外部结构迁移</Text>
+      <Text style={{ fontSize: 9, color: '#8B97A8' }}>（External Transfer）</Text>
+      <Text style={{ fontSize: 11, color: '#1A2230' }}>结构能否跨域运行</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 310, background: '#F0F5FC', borderLeft: '5px solid #1E4FA8', padding: 20, gap: 10 }}>
+    <Text style={{ fontSize: 13, color: '#0E3F8C', fontWeight: 'bold' }}>参数敏感性证据卡（Sensitivity）</Text>
+    <Text style={{ fontSize: 21, color: '#1E4FA8', fontWeight: 'bold' }}>693 = 21 × 11 × 3　660 defined　33 undefined</Text>
+    <Text style={{ fontSize: 13, color: '#1A2230' }}>扰动幅度：±10% / ±20%</Text>
+    <Text style={{ fontSize: 19, color: '#D9534F', fontWeight: 'bold' }}>0 decision-state flips（决策状态零翻转）</Text>
+    <Text style={{ fontSize: 14, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.4 }}>五条路径不是五个新主张，而是同一个可审查问题的五种压力测试。</Text>
+    <Text style={{ fontSize: 10.5, color: '#4A5568' }}>每条路径统一报告：为什么问 → 怎么设 → 结果 → 支持什么 → 不支持什么</Text>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 9.5, color: '#8B97A8' }}>不新增实验解释，只收束既有冻结证据</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>06 / 10</Text>
+  </Box>
 </Slide>

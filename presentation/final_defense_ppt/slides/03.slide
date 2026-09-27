@@ -1,6 +1,26 @@
 <Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>Reliability-aware evaluation</Text><Text style={{ fontSize: 18, color: '#4A5568', marginTop: 6 }}>从观察证据到可审查决策</Text></Box>
-  <Box style={{ height: 472, paddingTop: 16, background: '#F7F9FC' }}><Image src="assets/F1_model_flow.svg" style={{ width: 1200, height: 450, objectFit: 'contain' }} /></Box>
-  <Box style={{ height: 68, background: '#E8EFF8', padding: 14, justifyContent: 'center' }}><Text style={{ fontSize: 21, color: '#0E3F8C' }}>wᵢ = I(observableᵢ) · cᵢ · (1 − λprompt·pᵢ) · (1 − λcontext·tᵢ)　　Adjustedᵢ = Rawᵢ × wᵢ　　Ceff = Σwᵢ / N</Text></Box>
-  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#8B97A8' }}>R 是支持权重，不是校准概率；无证据时 fail-closed</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>03 / 10</Text></Box>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 30, color: '#0E3F8C', fontWeight: 'bold' }}>模型链路：从观察到决策</Text>
+    <Text style={{ fontSize: 13, color: '#4A5568', marginTop: 6 }}>证据可靠性如何进入评价</Text>
+  </Box>
+  <Box style={{ height: 430, flexDirection: 'row', gap: 28, paddingTop: 16 }}>
+    <Box style={{ width: 700, height: 400, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}>
+      <Image src="assets/F1_model_flow.svg" style={{ width: 676, height: 376, objectFit: 'contain' }} />
+    </Box>
+    <Box style={{ width: 460, height: 400, padding: 22, gap: 14, background: '#F0F5FC' }}>
+      <Text style={{ fontSize: 15, color: '#0E3F8C', fontWeight: 'bold' }}>支持权重由四个因子决定</Text>
+      <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>可判读性</Text>
+      <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>× 标注置信度</Text>
+      <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>× AI 提示风险</Text>
+      <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>× 上下文风险</Text>
+      <Text style={{ fontSize: 9.5, color: '#8B97A8' }}>（后两项为风险折减）</Text>
+      <Text style={{ fontSize: 8.5, color: '#8B97A8' }}>Observability · Confidence · Prompt risk · Context risk</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 78, background: '#F0F5FC', padding: 14, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 13, color: '#0E3F8C' }}>wᵢ = I(observableᵢ) · cᵢ · (1 − λprompt·pᵢ) · (1 − λcontext·tᵢ)　　Adjustedᵢ = Rawᵢ × wᵢ　　Ceff = Σwᵢ / N</Text>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 10.5, color: '#4A5568' }}>Reliability 是支持权重，不是概率，也不是因果系数。</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>03 / 10</Text>
+  </Box>
 </Slide>

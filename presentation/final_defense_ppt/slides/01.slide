@@ -1,18 +1,20 @@
-<Slide style={{ width: 1280, height: 720, background: '#F7F9FC', padding: 40 }}>
-  <Box style={{ height: 72, background: '#0E3F8C', padding: 18, justifyContent: 'center' }}>
-    <Text style={{ fontSize: 22, color: '#FFFFFF', fontWeight: 'bold' }}>教育 AI 增量价值评价｜现场答辩</Text>
+<Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
+  <Box style={{ height: 62, background: '#1E4FA8', padding: 18, justifyContent: 'center' }}>
+    <Text style={{ fontSize: 15, color: '#FFFFFF', fontWeight: 'bold' }}>教育 AI 增量价值评价｜现场答辩</Text>
   </Box>
   <Box style={{ height: 500, padding: 54, justifyContent: 'center', gap: 24 }}>
-    <Text style={{ fontSize: 42, color: '#0E3F8C', fontWeight: 'bold', lineHeight: 1.2 }}>观察到的结果，不等于可靠证据</Text>
-    <Text style={{ fontSize: 25, color: '#4A5568', lineHeight: 1.45 }}>我们不是重新给学生打分，而是在回答：这个分数，到底有多少证据值得相信？</Text>
-    <Text style={{ fontSize: 19, color: '#8B97A8', lineHeight: 1.4 }}>当证据缺失、冲突或可信度不同，如何避免把 Raw Signal 直接当成可信结论？</Text>
-    <Box style={{ background: '#E8EFF8', border: '2px solid #1E4FA8', padding: 28, width: 900 }}>
-      <Text style={{ fontSize: 34, color: '#1E4FA8', fontWeight: 'bold' }}>Score Stability ≠ Evidence Support Stability</Text>
-      <Text style={{ fontSize: 22, color: '#1A2230', marginTop: 12 }}>分数稳定，不等于证据支撑稳定</Text>
+    <Text style={{ fontSize: 34, color: '#0E3F8C', fontWeight: 'bold', lineHeight: 1.2 }}>观察到的结果，不等于可靠证据</Text>
+    <Text style={{ fontSize: 21, color: '#1A2230', fontWeight: 'bold' }}>这个分数，到底有多少证据值得相信？</Text>
+    <Text style={{ fontSize: 13.5, color: '#4A5568', lineHeight: 1.4 }}>当证据缺失、冲突或可信度不一，如何避免把观察值直接当成可信结论？</Text>
+    <Box style={{ background: '#F0F5FC', borderLeft: '5px solid #1E4FA8', padding: 20 }}>
+      <Text style={{ fontSize: 17, color: '#1E4FA8', fontWeight: 'bold' }}>Score Stability ≠ Evidence Support Stability</Text>
+      <Text style={{ fontSize: 19, color: '#1A2230', fontWeight: 'bold', marginTop: 10 }}>分数稳定，不等于证据支撑稳定</Text>
     </Box>
-    <Text style={{ fontSize: 18, color: '#8B97A8' }}>AI_PROVISIONAL · DEVELOPMENT_ONLY · NOT_HUMAN_VALIDATED</Text>
+    <Text style={{ fontSize: 14, color: '#1A2230', lineHeight: 1.4 }}>一句话：我们在补的不是一个更高的分数，而是「这个分数有多少证据值得相信」。</Text>
+    <Text style={{ fontSize: 18, color: '#0E3F8C', fontWeight: 'bold' }}>起名困难队　　汇报人：张镇源</Text>
+    <Text style={{ fontSize: 9.5, color: '#8B97A8' }}>状态：AI 临时标注 AI_PROVISIONAL · 仅开发阶段 DEVELOPMENT_ONLY · 尚未人工验证 NOT_HUMAN_VALIDATED</Text>
   </Box>
   <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-    <Text style={{ fontSize: 14, color: '#8B97A8' }}>PPT_FINAL_CONVERGENCE</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>01 / 10</Text>
+    <Text style={{ fontSize: 9, color: '#8B97A8' }}>路演版 · 简体中文</Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>01 / 10</Text>
   </Box>
 </Slide>

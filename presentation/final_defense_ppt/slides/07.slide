@@ -1,8 +1,31 @@
 <Slide style={{ width: 1280, height: 720, background: '#FFFFFF', padding: 40 }}>
-  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}><Text style={{ fontSize: 36, color: '#0E3F8C', fontWeight: 'bold' }}>失败不是 0 分：ABSTAIN 与 NO_EFFECTIVE_EVIDENCE</Text></Box>
-  <Box style={{ height: 500, flexDirection: 'row', gap: 28, paddingTop: 18 }}>
-    <Box style={{ width: 690, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}><Image src="assets/F5_ablation_refusal.svg" style={{ width: 664, height: 444, objectFit: 'contain' }} /></Box>
-    <Box style={{ width: 460, height: 470, padding: 22, gap: 17 }}><Text style={{ fontSize: 25, color: '#0E3F8C', fontWeight: 'bold' }}>三个反例</Text><Box style={{ background: '#E8EFF8', padding: 14 }}><Text style={{ fontSize: 20, color: '#1A2230', lineHeight: 1.35 }}>P108：L6 · R=0.375 · Adj=2.25</Text><Text style={{ fontSize: 20, color: '#D9534F', fontWeight: 'bold', marginTop: 6 }}>LOW_SUPPORT / ABSTAIN</Text></Box><Box style={{ background: '#F0F5FC', padding: 14 }}><Text style={{ fontSize: 20, color: '#1A2230', lineHeight: 1.35 }}>P105：L2 · R=0.375 · Adj=0.75</Text><Text style={{ fontSize: 20, color: '#D9534F', fontWeight: 'bold', marginTop: 6 }}>LOW_SUPPORT</Text></Box><Box style={{ border: '2px solid #D9534F', padding: 14 }}><Text style={{ fontSize: 20, color: '#1A2230', lineHeight: 1.35 }}>P072 / P035：Adjusted=null</Text><Text style={{ fontSize: 20, color: '#D9534F', fontWeight: 'bold', marginTop: 6 }}>NO_EFFECTIVE_EVIDENCE</Text></Box><Text style={{ fontSize: 20, color: '#4A5568', lineHeight: 1.4 }}>ABSTAIN 是合理输出，不是模型失败。</Text></Box>
+  <Box style={{ height: 88, borderBottom: '3px solid #1E4FA8', justifyContent: 'center' }}>
+    <Text style={{ fontSize: 32, color: '#0E3F8C', fontWeight: 'bold' }}>高 Raw，不代表高可信</Text>
+    <Text style={{ fontSize: 13, color: '#4A5568', marginTop: 6 }}>最困难的记录，正好暴露支持与拒判的边界</Text>
   </Box>
-  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}><Text style={{ fontSize: 14, color: '#D9534F' }}>无有效证据时不填 0，避免制造虚假的确定性</Text><Text style={{ fontSize: 14, color: '#0E3F8C' }}>07 / 10</Text></Box>
+  <Box style={{ height: 506, flexDirection: 'row', gap: 28, paddingTop: 16 }}>
+    <Box style={{ width: 700, height: 470, border: '1px solid #D6DCE5', padding: 12, background: '#F7F9FC' }}>
+      <Image src="assets/F3_evidence_degradation.svg" style={{ width: 676, height: 396, objectFit: 'contain' }} />
+      <Text style={{ fontSize: 9.5, color: '#8B97A8', lineHeight: 1.4 }}>冻结图 F3 · 证据退化与拒判边界　受控改变单个证据字段时的机械响应，不是真实观测。</Text>
+    </Box>
+    <Box style={{ width: 460, height: 470, padding: 20, gap: 14 }}>
+      <Box style={{ background: '#FDECEA', borderLeft: '5px solid #D9534F', padding: 14 }}>
+        <Text style={{ fontSize: 18, color: '#1A2230', fontWeight: 'bold' }}>P108</Text>
+        <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>原始表现 = L6（最高层）</Text>
+        <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>证据可靠性 = 0.375</Text>
+        <Text style={{ fontSize: 15, color: '#1A2230', fontWeight: 'bold', lineHeight: 1.5 }}>调整后贡献 = 2.25</Text>
+        <Text style={{ fontSize: 13, color: '#D9534F', fontWeight: 'bold', marginTop: 4 }}>→ 支持不足，暂缓判断（ABSTAIN）</Text>
+      </Box>
+      <Box style={{ background: '#F0F5FC', padding: 14 }}>
+        <Text style={{ fontSize: 16, color: '#1A2230', fontWeight: 'bold' }}>P072 / P035</Text>
+        <Text style={{ fontSize: 13.5, color: '#1A2230', lineHeight: 1.5 }}>→ 无有效证据</Text>
+        <Text style={{ fontSize: 13.5, color: '#D9534F', fontWeight: 'bold' }}>→ 不填 0</Text>
+      </Box>
+      <Text style={{ fontSize: 17, color: '#1A2230', fontWeight: 'bold' }}>没有证据，不等于表现为零。</Text>
+      <Text style={{ fontSize: 9.5, color: '#8B97A8', lineHeight: 1.4 }}>同类低支持案例：P105（L2 · R=0.375 · 贡献 0.75）　LOW_SUPPORT</Text>
+    </Box>
+  </Box>
+  <Box style={{ height: 40, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+    <Text style={{ fontSize: 9.5, color: '#8B97A8' }}></Text><Text style={{ fontSize: 10, color: '#0E3F8C' }}>07 / 10</Text>
+  </Box>
 </Slide>
