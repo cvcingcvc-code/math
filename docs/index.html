@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evidence-Aware Evaluation Framework · 赛道一 Demo</title>
+<title>教育AI证据可靠性评估模型 · 赛道一 Demo</title>
 <style>
   :root{
     --bg:#f7f3e8; --card:#fffdf7; --ink:#19231d; --muted:#667269; --line:#dcd8ca;
@@ -175,10 +175,12 @@
   </div>
 
   <header>
-    <div class="tag">赛道一 · 教育 AI 增量价值评价</div>
+    <div class="tag">赛道一 · 教育 AI 增量价值评价 ｜ 教育AI证据可靠性评估模型</div>
     <h1>这个分数，到底有多少证据值得相信？</h1>
     <p class="subtitle">我们不是重新给学生打分，而是在回答：证据是否足以支撑这个分数被同样强度地解释。</p>
     <p class="rq"><b>观察到的结果 ≠ 可靠证据（Observed Result ≠ Reliable Evidence）。</b> 一个结果有多高，和我们有多大把握解释这个结果，不是一回事。当证据缺失、冲突或低可信时，原始信号（Raw Signal）不应被直接当作可靠结论——模型把「表现有多高」和「这条表现有多少可审查支撑」拆成两个量。</p>
+    <p class="rq" style="margin-top:12px"><b>教育AI证据可靠性评估模型</b>：本项目针对教育AI评价中证据缺失、冲突和可信度差异问题，构建「Raw–Reliability–Adjusted–Support/Decision」评估框架，将原始表现与证据可靠性分离，并在证据不足时主动拒判。通过敏感性、消融、失败案例和机器学习对照等验证发现：分数稳定不等于证据支持稳定，从而提升评价结果的可解释性与可信度。</p>
+    <p class="rq" style="margin-top:10px"><b>核心框架：</b><span style="font-family:ui-monospace,Consolas,monospace; color:var(--ink)">Raw → Reliability → Adjusted → Support / Coverage → Decision</span>　·　<b>核心结论：</b><span style="color:var(--ink); font-weight:700">Score Stability ≠ Evidence Support Stability</span>（分数稳定 ≠ 证据支持稳定）</p>
     <p style="margin-top:14px"><a class="btn-demo" href="#model">开始模型演示 ↓</a></p>
   </header>
 
@@ -474,8 +476,9 @@
   </section>
 
   <div class="footer">
+    <b>教育AI证据可靠性评估模型</b> · 起名困难队 · 汇报人：张镇源<br>
     数字唯一来源：<code>outputs/final_results.json</code> · <code>paper/PAPER_NUMBER_LOCK.md</code> · <code>paper/PAPER_EVIDENCE_TRACE.md</code> · <code>docs/metric_dictionary.md</code>。
-    图表：<code>reports/visual_evidence/final/F1–F6</code>。状态：DEVELOPMENT_ONLY · AI_PROVISIONAL · FORMAL GATE NOT_RUN。
+    图表：<code>reports/visual_evidence/final/F1–F6</code>。状态：DEVELOPMENT_ONLY · AI_PROVISIONAL · NOT_HUMAN_VALIDATED · FORMAL GATE NOT_RUN · AI_INCREMENT = NOT_SUPPORTED。
   </div>
 
 </main>

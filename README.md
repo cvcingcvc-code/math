@@ -1,8 +1,40 @@
-# 教育 AI 增量价值评价：一个证据可靠性与拒判建模框架
+# 教育AI证据可靠性评估模型
 
 中国第一届数学建模黑客松 · 赛道一：《新时代教育中 AI 增量价值评价的建模方法》
 
+**队名**：起名困难队　·　**汇报人**：张镇源
+
 > **状态**：Development submission。所有结果为 `AI_PROVISIONAL / DEVELOPMENT_ONLY`，`formal_gate_eligible=false`。Human R1/R2 尚未产生，Formal Gate `NOT_RUN`。
+
+---
+
+## 核心问题
+
+> 当观测结果存在缺失、冲突或可信度差异时，如何避免直接把 Raw Signal 当成可靠结论？
+
+## 核心框架
+
+`Raw → Reliability → Adjusted → Support / Coverage → Decision`
+
+## 核心结论
+
+> **Score Stability ≠ Evidence Support Stability**
+>
+> 分数稳定，不等于证据支持稳定。
+
+## 项目简介
+
+本项目针对教育AI评价中证据缺失、冲突和可信度差异问题，构建“Raw–Reliability–Adjusted–Support/Decision”评估框架，将原始表现与证据可靠性分离，并在证据不足时主动拒判。通过敏感性、消融、失败案例和机器学习对照等验证发现：分数稳定不等于证据支持稳定，从而提升评价结果的可解释性与可信度。
+
+## 当前研究边界
+
+| 边界项 | 状态 |
+|---|---|
+| 数据与标注 | `DEVELOPMENT_ONLY`（仅开发阶段开发切片） |
+| 人工验证 | `NOT_HUMAN_VALIDATED`（尚未人工验证，Human R1 = 0/70、R2 = 0/70） |
+| AI 增量识别 | `AI_INCREMENT = NOT_SUPPORTED` |
+
+**本项目不主张**：已证明 AI 提升学习效果、已证明因果增益、已找到 ML winner、已证明交易盈利能力。
 
 ---
 
@@ -14,7 +46,7 @@
 
 - 🌐 **Live Demo**：https://cvcingcvc-code.github.io/math/（正式比赛 Demo）
 - 📄 **Paper**：`paper/development_submission_candidate.md`（canonical development paper）
-- 📊 **PPT**：`outputs/education_ai_evidence_roadshow_final.pptx`（10 页最终路演版）
+- 📊 **PPT**：`presentation/final_defense_ppt/教育AI证据可靠性_现场答辩终稿.pptx`（10 页现场答辩终稿；`outputs/education_ai_evidence_roadshow_final.pptx` 为同一份文件）
 - 🔁 **Reproducibility**：`python run_all.py`（开发版复现，32/32 检查），详见 `docs/RUN_GUIDE.md`
 - 💻 **Source Code**：`src/`、`scripts/`、`run_all.py`
 
